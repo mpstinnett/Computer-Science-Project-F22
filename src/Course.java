@@ -6,5 +6,4 @@ public class Course {
     Boolean transfer;
 
     Course () {};
-
 }
