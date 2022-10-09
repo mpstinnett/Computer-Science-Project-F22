@@ -1,1 +1,1 @@
-[{"courseName":"Test Class","courseDescription":"Best Class EVER"},{"courseName":"Test Class","courseDescription":"Best Class NEVER"},{"courseName":"Test Class","courseDescription":"Best Class FOREVER"}]
+[{"courseNumber":"CS 5556","courseName":"Test Class","courseDescription":"Best Class EVER"},{"courseNumber":"CS 5557","courseName":"Test Class","courseDescription":"Best Class NEVER"},{"courseNumber":"CS 5558","courseName":"Test L Class","courseDescription":"Best Class FOREVER","coursePreReqs":["CS 555755","CS 5556"]}]

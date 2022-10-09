@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class JSONCourse 
 {
-    String courseNum;
+    String courseNumber;
     String courseName;
     String courseDescription;
-    JSONCourse[] coursePreReqs;
+    String[] coursePreReqs;
 
-    public JSONCourse(String courseNumber, String courseName, String courseDescription, ArrayList<JSONCourse> prereqs)
+    public JSONCourse(String courseNumber, String courseName, String courseDescription, String[] prereqs)
     {
-        this.courseNum = courseNum;
+        this.courseNumber = courseNumber;
         this.courseName = courseName;
         this.courseDescription = courseDescription;
-        this.coursePreReqs = coursePreReqs;
+        this.coursePreReqs = prereqs;
     }
 }
