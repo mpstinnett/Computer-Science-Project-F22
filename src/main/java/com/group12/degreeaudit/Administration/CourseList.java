@@ -40,7 +40,13 @@ public class CourseList
             System.out.println("Adding1");
             AddCourse("CS 5555", "Test Class", "Best Class EVER", null);
             AddCourse("CS 5555", "Test Class", "Best Class NEVER", null);
-            AddCourse("CS 5555", "Test Class", "Best Class FOREVER", null);
+            ArrayList<JSONCourse> temp = new ArrayList<JSONCourse>();
+            
+            //Problem putting pre-reqs into json file
+            
+            
+            temp.add(new JSONCourse("CS 555755", "Test adfas Class", "Best Class Tacos", null));
+            AddCourse("CS 5555", "Test Class", "Best Class FOREVER", temp);
             ReadJsonCourseList();
         }
     }
