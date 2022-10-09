@@ -1,3 +1,4 @@
+package com.group12.degreeaudit;
 public class Course {
     String courseNum;
     String semester;
