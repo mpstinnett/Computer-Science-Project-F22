@@ -1,9 +1,9 @@
 
-
-public class DegreeAudit
-{
-    public static void main(String args[])
-    {
-        System.out.println("Hello Overworld");
+public class DegreeAudit {
+    static final String transcriptFilePath = "src\\TSRPT_Sample2.txt";
+    
+    public static void main(String args[]) {
+        TranscriptScanner transcriptScanner = new TranscriptScanner(transcriptFilePath);
+        transcriptScanner.scanTranscript();
     }
 }
