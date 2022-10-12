@@ -1,3 +1,4 @@
+package com.group12.degreeaudit;
 import java.util.ArrayList;
 import java.util.List;
 
