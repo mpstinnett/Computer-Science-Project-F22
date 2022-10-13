@@ -121,7 +121,7 @@ public class TranscriptScanner {
             if(line.startsWith("20")) {
                 semester = line;
             }
-            if(line.startsWith("CS")) {
+            if(line.startsWith("CS ") || line.startsWith("SE ")) {
                 String[] lineAsSplit = line.split(" ");
                 String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
                 String grade = "";
