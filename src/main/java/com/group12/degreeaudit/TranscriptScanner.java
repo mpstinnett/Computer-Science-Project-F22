@@ -1,4 +1,5 @@
 package com.group12.degreeaudit;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,8 +30,7 @@ public class TranscriptScanner {
             String semesterAdmitted = grabSemesterAdmitted();
             List<Course> studentCourses = grabStudentCourses();
             
-            Student student = new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
-
+            new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
         } catch (Exception e) {
             System.out.println("EXCEPTION ERROR!");
         }
@@ -41,7 +41,7 @@ public class TranscriptScanner {
      * 
      * Assume file has only one line with "Name: " followed by the student name.
      */
-    public String grabStudentName() throws IOException {
+    private String grabStudentName() throws IOException {
         while(scan.hasNext()) {
             String line = scan.nextLine();
             if(line.startsWith("Name:"))
@@ -55,7 +55,7 @@ public class TranscriptScanner {
      * 
      * Assume file has only one line with "Student ID: " followed by the student ID number.
      */
-    public String grabStudentID() throws IOException {
+    private String grabStudentID() throws IOException {
         while(scan.hasNext()) {
             String line = scan.nextLine();
             if(line.startsWith("Student ID:"))
@@ -69,7 +69,7 @@ public class TranscriptScanner {
      * 
      * Assume file has only one line with "Program: " followed by the program.
      */
-    public String grabProgram() throws IOException {
+    private String grabProgram() throws IOException {
         while(scan.hasNext()) {
             String line = scan.nextLine();
             if(line.startsWith("Program:"))
@@ -86,7 +86,7 @@ public class TranscriptScanner {
      * Assume the method is ran right after TranscriptScanner.grabProgram
      * Assume the line after running TranscriptScanner.grabProgram starts with the admission date
      */
-    public String grabSemesterAdmitted() throws IOException {
+    private String grabSemesterAdmitted() throws IOException {
         String line = scan.nextLine();
         String year = line.substring(0, line.indexOf("-"));
         String month = line.substring(line.indexOf("-")+1, line.indexOf("-")+3);
@@ -111,7 +111,7 @@ public class TranscriptScanner {
      * Assume any line after "Beginning of Graduate Record" that starts with "20" indicates a new semester.
      * Assume all new semesters will be in a line that starts with "20"
      */
-    public List<Course> grabStudentCourses() {
+    private List<Course> grabStudentCourses() {
         List<Course> studentCourses = new ArrayList<>();
 
         while(scan.nextLine().equals("Beginning of Graduate Record")) {}
