@@ -88,6 +88,27 @@ public class CourseList
         return false;
     }
 
+    public ArrayList<JSONCourse> GetCourseList()
+    {
+        try
+        {
+            Scanner myReader = new Scanner(courseListFile);
+            Type listType = new TypeToken<ArrayList<JSONCourse>>(){}.getType();
+            ArrayList<JSONCourse> readList = gson.fromJson(myReader.nextLine(), listType);
+            myReader.close();
+            return readList;
+        }  
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Unable to read from JSON course list file");
+        }
+        catch(JsonSyntaxException e)
+        {
+            System.out.println("Unable to read from JSON course list file");
+        }
+        return null;
+    }
+
     public void ReadJsonCourseList()
     {
         try
