@@ -6,7 +6,9 @@ public class DegreeAudit
 {
     public static void main(String args[])
     {
-        System.out.println("Hello Overworld");
-        CourseList temp = new CourseList("resources/CourseList.json");
+        String transcriptFilePath = "resources\\TSRPT_Sample2.txt";
+        TranscriptScanner transcriptScanner = new TranscriptScanner(transcriptFilePath);
+        transcriptScanner.scanTranscript();
+        //CourseList temp = new CourseList("resources/CourseList.json");
     }
 }
