@@ -32,11 +32,11 @@ public class CourseList
                 System.out.println("Unable to open or create file: " + fileName);
             }
         }
-        AddCourseToList("CS 5556", "Test Class", "Best Class EVER", null);
-        AddCourseToList("CS 5557", "Test Class", "Best Class NEVER", null);
+        AddCourseToList("CS 5556", "Test Class", "Best Class EVER", null, 'C', true);
+        AddCourseToList("CS 5557", "Test Class", "Best Class NEVER", null, 'E', false);
 
         String[] temp = new String[]{"CS 555755", "CS 5556"};
-        AddCourseToList("CS 5558", "Test L Class", "Best Class FOREVER", temp);
+        AddCourseToList("CS 5558", "Test L Class", "Best Class FOREVER", temp, 'A', true);
         ReadJsonCourseList();
         System.out.println(PrintCourseList(courseList));
 
@@ -46,9 +46,9 @@ public class CourseList
         System.out.println(PrintCourseList(courseList));
     }
 
-    public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs)
+    public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
-        JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs);
+        JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
         AppendCourseList(createdCourse);
         return false;
     }
@@ -79,7 +79,7 @@ public class CourseList
     {
         for(int i = 0; i < courseList.size(); i++)
         {
-            if(courseList.get(i).courseNumber.equalsIgnoreCase(courseNumber))
+            if(courseList.get(i).getCourseNumber().equalsIgnoreCase(courseNumber))
             {
                 courseList.remove(i);
                 return true;
@@ -115,23 +115,8 @@ public class CourseList
         courseL += "Course List:\n\n";
         for(int i = 0; i < c.size(); i++)
         {
-            courseL += "" + i + ":"
-                + "\nCourse: " + c.get(i).courseNumber
-                + "\nName: " + c.get(i).courseName
-                + "\nDescription: " + c.get(i).courseDescription
-                + "\nPrerequisites: ";
-            if(c.get(i).coursePreReqs != null)
-            {
-                for(int j = 0; j < c.get(i).coursePreReqs.length; j++)
-                {
-                    courseL += "\n  " + c.get(i).coursePreReqs[j];
-                }
-            }
-            else
-            {
-                courseL += "\n  None";
-            }
-            courseL += "\n\n";
+            courseL += courseList.get(i) 
+                + "\n";
         }
         return courseL;
     }
