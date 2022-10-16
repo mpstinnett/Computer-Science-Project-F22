@@ -53,13 +53,13 @@ public class CourseList
         return false;
     }
 
-    public void AppendCourseList(JSONCourse course)
+    private void AppendCourseList(JSONCourse course)
     {
         courseList.add(course);
         WriteCourseList(courseList);
     }
 
-    public boolean WriteCourseList(ArrayList<JSONCourse> courseList)
+    private boolean WriteCourseList(ArrayList<JSONCourse> courseList)
     {
         try
         {
