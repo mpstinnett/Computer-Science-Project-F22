@@ -1,3 +1,4 @@
+package com.group12.degreeaudit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
