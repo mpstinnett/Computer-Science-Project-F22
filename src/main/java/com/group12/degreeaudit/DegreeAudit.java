@@ -8,7 +8,7 @@ public class DegreeAudit
     {
         String transcriptFilePath = "resources\\TSRPT_Sample2.txt";
         TranscriptScanner transcriptScanner = new TranscriptScanner(transcriptFilePath);
-        transcriptScanner.scanTranscript();
-        //CourseList temp = new CourseList("resources/CourseList.json");
+        Student Luke_Skywalker = transcriptScanner.scanTranscript();
+        CourseList temp = new CourseList("resources/CourseList.json");
     }
 }

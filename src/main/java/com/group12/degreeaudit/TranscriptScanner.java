@@ -19,7 +19,7 @@ public class TranscriptScanner {
     /*
      * Goes through whole transcript and assigns relevant data to Student and Course objects.
      */
-    public void scanTranscript() {
+    public Student scanTranscript() {
         try {
             scan = new Scanner(transcriptFile);
 
@@ -30,10 +30,11 @@ public class TranscriptScanner {
             String semesterAdmitted = grabSemesterAdmitted();
             List<Course> studentCourses = grabStudentCourses();
             
-            new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
+            return new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
         } catch (Exception e) {
             System.out.println("EXCEPTION ERROR!");
         }
+        return null;
     }
 
     /*
