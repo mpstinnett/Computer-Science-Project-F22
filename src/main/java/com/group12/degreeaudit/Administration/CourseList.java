@@ -6,15 +6,17 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import java.io.FileWriter;
 
 public class CourseList
 {
-    ArrayList<JSONCourse> courseList = new ArrayList<JSONCourse>();
+    List<JSONCourse> courseList = new ArrayList<JSONCourse>();
     Gson gson = new Gson();
     File courseListFile;
 
@@ -32,6 +34,9 @@ public class CourseList
                 System.out.println("Unable to open or create file: " + fileName);
             }
         }
+
+        courseList = GetCourseListFromFile();
+
         AddCourseToList("CS 5556", "Test Class", "Best Class EVER", null, 'C', true);
         AddCourseToList("CS 5557", "Test Class", "Best Class NEVER", null, 'E', false);
 
@@ -46,10 +51,29 @@ public class CourseList
         System.out.println(PrintCourseList(courseList));
     }
 
-    public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
+    public void AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
-        AppendCourseList(createdCourse);
+        if(!CheckIfInCourseList(createdCourse))
+        {
+            AppendCourseList(createdCourse);
+        }
+        else
+        {
+            System.out.println("Cant Append as course is already in the course list");
+        }
+        
+    }
+
+    public boolean CheckIfInCourseList(JSONCourse checkCourse)
+    {
+        for(int i = 0; i < courseList.size(); i++)
+        {
+            if(courseList.get(i).getCourseNumber().equals(checkCourse.getCourseNumber()))
+            {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -59,7 +83,7 @@ public class CourseList
         WriteCourseList(courseList);
     }
 
-    private boolean WriteCourseList(ArrayList<JSONCourse> courseList)
+    private boolean WriteCourseList(List<JSONCourse> courseList)
     {
         try
         {
@@ -82,54 +106,43 @@ public class CourseList
             if(courseList.get(i).getCourseNumber().equalsIgnoreCase(courseNumber))
             {
                 courseList.remove(i);
+                WriteCourseList(courseList);
                 return true;
             }
         }
         return false;
     }
 
-    public ArrayList<JSONCourse> GetCourseList()
+    public List<JSONCourse> GetCourseList()
+    {
+        return courseList;
+    }
+
+    public List<JSONCourse> GetCourseListFromFile()
     {
         try
         {
-            Scanner myReader = new Scanner(courseListFile);
-            Type listType = new TypeToken<ArrayList<JSONCourse>>(){}.getType();
-            ArrayList<JSONCourse> readList = gson.fromJson(myReader.nextLine(), listType);
-            myReader.close();
-            return readList;
+            FileReader readFile = new FileReader(courseListFile);
+            List<JSONCourse> listArray = gson.fromJson(readFile, new TypeToken<List<JSONCourse>>(){}.getType());
+            readFile.close();
+            return listArray;
         }  
         catch(FileNotFoundException e)
         {
-            System.out.println("Unable to read from JSON course list file");
+            System.out.println("Unable to read from JSON course list file " + e);
         }
         catch(JsonSyntaxException e)
         {
-            System.out.println("Unable to read from JSON course list file");
+            System.out.println("Unable to read from JSON course list file " + e);
+        }
+        catch(IOException e)
+        {
+            System.out.println("Unable to read from JSON course list file " + e);
         }
         return null;
     }
 
-    public void ReadJsonCourseList()
-    {
-        try
-        {
-            Scanner myReader = new Scanner(courseListFile);
-            Type listType = new TypeToken<ArrayList<JSONCourse>>(){}.getType();
-            ArrayList<JSONCourse> temp = gson.fromJson(myReader.nextLine(), listType);
-            System.out.println(temp.size());
-            myReader.close();
-        }  
-        catch(FileNotFoundException e)
-        {
-            System.out.println("Unable to read from JSON course list file");
-        }
-        catch(JsonSyntaxException e)
-        {
-            System.out.println("Unable to read from JSON course list file");
-        }
-    }
-
-    public String PrintCourseList(ArrayList<JSONCourse> c)
+    public String PrintCourseList(List<JSONCourse> c)
     {
         String courseL = new String();
             
