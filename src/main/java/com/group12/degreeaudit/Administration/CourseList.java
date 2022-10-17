@@ -42,12 +42,10 @@ public class CourseList
 
         String[] temp = new String[]{"CS 555755", "CS 5556"};
         AddCourseToList("CS 5558", "Test L Class", "Best Class FOREVER", temp, 'A', true);
-        ReadJsonCourseList();
         System.out.println(PrintCourseList(courseList));
 
         if(RemoveCourse("CS 5556"))
             System.out.println("Removed");
-        ReadJsonCourseList();
         System.out.println(PrintCourseList(courseList));
     }
 
