@@ -124,6 +124,51 @@ public class CourseList
         return courseList;
     }
 
+    public JSONCourse GetCourseFromList(String courseNumber)
+    {
+        int courseLocationInList = FindCourseInList(courseNumber);
+        if(courseLocationInList != -1)
+        {
+            return courseList.get(courseLocationInList);
+        }
+        return null;
+    }
+
+    public boolean UpdateCourseInList(JSONCourse courseToUpdate)
+    {
+        int courseLocationInList = FindCourseInList(courseToUpdate);
+        if(courseLocationInList != -1)
+        {
+            courseList.set(courseLocationInList, courseToUpdate);
+            WriteCourseList(courseList);
+        }
+        return false;
+    }
+
+    public int FindCourseInList(JSONCourse courseToFind)
+    {
+        for(int i = 0; i < courseList.size(); i++)
+        {
+            if(courseList.get(i).getCourseNumber().equals(courseToFind.getCourseNumber()))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int FindCourseInList(String courseNumberToFind)
+    {
+        for(int i = 0; i < courseList.size(); i++)
+        {
+            if(courseList.get(i).getCourseNumber().equals(courseNumberToFind))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public List<JSONCourse> GetCourseListFromFile()
     {
         try
