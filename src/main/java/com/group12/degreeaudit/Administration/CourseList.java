@@ -65,11 +65,14 @@ public class CourseList
 
     public boolean CheckIfInCourseList(JSONCourse checkCourse)
     {
-        for(int i = 0; i < courseList.size(); i++)
+        if(courseList != null)
         {
-            if(courseList.get(i).getCourseNumber().equals(checkCourse.getCourseNumber()))
+            for(int i = 0; i < courseList.size(); i++)
             {
-                return true;
+                if(courseList.get(i).getCourseNumber().equals(checkCourse.getCourseNumber()))
+                {
+                    return true;
+                }
             }
         }
         return false;
