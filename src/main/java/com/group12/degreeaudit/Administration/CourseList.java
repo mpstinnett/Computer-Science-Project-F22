@@ -35,18 +35,35 @@ public class CourseList
             }
         }
 
-
         courseList = GetCourseListFromFile();
         if(courseList == null)
         {
             courseList = new ArrayList<JSONCourse>();
         }
 
-        AddCourseToList("CS 5556", "Test Class", "Best Class EVER", null, 'C', true);
-        AddCourseToList("CS 5557", "Test Class", "Best Class NEVER", null, 'E', false);
+        //Null Prereq
+        AddCourseToList("CS 6313", "A", "B", null, 'C', true);
 
-        String[] temp = new String[]{"CS 555755", "CS 5556"};
-        AddCourseToList("CS 5558", "Test L Class", "Best Class FOREVER", temp, 'A', true);
+        //One satisfied prereq
+        String[] temp = new String[]{"CS 6313"};
+        AddCourseToList("CS 5558", "A", "B", temp, 'C', true);
+
+        //One unsatisfied prereq
+        temp = new String[]{"CS 6315"};
+        AddCourseToList("CS 7384", "A", "B", temp, 'C', true);
+
+        //One satisfied and one unsatisfied prereq
+        temp = new String[]{"CS 6313", "CS 6315"};
+        AddCourseToList("CS 7564", "A", "B", temp, 'C', true);
+
+        //One satisfied but already taken prereq
+        temp = new String[]{"CS 6313"};
+        AddCourseToList("CS 6360", "A", "B", temp, 'C', true);
+
+        //One inactive but satisfied prereq
+        temp = new String[]{"CS 6313"};
+        AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
+        
         System.out.println(PrintCourseList(courseList));
 
         if(RemoveCourse("CS 5556"))
