@@ -11,6 +11,7 @@ public class DegreeAudit
     {
         String transcriptFilePath = "resources\\TSRPT_Sample2.txt";
         TranscriptScanner transcriptScanner = new TranscriptScanner(transcriptFilePath);
+
         Student student = transcriptScanner.scanTranscript();
         CourseList temp = new CourseList("resources/CourseList.json");
         List<JSONCourse> possibleCourses = student.getPossibleCourses(temp.GetCourseList());

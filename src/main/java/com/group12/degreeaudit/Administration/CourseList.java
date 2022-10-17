@@ -35,7 +35,6 @@ public class CourseList
             }
         }
 
-
         courseList = GetCourseListFromFile();
         if(courseList == null)
         {
