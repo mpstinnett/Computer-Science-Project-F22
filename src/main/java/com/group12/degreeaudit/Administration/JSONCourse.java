@@ -1,7 +1,5 @@
 package com.group12.degreeaudit.Administration;
 
-import java.util.ArrayList;
-
 public class JSONCourse 
 {
     private String courseNumber;
@@ -19,6 +17,16 @@ public class JSONCourse
         this.coursePreReqs = prereqs;
         this.classType = classType;
         this.activeStatus = activeStatus;
+    }
+
+    public JSONCourse(JSONCourse copyCourse)
+    {
+        this.courseNumber = copyCourse.getCourseNumber();
+        this.courseName = copyCourse.getCourseName();
+        this.courseDescription = copyCourse.getCourseDescription();
+        this.coursePreReqs = copyCourse.getCoursePreReqs();
+        this.classType = copyCourse.getClassType();
+        this.activeStatus = copyCourse.getActiveStatus();
     }
 
     public String getCourseNumber()
