@@ -3,14 +3,12 @@ package com.group12.degreeaudit.Administration;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import java.io.FileWriter;
 
@@ -64,11 +62,11 @@ public class CourseList
         temp = new String[]{"CS 6313"};
         AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
         
-        System.out.println(PrintCourseList(courseList));
+        System.out.println(PrintCourseList());
 
         if(RemoveCourse("CS 5556"))
             System.out.println("Removed");
-        System.out.println(PrintCourseList(courseList));
+        System.out.println(PrintCourseList());
     }
 
     public void AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
@@ -210,12 +208,12 @@ public class CourseList
         return null;
     }
 
-    public String PrintCourseList(List<JSONCourse> c)
+    public String PrintCourseList()
     {
         String courseL = new String();
             
         courseL += "Course List:\n\n";
-        for(int i = 0; i < c.size(); i++)
+        for(int i = 0; i < courseList.size(); i++)
         {
             courseL += courseList.get(i) 
                 + "\n";
