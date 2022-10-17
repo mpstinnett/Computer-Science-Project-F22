@@ -35,7 +35,12 @@ public class CourseList
             }
         }
 
+
         courseList = GetCourseListFromFile();
+        if(courseList == null)
+        {
+            courseList = new ArrayList<JSONCourse>();
+        }
 
         AddCourseToList("CS 5556", "Test Class", "Best Class EVER", null, 'C', true);
         AddCourseToList("CS 5557", "Test Class", "Best Class NEVER", null, 'E', false);
