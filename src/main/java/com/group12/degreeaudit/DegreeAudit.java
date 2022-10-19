@@ -3,6 +3,7 @@ package com.group12.degreeaudit;
 import java.util.List;
 
 import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.DegreeList;
 import com.group12.degreeaudit.Administration.JSONCourse;
 
 public class DegreeAudit
@@ -14,6 +15,7 @@ public class DegreeAudit
 
         Student student = transcriptScanner.scanTranscript();
         CourseList temp = new CourseList("resources/CourseList.json");
+        DegreeList temp2 = new DegreeList("resources/DegreeList.json");
         List<JSONCourse> possibleCourses = student.getPossibleCourses(temp.GetCourseList());
         for(JSONCourse jsonCourse : possibleCourses)
             System.out.println(jsonCourse.getCourseNumber());
