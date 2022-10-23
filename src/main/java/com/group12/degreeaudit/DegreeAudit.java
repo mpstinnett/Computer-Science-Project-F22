@@ -19,5 +19,6 @@ public class DegreeAudit
         List<JSONCourse> possibleCourses = student.getPossibleCourses(temp.GetCourseList());
         for(JSONCourse jsonCourse : possibleCourses)
             System.out.println(jsonCourse.getCourseNumber());
+
     }
 }
