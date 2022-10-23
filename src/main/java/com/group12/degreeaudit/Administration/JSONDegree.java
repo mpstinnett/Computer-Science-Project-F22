@@ -17,6 +17,24 @@ public class JSONDegree
     private String[] electiveClassListRequirement;
     private boolean activeStatus;
 
+    public JSONDegree()
+    {
+        this.degreeName = "No Degree Track Chosen";
+       this.coreRequirementAmount = "0";
+       this.coreGPARequirement = "0";
+       this.coreReplaceHighestAttempt = false;
+       this.coreAllowSeventhElective = false;
+       this.electiveRequirementAmount = "0";
+       this.electiveGPARequirement = "0";
+       this.electiveReplaceHighestAttempt = false;
+       this.electiveAllowOneLowerCourse = false;
+       this.electivesAcceptedLowerCourses = null;
+       this.overallGPARequirement = "0";
+       this.coreClassListRequirement = null;
+       this.electiveClassListRequirement = null;
+       this.activeStatus = false;
+    }
+
     public JSONDegree(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
             boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
             String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,

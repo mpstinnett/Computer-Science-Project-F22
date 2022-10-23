@@ -39,34 +39,35 @@ public class DegreeList
         {
             degreeList = new ArrayList<JSONDegree>();
         }
-        String[] temp = new String[]{"CS 555755", "CS 5556"};
+
+        // String[] temp = new String[]{"CS 555755", "CS 5556"};
         
-        AddDegreeToList("Systems", "5", "3.2", 
-        true, true, "6",
-        "3.0", true, true,
-        temp, "3.2", temp,
-        temp, true);
-        AddDegreeToList("Data Science", "5", "3.2", 
-        true, true, "6",
-        "3.0", true, true,
-        temp, "3.2", temp,
-        temp, true);
+        // AddDegreeToList("Systems", "5", "3.2", 
+        // true, true, "6",
+        // "3.0", true, true,
+        // temp, "3.2", temp,
+        // temp, true);
+        // AddDegreeToList("Data Science", "5", "3.2", 
+        // true, true, "6",
+        // "3.0", true, true,
+        // temp, "3.2", temp,
+        // temp, true);
 
-        AddDegreeToList("Systems", "5", "3.2", 
-        true, true, "6",
-        "3.0", true, true,
-        temp, "3.2", temp,
-        temp, true);
-        AddDegreeToList("Interactive Computing", "5", "3.2", 
-        true, true, "6",
-        "3.0", true, true,
-        temp, "3.2", temp,
-        temp, true);
-        System.out.println(PrintDegreeList());
+        // AddDegreeToList("Systems", "5", "3.2", 
+        // true, true, "6",
+        // "3.0", true, true,
+        // temp, "3.2", temp,
+        // temp, true);
+        // AddDegreeToList("Interactive Computing", "5", "3.2", 
+        // true, true, "6",
+        // "3.0", true, true,
+        // temp, "3.2", temp,
+        // temp, true);
+        // System.out.println(PrintDegreeList());
 
-        if(RemoveDegree("Interactive Computing"))
-            System.out.println("Removed");
-        System.out.println(PrintDegreeList());
+        // if(RemoveDegree("Interactive Computing"))
+        //     System.out.println("Removed");
+        // System.out.println(PrintDegreeList());
     }
     
     public void AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
