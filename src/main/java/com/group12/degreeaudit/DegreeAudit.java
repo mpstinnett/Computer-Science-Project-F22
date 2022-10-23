@@ -20,18 +20,21 @@ public class DegreeAudit
         student.setDegreeTrack(degreeList.GetDegreeList().get(degreeList.FindDegreeInList("Systems")));
         DegreePlanner degreePlanner = new DegreePlanner(student, courseList, degreeList);
 
-        List<JSONCourse> possibleCourses = degreePlanner.getPossibleCourses();
-        
+        List<JSONCourse> possibleCourses = degreePlanner.getPossibleCourses('A');
         
         
         //Testing
+        System.out.println("Possible Classes to Take: ");
         for(JSONCourse jsonCourse : possibleCourses)
-            System.out.println(jsonCourse.getCourseNumber());
+            System.out.println(jsonCourse.getCourseNumber() + " - " + jsonCourse.getCourseName() + " - " + jsonCourse.getClassType());
 
+        System.out.println("\nAll Classes: ");
         for(JSONCourse courses : degreePlanner.getAllCourses())
         {
-            System.out.println(courses.getCourseName());
+            System.out.println(courses.getCourseNumber() + " - " + courses.getCourseName() + " - " + courses.getClassType());
         }
+
+        System.out.println("\nDegree Track: ");
         System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
     }
 }

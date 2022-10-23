@@ -24,11 +24,36 @@ public class DegreePlanner
      *      2. The course's prerequisites must be met.
      *      3. The course hasn't already been taken.
      */
-    public List<JSONCourse> getPossibleCourses() {
+    public List<JSONCourse> getPossibleCourses(char courseType) {
         List<JSONCourse> possibleCourses = new ArrayList<>();
         for(JSONCourse jsonCourse : courseList.GetCourseList()) {
             if(jsonCourse.getActiveStatus() && checkPreReqCondition(jsonCourse) && !hasTakenCourse(jsonCourse))
-                possibleCourses.add(jsonCourse);
+            {
+                switch(courseType)
+                {
+                    case 'c':
+                    case 'C':
+                        if(jsonCourse.getClassType() == 'C')
+                        {
+                            possibleCourses.add(jsonCourse);
+                        }
+                        break;
+                    case 'e':
+                    case 'E':
+                        if(jsonCourse.getClassType() == 'C' || jsonCourse.getClassType() == 'E')
+                        {
+                            possibleCourses.add(jsonCourse);
+                        }
+                        break;
+                    case 'a':
+                    case 'A':
+                        if(jsonCourse.getClassType() == 'A')
+                        {
+                            possibleCourses.add(jsonCourse);
+                        }
+                        break;
+                }
+            }
         }
         return possibleCourses;
     }
