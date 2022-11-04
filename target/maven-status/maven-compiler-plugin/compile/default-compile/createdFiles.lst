@@ -1,3 +1,4 @@
+com\group12\degreeaudit\degreePlanningGUI.class
 com\group12\degreeaudit\adminSceneController.class
 com\group12\degreeaudit\TranscriptScanner.class
 com\group12\degreeaudit\Course.class
@@ -6,6 +7,7 @@ com\group12\degreeaudit\Administration\CourseList$1.class
 com\group12\degreeaudit\Administration\DegreePlanner.class
 com\group12\degreeaudit\Administration\DegreeList$1.class
 com\group12\degreeaudit\Student.class
+com\group12\degreeaudit\degreePlanningSceneController.class
 com\group12\degreeaudit\Administration\JSONCourse.class
 com\group12\degreeaudit\adminGUI.class
 com\group12\degreeaudit\Administration\JSONDegree.class
