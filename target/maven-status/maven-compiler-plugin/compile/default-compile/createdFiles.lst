@@ -5,6 +5,8 @@ com\group12\degreeaudit\Administration\DegreeList.class
 com\group12\degreeaudit\Administration\CourseList$1.class
 com\group12\degreeaudit\Administration\DegreeList$1.class
 com\group12\degreeaudit\Student.class
+com\group12\degreeaudit\CourseSample.class
+com\group12\degreeaudit\CourseSample$1.class
 com\group12\degreeaudit\Administration\JSONCourse.class
 com\group12\degreeaudit\adminGUI.class
 com\group12\degreeaudit\Administration\JSONDegree.class
