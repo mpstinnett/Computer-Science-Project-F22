@@ -15,9 +15,14 @@ public class DegreeAudit
     private CourseList courseList;
     private List<Course> pastTop5Core;
     private List<Course> top5Core;
+    private List<Course> finalElectiveCourses;
+    private List<Course> levelingCourses;
     private List<Course> sortedCourseListByGrade;
     private List<Course> duplicatesRemovedCourses;
     private List<Course> allTakenCourses;
+    private double electiveGPA = 0.0;
+    private double coreGPA = 0.0;
+    private double combinedGPA = 0.0;
     
     public DegreeAudit(Student student, CourseList courseList)
     {
