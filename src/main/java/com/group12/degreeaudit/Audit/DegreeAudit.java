@@ -30,6 +30,12 @@ public class DegreeAudit
         this.courseList = courseList;
     }
 
+    public String calculateOverallGPA()
+    {
+        combinedGPA = getGPA(duplicatesRemovedCourses);
+        return "" + combinedGPA;
+    }
+
     public String electiveComplete()
     {
         String electiveInformationString = "";
