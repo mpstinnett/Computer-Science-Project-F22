@@ -7,6 +7,7 @@ public class Course {
     private String grade;
     private String courseTitle;
     private boolean transfer;
+    private char classType;
 
     public Course() {}
     public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer) {
@@ -46,6 +47,12 @@ public class Course {
     }
     public void setTransfer(boolean transfer) {
         this.transfer = transfer;
+    }
+    public char getClassType() {
+        return classType;
+    }
+    public void setClassType(char classType) {
+        this.classType = classType;
     }
 
     public String toString() {
