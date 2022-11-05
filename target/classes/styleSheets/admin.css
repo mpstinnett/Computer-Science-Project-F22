@@ -1,23 +1,6 @@
-.menuItem{
-    -fx-border-color: #EACBA3;
-    border-color: #EACBA3;
-    -fx-border-width: 0px 0px 3px 0px;
-    border-width: 0px 0px 3px 0px;
-    -fx-font-size: 11px;
-    font-size: 30px;
-}
-
-.menuItem:hover{
-    -fx-border-color: #F68A00;
-    border-color: #F68A00;
-    -fx-font-size: 11px;
-    font-size: 11px;
-}
-
 .tab-pane .tab-header-area .tab-header-background {
     -fx-background-color: #F68A00;
     background-color: #F68A00;
-    
 }
 
 
@@ -58,11 +41,11 @@
 }
 
 
-.panelItem{
+.panel-item{
     -fx-background-radius: 0px 0px 35px 35px;
 }
 
-.adminButton{
+.regular-button{
     -fx-background-color: #F68A00;
     background-color: #F68A00;
     -fx-text-fill: #FFFFFF;
@@ -71,11 +54,11 @@
     font-weight: bold;
 }
 
-.tabHeader{
+.tab-header{
     -fx-background-radius: 35px 35px 0px 0px;
 }
 
-.optionalFeaturesGrid{
+.optional-features-grid{
     -fx-border-color: #2e8b57;
     border-color: #2e8b57;
     -fx-border-width: 2px;
@@ -84,7 +67,7 @@
     border-radius: 5;
 }
 
-.optionalFeaturesCell{
+.optional-features-cell{
     -fx-border-color: #2e8b57;
     border-color: #2e8b57;
     -fx-border-width: 0px 0px 2px 0px;
@@ -96,6 +79,11 @@
     -fx-background-color: #83C03D;
     background-color: #83C03D;
     border-radius: 10px;
+    -fx-text-fill: #FFF;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
 }
 
 .tab_category {
@@ -105,4 +93,18 @@
     border-width: 0px 0px 3px 0px;
     -fx-font-size: 11px;
     font-size: 11px;
+}
+
+.return-to-menu-btn{
+    -fx-background-color: #FFF;
+    background-color: #FFF;
+    -fx-text-fill: #F68A00;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.return-to-menu-btn:hover{
+    -fx-font-size: 10px;
+    font-size: 10px;
 }

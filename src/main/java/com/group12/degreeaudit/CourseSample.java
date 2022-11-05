@@ -15,13 +15,8 @@ public class CourseSample {
         this.name = name;
         this.number = number;
         this.button = new Button("X");
-
-        /*button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println(adminSceneController.table_view.getSelectionModel().getSelectedItem());
-            }
-        });*/
+        button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
+        
     }
 
     public void ButtonCell(final TableView tblView, final CourseSample course){
