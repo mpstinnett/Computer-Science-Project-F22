@@ -13,6 +13,7 @@ public class DegreeAudit
 {
     private Student student;
     private CourseList courseList;
+    private String coreInformationString;
     
     public DegreeAudit(Student student, CourseList courseList)
     {
@@ -22,8 +23,14 @@ public class DegreeAudit
 
     public String coreComplete()
     {
+        coreInformationString = "";
+
         int completedCoreAmount = 0;
         List<Course> coreCourses = new ArrayList<Course>();
+        String[] coursesToTake = new String[Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount())];
+        int courseToTakeIterator = 0;
+
+        //Get all courses from the completed courses list
         for(Course course : student.getCoursesTaken())
         {
             if(course.getClassType() == 'C')
@@ -32,51 +39,57 @@ public class DegreeAudit
                 coreCourses.add(course);
             }
         }
-        if(Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()) <= completedCoreAmount)
+
+        //Sort Courses by Grade
+        sortByGrade(coreCourses);
+
+        //Check if required amount is not met
+        if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
         {
-            sortByGrade(coreCourses);
+            coreInformationString += "\nRequired amount of Core courses is not met. Need "
+            + (Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()) - completedCoreAmount)
+            + " more.";
+        }
+
+        //Check if all courses are satisfied
+        for(String courseRequirement : student.getDegreeTrack().getCoreClassListRequirement())
+        {
+            coursesToTake[courseToTakeIterator] = courseRequirement;
+            for(Course coreCourse : coreCourses)
+            {
+                if(coreCourse.getCourseNumber().equals(courseRequirement))
+                {
+                    coursesToTake[courseToTakeIterator] = null;
+                    break;
+                }
+            }
+            courseToTakeIterator++;
+        }
+        for(int i = 0; i < courseToTakeIterator; i++)
+        {
+            if(coursesToTake[i] != null)
+            {
+                coreInformationString += "\nNeed to complete course " + coursesToTake[i];
+            }
+        }
+
+        //Check if GPA is satisfied
+        //If more classes completed, trim the top 5
+        if(completedCoreAmount >= Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
+        {
+            //Remove anything past the top 5 courses
             for(int i = 4; i < coreCourses.size(); i++)
             {
                 coreCourses.remove(4);
             }
-            if(getGPA('C', coreCourses) >= Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement()))
-            {
-                return "Complete";
-            }
-            else
-            {
-                return "Core GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
-            }
         }
-        else
+        //Check the top 5 gpa
+        if(getGPA('C', coreCourses) < Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement()))
         {
-            String returnString = "";
-            String[] coursesToTake = new String[Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount())];
-            int i = 0;
-            for(String courseRequirement : student.getDegreeTrack().getCoreClassListRequirement())
-            {
-                coursesToTake[i] = courseRequirement;
-                for(Course coreCourse : coreCourses)
-                {
-                    if(coreCourse.getCourseNumber().equals(courseRequirement))
-                    {
-                        coursesToTake[i] = null;
-                        break;
-                    }
-                }
-                i++;
-            }
-            
-            for(int j = 0; j < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()); j++)
-            {
-                if(coursesToTake[j] != null)
-                {
-                    returnString += "\nNeed to complete course " + coursesToTake[j];
-                }
-            }
-
-            return returnString;
+            coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
         }
+
+        return coreInformationString;
     }
 
     private void sortByGrade(List<Course> sortList)
