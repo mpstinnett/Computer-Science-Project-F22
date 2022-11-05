@@ -42,6 +42,7 @@ public class DegreeAuditTest
         System.out.println(audit.getGPA('C', student.getCoursesTaken()));
         System.out.println(audit.coreComplete());
         System.out.println(audit.electiveComplete());
+        System.out.println(audit.calculateOverallGPA());
     }
 
     
