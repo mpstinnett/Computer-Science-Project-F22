@@ -130,10 +130,13 @@ public class DegreeAudit
         return top5Core;
     }
 
-    public String calculateOverallGPA()
+    public void calculateOverallGPA()
     {
         combinedGPA = getGPA(duplicatesRemovedCourses);
-        return "" + combinedGPA;
+        if(combinedGPA < Double.parseDouble(student.getDegreeTrack().getOverallGPARequirement()))
+        {
+            outstandingRequirements += "\nThe Student needs a Combined GPA >= " + student.getDegreeTrack().getOverallGPARequirement();
+        }
     }
 
     public String electiveComplete()
@@ -210,7 +213,7 @@ public class DegreeAudit
             electiveInformationString += "\nElective GPA of " + student.getDegreeTrack().getElectiveGPARequirement() + " is not met";
             if(aboveCourses > 0)
             {
-                outstandingRequirements += "\nThe student needs a GPA >= " + getNeededGPA(electiveCourses, creditsNeeded, 'E') + " in the above " + aboveCourses + " courses.";
+                outstandingRequirements += "\nThe student needs a Elective GPA >= " + getNeededGPA(electiveCourses, creditsNeeded, 'E') + " in the above " + aboveCourses + " courses.";
             }
             else
             {
@@ -342,7 +345,7 @@ public class DegreeAudit
             coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
             if(aboveCourses > 0)
             {
-                outstandingRequirements += "\nThe student needs a GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
+                outstandingRequirements += "\nThe student needs a core GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
             }
             else
             {
