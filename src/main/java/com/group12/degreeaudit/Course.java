@@ -1,13 +1,15 @@
 package com.group12.degreeaudit;
 
+import com.group12.degreeaudit.Administration.CourseList;
 
-public class Course {
+public class Course implements Comparable<Course> {
     private String courseNumber;
     private String semester;
     private String grade;
     private String courseTitle;
     private boolean transfer;
     private char classType;
+    private double gradePoints;
 
     public Course() {}
     public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer) {
@@ -16,6 +18,7 @@ public class Course {
         this.grade = grade;
         this.courseTitle = courseTitle;
         this.transfer = transfer;
+        updateGradePoints();
     }
 
     public String getCourseNumber() {
@@ -55,6 +58,77 @@ public class Course {
         this.classType = classType;
     }
 
+    @Override
+    public int compareTo(Course c)
+    {
+        return Integer.compare(getGradeHeirarchy(), c.getGradeHeirarchy());
+    }
+
+    public double getGradePoints()
+    {
+        return gradePoints;
+    }
+
+    private void updateGradePoints()
+    {
+        int credits = getCredits();
+        switch (getGrade()) {
+            case "A+" : gradePoints = 4.00 * credits;
+                        break;
+            case "A"  : gradePoints = 4.00 * credits;
+                        break;
+            case "A-" : gradePoints = 3.67 * credits;
+                        break;
+            case "B+" : gradePoints = 3.33 * credits;
+                        break;
+            case "B"  : gradePoints = 3.00 * credits;
+                        break;
+            case "B-" : gradePoints = 2.67 * credits;
+                        break;
+            case "C+" : gradePoints = 2.33 * credits;
+                        break;
+            case "C"  : gradePoints = 2.00 * credits;
+                        break;
+            case "C-" : gradePoints = 1.67 * credits;
+                        break;
+            case "D+" : gradePoints = 1.33 * credits;
+                        break;
+            case "D"  : gradePoints = 1.00 * credits;
+                        break;
+            case "D-" : gradePoints = 0.67 * credits;
+                        break;
+            case "F"  : gradePoints = 0.00 * credits;
+                        break;
+            default : gradePoints = 0.00 * credits;
+                        break;
+        } 
+    }
+
+    public int getCredits()
+    {
+        return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
+    }
+
+    private int getGradeHeirarchy()
+    {
+        switch (getGrade()) {
+            case "A+" : return 1;
+            case "A"  : return 2;
+            case "A-" : return 3;
+            case "B+" : return 4;
+            case "B"  : return 5;
+            case "B-" : return 6;
+            case "C+" : return 7;
+            case "C"  : return 8;
+            case "C-" : return 9;
+            case "D+" : return 10;
+            case "D"  : return 11;
+            case "D-" : return 12;
+            case "F"  : return 13;
+            default : return 14;
+        } 
+    }
+
     public String toString() {
         return "\tNumber: " + courseNumber
                + "\n\tTitle: " + courseTitle
@@ -62,4 +136,5 @@ public class Course {
                + "\n\tSemester: " + semester
                + "\n\tTransfer: " + transfer;
     }
+    
 }
