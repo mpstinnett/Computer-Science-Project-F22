@@ -39,11 +39,10 @@ public class DegreeAuditTest
         System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
 
         DegreeAudit audit = new DegreeAudit(student, courseList);
-        System.out.println(audit.getGPA('C', student.getCoursesTaken()));
-        System.out.println(audit.coreComplete());
-        System.out.println(audit.electiveComplete());
-        System.out.println(audit.calculateOverallGPA());
+        System.out.println(audit.doAudit());
+        
     }
 
     
 }
+

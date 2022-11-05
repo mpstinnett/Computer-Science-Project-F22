@@ -23,11 +23,82 @@ public class DegreeAudit
     private double electiveGPA = 0.0;
     private double coreGPA = 0.0;
     private double combinedGPA = 0.0;
+    private String outstandingRequirements = "\nOutstanding Requirements:\n";
     
     public DegreeAudit(Student student, CourseList courseList)
     {
         this.student = student;
         this.courseList = courseList;
+    }
+
+    public String doAudit()
+    {
+        coreComplete();
+        electiveComplete();
+        calculateOverallGPA();
+        String auditString = "\nAudit Report\n";
+        auditString += "Name: " + student.getName() + "\t\t\t\t\tID: " + student.getID()
+        + "\nPlan: " + student.getProgram() +"\t\t\t\t\tMajor: Computer Science"
+        + "\n\t\t\t\t\tTrack: " + student.getDegreeTrack().getDegreeName()
+        + "\n\nCore GPA: " + getCoreGPA()
+        + "\nElective GPA: " + getElectiveGPA()
+        + "\nCombined GPA: " + getCombinedGPA()
+        + "\n\nCore Courses: ";
+        for(int i = 0; i < getCoreCoursesTaken().size(); i++)
+        {
+            if(i !=  getCoreCoursesTaken().size()-1)
+            {
+                auditString += getCoreCoursesTaken().get(i).getCourseNumber() + ", ";
+            }
+            else
+            {
+                auditString += getCoreCoursesTaken().get(i).getCourseNumber();
+            }
+        }
+        auditString += "\nElective Courses: ";
+        for(int i = 0; i < getElectiveCoursesTaken().size(); i++)
+        {
+            if(i !=  getElectiveCoursesTaken().size()-1)
+            {
+                auditString += getElectiveCoursesTaken().get(i).getCourseNumber() + ", ";
+            }
+            else
+            {
+                auditString += getElectiveCoursesTaken().get(i).getCourseNumber();
+            }
+        }
+        if(getLevelingCoursesTaken() != null)
+        {
+            auditString += "\n\nLeveling Courses and Pre-Requisites from Admission Letter\n";
+            for(int i = 0; i < getLevelingCoursesTaken().size(); i++)
+            {
+                auditString += getLevelingCoursesTaken().get(i).getCourseNumber() + " - " + getLevelingCoursesTaken().get(i).getSemester() + "\n";
+            }
+        }
+        auditString += "\n" + getOutstandingRequirements();
+        
+
+        return auditString;
+    }
+
+    public double getElectiveGPA()
+    {
+        return electiveGPA;
+    }
+
+    public double getCoreGPA()
+    {
+        return coreGPA;
+    }
+
+    public double getCombinedGPA()
+    {
+        return combinedGPA;
+    }
+
+    public String getOutstandingRequirements()
+    {
+        return outstandingRequirements;
     }
 
     public void findLevelingCourses()
@@ -116,19 +187,35 @@ public class DegreeAudit
             }
             courseToTakeIterator++;
         }
+
+        int aboveCourses = 0;
+        int creditsNeeded = 0;
         for(int i = 0; i < courseToTakeIterator; i++)
         {
             if(coursesToTake[i] != null)
             {
                 electiveInformationString += "\nNeed to complete course " + coursesToTake[i];
+                outstandingRequirements += "\nThe student must pass " + coursesToTake[i];
+                aboveCourses ++;
+                creditsNeeded += Integer.parseInt(coursesToTake[i].substring(coursesToTake[i].length()-3, coursesToTake[i].length()-2));
             }
         }
+
+        electiveGPA = getGPA(electiveCourses);
 
         //Check if GPA is satisfied
         if(electiveCourses.size() == 0
         || getGPA(electiveCourses) < Double.parseDouble(student.getDegreeTrack().getElectiveGPARequirement()))
         {
             electiveInformationString += "\nElective GPA of " + student.getDegreeTrack().getElectiveGPARequirement() + " is not met";
+            if(aboveCourses > 0)
+            {
+                outstandingRequirements += "\nThe student needs a GPA >= " + getNeededGPA(electiveCourses, creditsNeeded, 'E') + " in the above " + aboveCourses + " courses.";
+            }
+            else
+            {
+                outstandingRequirements += "\nThe student needs a Elective GPA >= " + student.getDegreeTrack().getElectiveGPARequirement();
+            }
         }
 
         return electiveInformationString;
@@ -220,11 +307,17 @@ public class DegreeAudit
             }
             courseToTakeIterator++;
         }
+
+        int aboveCourses = 0;
+        int creditsNeeded = 0;
         for(int i = 0; i < courseToTakeIterator; i++)
         {
             if(coursesToTake[i] != null)
             {
                 coreInformationString += "\nNeed to complete course " + coursesToTake[i];
+                outstandingRequirements += "\nThe student must pass " + coursesToTake[i];
+                aboveCourses ++;
+                creditsNeeded += Integer.parseInt(coursesToTake[i].substring(coursesToTake[i].length()-3, coursesToTake[i].length()-2));
             }
         }
 
@@ -238,19 +331,56 @@ public class DegreeAudit
                 pastTop5Core.add(coreCourses.get(4));
                 coreCourses.remove(4);
             }
-
-            top5Core = coreCourses;
         }
+
+        top5Core = coreCourses;
+        coreGPA = getGPA(coreCourses);
         //Check the top 5 gpa
         if(coreCourses.size() == 0
             || getGPA(coreCourses) < Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement()))
         {
             coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
+            if(aboveCourses > 0)
+            {
+                outstandingRequirements += "\nThe student needs a GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
+            }
+            else
+            {
+                outstandingRequirements += "\nThe student needs a core GPA >= " + student.getDegreeTrack().getCoreGPARequirement();
+            }
         }
 
         return coreInformationString;
     }
 
+    private double getNeededGPA(List<Course> courses, int creditsLeft, char gpaType)
+    {
+        int currentCredits = 0;
+        double currentGPA;
+        currentGPA = getGPA(courses);
+        for(Course course : courses)
+        {
+            currentCredits += course.getCredits();
+        }
+
+        try
+        {
+            switch(gpaType)
+            {
+                case 'C':
+                    return ((((currentCredits+creditsLeft) * Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement())) - (currentCredits*currentGPA)) / (creditsLeft));
+                case 'E':
+                return ((((currentCredits+creditsLeft) * Double.parseDouble(student.getDegreeTrack().getElectiveGPARequirement())) - (currentCredits*currentGPA)) / (creditsLeft));
+                default:
+                    return 0;
+            }
+        }
+        catch(Exception e)
+        {
+            return 0;
+        }
+    }
+    
     private void sortByGrade(List<Course> sortList)
     {
         Collections.sort(sortList);
