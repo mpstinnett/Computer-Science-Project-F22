@@ -30,6 +30,35 @@ public class DegreeAudit
         this.courseList = courseList;
     }
 
+    public void findLevelingCourses()
+    {
+        List<Course> levelingCoursesFound = new ArrayList<Course>();
+        for(Course course : duplicatesRemovedCourses)
+        {
+            if(course.getClassType() == 'A')
+            {
+                levelingCoursesFound.add(course);
+            }
+        }
+
+        levelingCourses = levelingCoursesFound;
+    }
+
+    public List<Course> getLevelingCoursesTaken()
+    {
+        return levelingCourses;
+    }
+
+    public List<Course> getElectiveCoursesTaken()
+    {
+        return finalElectiveCourses;
+    }
+
+    public List<Course> getCoreCoursesTaken()
+    {
+        return top5Core;
+    }
+
     public String calculateOverallGPA()
     {
         combinedGPA = getGPA(duplicatesRemovedCourses);
@@ -63,6 +92,8 @@ public class DegreeAudit
             }
         }
 
+        finalElectiveCourses = electiveCourses;
+        
         //Check if required amount is not met
         if(completedElectiveAmount < Integer.parseInt(student.getDegreeTrack().getElectiveRequirementAmount()))
         {
