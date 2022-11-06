@@ -7,6 +7,7 @@ import com.group12.degreeaudit.Administration.DegreeList;
 import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Audit.DegreeAudit;
 import com.group12.degreeaudit.Administration.DegreePlanner;
+import com.group12.degreeaudit.Administration.FileActions;
 
 public class DegreeAuditTest
 {
@@ -25,22 +26,23 @@ public class DegreeAuditTest
         
         
         //Testing
-        System.out.println("Possible Classes to Take: ");
+        //System.out.println("Possible Classes to Take: ");
         for(JSONCourse jsonCourse : possibleCourses)
-            System.out.println(jsonCourse.getCourseNumber() + " - " + jsonCourse.getCourseName() + " - " + jsonCourse.getClassType());
+            //System.out.println(jsonCourse.getCourseNumber() + " - " + jsonCourse.getCourseName() + " - " + jsonCourse.getClassType());
 
-        System.out.println("\nAll Classes: ");
+        //System.out.println("\nAll Classes: ");
         for(JSONCourse courses : degreePlanner.getAllCourses())
         {
-            System.out.println(courses.getCourseNumber() + " - " + courses.getCourseName() + " - " + courses.getClassType());
+            //System.out.println(courses.getCourseNumber() + " - " + courses.getCourseName() + " - " + courses.getClassType());
         }
 
-        System.out.println("\nDegree Track: ");
-        System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
+        //System.out.println("\nDegree Track: ");
+        //System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
 
         DegreeAudit audit = new DegreeAudit(student, courseList);
-        System.out.println(audit.doAudit());
-        
+        //System.out.println(audit.doAudit());
+        FileActions fA = new FileActions(courseList, degreeList);
+        fA.exportStudent(student);
     }
 
     
