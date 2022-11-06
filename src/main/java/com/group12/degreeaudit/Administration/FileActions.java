@@ -82,8 +82,6 @@ public class FileActions
     {
         try
         {
-            List<JSONCourse> courseListImport;
-            List<JSONDegree> degreeListImport;
             List<Object> objectImport;
 
             fileChooser.showOpenDialog(null);
