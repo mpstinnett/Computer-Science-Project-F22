@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.group12.degreeaudit.Student;
 
 public class FileActions 
 {
@@ -69,7 +70,7 @@ public class FileActions
             createFile.createNewFile();
 
             FileWriter writeFile = new FileWriter(createFile.getPath());
-            writeFile.append(gson.toJson(objectExport));
+            writeFile.write(gson.toJson(objectExport));
             writeFile.close();
         }
         catch(Exception e)
@@ -108,13 +109,36 @@ public class FileActions
             degreeListFile.createNewFile();
 
             FileWriter writeFile = new FileWriter(courseListFile.getPath());
-            writeFile.append(gson.toJson(objectImport.toArray()[0]));
+            writeFile.write(gson.toJson(objectImport.toArray()[0]));
             writeFile.close();
 
             writeFile = new FileWriter(degreeListFile.getPath());
-            writeFile.append(gson.toJson(objectImport.toArray()[1]));
+            writeFile.write(gson.toJson(objectImport.toArray()[1]));
             writeFile.close();
 
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+
+    public void exportStudent(Student student)
+    {
+        try
+        {
+            Gson gson = new Gson();
+
+            fileChooser.setSelectedFile(new File(student.getID() + ".json"));
+            fileChooser.showSaveDialog(null);
+            fileChooser.getSelectedFile();
+
+            File createFile = new File(fileChooser.getSelectedFile().toString());
+            createFile.createNewFile();
+
+            FileWriter writeFile = new FileWriter(createFile.getPath());
+            writeFile.write(gson.toJson(student));
+            writeFile.close();
         }
         catch(Exception e)
         {

@@ -19,22 +19,22 @@ public class DegreeAuditTest
         TranscriptScanner transcriptScanner = new TranscriptScanner(transcriptFilePath, courseList);
         Student student = transcriptScanner.scanTranscript();
 
-        //student.setDegreeTrack(degreeList.GetDegreeList().get(degreeList.FindDegreeInList("Systems")));
-        //DegreePlanner degreePlanner = new DegreePlanner(student, courseList, degreeList);
+        student.setDegreeTrack(degreeList.GetDegreeList().get(degreeList.FindDegreeInList("Systems")));
+        DegreePlanner degreePlanner = new DegreePlanner(student, courseList, degreeList);
 
-        //List<JSONCourse> possibleCourses = degreePlanner.getPossibleCourses('C');
+        List<JSONCourse> possibleCourses = degreePlanner.getPossibleCourses('C');
         
         
         //Testing
         //System.out.println("Possible Classes to Take: ");
-        //for(JSONCourse jsonCourse : possibleCourses)
+        for(JSONCourse jsonCourse : possibleCourses)
             //System.out.println(jsonCourse.getCourseNumber() + " - " + jsonCourse.getCourseName() + " - " + jsonCourse.getClassType());
 
         //System.out.println("\nAll Classes: ");
-        //for(JSONCourse courses : degreePlanner.getAllCourses())
-        //{
+        for(JSONCourse courses : degreePlanner.getAllCourses())
+        {
             //System.out.println(courses.getCourseNumber() + " - " + courses.getCourseName() + " - " + courses.getClassType());
-        //}
+        }
 
         //System.out.println("\nDegree Track: ");
         //System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
@@ -42,7 +42,7 @@ public class DegreeAuditTest
         DegreeAudit audit = new DegreeAudit(student, courseList);
         //System.out.println(audit.doAudit());
         FileActions fA = new FileActions(courseList, degreeList);
-        fA.importSettings();
+        fA.exportStudent(student);
     }
 
     
