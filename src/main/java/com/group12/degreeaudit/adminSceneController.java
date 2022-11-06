@@ -2,7 +2,12 @@ package com.group12.degreeaudit;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.JSONCourse;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,7 +62,8 @@ public class adminSceneController implements Initializable{
 
     /* 
      * ADD COURSE TAB
-    */
+    */    
+
     @FXML
     private TextField addc_class_number, addc_class_name;
     
@@ -66,22 +72,75 @@ public class adminSceneController implements Initializable{
     
     @FXML
     private CheckBox addc_active_status;
+    
+    @FXML
+    private ComboBox<String> addc_type_dropdown, addc_prerequisites_dropdown;
+    
+    // Add to Prerequisites Courses Table
+    @FXML
+    public TableView<CourseSample> addc_prerequisites_table;
+    
+    //Columns
+    @FXML
+    public TableColumn<CourseSample, String> addc_course_num_col;
+    
+    @FXML
+    public TableColumn<CourseSample, String> addc_course_remove_col;
 
+    // Add to table button
+    @FXML
+    void addcPrerequisites(ActionEvent event) {
+        System.out.println("add to prerequisites table");
+        System.out.println(addc_prerequisites_dropdown.getValue());
+        /*
+        String courseNum = addc_prerequisites_dropdown.getValue();
+        JSONCourse course = new JSONCourse(courseNum);
+        ObservableList<JSONCourse> courseSample = addc_prerequisites_table.getItems();
+        courseSample.add(course);
+        addc_prerequisites_table.setItems(courseSample);
+        course.ButtonCell(addc_prerequisites_table, course);
+        //addc_prerequisites_table.setItems(addc_prerequisites_dropdown.getValue());
+ */
+    
+    }
+
+
+
+    // add course
     @FXML
     private Button addc_add_btn;
 
     @FXML
     public void addCourseToCourseList(ActionEvent event)
     {
-        System.out.println("add course to course list");
+        String courseNumber = addc_class_number.getText().toString();
+        String courseName = addc_class_name.getText().toString();
+        String courseDescription = addc_class_description.getText().toString();
+        String[] prereqs = new String[addc_prerequisites_table.getItems().size()];  
+        char classType = addc_type_dropdown.getValue().charAt(0);
+        boolean activeStatus = addc_active_status.isSelected();
+
+        int i = 0;
+        for (CourseSample course : addc_prerequisites_table.getItems()) {
+            //prereqs[i] = addc_prerequisites_table.getValueAt(1, i);
+            prereqs [i] = course.getNumber();
+            System.out.println(prereqs[i]);
+            i++;
+        }
+
+        System.out.println("Course Number is: " + courseNumber);
+        
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        courseList.AddCourseToList(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
     }
  
 
     /* 
      * UPDATE COURSE TAB
     */
+
     @FXML
-    private ComboBox<String> updatec_dropdown;
+    private ComboBox<String> updatec_class_dropdown, updatec_type_dropdown, updatec_prerequisites_dropdown;
 
     @FXML
     private TextField updatec_class_number, updatec_class_name;
@@ -91,6 +150,23 @@ public class adminSceneController implements Initializable{
     
     @FXML
     private CheckBox updatec_active_status;
+
+    // Add to Prerequisites Courses Table
+    @FXML
+    public TableView<CourseSample> updatec_prerequisites_table;
+    
+    //Columns
+    @FXML
+    public TableColumn<CourseSample, String> updatec_course_num_col;
+    
+    @FXML
+    public TableColumn<CourseSample, String> updatec_course_remove_col;
+
+    // Add to table button
+    @FXML
+    void updatecPrerequisites(ActionEvent event) {
+        System.out.println("update prerequisites table");
+    }
 
     @FXML
     private Button updatec_update_btn;
@@ -152,7 +228,6 @@ public class adminSceneController implements Initializable{
         courseSample.add(course);
         addt_5k_table_courses.setItems(courseSample);
         course.ButtonCell(addt_5k_table_courses, course);
-        
     }
 
     
@@ -174,7 +249,6 @@ public class adminSceneController implements Initializable{
     @FXML
     void addtAddCoreCourse(ActionEvent event) {
         System.out.println("Add core course");
-        
     }
 
     // Add to Elective Courses Table
@@ -313,14 +387,29 @@ public class adminSceneController implements Initializable{
 
         // UPDATE COURSE TAB
         ObservableList<String> list = FXCollections.observableArrayList("CS123", "CS456", "CS789");
-        updatec_dropdown.setItems(list);
+        updatec_class_dropdown.setItems(list);
 
+        // UPDATE COURSE TAB
+        ObservableList<String> classTypeList = FXCollections.observableArrayList("Admission", "Elective", "Core");
+        addc_type_dropdown.setItems(classTypeList);
+
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        List<JSONCourse> allCourses = courseList.GetCourseList();
+        ObservableList<String> prereqList = FXCollections.observableArrayList();
+        for (JSONCourse course : allCourses) {
+            prereqList.add(course.getCourseNumber());
+        }
+        addc_prerequisites_dropdown.setItems(prereqList);
 
         // ADD DEGREE TRACK TAB
         addt_5k_course_name_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("name"));
         addt_5k_course_num_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("number"));
         addt_5k_remove_course_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("button"));
 
+
+        // ADD DEGREE TRACK TAB
+        // addc_course_num_col.setCellValueFactory(new PropertyValueFactory<JSONCourse, String>("name"));
+        // addc_course_remove_col.setCellValueFactory(new PropertyValueFactory<JSONCourse, String>("button"));
 
     }
 

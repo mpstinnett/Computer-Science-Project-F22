@@ -34,6 +34,7 @@
                               <Image url="@../images/degree-planning-icon.png" />
                            </image>
                         </ImageView>
+                        <Button fx:id="return_to_menu_btn" layoutX="456.0" layoutY="5.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="133.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" />
                      </children>
                   </Pane>
                   <Pane layoutX="16.0" layoutY="111.0" prefHeight="144.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
