@@ -5,6 +5,7 @@ import com.group12.degreeaudit.CourseSample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 
 public class JSONCourseWrapper 
@@ -29,14 +30,17 @@ public class JSONCourseWrapper
     }
 
 
-    public void ButtonCell(final TableView tblView, final JSONCourseWrapper course){
+    public void ButtonCell(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
             public void handle(ActionEvent t) {
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
                 tblView.getItems().remove(course);   
-                System.out.println("after removed: " + tblView.getItems());           
+                System.out.println("after removed: " + tblView.getItems());
+                
+                // Put it back into dropdown
+                dropdown.getItems().add(prereq);
             }
         });
     }

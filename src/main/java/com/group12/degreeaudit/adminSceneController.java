@@ -108,11 +108,11 @@ public class adminSceneController implements Initializable{
         JSONCourseWrapper addc_prereq_course = new JSONCourseWrapper(addc_prereq_course_num);
         ObservableList<JSONCourseWrapper> addc_JSONCourseWrapper = addc_prerequisites_table.getItems();
         
-        
+        addc_prerequisites_dropdown.getItems().remove(addc_prereq_course_num);  
         
         addc_JSONCourseWrapper.add(addc_prereq_course);
         addc_prerequisites_table.setItems(addc_JSONCourseWrapper);
-        addc_prereq_course.ButtonCell(addc_prerequisites_table, addc_prereq_course);
+        addc_prereq_course.ButtonCell(addc_prerequisites_table, addc_prereq_course, addc_prerequisites_dropdown, addc_prereq_course_num);
         /*
         String courseNum = addc_prerequisites_dropdown.getValue();
         JSONCourse course = new JSONCourse(courseNum);
