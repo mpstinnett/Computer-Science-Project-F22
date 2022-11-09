@@ -16,11 +16,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="615.0" stylesheets="@../styleSheets/degreeplanning.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.degreePlanningSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: #fff;" stylesheets="@../styleSheets/degreeplanning.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.degreePlanningSceneController">
    <children>
-      <ScrollPane prefHeight="601.0" prefWidth="615.0">
+      <ScrollPane prefHeight="601.0" prefWidth="615.0" style="-fx-background-color: #fff; -fx-background: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane prefHeight="2538.0" prefWidth="615.0" style="-fx-background-color: FFFFFF;">
+            <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="2538.0" prefWidth="615.0" style="-fx-background-color: FFFFFF;">
                <children>
                   <Pane layoutY="-1.0" prefHeight="89.0" prefWidth="615.0" style="-fx-background-color: #154734;">
                      <children>

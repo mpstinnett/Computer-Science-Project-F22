@@ -1,1 +1,18 @@
-[{"courseNumber":"CS 5303","courseName":"Computer Science I","courseDescription":"Computer science problem solving. The structure and nature of algorithms and their corresponding computer program implementation. Programming in a high level block-structured language (e.g., PASCAL, Ada, C++, or JAVA). Elementary data structures: arrays, records, linked lists, trees, stacks and queues. Prerequisite: ENCS majors only. (3-0) R","coursePreReqs":[],"classType":"A","activeStatus":true},{"courseNumber":"CS 5333","courseName":"Discrete Structures","courseDescription":"Mathematical foundations of computer science. Logic, sets, relations, graphs and algebraic structures. Combinatorics and metrics for performance evaluation of algorithms. Prerequisite: ENCS majors only. (3-0) S","coursePreReqs":[],"classType":"A","activeStatus":true}]
+[
+    {
+        "courseNumber": "CS 5303",
+        "courseName": "Computer Science I",
+        "courseDescription": "Computer science problem solving. The structure and nature of algorithms and their corresponding computer program implementation. Programming in a high level block-structured language (e.g., PASCAL, Ada, C++, or JAVA). Elementary data structures: arrays, records, linked lists, trees, stacks and queues. Prerequisite: ENCS majors only. (3-0) R",
+        "coursePreReqs": [],
+        "classType": "A",
+        "activeStatus": true
+    },
+    {
+        "courseNumber": "CS 5333",
+        "courseName": "Discrete Structures",
+        "courseDescription": "Mathematical foundations of computer science. Logic, sets, relations, graphs and algebraic structures. Combinatorics and metrics for performance evaluation of algorithms. Prerequisite: ENCS majors only. (3-0) S",
+        "coursePreReqs": [],
+        "classType": "A",
+        "activeStatus": true
+    }
+]

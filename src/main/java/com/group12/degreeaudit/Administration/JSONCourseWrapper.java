@@ -1,0 +1,58 @@
+package com.group12.degreeaudit.Administration;
+
+import com.group12.degreeaudit.CourseSample;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+
+public class JSONCourseWrapper 
+{
+    private JSONCourse jsonCourse;
+    private Button button;
+
+
+    public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
+    {
+        jsonCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
+        //button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
+    }
+
+    public JSONCourseWrapper(String courseNumber)
+    {
+        jsonCourse = new JSONCourse(courseNumber);
+        this.button = new Button("X");
+        button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
+        
+        //button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
+    }
+
+
+    public void ButtonCell(final TableView tblView, final JSONCourseWrapper course){
+        button.setOnAction(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent t) {
+                //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
+                tblView.getItems().remove(course);   
+                System.out.println("after removed: " + tblView.getItems());           
+            }
+        });
+    }
+
+    public JSONCourse getJsonCourse() {
+        return jsonCourse;
+    }
+    public void setJsonCourse(JSONCourse jsonCourse) {
+        this.jsonCourse = jsonCourse;
+    }
+
+    public void setButton(Button button){
+        this.button = button;
+    }
+
+    public Button getButton(){
+        return button;
+    }
+}

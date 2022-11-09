@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.JSONCourse;
+import com.group12.degreeaudit.Administration.JSONCourseWrapper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,8 +41,7 @@ public class adminSceneController implements Initializable{
     
     // Handles return button
     @FXML
-    public void returnToMenu(ActionEvent event) throws IOException 
-    {
+    public void returnToMenu(ActionEvent event) throws IOException {
         Stage stage;
         Parent root;
         stage = (Stage) return_to_menu_btn.getScene().getWindow();
@@ -52,6 +52,17 @@ public class adminSceneController implements Initializable{
         stage.show();
     }
 
+    /*
+     * EXPORT SETTINGS 
+    */
+    @FXML
+    private Button export_settings_btn;
+    
+    // Handles export button
+    @FXML 
+    public void exportSettings(ActionEvent event){
+        System.out.println("Export settings");
+    }
 
     /* 
      * TABS
@@ -78,20 +89,30 @@ public class adminSceneController implements Initializable{
     
     // Add to Prerequisites Courses Table
     @FXML
-    public TableView<CourseSample> addc_prerequisites_table;
+    public TableView<JSONCourseWrapper> addc_prerequisites_table;
     
     //Columns
     @FXML
-    public TableColumn<CourseSample, String> addc_course_num_col;
+    public TableColumn<JSONCourseWrapper, String> addc_course_num_col;
     
     @FXML
-    public TableColumn<CourseSample, String> addc_course_remove_col;
+    public TableColumn<JSONCourseWrapper, String> addc_course_remove_col;
 
     // Add to table button
     @FXML
     void addcPrerequisites(ActionEvent event) {
         System.out.println("add to prerequisites table");
         System.out.println(addc_prerequisites_dropdown.getValue());
+
+        String addc_prereq_course_num = addc_prerequisites_dropdown.getValue();
+        JSONCourseWrapper addc_prereq_course = new JSONCourseWrapper(addc_prereq_course_num);
+        ObservableList<JSONCourseWrapper> addc_JSONCourseWrapper = addc_prerequisites_table.getItems();
+        
+        
+        
+        addc_JSONCourseWrapper.add(addc_prereq_course);
+        addc_prerequisites_table.setItems(addc_JSONCourseWrapper);
+        addc_prereq_course.ButtonCell(addc_prerequisites_table, addc_prereq_course);
         /*
         String courseNum = addc_prerequisites_dropdown.getValue();
         JSONCourse course = new JSONCourse(courseNum);
@@ -121,9 +142,9 @@ public class adminSceneController implements Initializable{
         boolean activeStatus = addc_active_status.isSelected();
 
         int i = 0;
-        for (CourseSample course : addc_prerequisites_table.getItems()) {
+        for (JSONCourseWrapper course : addc_prerequisites_table.getItems()) {
             //prereqs[i] = addc_prerequisites_table.getValueAt(1, i);
-            prereqs [i] = course.getNumber();
+            prereqs [i] = course.getJsonCourse().getCoursePreReqs()[i];
             System.out.println(prereqs[i]);
             i++;
         }
@@ -208,7 +229,7 @@ public class adminSceneController implements Initializable{
 
     // Add to 5XXX Courses Table
     @FXML
-    public TableView<CourseSample> addt_5k_table_courses;
+    public TableView<CourseSample> addt_5k_table;
 
     //Columns
     @FXML
@@ -224,16 +245,17 @@ public class adminSceneController implements Initializable{
     @FXML
     void addtAdd5kCourse(ActionEvent event) {
         CourseSample course = new CourseSample(addt_5k_course_name_input.getText(), addt_5k_course_num_input.getText());
-        ObservableList<CourseSample> courseSample = addt_5k_table_courses.getItems();
+        ObservableList<CourseSample> courseSample = addt_5k_table.getItems();
         courseSample.add(course);
-        addt_5k_table_courses.setItems(courseSample);
-        course.ButtonCell(addt_5k_table_courses, course);
+        addt_5k_table.setItems(courseSample);
+        course.ButtonCell(addt_5k_table, course);
+        System.out.println(addt_5k_table.getItems());
     }
 
     
     // Add to Core Courses Table
     @FXML
-    public TableView<CourseSample> addt_core_table_courses;
+    public TableView<CourseSample> addt_core_table;
 
     //Columns
     @FXML
@@ -253,7 +275,7 @@ public class adminSceneController implements Initializable{
 
     // Add to Elective Courses Table
     @FXML
-    public TableView<CourseSample> addt_elective_table_courses;
+    public TableView<CourseSample> addt_elective_table;
 
     //Columns
     @FXML
@@ -297,7 +319,7 @@ public class adminSceneController implements Initializable{
 
     // Add to 5XXX Courses Table
     @FXML
-    public TableView<CourseSample> updatet_5k_table_courses;
+    public TableView<CourseSample> updatet_5k_table;
 
     //Columns
     @FXML
@@ -319,7 +341,7 @@ public class adminSceneController implements Initializable{
     
     // Add to Core Courses Table
     @FXML
-    public TableView<CourseSample> updatet_core_table_courses;
+    public TableView<CourseSample> updatet_core_table;
 
     //Columns
     @FXML
@@ -340,7 +362,7 @@ public class adminSceneController implements Initializable{
 
     // Add to Elective Courses Table
     @FXML
-    public TableView<CourseSample> updatet_elective_table_courses;
+    public TableView<CourseSample> updatet_elective_table;
 
     //Columns
     @FXML
@@ -408,8 +430,8 @@ public class adminSceneController implements Initializable{
 
 
         // ADD DEGREE TRACK TAB
-        // addc_course_num_col.setCellValueFactory(new PropertyValueFactory<JSONCourse, String>("name"));
-        // addc_course_remove_col.setCellValueFactory(new PropertyValueFactory<JSONCourse, String>("button"));
+        addc_course_num_col.setCellValueFactory(new PropertyValueFactory<JSONCourseWrapper, String>("jsonCourse"));
+        addc_course_remove_col.setCellValueFactory(new PropertyValueFactory<JSONCourseWrapper, String>("button"));
 
     }
 
