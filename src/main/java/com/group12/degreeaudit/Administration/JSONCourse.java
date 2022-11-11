@@ -9,6 +9,8 @@ public class JSONCourse
     private char classType;
     private boolean activeStatus;
 
+    public JSONCourse() {};
+
     public JSONCourse(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         this.courseNumber = courseNumber;
