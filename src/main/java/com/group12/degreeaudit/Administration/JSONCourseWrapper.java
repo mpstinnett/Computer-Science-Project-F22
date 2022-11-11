@@ -17,20 +17,19 @@ public class JSONCourseWrapper
     public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         jsonCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
-        //button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
     }
 
     public JSONCourseWrapper(String courseNumber)
     {
         jsonCourse = new JSONCourse(courseNumber);
+
+        // create a remove button for the instance
         this.button = new Button("X");
         button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
         
-        //button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
     }
 
-
-    public void ButtonCell(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
+    public void removePrerequisite(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override
@@ -39,7 +38,7 @@ public class JSONCourseWrapper
                 tblView.getItems().remove(course);   
                 System.out.println("after removed: " + tblView.getItems());
                 
-                // Put it back into dropdown
+                // Put item back into dropdown
                 dropdown.getItems().add(prereq);
             }
         });

@@ -14,5 +14,15 @@
         "coursePreReqs": [],
         "classType": "A",
         "activeStatus": true
+    },
+    {
+        "courseNumber": "CS 5330",
+        "courseName": "Computer Science II",
+        "courseDescription": "Computer Science II (3 semester credit hours) Basic concepts of computer organization: Numbering systems, two\u0027s complement notation, multi-level machine concepts, machine language, assembly programming and optimization, subroutine calls, addressing modes, code generation process, CPU datapath, pipelining, RISC, CISC, and performance calculation. Corequisite: CS 5303. (3-0) R",
+        "coursePreReqs": [
+            "CS 5303"
+        ],
+        "classType": "A",
+        "activeStatus": true
     }
 ]

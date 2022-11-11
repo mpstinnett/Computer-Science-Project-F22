@@ -51,7 +51,7 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="574.0" style="-fx-background-color: #fff;">
                                        <children>
-                                          <BorderPane focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="589.0" prefWidth="538.0">
+                                          <BorderPane focusTraversable="true" layoutX="14.0" layoutY="14.0" prefHeight="589.0" prefWidth="538.0" BorderPane.alignment="CENTER">
                                              <top>
                                                 <Pane prefHeight="75.0" prefWidth="538.0" style="-fx-background-color: #1C5EAB;" styleClass="tab-header" BorderPane.alignment="CENTER">
                                                    <children>
@@ -110,6 +110,7 @@
                                                             <TableColumn fx:id="addc_course_remove_col" editable="false" minWidth="0.0" prefWidth="87.5999755859375" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
                                                          </columns>
                                                       </TableView>
+                                                      <Button layoutX="25.0" layoutY="297.0" mnemonicParsing="false" onAction="#testMeBestie" text="Test" />
                                                    </children>
                                                 </Pane>
                                              </center>

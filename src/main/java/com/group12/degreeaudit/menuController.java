@@ -50,12 +50,13 @@ public class menuController {
     @FXML
     private void importTranscript(ActionEvent event){
         System.out.println("I'm so done with you");
+
         FileChooser fc = new FileChooser();
 		// if we want to open fixed location
 		//fc.setInitialDirectory(new File("D:\\\\Books"));
 		
 
-		// if we want to fixed file extension
+		// Only allowing .txt files
 		fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
 		File selectedFile = fc.showOpenDialog(null);
         
