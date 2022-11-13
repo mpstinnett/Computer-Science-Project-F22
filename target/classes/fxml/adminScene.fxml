@@ -196,7 +196,7 @@
                                                       </Label>
                                                       <Button layoutX="465.0" layoutY="285.0" mnemonicParsing="false" onAction="#updatecPrerequisites" styleClass="regular-button" text="ADD" />
                                                       <ComboBox fx:id="updatec_prerequisites_dropdown" layoutX="155.0" layoutY="285.0" prefHeight="25.0" prefWidth="303.0" style="-fx-background-color: #fff;" />
-                                                      <ComboBox fx:id="updatec_class_dropdown" layoutX="154.0" layoutY="22.0" prefHeight="25.0" prefWidth="354.0" style="-fx-background-color: #fff;" />
+                                                      <ComboBox fx:id="updatec_class_dropdown" layoutX="154.0" layoutY="22.0" onAction="#updatecGetClassInfo" prefHeight="25.0" prefWidth="354.0" style="-fx-background-color: #fff;" />
                                                       <Label layoutX="28.0" layoutY="20.0" prefHeight="26.0" prefWidth="102.0" text="Choose Class:">
                                                          <font>
                                                             <Font size="14.0" />

@@ -13,6 +13,10 @@ public class JSONCourseWrapper
     private JSONCourse jsonCourse;
     private Button button;
 
+    public JSONCourseWrapper() 
+    {
+        jsonCourse = new JSONCourse();
+    }
 
     public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
