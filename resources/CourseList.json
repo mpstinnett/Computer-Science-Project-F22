@@ -26,11 +26,14 @@
         "activeStatus": true
     },
     {
-        "courseNumber": "",
-        "courseName": "",
-        "courseDescription": "",
-        "coursePreReqs": [],
-        "classType": "A",
+        "courseNumber": "CS 0000",
+        "courseName": "Sample Name",
+        "courseDescription": "Sample Description",
+        "coursePreReqs": [
+            "CS 5333",
+            "CS 5330"
+        ],
+        "classType": "E",
         "activeStatus": true
     }
 ]

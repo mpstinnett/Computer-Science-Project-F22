@@ -191,7 +191,18 @@ public class adminSceneController implements Initializable{
         String courseNumber = updatec_class_dropdown.getValue();
         CourseList courseList = new CourseList("resources/CourseList.json");
         JSONCourse course = courseList.GetCourseFromList(courseNumber);
-        //System.out.println(course.getCourseName());
+        List<JSONCourse> allCourses = courseList.GetCourseList();
+
+        ObservableList<String> updatecPreqDropList = FXCollections.observableArrayList();
+
+        for (JSONCourse preReqCourse : allCourses) {
+            updatecPreqDropList.add(preReqCourse.getCourseNumber());
+        }
+        updatec_prerequisites_dropdown.setItems(updatecPreqDropList);
+
+        // remove chosen class from prerequisite dropdown
+        updatec_prerequisites_dropdown.getItems().remove(courseNumber);  
+
         updatec_class_number.setText(course.getCourseNumber());
         updatec_class_name.setText(course.getCourseName());
         updatec_class_description.setText(course.getCourseDescription());
@@ -210,6 +221,9 @@ public class adminSceneController implements Initializable{
 
         }
         
+        // clear the table whenever a new class is chosen from the dropdown
+        updatec_prerequisites_table.getItems().clear();
+        
         String prerequisites[] = course.getCoursePreReqs();
         ObservableList<JSONCourseWrapper> updatec_JSONCourseWrapper = updatec_prerequisites_table.getItems();
         for(int i = 0; i < prerequisites.length; i++){
@@ -218,15 +232,35 @@ public class adminSceneController implements Initializable{
             
             updatec_JSONCourseWrapper.add(updatec_prereq_course);
             updatec_prerequisites_table.setItems(updatec_JSONCourseWrapper);
-            System.out.println(prerequisites[i]);
+            // remove the selected class from the dropdown 
+            updatec_prerequisites_dropdown.getItems().remove(prerequisites[i]);  
+            updatec_prereq_course.removePrerequisite(updatec_prerequisites_table, updatec_prereq_course, updatec_prerequisites_dropdown, prerequisites[i]);
+            
         }
-        //updatec_prerequisites_table.setItems(null);
+
 
     }
 
     // Add to table button
     @FXML
     void updatecPrerequisites(ActionEvent event) {
+        // Grab the selected class from prerequisite dropdown
+        String updatec_prereq_course_num = updatec_prerequisites_dropdown.getValue();
+
+        // create an instance of JSONCourseWrapper to add to the prerequisite table
+        JSONCourseWrapper updatec_prereq_course = new JSONCourseWrapper(updatec_prereq_course_num);
+
+        // remove the selected class from the dropdown 
+        updatec_prerequisites_dropdown.getItems().remove(updatec_prereq_course_num);  
+
+        // create an observable list for the prerequisite table
+        ObservableList<JSONCourseWrapper> updatec_JSONCourseWrapper = updatec_prerequisites_table.getItems();
+        
+        // populate the prerequisite table
+        updatec_JSONCourseWrapper.add(updatec_prereq_course);
+        updatec_prerequisites_table.setItems(updatec_JSONCourseWrapper);
+        updatec_prereq_course.removePrerequisite(updatec_prerequisites_table, updatec_prereq_course, updatec_prerequisites_dropdown, updatec_prereq_course_num);
+    
 
     }
 
@@ -242,16 +276,27 @@ public class adminSceneController implements Initializable{
         courseToUpdate.setCourseNumber(updatec_class_number.getText().toString());
         courseToUpdate.setCourseDescription(updatec_class_description.getText().toString());
         courseToUpdate.setActiveStatus(updatec_active_status.isSelected());
-        courseToUpdate.setCoursePreReqs(null);
-        courseToUpdate.setClassType('A');
-        courseList.UpdateCourseInList(courseToUpdate);
-        System.out.println("update course in course list");
+
+        String prerequisites[] = new String[updatec_prerequisites_table.getItems().size()];
+        for (int i = 0; i < prerequisites.length; i++) {
+
+            prerequisites[i] = updatec_prerequisites_table.getItems().get(i).getJsonCourse().getCourseNumber();
+        }
+
+        courseToUpdate.setCoursePreReqs(prerequisites);
+        courseToUpdate.setClassType(updatec_type_dropdown.getValue().charAt(0));
+        if (courseList.UpdateCourseInList(courseToUpdate)) {
+            System.out.println("Course updated.");
+        } else {
+            System.out.println("Error: Course not Updated.");
+        }
+        
     }
  
 
     /* 
      * REMOVE COURSE TAB
-    */
+    */ 
     @FXML
     private ComboBox<String> removec_dropdown;
 
@@ -474,6 +519,7 @@ public class adminSceneController implements Initializable{
             removecDropList.add(course.getCourseNumber());
             updatecDropList.add(course.getCourseNumber());
         }
+
         addc_prerequisites_dropdown.setItems(addcPreqDropList);
         removec_dropdown.setItems(removecDropList);
         updatec_class_dropdown.setItems(updatecDropList);
