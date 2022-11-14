@@ -28,7 +28,6 @@ public class menuController {
 
     public void initialize() {
         // TODO
-        courseList = new CourseList("resources/CourseList.json");
     }
 
     @FXML
@@ -69,6 +68,7 @@ public class menuController {
 		
 		if(selectedFile != null) {
 			//listview.getItems().add(selectedFile.getAbsolutePath());
+            courseList = new CourseList("resources/CourseList.json");
             TranscriptScanner transcriptScanner = new TranscriptScanner(selectedFile.toPath().toString(), courseList);
             Student student = transcriptScanner.scanTranscript();
 
