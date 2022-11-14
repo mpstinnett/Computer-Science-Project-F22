@@ -14,16 +14,21 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.group12.degreeaudit.Administration.CourseList;
+
 import javafx.fxml.Initializable;
 
 public class menuController {
 
     @FXML
     private Button admin_btn,degree_planner_btn;
+    private CourseList courseList;
 
 
     public void initialize() {
         // TODO
+        courseList = new CourseList("resources/CourseList.json");
     }
 
     @FXML
@@ -64,7 +69,7 @@ public class menuController {
 		
 		if(selectedFile != null) {
 			//listview.getItems().add(selectedFile.getAbsolutePath());
-            TranscriptScanner transcriptScanner = new TranscriptScanner(selectedFile.toPath().toString());
+            TranscriptScanner transcriptScanner = new TranscriptScanner(selectedFile.toPath().toString(), courseList);
             Student student = transcriptScanner.scanTranscript();
 
             System.out.println("File is valid");
