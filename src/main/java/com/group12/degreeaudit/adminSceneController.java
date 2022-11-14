@@ -4,6 +4,7 @@ package com.group12.degreeaudit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -193,10 +194,13 @@ public class adminSceneController implements Initializable{
 
         // Populate prerequisite dropdown with all courses possible
         ObservableList<String> updatecPreqDropList = FXCollections.observableArrayList();
+        
 
         for (JSONCourse preReqCourse : allCourses) {
             updatecPreqDropList.add(preReqCourse.getCourseNumber());
         }
+        
+        Collections.sort(updatecPreqDropList);
 
         updatec_prerequisites_dropdown.setItems(updatecPreqDropList);
 
@@ -503,12 +507,18 @@ public class adminSceneController implements Initializable{
         ObservableList<String> updatet5kDropList = FXCollections.observableArrayList();
         ObservableList<String> updatetCoreDropList = FXCollections.observableArrayList();
         ObservableList<String> updatetElectiveDropList = FXCollections.observableArrayList();
+        
+
 
         for (JSONCourse course : allCourses) {
             updatet5kDropList.add(course.getCourseNumber());
             updatetCoreDropList.add(course.getCourseNumber());
             updatetElectiveDropList.add(course.getCourseNumber());
         }
+
+        Collections.sort(updatet5kDropList);
+        Collections.sort(updatetCoreDropList);
+        Collections.sort(updatetElectiveDropList);
 
         updatet_5k_dropdown.setItems(updatet5kDropList);
         updatet_core_dropdown.setItems(updatetCoreDropList);
@@ -601,7 +611,21 @@ public class adminSceneController implements Initializable{
     // "ADD" button is pressed for adding a 5XXX course
     @FXML
     void updatetAdd5kCourse(ActionEvent event) {
-        System.out.println("Add 5k course");
+        // Grab the selected class from prerequisite dropdown
+        String updatet_5k_course_num = updatet_5k_dropdown.getValue();
+
+        // create an instance of JSONCourseWrapper to add to the prerequisite table
+        JSONCourseWrapper updatet_5k_course = new JSONCourseWrapper(updatet_5k_course_num);
+
+        // create an observable list for the prerequisite table
+        ObservableList<JSONCourseWrapper> updatet_5k_JSONCourseWrapper = updatet_5k_table.getItems();
+        
+        // populate the prerequisite table
+        updatet_5k_dropdown.getItems().remove(updatet_5k_course_num);  
+
+        updatet_5k_JSONCourseWrapper.add(updatet_5k_course);
+        updatet_5k_table.setItems(updatet_5k_JSONCourseWrapper);
+        updatet_5k_course.removeTableCourse(updatet_5k_table, updatet_5k_course, updatet_5k_dropdown, updatet_5k_course_num);
         
     }
 
@@ -619,7 +643,21 @@ public class adminSceneController implements Initializable{
     // "ADD" button is pressed for adding a core course
     @FXML
     void updatetAddCoreCourse(ActionEvent event) {
-        System.out.println("Add core course");
+         // Grab the selected class from prerequisite dropdown
+         String updatet_core_course_num = updatet_core_dropdown.getValue();
+
+         // create an instance of JSONCourseWrapper to add to the prerequisite table
+         JSONCourseWrapper updatet_core_course = new JSONCourseWrapper(updatet_core_course_num);
+ 
+         // create an observable list for the prerequisite table
+         ObservableList<JSONCourseWrapper> updatet_core_JSONCourseWrapper = updatet_core_table.getItems();
+         
+         // populate the prerequisite table
+         updatet_core_dropdown.getItems().remove(updatet_core_course_num);  
+ 
+         updatet_core_JSONCourseWrapper.add(updatet_core_course);
+         updatet_core_table.setItems(updatet_core_JSONCourseWrapper);
+         updatet_core_course.removeTableCourse(updatet_core_table, updatet_core_course, updatet_core_dropdown, updatet_core_course_num);
         
     }
 
@@ -636,7 +674,22 @@ public class adminSceneController implements Initializable{
     // "ADD" button is pressed for adding a elective course
     @FXML
     void updatetAddElectiveCourse(ActionEvent event) {
-        System.out.println("Add elective course");
+        // Grab the selected class from prerequisite dropdown
+        String updatet_elective_course_num = updatet_elective_dropdown.getValue();
+
+        // create an instance of JSONCourseWrapper to add to the prerequisite table
+        JSONCourseWrapper updatet_elective_course = new JSONCourseWrapper(updatet_elective_course_num);
+
+        // create an observable list for the prerequisite table
+        ObservableList<JSONCourseWrapper> updatet_elective_JSONCourseWrapper = updatet_elective_table.getItems();
+        
+        // populate the prerequisite table
+        updatet_elective_dropdown.getItems().remove(updatet_elective_course_num);  
+
+        updatet_elective_JSONCourseWrapper.add(updatet_elective_course);
+        updatet_elective_table.setItems(updatet_elective_JSONCourseWrapper);
+        updatet_elective_course.removeTableCourse(updatet_elective_table, updatet_elective_course, updatet_elective_dropdown, updatet_elective_course_num);
+        
         
     }
 
@@ -692,6 +745,7 @@ public class adminSceneController implements Initializable{
         ObservableList<String> addt5kDropList = FXCollections.observableArrayList();
         ObservableList<String> addtCoreDropList = FXCollections.observableArrayList();
         ObservableList<String> addtElectiveDropList = FXCollections.observableArrayList();
+        
 
         for (JSONCourse course : allCourses) {
             addcPreqDropList.add(course.getCourseNumber());
@@ -701,6 +755,13 @@ public class adminSceneController implements Initializable{
             addtCoreDropList.add(course.getCourseNumber());
             addtElectiveDropList.add(course.getCourseNumber());
         }
+
+        Collections.sort(addcPreqDropList);
+        Collections.sort(removecDropList);
+        Collections.sort(updatecDropList);
+        Collections.sort(addt5kDropList);
+        Collections.sort(addtCoreDropList);
+        Collections.sort(addtElectiveDropList);
 
         addc_prerequisites_dropdown.setItems(addcPreqDropList);
         removec_dropdown.setItems(removecDropList);
@@ -713,7 +774,7 @@ public class adminSceneController implements Initializable{
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         List<JSONDegree> allDegreeTracks = degreeList.GetDegreeList();
         ObservableList<String> updatetDropList = FXCollections.observableArrayList();
-
+        Collections.sort(updatetDropList);
 
         for(JSONDegree degreeTrack: allDegreeTracks){
             updatetDropList.add(degreeTrack.getDegreeName());

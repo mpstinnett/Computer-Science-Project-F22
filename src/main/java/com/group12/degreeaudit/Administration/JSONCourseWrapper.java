@@ -1,7 +1,10 @@
 package com.group12.degreeaudit.Administration;
 
+import java.util.Collections;
+
 import com.group12.degreeaudit.CourseSample;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -44,6 +47,10 @@ public class JSONCourseWrapper
                 
                 // Put item back into dropdown
                 dropdown.getItems().add(prereq);
+
+                // sort the dropdown again after putting back an item
+                ObservableList<String> dropdownItems = dropdown.getItems();
+                Collections.sort(dropdownItems);
             }
         });
     }
