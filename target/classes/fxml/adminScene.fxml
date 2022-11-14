@@ -409,7 +409,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox fx:id="addt_elective_allow_7th" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="addt_elective_allow_5k" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                          </children>
@@ -504,7 +504,7 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="updatet_track_name" layoutX="184.0" layoutY="59.0" prefHeight="25.0" prefWidth="326.0" />
-                                                      <Button layoutX="474.0" layoutY="651.0" mnemonicParsing="false" onAction="#updatetAdd5kCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="618.0" mnemonicParsing="false" onAction="#updatetAdd5kCourse" styleClass="regular-button" text="ADD" />
                                                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1235.0" prefWidth="538.0" stylesheets="@../styleSheets/admin.css" visible="false" />
                                                       <Label layoutX="29.0" layoutY="120.0" prefHeight="26.0" prefWidth="167.0" text="Number of Core Courses:">
                                                          <font>
@@ -534,7 +534,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField fx:id="updatet_gpa_requirements" layoutX="179.0" layoutY="8.0" prefHeight="25.0" prefWidth="95.0" />
+                                                                  <TextField fx:id="updatet_core_gpa_requirements" layoutX="179.0" layoutY="8.0" prefHeight="25.0" prefWidth="95.0" />
                                                                </children>
                                                             </Pane>
                                                             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="optional-features-cell" GridPane.rowIndex="1">
@@ -544,7 +544,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox fx:id="updatet_replace_2nd" layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="updatet_core_replace_2nd" layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                             <Pane prefHeight="200.0" prefWidth="283.0" GridPane.rowIndex="2">
@@ -554,7 +554,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox fx:id="updatet_allow_7th" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="updatet_core_allow_7th" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                          </children>
@@ -576,7 +576,6 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="updatet_5k_course_num_input" layoutX="166.0" layoutY="618.0" prefHeight="27.0" prefWidth="114.0" text="Course #" />
                                                       <Label layoutX="78.0" layoutY="415.0" prefHeight="26.0" prefWidth="125.0" text="Optional Features:">
                                                          <font>
                                                             <Font size="14.0" />
@@ -599,7 +598,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <TextField layoutX="179.0" layoutY="8.0" prefHeight="25.0" prefWidth="95.0" />
+                                                                  <TextField fx:id="updatet_elective_gpa_requirements" layoutX="179.0" layoutY="8.0" prefHeight="25.0" prefWidth="95.0" />
                                                                </children>
                                                             </Pane>
                                                             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="optional-features-cell" GridPane.rowIndex="1">
@@ -609,7 +608,7 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="updatet_elective_replace_2nd" layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                             <Pane prefHeight="200.0" prefWidth="283.0" GridPane.rowIndex="2">
@@ -619,17 +618,15 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="updatet_elective_allow_5k" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                          </children>
                                                       </GridPane>
-                                                      <TextField fx:id="updatet_5k_course_name_input" layoutX="166.0" layoutY="652.0" prefHeight="27.0" prefWidth="301.0" text="Course Name" />
-                                                      <TableView fx:id="updatet_5k_table" layoutX="167.0" layoutY="699.0" prefHeight="218.0" prefWidth="346.0">
+                                                      <TableView fx:id="updatet_5k_table" layoutX="167.0" layoutY="657.0" prefHeight="218.0" prefWidth="299.0">
                                                          <columns>
-                                                            <TableColumn fx:id="updatet_5k_course_num_col1" editable="false" prefWidth="116.79998779296875" sortable="false" text="Course #" />
-                                                            <TableColumn fx:id="updatet_5k_course_name_col" editable="false" prefWidth="168.0" sortable="false" text="Course Name" />
-                                                            <TableColumn fx:id="updatet_5k_remove_course_col" editable="false" minWidth="0.0" prefWidth="62.4000244140625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
+                                                            <TableColumn fx:id="updatet_5k_course_num_col" editable="false" prefWidth="230.00001525878906" sortable="false" text="Course #" />
+                                                            <TableColumn fx:id="updatet_5k_remove_course_col" editable="false" minWidth="0.0" prefWidth="68.0" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
                                                          </columns>
                                                       </TableView>
                                                       <Label layoutX="29.0" layoutY="944.0" prefHeight="26.0" prefWidth="134.0" text="Update Core Course:">
@@ -637,38 +634,35 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="updatet_core_course_num_input" layoutX="166.0" layoutY="944.0" prefHeight="27.0" prefWidth="114.0" text="Course #" />
-                                                      <TextField fx:id="updatet_core_course_name_input" layoutX="166.0" layoutY="982.0" prefHeight="27.0" prefWidth="301.0" text="Course Name" />
-                                                      <Button layoutX="474.0" layoutY="983.0" mnemonicParsing="false" onAction="#updatetAddCoreCourse" styleClass="regular-button" text="ADD" />
-                                                      <TableView fx:id="updatet_core_table" layoutX="167.0" layoutY="1028.0" prefHeight="218.0" prefWidth="346.0">
-                                                         <columns>
-                                                            <TableColumn fx:id="updatet_core_course_num_col" editable="false" prefWidth="116.79998779296875" sortable="false" text="Course #" />
-                                                            <TableColumn fx:id="updatet_core_course_name_col" editable="false" prefWidth="168.0" sortable="false" text="Course Name" />
-                                                            <TableColumn fx:id="updatet_core_remove_course_col" editable="false" minWidth="0.0" prefWidth="62.4000244140625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
-                                                         </columns>
-                                                      </TableView>
-                                                      <Label layoutX="29.0" layoutY="1269.0" prefHeight="26.0" prefWidth="134.0" text="Update Elective Course:">
+                                                      <Button layoutX="474.0" layoutY="945.0" mnemonicParsing="false" onAction="#updatetAddCoreCourse" styleClass="regular-button" text="ADD" />
+                                                      <Label layoutX="29.0" layoutY="1269.0" prefHeight="26.0" prefWidth="134.0" text="Update Elective:">
                                                          <font>
-                                                            <Font size="12.0" />
+                                                            <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="updatet_elective_num_input" layoutX="164.0" layoutY="1269.0" prefHeight="27.0" prefWidth="114.0" text="Course #" />
-                                                      <TextField fx:id="updatet_elective_name_input" layoutX="164.0" layoutY="1307.0" prefHeight="27.0" prefWidth="301.0" text="Course Name" />
-                                                      <Button layoutX="474.0" layoutY="1308.0" mnemonicParsing="false" onAction="#updatetAddElectiveCourse" styleClass="regular-button" text="ADD" />
-                                                      <TableView fx:id="updatet_elective_table" layoutX="165.0" layoutY="1353.0" prefHeight="218.0" prefWidth="346.0">
-                                                         <columns>
-                                                            <TableColumn fx:id="updatet_elective_course_num_col" editable="false" prefWidth="116.79998779296875" sortable="false" text="Course #" />
-                                                            <TableColumn fx:id="updatet_elective_course_name_col" editable="false" prefWidth="168.0" sortable="false" text="Course Name" />
-                                                            <TableColumn fx:id="updatet_elective_remove_course_col" editable="false" minWidth="0.0" prefWidth="62.4000244140625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
-                                                         </columns>
-                                                      </TableView>
-                                                      <Button layoutX="232.0" layoutY="1590.0" mnemonicParsing="false" onAction="#updatetSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="UPDATE" />
-                                                      <ComboBox fx:id="updatet_dropdown" layoutX="184.0" layoutY="18.0" prefHeight="25.0" prefWidth="327.0" style="-fx-background-color: #fff;" />
+                                                      <Button layoutX="474.0" layoutY="1269.0" mnemonicParsing="false" onAction="#updatetAddElectiveCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="207.0" layoutY="1567.0" mnemonicParsing="false" onAction="#updatetSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="UPDATE" />
+                                                      <ComboBox fx:id="updatet_dropdown" layoutX="184.0" layoutY="18.0" onAction="#updatetGetClassInfo" prefHeight="25.0" prefWidth="327.0" style="-fx-background-color: #fff;" />
                                                       <Label layoutX="29.0" layoutY="18.0" prefHeight="26.0" prefWidth="134.0" text="Class to Update:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
+                                                      <ComboBox fx:id="updatet_5k_dropdown" layoutX="167.0" layoutY="618.0" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #fff;" />
+                                                      <ComboBox fx:id="updatet_core_dropdown" layoutX="167.0" layoutY="945.0" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #fff;" />
+                                                      <TableView fx:id="updatet_core_table" layoutX="165.0" layoutY="986.0" prefHeight="218.0" prefWidth="299.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="updatet_core_course_num_col" editable="false" prefWidth="230.00001525878906" sortable="false" text="Course #" />
+                                                            <TableColumn fx:id="updatet_core_remove_course_col" editable="false" minWidth="0.0" prefWidth="68.0" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
+                                                         </columns>
+                                                      </TableView>
+                                                      <ComboBox fx:id="updatet_elective_dropdown" layoutX="167.0" layoutY="1269.0" prefHeight="25.0" prefWidth="299.0" style="-fx-background-color: #fff;" />
+                                                      <TableView fx:id="updatet_elective_table" layoutX="165.0" layoutY="1309.0" prefHeight="218.0" prefWidth="299.0">
+                                                         <columns>
+                                                            <TableColumn fx:id="updatet_elective_course_num_col" editable="false" prefWidth="230.00001525878906" sortable="false" text="Course #" />
+                                                            <TableColumn fx:id="updatet_elective_remove_course_col" editable="false" minWidth="0.0" prefWidth="68.0" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
+                                                         </columns>
+                                                      </TableView>
                                                    </children>
                                                 </Pane>
                                              </center>
