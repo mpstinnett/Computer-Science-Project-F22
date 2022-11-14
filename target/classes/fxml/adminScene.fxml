@@ -435,14 +435,14 @@
                                                       <Button layoutX="209.0" layoutY="1568.0" mnemonicParsing="false" onAction="#addtSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="SUBMIT" />
                                                       <ComboBox fx:id="addt_5k_dropdown" layoutX="168.0" layoutY="618.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <ComboBox fx:id="addt_core_dropdown" layoutX="168.0" layoutY="945.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
-                                                      <TableView fx:id="addt_5k_table1" layoutX="168.0" layoutY="988.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
+                                                      <TableView fx:id="addt_core_table" layoutX="168.0" layoutY="988.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
                                                          <columns>
                                                             <TableColumn fx:id="addt_core_course_num_col" editable="false" prefWidth="214.6666259765625" sortable="false" text="Course #" />
                                                             <TableColumn fx:id="addt_core_remove_course_col" editable="false" minWidth="0.0" prefWidth="82.00006103515625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
                                                          </columns>
                                                       </TableView>
                                                       <ComboBox fx:id="addt_elective_dropdown" layoutX="168.0" layoutY="1269.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
-                                                      <TableView fx:id="addt_5k_table11" layoutX="168.0" layoutY="1308.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
+                                                      <TableView fx:id="addt_elective_table" layoutX="168.0" layoutY="1308.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
                                                          <columns>
                                                             <TableColumn fx:id="addt_elective_course_num_col" editable="false" prefWidth="214.6666259765625" sortable="false" text="Course #" />
                                                             <TableColumn fx:id="addt_elective_remove_course_col" editable="false" minWidth="0.0" prefWidth="82.00006103515625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />

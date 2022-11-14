@@ -33,7 +33,7 @@ public class JSONCourseWrapper
         
     }
 
-    public void removePrerequisite(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
+    public void removeTableCourse(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
 
             @Override

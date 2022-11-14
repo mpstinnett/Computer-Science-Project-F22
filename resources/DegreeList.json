@@ -48,5 +48,30 @@
             "CS 5556"
         ],
         "activeStatus": true
+    },
+    {
+        "degreeName": "SAMPLE BAMBLE",
+        "coreRequirementAmount": "4",
+        "coreGPARequirement": "5.0",
+        "coreReplaceHighestAttempt": true,
+        "coreAllowSeventhElective": true,
+        "electiveRequirementAmount": "5",
+        "electiveGPARequirement": "3.5",
+        "electiveReplaceHighestAttempt": true,
+        "electiveAllowOneLowerCourse": true,
+        "electivesAcceptedLowerCourses": [
+            "CS 5330",
+            "CS 5333"
+        ],
+        "overallGPARequirement": "4.0",
+        "coreClassListRequirement": [
+            "CS 5333"
+        ],
+        "electiveClassListRequirement": [
+            "CS 0000",
+            "CS 5303",
+            "CS 5330"
+        ],
+        "activeStatus": true
     }
 ]
