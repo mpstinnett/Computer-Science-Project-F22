@@ -316,13 +316,15 @@ public class adminSceneController implements Initializable{
      * ADD DEGREE TRACK TAB
     */
     @FXML
-    public TextField addt_track_name, addt_num_core_courses, addt_gpa_requirements, 
-                     addt_num_electives, addt_overall_gpa, addt_5k_course_num_input, 
-                     addt_5k_course_name_input, addt_core_course_num_input, addt_core_course_name_input,
-                     addt_elective_num_input, addt_elective_name_input;
+    public TextField addt_track_name, addt_num_core_courses, addt_core_gpa_requirements, 
+                     addt_num_electives, addt_overall_gpa, addt_elective_gpa_requirements, 
+                     addt_5k_course_num_input, addt_core_course_num_input, addt_elective_num_input;
 
     @FXML
-    private CheckBox addt_active_status, addt_replace_2nd, addt_allow_7th;
+    private CheckBox addt_active_status, addt_core_replace_2nd, addt_core_allow_7th, addt_elective_replace_2nd, addt_elective_allow_7th;
+
+    @FXML
+    private ComboBox<String> addt_5k_dropdown, addt_core_dropdown, addt_elective_dropdown;
 
     // Add to 5XXX Courses Table
     @FXML
@@ -333,20 +335,12 @@ public class adminSceneController implements Initializable{
     public TableColumn<CourseSample, String> addt_5k_course_num_col;
 
     @FXML
-    public TableColumn<CourseSample, String> addt_5k_course_name_col;
-
-    @FXML
     public TableColumn<CourseSample, String> addt_5k_remove_course_col;
 
     // Add to table button
     @FXML
     void addtAdd5kCourse(ActionEvent event) {
-        CourseSample course = new CourseSample(addt_5k_course_name_input.getText(), addt_5k_course_num_input.getText());
-        ObservableList<CourseSample> courseSample = addt_5k_table.getItems();
-        courseSample.add(course);
-        addt_5k_table.setItems(courseSample);
-        course.ButtonCell(addt_5k_table, course);
-        System.out.println(addt_5k_table.getItems());
+
     }
 
     
@@ -357,9 +351,6 @@ public class adminSceneController implements Initializable{
     //Columns
     @FXML
     public TableColumn<CourseSample, String> addt_core_course_num_col;
-
-    @FXML
-    public TableColumn<CourseSample, String> addt_core_course_name_col;
 
     @FXML
     public TableColumn<CourseSample, String> addt_core_remove_course_col;
@@ -379,9 +370,6 @@ public class adminSceneController implements Initializable{
     public TableColumn<CourseSample, String> addt_elective_course_num_col;
 
     @FXML
-    public TableColumn<CourseSample, String> addt_elective_course_name_col;
-
-    @FXML
     public TableColumn<CourseSample, String> addt_elective_remove_course_col;
   
     // Add to table button
@@ -394,6 +382,21 @@ public class adminSceneController implements Initializable{
     // Submit button
     @FXML
     void addtSubmit(ActionEvent event) {
+
+        String trackName = addt_track_name.getText().toString();
+        boolean activeStatus = addt_active_status.isSelected();
+        String coreAmount = addt_num_core_courses.getText().toString();
+        String coreGpaRequirements = addt_core_gpa_requirements.getText().toString();
+        boolean coreAllow7th = addt_core_allow_7th.isSelected();
+        boolean coreReplace2nd = addt_core_replace_2nd.isSelected();
+        String electiveAmount = addt_num_electives.getText().toString();
+        String overallGPA = addt_overall_gpa.getText().toString();
+        String electiveGpaRequirements = addt_elective_gpa_requirements.getText().toString();
+        boolean electiveAllow7th = addt_elective_allow_7th.isSelected();
+        boolean electiveReplace2nd = addt_elective_replace_2nd.isSelected();
+
+
+
         System.out.println("Submit Degree Track");
         
     }
@@ -543,11 +546,6 @@ public class adminSceneController implements Initializable{
         addc_type_dropdown.setItems(classTypeList);
         updatec_type_dropdown.setItems(classTypeList);
         
-        // ADD DEGREE TRACK TAB
-        addt_5k_course_name_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("name"));
-        addt_5k_course_num_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("number"));
-        addt_5k_remove_course_col.setCellValueFactory(new PropertyValueFactory<CourseSample, String>("button"));
-
 
     }
 

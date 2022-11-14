@@ -19,3 +19,4 @@ com\group12\degreeaudit\Administration\DegreeList$1.class
 com\group12\degreeaudit\Student.class
 com\group12\degreeaudit\CourseSample$1.class
 com\group12\degreeaudit\Administration\JSONCourse.class
+com\group12\degreeaudit\Administration\JSONDegreeWrapper.class
