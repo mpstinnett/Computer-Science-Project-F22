@@ -156,6 +156,7 @@ public class CourseList
         {
             courseList.set(courseLocationInList, courseToUpdate);
             WriteCourseList(courseList);
+            return true;
         }
         return false;
     }
