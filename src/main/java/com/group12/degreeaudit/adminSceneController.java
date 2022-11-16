@@ -114,13 +114,45 @@ public class adminSceneController implements Initializable{
         addc_JSONCourseWrapper.add(addc_prereq_course);
         addc_prerequisites_table.setItems(addc_JSONCourseWrapper);
         addc_prereq_course.removeTableCourse(addc_prerequisites_table, addc_prereq_course, addc_prerequisites_dropdown, addc_prereq_course_num);
+
+        // clear selection
+        addc_prerequisites_dropdown.getSelectionModel().clearSelection();
     
     }
 
     // "TEST" button is pressed
     @FXML
     public void testMeBestie(ActionEvent event){
-        initialize(null, null);
+        //initialize(null, null);
+
+        // clear all fields after a course is updated
+        // a_class_dropdown.getSelectionModel().clearSelection();
+        // updatec_class_number.clear();
+        // updatec_class_name.clear();
+        // updatec_class_description.clear();
+        // updatec_type_dropdown.getSelectionModel().clearSelection();
+        // updatec_active_status.setSelected(false);
+        // updatec_prerequisites_dropdown.getSelectionModel().clearSelection();
+        // updatec_prerequisites_table.getItems().clear();
+
+        addt_track_name.clear();
+        addt_active_status.setSelected(false);
+        addt_num_core_courses.clear();
+        addt_core_gpa_requirements.clear();
+        addt_core_replace_2nd.setSelected(false);
+        addt_core_allow_7th.setSelected(false);
+        addt_num_electives.clear();
+        addt_overall_gpa.clear();
+        addt_elective_gpa_requirements.clear();
+        addt_elective_replace_2nd.setSelected(false);
+        addt_elective_allow_5k.setSelected(false);
+        addt_5k_dropdown.getSelectionModel().clearSelection();
+        addt_5k_table.getItems().clear();
+        addt_core_dropdown.getSelectionModel().clearSelection();
+        addt_core_table.getItems().clear();
+        addt_elective_dropdown.getSelectionModel().clearSelection();
+        addt_elective_table.getItems().clear();
+
     }
 
 
@@ -153,6 +185,7 @@ public class adminSceneController implements Initializable{
 
         // Refresh the tab
         initialize(null, null);
+
     }
  
 
@@ -187,66 +220,68 @@ public class adminSceneController implements Initializable{
 
         String courseNumber = updatec_class_dropdown.getValue();
 
-        // Get all the courses possible
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        JSONCourse course = courseList.GetCourseFromList(courseNumber);
-        List<JSONCourse> allCourses = courseList.GetCourseList();
+        if(courseNumber != null){
+            // Get all the courses possible
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            JSONCourse course = courseList.GetCourseFromList(courseNumber);
+            List<JSONCourse> allCourses = courseList.GetCourseList();
 
-        // Populate prerequisite dropdown with all courses possible
-        ObservableList<String> updatecPreqDropList = FXCollections.observableArrayList();
-        
-
-        for (JSONCourse preReqCourse : allCourses) {
-            updatecPreqDropList.add(preReqCourse.getCourseNumber());
-        }
-        
-        Collections.sort(updatecPreqDropList);
-
-        updatec_prerequisites_dropdown.setItems(updatecPreqDropList);
-
-        // Remove chosen class from prerequisite dropdown
-        updatec_prerequisites_dropdown.getItems().remove(courseNumber);  
-
-        // Populate details of the chosen class
-        updatec_class_number.setText(course.getCourseNumber());
-        updatec_class_name.setText(course.getCourseName());
-        updatec_class_description.setText(course.getCourseDescription());
-        updatec_active_status.setSelected(course.getActiveStatus());
-
-        switch(course.getClassType()){
-            case 'A':
-                updatec_type_dropdown.getSelectionModel().select("Admission");
-                break;
-            case 'E':
-                updatec_type_dropdown.getSelectionModel().select("Elective");
-                break;
-            case 'C':
-                updatec_type_dropdown.getSelectionModel().select("Core");
-                break;
-
-        }
-        
-        // Clear the prerequisites table whenever a new class is chosen from the class dropdown
-        updatec_prerequisites_table.getItems().clear();
-        
-        // Populate the table with the course prerequisites
-        String prerequisites[] = course.getCoursePreReqs();
-
-        ObservableList<JSONCourseWrapper> updatec_JSONCourseWrapper = updatec_prerequisites_table.getItems();
-
-        // Make a JSONCourseWrapper for every prerequisite in the course
-        for(int i = 0; i < prerequisites.length; i++){
-            JSONCourseWrapper updatec_prereq_course = new JSONCourseWrapper(prerequisites[i]);
-            updatec_JSONCourseWrapper.add(updatec_prereq_course);
-            updatec_prerequisites_table.setItems(updatec_JSONCourseWrapper);
-
-            // Remove the selected class from the dropdown 
-            updatec_prerequisites_dropdown.getItems().remove(prerequisites[i]);
+            // Populate prerequisite dropdown with all courses possible
+            ObservableList<String> updatecPreqDropList = FXCollections.observableArrayList();
             
-            updatec_prereq_course.removeTableCourse(updatec_prerequisites_table, updatec_prereq_course, updatec_prerequisites_dropdown, prerequisites[i]);
-            
-        }
 
+            for (JSONCourse preReqCourse : allCourses) {
+                updatecPreqDropList.add(preReqCourse.getCourseNumber());
+            }
+            
+            Collections.sort(updatecPreqDropList);
+
+            updatec_prerequisites_dropdown.setItems(updatecPreqDropList);
+
+            // Remove chosen class from prerequisite dropdown
+            updatec_prerequisites_dropdown.getItems().remove(courseNumber);  
+
+            // Populate details of the chosen class
+            updatec_class_number.setText(course.getCourseNumber());
+            updatec_class_name.setText(course.getCourseName());
+            updatec_class_description.setText(course.getCourseDescription());
+            updatec_active_status.setSelected(course.getActiveStatus());
+
+            switch(course.getClassType()){
+                case 'A':
+                    updatec_type_dropdown.getSelectionModel().select("Admission");
+                    break;
+                case 'E':
+                    updatec_type_dropdown.getSelectionModel().select("Elective");
+                    break;
+                case 'C':
+                    updatec_type_dropdown.getSelectionModel().select("Core");
+                    break;
+
+            }
+            
+            // Clear the prerequisites table whenever a new class is chosen from the class dropdown
+            updatec_prerequisites_table.getItems().clear();
+            
+            // Populate the table with the course prerequisites
+            String prerequisites[] = course.getCoursePreReqs();
+
+            ObservableList<JSONCourseWrapper> updatec_JSONCourseWrapper = updatec_prerequisites_table.getItems();
+
+            // Make a JSONCourseWrapper for every prerequisite in the course
+            for(int i = 0; i < prerequisites.length; i++){
+                JSONCourseWrapper updatec_prereq_course = new JSONCourseWrapper(prerequisites[i]);
+                updatec_JSONCourseWrapper.add(updatec_prereq_course);
+                updatec_prerequisites_table.setItems(updatec_JSONCourseWrapper);
+
+                // Remove the selected class from the dropdown 
+                updatec_prerequisites_dropdown.getItems().remove(prerequisites[i]);
+                
+                updatec_prereq_course.removeTableCourse(updatec_prerequisites_table, updatec_prereq_course, updatec_prerequisites_dropdown, prerequisites[i]);
+                
+            }
+
+        }
 
     }
 
@@ -270,6 +305,8 @@ public class adminSceneController implements Initializable{
         updatec_prerequisites_table.setItems(updatec_JSONCourseWrapper);
         updatec_prereq_course.removeTableCourse(updatec_prerequisites_table, updatec_prereq_course, updatec_prerequisites_dropdown, updatec_prereq_course_num);
 
+        // clear selection
+        updatec_prerequisites_dropdown.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -366,6 +403,9 @@ public class adminSceneController implements Initializable{
         addt_5k_JSONCourseWrapper.add(addt_5k_course);
         addt_5k_table.setItems(addt_5k_JSONCourseWrapper);
         addt_5k_course.removeTableCourse(addt_5k_table, addt_5k_course, addt_5k_dropdown, addt_5k_course_num);
+
+        // clear selection
+        addt_5k_dropdown.getSelectionModel().clearSelection();
     }
 
     
@@ -397,6 +437,9 @@ public class adminSceneController implements Initializable{
         addt_core_JSONCourseWrapper.add(addt_core_course);
         addt_core_table.setItems(addt_core_JSONCourseWrapper);
         addt_core_course.removeTableCourse(addt_core_table, addt_core_course, addt_core_dropdown, addt_core_course_num);
+
+        // clear selection
+        addt_core_dropdown.getSelectionModel().clearSelection();
     }
 
     // Add to Elective Courses Table
@@ -427,6 +470,9 @@ public class adminSceneController implements Initializable{
         addt_elective_JSONCourseWrapper.add(addt_elective_course);
         addt_elective_table.setItems(addt_elective_JSONCourseWrapper);
         addt_elective_course.removeTableCourse(addt_elective_table, addt_elective_course, addt_elective_dropdown, addt_elective_course_num);
+
+        // clear selection
+        addt_elective_dropdown.getSelectionModel().clearSelection();
         
     }
 
@@ -469,6 +515,9 @@ public class adminSceneController implements Initializable{
             coreAllowSeventhElective, electiveRequirementAmount, electiveGPARequirement, 
             electiveReplaceHighestAttempt, electiveAllowOneLowerCourse, electivesAcceptedLowerCourses, overallGPARequirement, 
             coreClassListRequirement, electiveClassListRequirement, activeStatus);
+
+        initialize(null, null);
+
     }
 
 
@@ -497,109 +546,110 @@ public class adminSceneController implements Initializable{
     void updatetGetClassInfo(ActionEvent event) {
         String degreeTrackName = updatet_dropdown.getValue();
 
-        // Get all the courses possible
-        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
-        JSONDegree degreeTrack = degreeList.GetDegreeFromList(degreeTrackName);
+        if(degreeTrackName != null){
+            // Get all the courses possible
+            DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+            JSONDegree degreeTrack = degreeList.GetDegreeFromList(degreeTrackName);
 
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        List<JSONCourse> allCourses = courseList.GetCourseList();
-        // Populate table dropdowns with all courses possible
-        ObservableList<String> updatet5kDropList = FXCollections.observableArrayList();
-        ObservableList<String> updatetCoreDropList = FXCollections.observableArrayList();
-        ObservableList<String> updatetElectiveDropList = FXCollections.observableArrayList();
-        
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            List<JSONCourse> allCourses = courseList.GetCourseList();
+            // Populate table dropdowns with all courses possible
+            ObservableList<String> updatet5kDropList = FXCollections.observableArrayList();
+            ObservableList<String> updatetCoreDropList = FXCollections.observableArrayList();
+            ObservableList<String> updatetElectiveDropList = FXCollections.observableArrayList();
+            
 
 
-        for (JSONCourse course : allCourses) {
-            updatet5kDropList.add(course.getCourseNumber());
-            updatetCoreDropList.add(course.getCourseNumber());
-            updatetElectiveDropList.add(course.getCourseNumber());
+            for (JSONCourse course : allCourses) {
+                updatet5kDropList.add(course.getCourseNumber());
+                updatetCoreDropList.add(course.getCourseNumber());
+                updatetElectiveDropList.add(course.getCourseNumber());
+            }
+
+            Collections.sort(updatet5kDropList);
+            Collections.sort(updatetCoreDropList);
+            Collections.sort(updatetElectiveDropList);
+
+            updatet_5k_dropdown.setItems(updatet5kDropList);
+            updatet_core_dropdown.setItems(updatetCoreDropList);
+            updatet_elective_dropdown.setItems(updatetElectiveDropList);
+
+            // Populate details of the chosen class
+            updatet_track_name.setText(degreeTrack.getDegreeName());
+            updatet_active_status.setSelected(degreeTrack.getActiveStatus());
+            updatet_num_core_courses.setText(degreeTrack.getCoreRequirementAmount());
+            updatet_core_gpa_requirements.setText(degreeTrack.getCoreGPARequirement());
+            updatet_core_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
+            updatet_core_allow_7th.setSelected(degreeTrack.getCoreAllowSeventhElective());
+            updatet_num_electives.setText(degreeTrack.getElectiveRequirementAmount());
+            updatet_overall_gpa.setText(degreeTrack.getOverallGPARequirement());
+            updatet_elective_gpa_requirements.setText(degreeTrack.getElectiveGPARequirement());
+            updatet_elective_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
+            updatet_elective_allow_5k.setSelected(degreeTrack.getElectiveAllowOneLowerCourse());
+
+
+            // Clear the tables whenever a new track is chosen from the dropdown
+            updatet_5k_table.getItems().clear();
+            updatet_core_table.getItems().clear();
+            updatet_elective_table.getItems().clear();
+
+            // POPULATE 5XXX COURSE TABLE
+            String lowerCourses[] = degreeTrack.getElectivesAcceptedLowerCourses();
+
+            // Populate the table with the 5k courses
+            ObservableList<JSONCourseWrapper> lowerCourseJSONCourseWrapper = updatet_5k_table.getItems();
+
+            // Make a JSONCourseWrapper for every 5k course
+            for(int i = 0; i < lowerCourses.length; i++){
+                JSONCourseWrapper lowerCourse = new JSONCourseWrapper(lowerCourses[i]);
+                lowerCourseJSONCourseWrapper.add(lowerCourse);
+                updatet_5k_table.setItems(lowerCourseJSONCourseWrapper);
+
+                // Remove the selected class from the dropdown 
+                updatet_5k_dropdown.getItems().remove(lowerCourses[i]);
+                
+                lowerCourse.removeTableCourse(updatet_5k_table, lowerCourse, updatet_5k_dropdown, lowerCourses[i]);
+                
+            }
+
+            // POPULATE CORE COURSE TABLE
+            String coreCourses[] = degreeTrack.getCoreClassListRequirement();
+
+            // Populate the table with the 5k courses
+            ObservableList<JSONCourseWrapper> coreCourseJSONCourseWrapper = updatet_core_table.getItems();
+
+            // Make a JSONCourseWrapper for every 5k course
+            for(int i = 0; i < coreCourses.length; i++){
+                JSONCourseWrapper coreCourse = new JSONCourseWrapper(coreCourses[i]);
+                coreCourseJSONCourseWrapper.add(coreCourse);
+                updatet_core_table.setItems(coreCourseJSONCourseWrapper);
+
+                // Remove the selected class from the dropdown 
+                updatet_core_dropdown.getItems().remove(coreCourses[i]);
+                
+                coreCourse.removeTableCourse(updatet_core_table, coreCourse, updatet_core_dropdown, coreCourses[i]);
+                
+            }
+
+            // POPULATE ELECTIVE COURSE TABLE
+            String electiveCourses[] = degreeTrack.getElectiveClassListRequirement();
+
+            // Populate the table with the 5k courses
+            ObservableList<JSONCourseWrapper> electiveCourseJSONCourseWrapper = updatet_elective_table.getItems();
+
+            // Make a JSONCourseWrapper for every 5k course
+            for(int i = 0; i < electiveCourses.length; i++){
+                JSONCourseWrapper electiveCourse = new JSONCourseWrapper(electiveCourses[i]);
+                electiveCourseJSONCourseWrapper.add(electiveCourse);
+                updatet_elective_table.setItems(electiveCourseJSONCourseWrapper);
+
+                // Remove the selected class from the dropdown 
+                updatet_elective_dropdown.getItems().remove(electiveCourses[i]);
+                
+                electiveCourse.removeTableCourse(updatet_elective_table, electiveCourse, updatet_elective_dropdown, electiveCourses[i]);
+                
+            }
         }
-
-        Collections.sort(updatet5kDropList);
-        Collections.sort(updatetCoreDropList);
-        Collections.sort(updatetElectiveDropList);
-
-        updatet_5k_dropdown.setItems(updatet5kDropList);
-        updatet_core_dropdown.setItems(updatetCoreDropList);
-        updatet_elective_dropdown.setItems(updatetElectiveDropList);
-
-        // Populate details of the chosen class
-        updatet_track_name.setText(degreeTrack.getDegreeName());
-        updatet_active_status.setSelected(degreeTrack.getActiveStatus());
-        updatet_num_core_courses.setText(degreeTrack.getCoreRequirementAmount());
-        updatet_core_gpa_requirements.setText(degreeTrack.getCoreGPARequirement());
-        updatet_core_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
-        updatet_core_allow_7th.setSelected(degreeTrack.getCoreAllowSeventhElective());
-        updatet_num_electives.setText(degreeTrack.getElectiveRequirementAmount());
-        updatet_overall_gpa.setText(degreeTrack.getOverallGPARequirement());
-        updatet_elective_gpa_requirements.setText(degreeTrack.getElectiveGPARequirement());
-        updatet_elective_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
-        updatet_elective_allow_5k.setSelected(degreeTrack.getElectiveAllowOneLowerCourse());
-
-
-        // Clear the tables whenever a new track is chosen from the dropdown
-        updatet_5k_table.getItems().clear();
-        updatet_core_table.getItems().clear();
-        updatet_elective_table.getItems().clear();
-
-        // POPULATE 5XXX COURSE TABLE
-        String lowerCourses[] = degreeTrack.getElectivesAcceptedLowerCourses();
-
-        // Populate the table with the 5k courses
-        ObservableList<JSONCourseWrapper> lowerCourseJSONCourseWrapper = updatet_5k_table.getItems();
-
-        // Make a JSONCourseWrapper for every 5k course
-        for(int i = 0; i < lowerCourses.length; i++){
-            JSONCourseWrapper lowerCourse = new JSONCourseWrapper(lowerCourses[i]);
-            lowerCourseJSONCourseWrapper.add(lowerCourse);
-            updatet_5k_table.setItems(lowerCourseJSONCourseWrapper);
-
-            // Remove the selected class from the dropdown 
-            updatet_5k_dropdown.getItems().remove(lowerCourses[i]);
-            
-            lowerCourse.removeTableCourse(updatet_5k_table, lowerCourse, updatet_5k_dropdown, lowerCourses[i]);
-            
-        }
-
-        // POPULATE CORE COURSE TABLE
-        String coreCourses[] = degreeTrack.getCoreClassListRequirement();
-
-        // Populate the table with the 5k courses
-        ObservableList<JSONCourseWrapper> coreCourseJSONCourseWrapper = updatet_core_table.getItems();
-
-        // Make a JSONCourseWrapper for every 5k course
-        for(int i = 0; i < coreCourses.length; i++){
-            JSONCourseWrapper coreCourse = new JSONCourseWrapper(coreCourses[i]);
-            coreCourseJSONCourseWrapper.add(coreCourse);
-            updatet_core_table.setItems(coreCourseJSONCourseWrapper);
-
-            // Remove the selected class from the dropdown 
-            updatet_core_dropdown.getItems().remove(coreCourses[i]);
-            
-            coreCourse.removeTableCourse(updatet_core_table, coreCourse, updatet_core_dropdown, coreCourses[i]);
-            
-        }
-
-        // POPULATE ELECTIVE COURSE TABLE
-        String electiveCourses[] = degreeTrack.getElectiveClassListRequirement();
-
-        // Populate the table with the 5k courses
-        ObservableList<JSONCourseWrapper> electiveCourseJSONCourseWrapper = updatet_elective_table.getItems();
-
-        // Make a JSONCourseWrapper for every 5k course
-        for(int i = 0; i < electiveCourses.length; i++){
-            JSONCourseWrapper electiveCourse = new JSONCourseWrapper(electiveCourses[i]);
-            electiveCourseJSONCourseWrapper.add(electiveCourse);
-            updatet_elective_table.setItems(electiveCourseJSONCourseWrapper);
-
-            // Remove the selected class from the dropdown 
-            updatet_elective_dropdown.getItems().remove(electiveCourses[i]);
-            
-            electiveCourse.removeTableCourse(updatet_elective_table, electiveCourse, updatet_elective_dropdown, electiveCourses[i]);
-            
-        }
-
     }
 
     @FXML
@@ -627,6 +677,8 @@ public class adminSceneController implements Initializable{
         updatet_5k_table.setItems(updatet_5k_JSONCourseWrapper);
         updatet_5k_course.removeTableCourse(updatet_5k_table, updatet_5k_course, updatet_5k_dropdown, updatet_5k_course_num);
         
+        // clear selection
+        updatet_5k_dropdown.getSelectionModel().clearSelection();
     }
 
     
@@ -659,6 +711,8 @@ public class adminSceneController implements Initializable{
          updatet_core_table.setItems(updatet_core_JSONCourseWrapper);
          updatet_core_course.removeTableCourse(updatet_core_table, updatet_core_course, updatet_core_dropdown, updatet_core_course_num);
         
+         // clear selection
+         updatet_core_dropdown.getSelectionModel().clearSelection();
     }
 
     // Add to Elective Courses Table
@@ -690,24 +744,55 @@ public class adminSceneController implements Initializable{
         updatet_elective_table.setItems(updatet_elective_JSONCourseWrapper);
         updatet_elective_course.removeTableCourse(updatet_elective_table, updatet_elective_course, updatet_elective_dropdown, updatet_elective_course_num);
         
-        
+        // clear selection
+        updatet_elective_dropdown.getSelectionModel().clearSelection();   
     }
 
     // "SUBMIT" button is pressed for updating a degree track
     @FXML
     void updatetSubmit(ActionEvent event) {
-        String degreeName = updatet_track_name.getText().toString();
-        String coreRequirementAmount = updatet_num_core_courses.getText().toString();
-        String coreGPARequirement = updatet_core_gpa_requirements.getText().toString();
-        boolean coreReplaceHighestAttempt = updatet_core_replace_2nd.isSelected();
-        boolean coreAllowSeventhElective = updatet_core_allow_7th.isSelected();
-        String electiveRequirementAmount = updatet_num_electives.getText().toString();
-        String electiveGPARequirement = updatet_elective_gpa_requirements.getText().toString();
-        boolean electiveReplaceHighestAttempt = updatet_elective_replace_2nd.isSelected();
-        boolean electiveAllowOneLowerCourse = updatet_elective_allow_5k.isSelected();
-        String overallGPARequirement = updatet_overall_gpa.getText().toString();
-        boolean activeStatus = addt_active_status.isSelected();
-        
+
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        JSONDegree degreeTrackToUpdate = new JSONDegree();
+        degreeTrackToUpdate.setDegreeName(updatet_track_name.getText().toString());
+        degreeTrackToUpdate.setActiveStatus(updatet_active_status.isSelected());
+        degreeTrackToUpdate.setCoreRequirementAmount(updatet_num_core_courses.getText().toString());
+        degreeTrackToUpdate.setCoreGPARequirement(updatet_core_gpa_requirements.getText().toString());
+        degreeTrackToUpdate.setCoreReplaceHighestAttempt(updatet_core_replace_2nd.isSelected());
+        degreeTrackToUpdate.setCoreAllowSeventhElective(updatet_core_allow_7th.isSelected());
+        degreeTrackToUpdate.setElectiveRequirementAmount(updatet_num_electives.getText().toString());
+        degreeTrackToUpdate.setElectiveGPARequirement(updatet_elective_gpa_requirements.getText().toString());
+        degreeTrackToUpdate.setElectiveReplaceHighestAttempt(updatet_elective_replace_2nd.isSelected());
+        degreeTrackToUpdate.setElectiveAllowOneLowerCourse(updatet_elective_allow_5k.isSelected());
+        degreeTrackToUpdate.setOverallGPARequirement(updatet_overall_gpa.getText().toString());
+
+        // Grab all table values
+        String electivesAcceptedLowerCourses[] = new String[updatet_5k_table.getItems().size()];
+        for (int i = 0; i < electivesAcceptedLowerCourses.length; i++) {
+            electivesAcceptedLowerCourses[i] = updatet_5k_table.getItems().get(i).getJsonCourse().getCourseNumber();
+        }
+
+        String coreClassListRequirement[] = new String[updatet_core_table.getItems().size()];
+        for (int i = 0; i < coreClassListRequirement.length; i++) {
+            coreClassListRequirement[i] = updatet_core_table.getItems().get(i).getJsonCourse().getCourseNumber();
+        }
+
+        String electiveClassListRequirement[] = new String[updatet_elective_table.getItems().size()];
+        for (int i = 0; i < electiveClassListRequirement.length; i++) {
+            electiveClassListRequirement[i] = updatet_elective_table.getItems().get(i).getJsonCourse().getCourseNumber();
+        }
+
+        degreeTrackToUpdate.setElectivesAcceptedLowerCourses(electivesAcceptedLowerCourses);
+        degreeTrackToUpdate.setCoreClassListRequirement(coreClassListRequirement);
+        degreeTrackToUpdate.setElectiveClassListRequirement(electiveClassListRequirement);
+
+        if (degreeList.UpdateDegreeInList(degreeTrackToUpdate)) {
+            System.out.println("Degree List updated.");
+        } else {
+            System.out.println("Error: Degree List not Updated.");
+        }
+
+        initialize(null, null);
     }
 
 
@@ -720,14 +805,78 @@ public class adminSceneController implements Initializable{
     @FXML
     private Button removet_remove_btn;
 
+    // "REMOVE" button is pressed
     @FXML
     public void removeDegreeTrack(ActionEvent event)
     {
-        System.out.println("Remove degree track");
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        degreeList.RemoveDegree(removet_dropdown.getValue());
+        initialize(null, null);
     }
 
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb){
+
+        // Clear ADD COURSES tab
+        addc_class_number.clear();
+        addc_class_name.clear();
+        addc_class_description.clear();
+        addc_type_dropdown.getSelectionModel().clearSelection();
+        addc_active_status.setSelected(false);
+        addc_prerequisites_dropdown.getSelectionModel().clearSelection();
+        addc_prerequisites_table.getItems().clear();
+
+        // clear UPDATE COURSES tab
+        updatec_class_dropdown.getSelectionModel().clearSelection();
+        updatec_class_number.clear();
+        updatec_class_name.clear();
+        updatec_class_description.clear();
+        updatec_type_dropdown.getSelectionModel().clearSelection();
+        updatec_active_status.setSelected(false);
+        updatec_prerequisites_dropdown.getSelectionModel().clearSelection();
+        updatec_prerequisites_table.getItems().clear();
+
+        // clear ADD DEGREE TRACK tab
+        addt_track_name.clear();
+        addt_active_status.setSelected(false);
+        addt_num_core_courses.clear();
+        addt_core_gpa_requirements.clear();
+        addt_core_replace_2nd.setSelected(false);
+        addt_core_allow_7th.setSelected(false);
+        addt_num_electives.clear();
+        addt_overall_gpa.clear();
+        addt_elective_gpa_requirements.clear();
+        addt_elective_replace_2nd.setSelected(false);
+        addt_elective_allow_5k.setSelected(false);
+        addt_5k_dropdown.getSelectionModel().clearSelection();
+        addt_5k_table.getItems().clear();
+        addt_core_dropdown.getSelectionModel().clearSelection();
+        addt_core_table.getItems().clear();
+        addt_elective_dropdown.getSelectionModel().clearSelection();
+        addt_elective_table.getItems().clear();
+
+        // clear UPDATE DEGREE TRACK tab
+        updatet_dropdown.getSelectionModel().clearSelection();
+        updatet_track_name.clear();
+        updatet_active_status.setSelected(false);
+        updatet_num_core_courses.clear();
+        updatet_core_gpa_requirements.clear();
+        updatet_core_replace_2nd.setSelected(false);
+        updatet_core_allow_7th.setSelected(false);
+        updatet_num_electives.clear();
+        updatet_overall_gpa.clear();
+        updatet_elective_gpa_requirements.clear();
+        updatet_elective_replace_2nd.setSelected(false);
+        updatet_elective_allow_5k.setSelected(false);
+        updatet_5k_dropdown.getSelectionModel().clearSelection();
+        updatet_5k_table.getItems().clear();
+        updatet_core_dropdown.getSelectionModel().clearSelection();
+        updatet_core_table.getItems().clear();
+        updatet_elective_dropdown.getSelectionModel().clearSelection();
+        updatet_elective_table.getItems().clear();
+
         // Clear Tables
         addc_prerequisites_table.getItems().clear();
 
@@ -774,12 +923,16 @@ public class adminSceneController implements Initializable{
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         List<JSONDegree> allDegreeTracks = degreeList.GetDegreeList();
         ObservableList<String> updatetDropList = FXCollections.observableArrayList();
+        ObservableList<String> removetDropList = FXCollections.observableArrayList();
+
         Collections.sort(updatetDropList);
 
         for(JSONDegree degreeTrack: allDegreeTracks){
             updatetDropList.add(degreeTrack.getDegreeName());
+            removetDropList.add(degreeTrack.getDegreeName());
         }
         updatet_dropdown.setItems(updatetDropList);
+        removet_dropdown.setItems(removetDropList);
 
         // ADD COURSE TAB - PREREQUISITES TABLE - setting columns using getters and setters from JSONCourseWrapper
         addc_course_num_col.setCellValueFactory(new PropertyValueFactory<JSONCourseWrapper, String>("jsonCourse"));
