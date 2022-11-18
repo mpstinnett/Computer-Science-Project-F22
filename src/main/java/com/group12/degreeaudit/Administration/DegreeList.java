@@ -70,7 +70,7 @@ public class DegreeList
         // System.out.println(PrintDegreeList());
     }
     
-    public void AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
+    public boolean AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
     boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
     String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
     String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
@@ -81,15 +81,14 @@ public class DegreeList
         electiveGPARequirement, electiveReplaceHighestAttempt, electiveAllowOneLowerCourse,
         electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement,
         electiveClassListRequirement, activeStatus);
+
         if(!CheckIfInDegreeList(createdDegree))
         {
             AppendDegreeList(createdDegree);
+            return true;
         }
-        else
-        {
-            System.out.println("Cant Append as degree is already in the degree list");
-        }
-        
+
+        return false;
     }
 
     public boolean CheckIfInDegreeList(JSONDegree checkDegree)
@@ -110,10 +109,10 @@ public class DegreeList
     private void AppendDegreeList(JSONDegree degree)
     {
         degreeList.add(degree);
-        WriteCourseList(degreeList);
+        WriteDegreeList(degreeList);
     }
 
-    private boolean WriteCourseList(List<JSONDegree> degreeList)
+    private boolean WriteDegreeList(List<JSONDegree> degreeList)
     {
         try
         {
@@ -136,7 +135,7 @@ public class DegreeList
             if(degreeList.get(i).getDegreeName().equalsIgnoreCase(degreeName))
             {
                 degreeList.remove(i);
-                WriteCourseList(degreeList);
+                WriteDegreeList(degreeList);
                 return true;
             }
         }
@@ -164,10 +163,18 @@ public class DegreeList
         if(degreeLocationInList != -1)
         {
             degreeList.set(degreeLocationInList, degreeToUpdate);
-            WriteCourseList(degreeList);
+            WriteDegreeList(degreeList);
+            return true;
         }
         return false;
     }
+
+    public void UpdateDegreeName(String oldDegreeName,String newDegreeName) {
+        int degreeLocationInList = FindDegreeInList(oldDegreeName);
+        degreeList.get(degreeLocationInList).setDegreeName(newDegreeName);
+        WriteDegreeList(degreeList);
+    }
+
 
     public int FindDegreeInList(JSONDegree degreeToFind)
     {
