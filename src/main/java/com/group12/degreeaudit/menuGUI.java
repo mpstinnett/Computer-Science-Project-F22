@@ -15,6 +15,7 @@ public class menuGUI extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
         primaryStage.setTitle("Administration Settings");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

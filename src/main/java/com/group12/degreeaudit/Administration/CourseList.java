@@ -69,18 +69,15 @@ public class CourseList
         // System.out.println(PrintCourseList());
     }
 
-    public void AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
+    public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
         if(!CheckIfInCourseList(createdCourse))
         {
             AppendCourseList(createdCourse);
+            return true;
         }
-        else
-        {
-            System.out.println("Cant Append as course is already in the course list");
-        }
-        
+        return false;
     }
 
     public boolean CheckIfInCourseList(JSONCourse checkCourse)
@@ -159,6 +156,12 @@ public class CourseList
             return true;
         }
         return false;
+    }
+    
+    public void UpdateCourseNumber(String oldCourseNumber, String newCourseNumber) {
+        int courseLocationInList = FindCourseInList(oldCourseNumber);
+        courseList.get(courseLocationInList).setCourseNumber(newCourseNumber);
+        WriteCourseList(courseList);
     }
 
     public int FindCourseInList(JSONCourse courseToFind)
