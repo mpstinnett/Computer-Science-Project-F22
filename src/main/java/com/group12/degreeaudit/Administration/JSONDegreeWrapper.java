@@ -12,13 +12,13 @@ public class JSONDegreeWrapper {
             boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
             String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
             String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
-            String[] electiveClassListRequirement, boolean activeStatus) 
+            String optionalCoreAmountRequired, String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus) 
     {
         jsonDegree = new JSONDegree( degreeName,  coreRequirementAmount,  coreGPARequirement, 
              coreReplaceHighestAttempt,  coreAllowSeventhElective,  electiveRequirementAmount,
              electiveGPARequirement,  electiveReplaceHighestAttempt,  electiveAllowOneLowerCourse,
              electivesAcceptedLowerCourses,  overallGPARequirement,  coreClassListRequirement,
-             electiveClassListRequirement,  activeStatus);
+             optionsCoreClassListRequirement, electiveClassListRequirement,  activeStatus);
     }
 
     public JSONDegreeWrapper(JSONDegree copyDegree) 
