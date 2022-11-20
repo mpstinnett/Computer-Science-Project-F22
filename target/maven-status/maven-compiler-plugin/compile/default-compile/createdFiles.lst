@@ -23,4 +23,3 @@ com\group12\degreeaudit\DegreeAuditTest.class
 com\group12\degreeaudit\Audit\DegreeAudit.class
 com\group12\degreeaudit\CourseSample$1.class
 com\group12\degreeaudit\Administration\JSONCourse.class
-com\group12\degreeaudit\Administration\JSONDegreeWrapper.class

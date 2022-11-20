@@ -84,13 +84,13 @@ public class DegreeList
     boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
     String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
     String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
-    String optionalCoreAmountRequired, String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
+    String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
         //First, create the JSONDegree to add with the parameter values
         JSONDegree createdDegree = new JSONDegree(degreeName, coreRequirementAmount, coreGPARequirement, 
         coreReplaceHighestAttempt, coreAllowSeventhElective, electiveRequirementAmount,
         electiveGPARequirement, electiveReplaceHighestAttempt, electiveAllowOneLowerCourse,
-        electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement, optionalCoreAmountRequired,
+        electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement,
         optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus);
 
         if(!CheckIfInDegreeList(createdDegree)) //Check if the newly created degree is not already in the degree list

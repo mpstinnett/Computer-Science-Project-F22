@@ -380,7 +380,7 @@ public class adminSceneController implements Initializable {
      * ADD DEGREE TRACK TAB
      */
     @FXML
-    public TextField addt_track_name, addt_num_core_courses, addt_num_optional_core_courses, addt_core_gpa_requirements,
+    public TextField addt_track_name, addt_num_core_courses, addt_core_gpa_requirements,
             addt_num_electives, addt_overall_gpa, addt_elective_gpa_requirements;
 
     @FXML
@@ -535,7 +535,6 @@ public class adminSceneController implements Initializable {
         String electiveGPARequirement = addt_elective_gpa_requirements.getText().toString();
         boolean electiveReplaceHighestAttempt = addt_elective_replace_2nd.isSelected();
         boolean electiveAllowOneLowerCourse = addt_elective_allow_5k.isSelected();
-        String optionalCoreAmountRequired = addt_num_optional_core_courses.getText().toString();
         String overallGPARequirement = addt_overall_gpa.getText().toString();
         boolean activeStatus = addt_active_status.isSelected();
 
@@ -567,8 +566,7 @@ public class adminSceneController implements Initializable {
         if (degreeList.AddDegreeToList(degreeName, coreRequirementAmount, coreGPARequirement, coreReplaceHighestAttempt,
                 coreAllowSeventhElective, electiveRequirementAmount, electiveGPARequirement,
                 electiveReplaceHighestAttempt, electiveAllowOneLowerCourse, electivesAcceptedLowerCourses,
-                overallGPARequirement, coreClassListRequirement, optionalCoreAmountRequired,
-                optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus)) {
+                overallGPARequirement, coreClassListRequirement,optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus)) {
             tattooOnMyChestie();
         } else {
             cowboyFromTheWestie("Error: Degree Name is already found in the list");
@@ -585,7 +583,7 @@ public class adminSceneController implements Initializable {
     private ComboBox<String> updatet_dropdown;
 
     @FXML
-    public TextField updatet_track_name, updatet_num_core_courses, updatet_num_optional_core_courses,
+    public TextField updatet_track_name, updatet_num_core_courses,
             updatet_core_gpa_requirements,
             updatet_num_electives, updatet_overall_gpa, updatet_elective_gpa_requirements;
 
@@ -642,7 +640,6 @@ public class adminSceneController implements Initializable {
             updatet_core_gpa_requirements.setText(degreeTrack.getCoreGPARequirement());
             updatet_core_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
             updatet_core_allow_7th.setSelected(degreeTrack.getCoreAllowSeventhElective());
-            updatet_num_optional_core_courses.setText(degreeTrack.getOptionalCoreAmountRequired());
             updatet_num_electives.setText(degreeTrack.getElectiveRequirementAmount());
             updatet_overall_gpa.setText(degreeTrack.getOverallGPARequirement());
             updatet_elective_gpa_requirements.setText(degreeTrack.getElectiveGPARequirement());
@@ -886,7 +883,6 @@ public class adminSceneController implements Initializable {
         degreeTrackToUpdate.setCoreGPARequirement(updatet_core_gpa_requirements.getText().toString());
         degreeTrackToUpdate.setCoreReplaceHighestAttempt(updatet_core_replace_2nd.isSelected());
         degreeTrackToUpdate.setCoreAllowSeventhElective(updatet_core_allow_7th.isSelected());
-        degreeTrackToUpdate.setOptionalCoreAmountRequired(updatet_num_optional_core_courses.getText().toString());
         degreeTrackToUpdate.setElectiveRequirementAmount(updatet_num_electives.getText().toString());
         degreeTrackToUpdate.setElectiveGPARequirement(updatet_elective_gpa_requirements.getText().toString());
         degreeTrackToUpdate.setElectiveReplaceHighestAttempt(updatet_elective_replace_2nd.isSelected());
@@ -985,7 +981,6 @@ public class adminSceneController implements Initializable {
         addt_core_gpa_requirements.clear();
         addt_core_replace_2nd.setSelected(false);
         addt_core_allow_7th.setSelected(false);
-        addt_num_optional_core_courses.clear();
         addt_num_electives.clear();
         addt_overall_gpa.clear();
         addt_elective_gpa_requirements.clear();
@@ -1008,7 +1003,6 @@ public class adminSceneController implements Initializable {
         updatet_core_gpa_requirements.clear();
         updatet_core_replace_2nd.setSelected(false);
         updatet_core_allow_7th.setSelected(false);
-        updatet_num_optional_core_courses.clear();
         updatet_num_electives.clear();
         updatet_overall_gpa.clear();
         updatet_elective_gpa_requirements.clear();

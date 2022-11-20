@@ -308,7 +308,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <GridPane layoutX="223.0" layoutY="205.0" prefHeight="230.0" prefWidth="288.0" styleClass="optional-features-grid">
+                                                      <GridPane layoutX="223.0" layoutY="205.0" prefHeight="191.0" prefWidth="288.0" styleClass="optional-features-grid">
                                                         <columnConstraints>
                                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                         </columnConstraints>
@@ -316,7 +316,6 @@
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
                                                             <Pane prefHeight="200.0" prefWidth="200.0" styleClass="optional-features-cell">
@@ -339,7 +338,7 @@
                                                                   <CheckBox fx:id="addt_core_replace_2nd" layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
-                                                            <Pane prefHeight="200.0" prefWidth="283.0" styleClass="optional-features-cell" GridPane.rowIndex="2">
+                                                            <Pane prefHeight="55.0" prefWidth="284.0" GridPane.rowIndex="2">
                                                                <children>
                                                                   <Label layoutX="8.0" layoutY="-2.0" prefHeight="53.0" prefWidth="134.0" text="Allow 7th Elective to bypass core GPA:" wrapText="true">
                                                                      <font>
@@ -347,16 +346,6 @@
                                                                      </font>
                                                                   </Label>
                                                                   <CheckBox fx:id="addt_core_allow_7th" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
-                                                               </children>
-                                                            </Pane>
-                                                            <Pane prefHeight="200.0" prefWidth="284.0" GridPane.rowIndex="3">
-                                                               <children>
-                                                                  <Label layoutX="8.0" layoutY="1.0" prefHeight="53.0" prefWidth="135.0" text="Number of optional core courses:" wrapText="true">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField fx:id="addt_num_optional_core_courses" layoutX="181.0" layoutY="16.0" prefHeight="25.0" prefWidth="95.0" />
                                                                </children>
                                                             </Pane>
                                                          </children>
@@ -544,12 +533,11 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <GridPane layoutX="222.0" layoutY="250.0" prefHeight="230.0" prefWidth="288.0" styleClass="optional-features-grid">
+                                                      <GridPane layoutX="222.0" layoutY="250.0" prefHeight="203.0" prefWidth="288.0" styleClass="optional-features-grid">
                                                          <columnConstraints>
                                                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                          </columnConstraints>
                                                          <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -572,27 +560,17 @@
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox fx:id="updatet_core_replace_2nd" layoutX="182.0" layoutY="16.0" mnemonicParsing="false" />
+                                                                  <CheckBox fx:id="updatet_core_replace_2nd" layoutX="182.0" layoutY="19.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
-                                                            <Pane prefHeight="200.0" prefWidth="283.0" styleClass="optional-features-cell" GridPane.rowIndex="2">
+                                                            <Pane prefHeight="61.0" prefWidth="284.0" GridPane.rowIndex="2">
                                                                <children>
-                                                                  <Label layoutX="8.0" layoutY="-2.0" prefHeight="53.0" prefWidth="134.0" text="Allow 7th Elective to bypass core GPA:" wrapText="true">
+                                                                  <Label layoutX="8.0" layoutY="2.0" prefHeight="53.0" prefWidth="134.0" text="Allow 7th Elective to bypass core GPA:" wrapText="true">
                                                                      <font>
                                                                         <Font size="14.0" />
                                                                      </font>
                                                                   </Label>
-                                                                  <CheckBox fx:id="updatet_core_allow_7th" layoutX="183.0" layoutY="16.0" mnemonicParsing="false" />
-                                                               </children>
-                                                            </Pane>
-                                                            <Pane prefHeight="200.0" prefWidth="284.0" GridPane.rowIndex="3">
-                                                               <children>
-                                                                  <Label layoutX="8.0" layoutY="1.0" prefHeight="53.0" prefWidth="135.0" text="Number of optional core courses:" wrapText="true">
-                                                                     <font>
-                                                                        <Font size="14.0" />
-                                                                     </font>
-                                                                  </Label>
-                                                                  <TextField fx:id="updatet_num_optional_core_courses" layoutX="181.0" layoutY="16.0" prefHeight="25.0" prefWidth="95.0" />
+                                                                  <CheckBox fx:id="updatet_core_allow_7th" layoutX="183.0" layoutY="20.0" mnemonicParsing="false" />
                                                                </children>
                                                             </Pane>
                                                          </children>
