@@ -29,3 +29,17 @@
   -fx-text-fill: white;
   -fx-alignment: left;
 }
+
+.return-to-menu-btn{
+  -fx-background-color: #FFF;
+  background-color: #FFF;
+  -fx-text-fill: #154734;
+  -fx-background-radius: 5;
+  -fx-font-weight: bold;
+  font-weight: bold;
+}
+
+.return-to-menu-btn:hover{
+  -fx-font-size: 12px;
+  font-size: 12px;
+}

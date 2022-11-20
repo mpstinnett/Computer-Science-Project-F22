@@ -26,7 +26,8 @@ public class CourseSample {
             @Override
             public void handle(ActionEvent t) {
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
-                tblView.getItems().remove(course);              
+                tblView.getItems().remove(course);   
+                System.out.println("after removed: " + tblView.getItems());           
             }
         });
     }

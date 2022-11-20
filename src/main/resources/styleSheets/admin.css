@@ -82,6 +82,11 @@
     -fx-text-fill: #FFF;
 }
 
+.add-and-update-course-table .column-header-background, .add-and-update-course-table .column-header  {
+    -fx-background-color:#1C5EAB;
+    background-color:#1C5EAB;
+}
+
 .table-view .column-header .label {
     -fx-text-fill: white;
 }

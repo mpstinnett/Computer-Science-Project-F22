@@ -12,6 +12,7 @@ public class adminGUI extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminScene.fxml"));
         primaryStage.setTitle("Administration Settings");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

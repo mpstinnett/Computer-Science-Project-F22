@@ -7,6 +7,7 @@
    <children>
 
       <Button fx:id="admin_btn" layoutX="208.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Admin" />
-      <Button fx:id="degree_planner_btn" layoutX="319.0" layoutY="166.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Degree Planner" />
+      <Button fx:id="degree_planner_btn" layoutX="234.0" layoutY="229.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Degree Planner" />
+      <Button layoutX="306.0" layoutY="166.0" mnemonicParsing="false" onAction="#importTranscript" text="Import Transcript" />
    </children>
 </AnchorPane>
