@@ -90,7 +90,7 @@ public class DegreeList
         JSONDegree createdDegree = new JSONDegree(degreeName, coreRequirementAmount, coreGPARequirement, 
         coreReplaceHighestAttempt, coreAllowSeventhElective, electiveRequirementAmount,
         electiveGPARequirement, electiveReplaceHighestAttempt, electiveAllowOneLowerCourse,
-        electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement,
+        electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement, optionalCoreAmountRequired,
         optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus);
 
         if(!CheckIfInDegreeList(createdDegree)) //Check if the newly created degree is not already in the degree list

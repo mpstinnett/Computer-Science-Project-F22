@@ -16,6 +16,7 @@ public class JSONDegree
     private String[] electivesAcceptedLowerCourses; //List of acceptable lower level courses to fill an elective
     private String overallGPARequirement;       //Overall GPA (All 5xxx & 6xxx courses)
     private String[] coreClassListRequirement;  //List of required core classes
+    private String optionalCoreAmountRequired; //Required amount of optional core classes (to satisfy the total required beyond the listed required)
     private String[] optionsCoreClassListRequirement;   //List of optional core classes (to satisfy the total required beyond the listed required)
     private String[] electiveClassListRequirement;      //Required electives to satisfy the degree track
     private boolean activeStatus;   //If the degree is able to be selected in dropdowns (Active to enroll into)
@@ -35,6 +36,7 @@ public class JSONDegree
         this.electivesAcceptedLowerCourses = null;
         this.overallGPARequirement = "0";
         this.coreClassListRequirement = null;
+        this.optionalCoreAmountRequired = "0";
         this.optionsCoreClassListRequirement = null;
         this.electiveClassListRequirement = null;
         this.activeStatus = false;
@@ -44,7 +46,7 @@ public class JSONDegree
     public JSONDegree(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
             boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
             String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
-            String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement, 
+            String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement, String optionalCoreAmountRequired,
             String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
        this.degreeName = degreeName;
@@ -59,6 +61,7 @@ public class JSONDegree
        this.electivesAcceptedLowerCourses = electivesAcceptedLowerCourses;
        this.overallGPARequirement = overallGPARequirement;
        this.coreClassListRequirement = coreClassListRequirement;
+       this.optionalCoreAmountRequired = optionalCoreAmountRequired;
        this.optionsCoreClassListRequirement = optionsCoreClassListRequirement;
        this.electiveClassListRequirement = electiveClassListRequirement;
        this.activeStatus = activeStatus;
@@ -79,6 +82,7 @@ public class JSONDegree
         this.electivesAcceptedLowerCourses = copyDegree.getElectivesAcceptedLowerCourses();
         this.overallGPARequirement = copyDegree.getOverallGPARequirement();
         this.coreClassListRequirement = copyDegree.getCoreClassListRequirement();
+        this.optionalCoreAmountRequired = copyDegree.getOptionalCoreAmountRequired();
         this.optionsCoreClassListRequirement = copyDegree.getOptionsCoreClassListRequirement();
         this.electiveClassListRequirement = copyDegree.getElectiveClassListRequirement();
         this.activeStatus = copyDegree.getActiveStatus();
@@ -214,6 +218,19 @@ public class JSONDegree
     public void setCoreClassListRequirement(String[] coreClassListRequirement)
     {
         this.coreClassListRequirement = coreClassListRequirement;
+    }
+
+    //getOptionalCoreAmountRequired - Returns the required amount of core classes that can be used to satisfy the required amount
+    //      past the cores required to take.
+    public String getOptionalCoreAmountRequired()
+    {
+        return optionalCoreAmountRequired;
+    }
+    //setOptionalCoreAmountRequired - Sets the class list of core classes that can be used to satisfy the required amount
+    //      past the cores required to take.
+    public void setOptionalCoreAmountRequired(String optionalCoreAmountRequired)
+    {
+        this.optionalCoreAmountRequired = optionalCoreAmountRequired;
     }
 
     //getOptionsCoreClassListRequirement - Returns the class list of core classes that can be used to satisfy the required amount

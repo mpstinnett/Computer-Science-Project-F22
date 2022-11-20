@@ -17,7 +17,7 @@ public class JSONDegreeWrapper {
         jsonDegree = new JSONDegree( degreeName,  coreRequirementAmount,  coreGPARequirement, 
              coreReplaceHighestAttempt,  coreAllowSeventhElective,  electiveRequirementAmount,
              electiveGPARequirement,  electiveReplaceHighestAttempt,  electiveAllowOneLowerCourse,
-             electivesAcceptedLowerCourses,  overallGPARequirement,  coreClassListRequirement,
+             electivesAcceptedLowerCourses,  overallGPARequirement,  coreClassListRequirement, optionalCoreAmountRequired,
              optionsCoreClassListRequirement, electiveClassListRequirement,  activeStatus);
     }
 
