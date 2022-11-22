@@ -64,6 +64,58 @@ public class Student {
             return new JSONDegree();
     }
 
+    public List<Course> matchCoreCourses(JSONDegree degreeTrack){ 
+        List<Course> matchedCoreCourses = new ArrayList<Course>();
+        for(Course course: coursesTaken)
+        {
+            for(String JSONcourse : degreeTrack.getCoreClassListRequirement())
+            {
+                if(course.getCourseNumber().equals(JSONcourse))
+                    matchedCoreCourses.add(course);
+            }            
+        }
+        return matchedCoreCourses;
+    }
+
+    public List<Course> matchCoreOptionCourses(JSONDegree degreeTrack){ 
+        List<Course> matchedCoreOptionCourses = new ArrayList<Course>();
+        for(Course course: coursesTaken)
+        {
+            for(String JSONcourse : degreeTrack.getOptionsCoreClassListRequirement())
+            {
+                if(course.getCourseNumber().equals(JSONcourse))
+                    matchedCoreOptionCourses.add(course);
+            }            
+        }
+        return matchedCoreOptionCourses;
+    }
+
+    public List<Course> matchElectiveCourses(JSONDegree degreeTrack){ 
+        List<Course> matchedElectiveCourses = new ArrayList<Course>();
+        for(Course course: coursesTaken)
+        {
+            for(String JSONcourse : degreeTrack.getElectiveClassListRequirement())
+            {
+                if(course.getCourseNumber().equals(JSONcourse))
+                    matchedElectiveCourses.add(course);
+            }            
+        }
+        return matchedElectiveCourses;
+    }
+
+    public List<Course> matchAddlElectiveCourses(JSONDegree degreeTrack){ 
+        List<Course> matchedAddlElectiveCourses = new ArrayList<Course>();
+        for(Course course: coursesTaken)
+        {
+            for(String JSONcourse : degreeTrack.getElectivesAcceptedLowerCourses())
+            {
+                if(course.getCourseNumber().equals(JSONcourse))
+                    matchedAddlElectiveCourses.add(course);
+            }            
+        }
+        return matchedAddlElectiveCourses;
+    }
+
     public String toString() {
         return "Name: " + name
                 + "\nID: " + ID

@@ -30,16 +30,23 @@
   -fx-alignment: left;
 }
 
-.return-to-menu-btn{
+.header-btn{
   -fx-background-color: #FFF;
   background-color: #FFF;
   -fx-text-fill: #154734;
   -fx-background-radius: 5;
   -fx-font-weight: bold;
   font-weight: bold;
+  -fx-font-size: 11px;
+  font-size: 11px;
 }
 
-.return-to-menu-btn:hover{
-  -fx-font-size: 12px;
-  font-size: 12px;
+.header-btn:hover{
+  -fx-font-size: 11px;
+  font-size: 11px;
+}
+
+.header-btn:selected{
+  -fx-font-size: 11px;
+  font-size: 11px;
 }

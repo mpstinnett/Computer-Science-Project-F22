@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: #fff;" stylesheets="@../styleSheets/degreeplanning.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.degreePlanningSceneController">
    <children>
-      <ScrollPane prefHeight="601.0" prefWidth="615.0" style="-fx-background-color: #fff; -fx-background: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane prefHeight="588.0" prefWidth="615.0" style="-fx-background-color: #fff; -fx-background: #fff;" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="2538.0" prefWidth="615.0" style="-fx-background-color: FFFFFF;">
                <children>
@@ -34,19 +34,28 @@
                               <Image url="@../images/degree-planning-icon.png" />
                            </image>
                         </ImageView>
-                        <Button fx:id="return_to_menu_btn" layoutX="456.0" layoutY="5.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="133.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" />
+                        <Button fx:id="return_to_menu_btn" depthTest="DISABLE" layoutX="456.0" layoutY="5.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="133.0" styleClass="header-btn" text="RETURN TO MENU">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                        <Button depthTest="DISABLE" layoutX="456.0" layoutY="39.0" mnemonicParsing="false" onAction="#importTranscript" prefHeight="25.0" prefWidth="133.0" styleClass="header-btn" text="IMPORT TRANSCRIPT">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                   <Pane layoutX="16.0" layoutY="111.0" prefHeight="144.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="95.0" text="Student Name: " />
-                        <TextField layoutX="107.0" layoutY="10.0" prefHeight="25.0" prefWidth="437.0" />
+                        <TextField fx:id="student_name" layoutX="107.0" layoutY="10.0" prefHeight="25.0" prefWidth="437.0" />
                         <Label layoutX="14.0" layoutY="45.0" text="Student I.D Number:" />
-                        <TextField layoutX="133.0" layoutY="41.0" prefHeight="25.0" prefWidth="193.0" />
+                        <TextField fx:id="student_id" layoutX="133.0" layoutY="41.0" prefHeight="25.0" prefWidth="193.0" />
                         <Label layoutX="14.0" layoutY="78.0" text="Semester Admitted to Program: " />
-                        <TextField layoutX="193.0" layoutY="74.0" prefHeight="25.0" prefWidth="193.0" />
+                        <TextField fx:id="semester_admitted" layoutX="193.0" layoutY="74.0" prefHeight="25.0" prefWidth="193.0" />
                         <Label layoutX="14.0" layoutY="112.0" text="Anticipated Graduation: " />
-                        <TextField layoutX="150.0" layoutY="108.0" prefHeight="25.0" prefWidth="193.0" />
+                        <TextField fx:id="anticipated_graduation" layoutX="150.0" layoutY="108.0" prefHeight="25.0" prefWidth="193.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="16.0" layoutY="276.0" prefHeight="97.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
@@ -54,9 +63,9 @@
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="95.0" text="Degree Plan:" />
                         <Label layoutX="14.0" layoutY="45.0" text="Fast Track: " />
                         <Label layoutX="14.0" layoutY="70.0" text="Thesis: " />
-                        <ComboBox layoutX="89.0" layoutY="10.0" prefHeight="25.0" prefWidth="261.0" />
-                        <CheckBox layoutX="89.0" layoutY="45.0" mnemonicParsing="false" />
-                        <CheckBox layoutX="70.0" layoutY="70.0" mnemonicParsing="false" />
+                        <ComboBox fx:id="degree_plan_dropdown" layoutX="89.0" layoutY="10.0" onAction="#getDegreePlanInfo" prefHeight="25.0" prefWidth="261.0" />
+                        <CheckBox fx:id="fast_track_checkbox" layoutX="89.0" layoutY="45.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="thesis_checkbox" layoutX="70.0" layoutY="70.0" mnemonicParsing="false" />
                      </children>
                   </Pane>
                   <Pane layoutX="16.0" layoutY="396.0" prefHeight="330.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
@@ -71,18 +80,18 @@
                            </children>
                         </Pane>
                         <Label layoutX="15.0" layoutY="64.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
-                        <ComboBox layoutX="89.0" layoutY="60.0" prefHeight="25.0" prefWidth="403.0" visibleRowCount="4" />
-                        <Button layoutX="508.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <ComboBox fx:id="admission_prereq_add_dropdown" layoutX="89.0" layoutY="60.0" prefHeight="25.0" prefWidth="403.0" visibleRowCount="4" />
+                        <Button fx:id="admission_prereq_add_button" layoutX="508.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="16.0" layoutY="107.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="admission_prereq_table" layoutX="16.0" layoutY="107.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn id="pre_req_table" prefWidth="265.0" text="Course:" />
-                              <TableColumn minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn prefWidth="84.0" text="Transfer:" />
-                              <TableColumn prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="admission_prereq_course_col" prefWidth="265.0" text="Course:" />
+                              <TableColumn fx:id="admission_prereq_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
+                              <TableColumn fx:id="admission_prereq_transfer_col" prefWidth="84.0" text="Transfer:" />
+                              <TableColumn fx:id="admission_prereq_grade_col" prefWidth="75.0" text="Grade:" />
                            </columns>
                         </TableView>
                      </children>
@@ -96,15 +105,17 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <ImageView id="infoIcon" fitHeight="32.0" fitWidth="29.0" layoutX="519.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/info-icon.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="523.0" layoutY="14.0" text="info" textFill="TRANSPARENT">
+                              <Label layoutX="524.0" layoutY="8.0">
                                  <tooltip>
-                                    <Tooltip autoHide="true" text="3.19 Grade Point Average Required " textAlignment="CENTER" />
+                                    <Tooltip fx:id="coreCourseTooltip" />
                                  </tooltip>
+                                 <graphic>
+                                    <ImageView id="infoIcon" fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/info-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Label>
                            </children>
                         </Pane>
@@ -115,18 +126,18 @@
                         </Label>
                         <Line endX="55.0" layoutX="115.0" layoutY="83.0" startX="-100.0" stroke="#a7a7a7" />
                         <Label layoutX="15.0" layoutY="101.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
-                        <ComboBox layoutX="93.0" layoutY="97.0" prefHeight="25.0" prefWidth="397.0" />
-                        <Button layoutX="508.0" layoutY="97.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <ComboBox fx:id="req_core_add_dropdown" layoutX="93.0" layoutY="97.0" prefHeight="25.0" prefWidth="397.0" />
+                        <Button fx:id="req_core_add_button" layoutX="508.0" layoutY="97.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="req_core_table" layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
                           <columns>
-                            <TableColumn prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                            <TableColumn minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn prefWidth="84.0" text="Transfer:" />
-                              <TableColumn prefWidth="75.0" text="Grade:" />
+                            <TableColumn fx:id="req_core_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                            <TableColumn fx:id="req_core_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
+                              <TableColumn fx:id="req_core_transfer_col" prefWidth="84.0" text="Transfer:" />
+                              <TableColumn fx:id="req_core_grade_col" prefWidth="75.0" text="Grade:" />
                           </columns>
                         </TableView>
                         <Label layoutX="14.0" layoutY="371.0" prefHeight="20.0" prefWidth="181.0" text="CORE CLASS OPTIONS">
@@ -136,18 +147,18 @@
                         </Label>
                         <Line endX="55.0" layoutX="115.0" layoutY="398.0" startX="-100.0" stroke="#a7a7a7" />
                         <Label layoutX="15.0" layoutY="413.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
-                        <ComboBox layoutX="93.0" layoutY="409.0" prefHeight="25.0" prefWidth="397.0" />
-                        <Button layoutX="508.0" layoutY="409.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <ComboBox fx:id="core_options_add_dropdown" layoutX="93.0" layoutY="409.0" prefHeight="25.0" prefWidth="397.0" />
+                        <Button fx:id="core_options_add_buttons" layoutX="508.0" layoutY="409.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="core_options_table" layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn prefWidth="84.0" text="Transfer:" />
-                              <TableColumn prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="core_options_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="core_options_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
+                              <TableColumn fx:id="core_options_transfer_col" prefWidth="84.0" text="Transfer:" />
+                              <TableColumn fx:id="core_options_grade_col" prefWidth="75.0" text="Grade:" />
                            </columns>
                         </TableView>
                      </children>
@@ -161,15 +172,17 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <ImageView id="infoIcon" fitHeight="32.0" fitWidth="29.0" layoutX="519.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/info-icon.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="523.0" layoutY="14.0" text="info" textFill="TRANSPARENT">
+                              <Label layoutX="516.0" layoutY="8.0" prefHeight="29.0" prefWidth="29.0" text=" " textFill="TRANSPARENT">
                                  <tooltip>
-                                    <Tooltip autoHide="true" text="3.0 Grade Point Average Required " textAlignment="CENTER" />
+                                    <Tooltip fx:id="electiveTooltip" autoHide="true" textAlignment="CENTER" />
                                  </tooltip>
+                                 <graphic>
+                                    <ImageView id="infoIcon" fitHeight="32.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/info-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
                               </Label>
                            </children>
                         </Pane>
@@ -178,30 +191,32 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView id="infoIcon" fitHeight="32.0" fitWidth="29.0" layoutX="521.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/info-icon.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="525.0" layoutY="58.0" text="info" textFill="TRANSPARENT">
+                        <Label layoutX="516.0" layoutY="51.0" prefHeight="29.0" prefWidth="23.0" text=" " textFill="TRANSPARENT">
                            <tooltip>
                               <Tooltip autoHide="true" text="May include any 6000 or 7000 level CS course without prior permission" textAlignment="CENTER" />
                            </tooltip>
+                           <graphic>
+                              <ImageView id="infoIcon" fitHeight="29.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/info-icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Label>
                         <Line endX="55.0" layoutX="115.0" layoutY="83.0" startX="-100.0" stroke="#a7a7a7" />
                         <Label layoutX="15.0" layoutY="101.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
-                        <ComboBox layoutX="93.0" layoutY="97.0" prefHeight="25.0" prefWidth="397.0" />
-                        <Button layoutX="508.0" layoutY="97.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <ComboBox fx:id="electives_add_dropdown" layoutX="93.0" layoutY="97.0" prefHeight="25.0" prefWidth="397.0" />
+                        <Button fx:id="electives_add_button" layoutX="508.0" layoutY="97.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="electives_table" layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn prefWidth="84.0" text="Transfer:" />
-                              <TableColumn prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="electives_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="electives_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
+                              <TableColumn fx:id="electives_transfer_col" prefWidth="84.0" text="Transfer:" />
+                              <TableColumn fx:id="electives_grade_col" prefWidth="75.0" text="Grade:" />
                            </columns>
                         </TableView>
                         <Label layoutX="14.0" layoutY="371.0" prefHeight="20.0" prefWidth="366.0" text="ADDITIONAL ELECTIVES (3 CREDIT HOURS MINIMUM)">
@@ -211,18 +226,18 @@
                         </Label>
                         <Line endX="55.0" layoutX="115.0" layoutY="398.0" startX="-100.0" stroke="#a7a7a7" />
                         <Label layoutX="15.0" layoutY="413.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
-                        <ComboBox layoutX="93.0" layoutY="409.0" prefHeight="25.0" prefWidth="397.0" />
-                        <Button layoutX="508.0" layoutY="409.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <ComboBox fx:id="addl_electives_add_dropdown" layoutX="93.0" layoutY="409.0" prefHeight="25.0" prefWidth="397.0" />
+                        <Button fx:id="addl_electives_add_button" layoutX="508.0" layoutY="409.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="addl_electives_table" layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn prefWidth="84.0" text="Transfer:" />
-                              <TableColumn prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="addl_electives_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="addl_electives_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
+                              <TableColumn fx:id="addl_electives_transfer_col" prefWidth="84.0" text="Transfer:" />
+                              <TableColumn fx:id="addl_electives_grade_col" prefWidth="75.0" text="Grade:" />
                            </columns>
                         </TableView>
                      </children>
