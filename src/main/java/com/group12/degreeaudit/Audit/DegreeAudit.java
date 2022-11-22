@@ -363,7 +363,7 @@ public class DegreeAudit
         currentGPA = getGPA(courses);
         for(Course course : courses)
         {
-            currentCredits += course.getCredits();
+            currentCredits += course.getCreditHours();
         }
 
         try
