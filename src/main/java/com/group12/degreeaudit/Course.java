@@ -2,11 +2,20 @@ package com.group12.degreeaudit;
 
 import com.group12.degreeaudit.Administration.CourseList;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import java.util.Collections;
+
 public class Course implements Comparable<Course> {
     private String courseNumber;
     private String semester;
     private String grade;
     private String courseTitle;
+    private Button button;
     private boolean transfer;
     private char classType;
     private double gradePoints;
@@ -18,8 +27,31 @@ public class Course implements Comparable<Course> {
         this.grade = grade;
         this.courseTitle = courseTitle;
         this.transfer = transfer;
+        this.button = new Button("X");
+        button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
+        
         updateGradePoints();
     }
+
+    public void removeCourse(final TableView tblView, final Course course, final ComboBox dropdown, final String prereq){
+        button.setFocusTraversable(false);
+        button.setOnAction(new EventHandler<ActionEvent>(){
+
+            @Override
+            public void handle(ActionEvent t) {
+                //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
+                tblView.getItems().remove(course);   
+                
+                // Put item back into dropdown
+                dropdown.getItems().add(prereq);
+
+                // sort the dropdown again after putting back an item
+                ObservableList<String> dropdownItems = dropdown.getItems();
+                Collections.sort(dropdownItems);
+            }
+        });
+    }
+
 
     public String getCourseNumber() {
         return courseNumber;
@@ -137,4 +169,11 @@ public class Course implements Comparable<Course> {
                + "\n\tTransfer: " + transfer;
     }
     
+    public void setButton(Button button){
+        this.button = button;
+    }
+
+    public Button getButton(){
+        return button;
+    }
 }

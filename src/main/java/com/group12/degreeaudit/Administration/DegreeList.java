@@ -84,7 +84,7 @@ public class DegreeList
     boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
     String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
     String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
-    String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
+    ArrayList<String> optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
         //First, create the JSONDegree to add with the parameter values
         JSONDegree createdDegree = new JSONDegree(degreeName, coreRequirementAmount, coreGPARequirement, 

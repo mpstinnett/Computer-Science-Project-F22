@@ -4,6 +4,7 @@ package com.group12.degreeaudit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -549,10 +550,11 @@ public class adminSceneController implements Initializable {
             coreClassListRequirement[i] = addt_core_table.getItems().get(i).getJsonCourse().getCourseNumber();
         }
 
-        String optionsCoreClassListRequirement[] = new String[addt_optional_core_table.getItems().size()];
-        for (int i = 0; i < optionsCoreClassListRequirement.length; i++) {
-            optionsCoreClassListRequirement[i] = addt_optional_core_table.getItems().get(i).getJsonCourse()
-                    .getCourseNumber();
+
+        ArrayList<String> optionsCoreClassListRequirement = new ArrayList<String>();
+        for (int i = 0; i < addt_optional_core_table.getItems().size(); i++) {
+            optionsCoreClassListRequirement.add(addt_optional_core_table.getItems().get(i).getJsonCourse()
+                    .getCourseNumber());
         }
 
         String electiveClassListRequirement[] = new String[addt_elective_table.getItems().size()];
@@ -691,23 +693,23 @@ public class adminSceneController implements Initializable {
             }
 
             // POPULATE OPTIONAL COURE COURSE TABLE
-            String optionalCoreCourses[] = degreeTrack.getOptionsCoreClassListRequirement();
+            ArrayList<String> optionalCoreCourses = degreeTrack.getOptionsCoreClassListRequirement();
 
             // Populate the table with the 5k courses
             ObservableList<JSONCourseWrapper> optionalCoreCourseJSONCourseWrapper = updatet_optional_core_table
                     .getItems();
 
             // Make a JSONCourseWrapper for every 5k course
-            for (int i = 0; i < optionalCoreCourses.length; i++) {
-                JSONCourseWrapper optionalCourse = new JSONCourseWrapper(optionalCoreCourses[i]);
+            for (int i = 0; i < optionalCoreCourses.size(); i++) {
+                JSONCourseWrapper optionalCourse = new JSONCourseWrapper(optionalCoreCourses.get(i));
                 optionalCoreCourseJSONCourseWrapper.add(optionalCourse);
                 updatet_optional_core_table.setItems(optionalCoreCourseJSONCourseWrapper);
 
                 // Remove the selected class from the dropdown
-                updatet_optional_core_dropdown.getItems().remove(optionalCoreCourses[i]);
+                updatet_optional_core_dropdown.getItems().remove(optionalCoreCourses.get(i));
 
                 optionalCourse.removeTableCourse(updatet_optional_core_table, optionalCourse,
-                        updatet_optional_core_dropdown, optionalCoreCourses[i]);
+                        updatet_optional_core_dropdown, optionalCoreCourses.get(i));
 
             }
 
@@ -900,11 +902,12 @@ public class adminSceneController implements Initializable {
             coreClassListRequirement[i] = updatet_core_table.getItems().get(i).getJsonCourse().getCourseNumber();
         }
 
-        String optionalCoreClassListRequirement[] = new String[updatet_optional_core_table.getItems().size()];
-        for (int i = 0; i < optionalCoreClassListRequirement.length; i++) {
-            optionalCoreClassListRequirement[i] = updatet_optional_core_table.getItems().get(i).getJsonCourse()
-                    .getCourseNumber();
+        ArrayList<String> optionalCoreClassListRequirement = new ArrayList<String>();
+        for (int i = 0; i < updatet_optional_core_table.getItems().size(); i++) {
+            optionalCoreClassListRequirement.add(updatet_optional_core_table.getItems().get(i).getJsonCourse()
+                    .getCourseNumber());
         }
+
 
         String electiveClassListRequirement[] = new String[updatet_elective_table.getItems().size()];
         for (int i = 0; i < electiveClassListRequirement.length; i++) {

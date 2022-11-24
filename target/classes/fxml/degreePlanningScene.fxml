@@ -18,11 +18,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="615.0" style="-fx-background-color: #fff;" stylesheets="@../styleSheets/degreeplanning.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.degreePlanningSceneController">
    <children>
-      <ScrollPane prefHeight="588.0" prefWidth="615.0" style="-fx-background-color: #fff; -fx-background: #fff;" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane maxWidth="1.7976931348623157E308" prefHeight="2538.0" prefWidth="615.0" style="-fx-background-color: FFFFFF;">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2538.0" prefWidth="615.0">
                <children>
-                  <Pane layoutY="-1.0" prefHeight="89.0" prefWidth="615.0" style="-fx-background-color: #154734;">
+                  <Pane prefHeight="89.0" prefWidth="615.0" style="-fx-background-color: #154734;">
                      <children>
                         <Label layoutX="107.0" layoutY="10.0" prefHeight="70.0" prefWidth="357.0" text="DEGREE PLAN" textFill="WHITE">
                            <font>
@@ -46,7 +46,7 @@
                         </Button>
                      </children>
                   </Pane>
-                  <Pane layoutX="16.0" layoutY="111.0" prefHeight="144.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
+                  <Pane layoutX="14.0" layoutY="112.0" prefHeight="144.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="95.0" text="Student Name: " />
                         <TextField fx:id="student_name" layoutX="107.0" layoutY="10.0" prefHeight="25.0" prefWidth="437.0" />
@@ -58,7 +58,7 @@
                         <TextField fx:id="anticipated_graduation" layoutX="150.0" layoutY="108.0" prefHeight="25.0" prefWidth="193.0" />
                      </children>
                   </Pane>
-                  <Pane layoutX="16.0" layoutY="276.0" prefHeight="97.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
+                  <Pane layoutX="14.0" layoutY="291.0" prefHeight="97.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="95.0" text="Degree Plan:" />
                         <Label layoutX="14.0" layoutY="45.0" text="Fast Track: " />
@@ -68,7 +68,7 @@
                         <CheckBox fx:id="thesis_checkbox" layoutX="70.0" layoutY="70.0" mnemonicParsing="false" />
                      </children>
                   </Pane>
-                  <Pane layoutX="16.0" layoutY="396.0" prefHeight="330.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
+                  <Pane layoutX="13.0" layoutY="421.0" prefHeight="330.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Pane prefHeight="43.0" prefWidth="567.0" style="-fx-background-color: #154734;" styleClass="degreeSectionHeader">
                            <children>
@@ -81,22 +81,23 @@
                         </Pane>
                         <Label layoutX="15.0" layoutY="64.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
                         <ComboBox fx:id="admission_prereq_add_dropdown" layoutX="89.0" layoutY="60.0" prefHeight="25.0" prefWidth="403.0" visibleRowCount="4" />
+                        <TableView fx:id="admission_prereq_table" layoutX="16.0" layoutY="103.0" prefHeight="200.0" prefWidth="536.0">
+                           <columns>
+                              <TableColumn fx:id="admission_prereq_course_col" prefWidth="172.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="admission_prereq_semester_col" minWidth="0.0" prefWidth="120.0" text="UTD Semester:" />
+                              <TableColumn fx:id="admission_prereq_transfer_col" prefWidth="88.0" text="Transfer:" />
+                              <TableColumn fx:id="admission_prereq_grade_col" prefWidth="72.0" text="Grade:" />
+                              <TableColumn fx:id="admission_prereq_remove_col" prefWidth="79.1" style="-fx-alignment: CENTER;" text="Remove" />
+                           </columns>
+                        </TableView>
                         <Button fx:id="admission_prereq_add_button" layoutX="508.0" layoutY="60.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="admission_prereq_table" layoutX="16.0" layoutY="107.0" prefHeight="200.0" prefWidth="536.0">
-                           <columns>
-                              <TableColumn fx:id="admission_prereq_course_col" prefWidth="265.0" text="Course:" />
-                              <TableColumn fx:id="admission_prereq_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn fx:id="admission_prereq_transfer_col" prefWidth="84.0" text="Transfer:" />
-                              <TableColumn fx:id="admission_prereq_grade_col" prefWidth="75.0" text="Grade:" />
-                           </columns>
-                        </TableView>
                      </children>
                   </Pane>
-                  <Pane layoutX="16.0" layoutY="748.0" prefHeight="673.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
+                  <Pane layoutX="14.0" layoutY="795.0" prefHeight="673.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Pane prefHeight="43.0" prefWidth="567.0" style="-fx-background-color: #154734;" styleClass="degreeSectionHeader">
                            <children>
@@ -127,17 +128,18 @@
                         <Line endX="55.0" layoutX="115.0" layoutY="83.0" startX="-100.0" stroke="#a7a7a7" />
                         <Label layoutX="15.0" layoutY="101.0" prefHeight="17.0" prefWidth="95.0" text="Add Course: " />
                         <ComboBox fx:id="req_core_add_dropdown" layoutX="93.0" layoutY="97.0" prefHeight="25.0" prefWidth="397.0" />
-                        <Button fx:id="req_core_add_button" layoutX="508.0" layoutY="97.0" mnemonicParsing="false" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
+                        <Button fx:id="req_core_add_button" layoutX="508.0" layoutY="97.0" mnemonicParsing="false" onAction="#addReqCore" style="-fx-background-color: F68A00;" text="ADD" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
                         <TableView fx:id="req_core_table" layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
                           <columns>
-                            <TableColumn fx:id="req_core_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                            <TableColumn fx:id="req_core_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn fx:id="req_core_transfer_col" prefWidth="84.0" text="Transfer:" />
-                              <TableColumn fx:id="req_core_grade_col" prefWidth="75.0" text="Grade:" />
+                            <TableColumn fx:id="req_core_course_col" prefWidth="172.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                            <TableColumn fx:id="req_core_semester_col" minWidth="0.0" prefWidth="120.0" text="UTD Semester:" />
+                              <TableColumn fx:id="req_core_transfer_col" prefWidth="88.0" text="Transfer:" />
+                              <TableColumn fx:id="req_core_grade_col" prefWidth="72.0" text="Grade:" />
+                              <TableColumn fx:id="req_core_remove_col" prefWidth="79.1" style="-fx-alignment: CENTER;" text="Remove" />
                           </columns>
                         </TableView>
                         <Label layoutX="14.0" layoutY="371.0" prefHeight="20.0" prefWidth="181.0" text="CORE CLASS OPTIONS">
@@ -153,17 +155,18 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="core_options_table" layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
+                        <TableView fx:id="core_options_table" layoutX="16.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn fx:id="core_options_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn fx:id="core_options_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn fx:id="core_options_transfer_col" prefWidth="84.0" text="Transfer:" />
-                              <TableColumn fx:id="core_options_grade_col" prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="core_options_course_col" prefWidth="172.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="core_options_semester_col" minWidth="0.0" prefWidth="120.0" text="UTD Semester:" />
+                              <TableColumn fx:id="core_options_transfer_col" prefWidth="88.0" text="Transfer:" />
+                              <TableColumn fx:id="core_options_grade_col" prefWidth="72.0" text="Grade:" />
+                              <TableColumn fx:id="core_options_remove_col" prefWidth="79.1" style="-fx-alignment: CENTER;" text="Remove" />
                            </columns>
                         </TableView>
                      </children>
                   </Pane>
-                  <Pane layoutX="16.0" layoutY="1446.0" prefHeight="673.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
+                  <Pane layoutX="14.0" layoutY="1505.0" prefHeight="673.0" prefWidth="567.0" style="-fx-background-color: EBEBEB;" styleClass="degreeSection">
                      <children>
                         <Pane prefHeight="43.0" prefWidth="567.0" style="-fx-background-color: #154734;" styleClass="degreeSectionHeader">
                            <children>
@@ -211,14 +214,6 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
-                        <TableView fx:id="electives_table" layoutX="15.0" layoutY="143.0" prefHeight="200.0" prefWidth="536.0">
-                           <columns>
-                              <TableColumn fx:id="electives_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn fx:id="electives_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn fx:id="electives_transfer_col" prefWidth="84.0" text="Transfer:" />
-                              <TableColumn fx:id="electives_grade_col" prefWidth="75.0" text="Grade:" />
-                           </columns>
-                        </TableView>
                         <Label layoutX="14.0" layoutY="371.0" prefHeight="20.0" prefWidth="366.0" text="ADDITIONAL ELECTIVES (3 CREDIT HOURS MINIMUM)">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -232,12 +227,22 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
+                        <TableView fx:id="electives_table" layoutX="16.0" layoutY="140.0" prefHeight="200.0" prefWidth="536.0">
+                           <columns>
+                              <TableColumn fx:id="electives_course_col" prefWidth="172.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="electives_semester_col" minWidth="0.0" prefWidth="120.0" text="UTD Semester:" />
+                              <TableColumn fx:id="electives_transfer_col" prefWidth="88.0" text="Transfer:" />
+                              <TableColumn fx:id="electives_grade_col" prefWidth="72.0" text="Grade:" />
+                              <TableColumn fx:id="electives_remove_col" prefWidth="79.1" style="-fx-alignment: CENTER;" text="Remove" />
+                           </columns>
+                        </TableView>
                         <TableView fx:id="addl_electives_table" layoutX="15.0" layoutY="451.0" prefHeight="200.0" prefWidth="536.0">
                            <columns>
-                              <TableColumn fx:id="addl_electives_course_col" prefWidth="265.0" styleClass="tableHeaderLeftCorner" text="Course:" />
-                              <TableColumn fx:id="addl_electives_semester_col" minWidth="0.0" prefWidth="117.0" text="UTD Semester:" />
-                              <TableColumn fx:id="addl_electives_transfer_col" prefWidth="84.0" text="Transfer:" />
-                              <TableColumn fx:id="addl_electives_grade_col" prefWidth="75.0" text="Grade:" />
+                              <TableColumn fx:id="addl_electives_course_col" prefWidth="172.0" styleClass="tableHeaderLeftCorner" text="Course:" />
+                              <TableColumn fx:id="addl_electives_semester_col" minWidth="0.0" prefWidth="120.0" text="UTD Semester:" />
+                              <TableColumn fx:id="addl_electives_transfer_col" prefWidth="88.0" text="Transfer:" />
+                              <TableColumn fx:id="addl_electives_grade_col" prefWidth="72.0" text="Grade:" />
+                              <TableColumn fx:id="addl_electives_remove_col" prefWidth="79.1" style="-fx-alignment: CENTER;" text="Remove" />
                            </columns>
                         </TableView>
                      </children>
