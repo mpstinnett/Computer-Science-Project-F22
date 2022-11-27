@@ -166,8 +166,11 @@ public class DegreeAudit
         {
             if(course.getClassType() == 'E')
             {
-                completedElectiveAmount++;
-                electiveCourses.add(course);
+                if(isPastTop5Core(course))
+                {
+                    completedElectiveAmount++;
+                    electiveCourses.add(course);
+                }
             }
             else if(course.getClassType() == 'C')
             {
