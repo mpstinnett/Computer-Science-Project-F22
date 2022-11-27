@@ -413,7 +413,7 @@ public class DegreeAudit
         int totalCreditHoursAttempted = 0;
         double totalGradePointsEarned = 0;
         for (Course course : courses) {
-            if (course.getGrade() == "") {
+            if (course.getGrade().equals("") || course.getGrade().equals("P")) {
                 continue;
             }
 

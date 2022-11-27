@@ -9,6 +9,8 @@ public class JSONCourse
     private char classType;
     private boolean activeStatus;
 
+    public JSONCourse() {};
+
     public JSONCourse(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         this.courseNumber = courseNumber;
@@ -17,6 +19,11 @@ public class JSONCourse
         this.coursePreReqs = prereqs;
         this.classType = classType;
         this.activeStatus = activeStatus;
+    }
+
+    public JSONCourse(String courseNumber)
+    {
+        this.courseNumber = courseNumber;
     }
 
     public JSONCourse(JSONCourse copyCourse)
@@ -92,6 +99,9 @@ public class JSONCourse
     @Override
     public String toString()
     {
+        if (getCourseName() == null) {
+            return getCourseNumber();
+        }
         String returnString = "";
         returnString += "\nCourse: " + getCourseNumber()
             + "\nName: " + getCourseName()
