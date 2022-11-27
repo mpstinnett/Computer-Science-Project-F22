@@ -363,7 +363,7 @@ public class DegreeAudit
         currentGPA = getGPA(courses);
         for(Course course : courses)
         {
-            currentCredits += course.getCreditHours();
+            currentCredits += course.getCredits();
         }
 
         try
@@ -411,7 +411,7 @@ public class DegreeAudit
         int totalCreditHoursAttempted = 0;
         double totalGradePointsEarned = 0;
         for (Course course : courses) {
-            if (course.getGrade() == "") {
+            if (course.getGrade().equals("") || course.getGrade().equals("P")) {
                 continue;
             }
 

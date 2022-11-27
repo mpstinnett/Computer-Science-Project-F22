@@ -13,6 +13,18 @@ public class Course implements Comparable<Course> {
     private double creditHours;
 
     public Course() {}
+
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer) 
+    {
+        this.courseNumber = courseNumber;
+        this.semester = semester;
+        this.grade = grade;
+        this.courseTitle = courseTitle;
+        this.transfer = transfer;
+        this.creditHours = 0;
+        updateGradePoints();
+    }
+
     public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer, double creditHours) {
         this.courseNumber = courseNumber;
         this.semester = semester;
@@ -73,35 +85,36 @@ public class Course implements Comparable<Course> {
 
     private void updateGradePoints()
     {
-        
+        double credits = getCredits();
+
         switch (getGrade()) {
-            case "A+" : gradePoints = 4.00 * creditHours;
+            case "A+" : gradePoints = 4.00 * credits;
                         break;
-            case "A"  : gradePoints = 4.00 * creditHours;
+            case "A"  : gradePoints = 4.00 * credits;
                         break;
-            case "A-" : gradePoints = 3.67 * creditHours;
+            case "A-" : gradePoints = 3.67 * credits;
                         break;
-            case "B+" : gradePoints = 3.33 * creditHours;
+            case "B+" : gradePoints = 3.33 * credits;
                         break;
-            case "B"  : gradePoints = 3.00 * creditHours;
+            case "B"  : gradePoints = 3.00 * credits;
                         break;
-            case "B-" : gradePoints = 2.67 * creditHours;
+            case "B-" : gradePoints = 2.67 * credits;
                         break;
-            case "C+" : gradePoints = 2.33 * creditHours;
+            case "C+" : gradePoints = 2.33 * credits;
                         break;
-            case "C"  : gradePoints = 2.00 * creditHours;
+            case "C"  : gradePoints = 2.00 * credits;
                         break;
-            case "C-" : gradePoints = 1.67 * creditHours;
+            case "C-" : gradePoints = 1.67 * credits;
                         break;
-            case "D+" : gradePoints = 1.33 * creditHours;
+            case "D+" : gradePoints = 1.33 * credits;
                         break;
-            case "D"  : gradePoints = 1.00 * creditHours;
+            case "D"  : gradePoints = 1.00 * credits;
                         break;
-            case "D-" : gradePoints = 0.67 * creditHours;
+            case "D-" : gradePoints = 0.67 * credits;
                         break;
-            case "F"  : gradePoints = 0.00 * creditHours;
+            case "F"  : gradePoints = 0.00 * credits;
                         break;
-            default : gradePoints = 0.00 * creditHours;
+            default : gradePoints = 0.00 * credits;
                         break;
         } 
     }
@@ -130,7 +143,13 @@ public class Course implements Comparable<Course> {
         this.creditHours = creditHours;
     }
 
-    public double getCreditHours() {
+    public double getCredits() 
+    {
+        if(creditHours == 0)
+        {
+            return getCourseNumber().split(" ")[1].charAt(1);
+            //return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
+        }
         return creditHours;
     }
 
@@ -140,7 +159,7 @@ public class Course implements Comparable<Course> {
                + "\n\tGrade: " + grade
                + "\n\tSemester: " + semester
                + "\n\tTransfer: " + transfer
-               + "\n\tCredit Hours: " + creditHours;
+               + "\n\tCredit Hours: " + getCredits();
     }
     
 }
