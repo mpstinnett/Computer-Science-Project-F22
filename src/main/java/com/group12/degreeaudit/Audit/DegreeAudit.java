@@ -134,7 +134,18 @@ public class DegreeAudit
 
     public void calculateOverallGPA()
     {
+        //List<Course> nonACourses = new ArrayList<Course>();
+        // for(Course course : duplicatesRemovedCourses)
+        // {
+        //     if(course.getClassType() != 'C')
+        //     {
+        //         nonACourses.add(course);
+        //     }
+        // }
+
         combinedGPA = getGPA(duplicatesRemovedCourses);
+        //combinedGPA = getGPA(nonACourses);
+
         if(combinedGPA < Double.parseDouble(student.getDegreeTrack().getOverallGPARequirement()))
         {
             outstandingRequirements += "\nThe Student needs a Combined GPA >= " + student.getDegreeTrack().getOverallGPARequirement();
@@ -228,22 +239,32 @@ public class DegreeAudit
 
     public boolean isPastTop5Core(Course course)
     {
-        if(pastTop5Core != null)
+        if(top5Core != null)
         {
-            for(Course courseRequirement : pastTop5Core)
+            for(Course courseRequirement : top5Core)
             {
                 if(course.getCourseNumber().equals(courseRequirement.getCourseNumber()))
                 {
-                    return true;
+                    return false;
                 }
             }
         }   
-        return false;
+        return true;
     }
 
     public void removeDuplicates()
     {
+        for(int i = 0; i < sortedCourseListByGrade.size(); i++)
+        {
+            if(sortedCourseListByGrade.get(i).getCourseNumber().split(" ")[1].charAt(0) != '5' && 
+                sortedCourseListByGrade.get(i).getCourseNumber().split(" ")[1].charAt(0) != '6' )
+                {
+                    sortedCourseListByGrade.remove(i);
+                }
+        }
+
         duplicatesRemovedCourses = sortedCourseListByGrade;
+
         for(int i = 0; i < sortedCourseListByGrade.size(); i++)
         {
             for(int j = 0; j < duplicatesRemovedCourses.size(); j++)
@@ -261,6 +282,7 @@ public class DegreeAudit
 
     public String coreComplete()
     {
+        //Check required + optional - Optional only up to the required amount
         String coreInformationString = "";
 
         int completedCoreAmount = 0;
@@ -272,16 +294,11 @@ public class DegreeAudit
         //Get all core courses from the completed courses list
         for(Course course : student.getCoursesTaken())
         {
-            if(course.getClassType() == 'C')
-            {
-                completedCoreAmount++;
-                coreCourses.add(course);
-            }
             allTakenCourses.add(course);
         }
 
         //Sort Core Courses by Grade
-        sortByGrade(coreCourses);
+        //sortByGrade(coreCourses);
 
         //Sort All Courses by Grade
         sortByGrade(allTakenCourses);
@@ -290,27 +307,52 @@ public class DegreeAudit
         //Make sure all duplicates are removed. This is important to make sure we dont use retaken classes in a gpa calculation, or total number completed.
         removeDuplicates(); //Removes duplicates, keeps highest grade
 
+        //Check if all required core courses are satisfied
+        for(String courseRequirement : student.getDegreeTrack().getCoreClassListRequirement())
+        {
+            coursesToTake[courseToTakeIterator] = courseRequirement;
+            for(Course course : student.getCoursesTaken())
+            {
+                if(course.getCourseNumber().equals(courseRequirement))
+                {
+                    coursesToTake[courseToTakeIterator] = null;
+                    completedCoreAmount++;
+                    coreCourses.add(course);
+                    break;
+                }
+            }
+            courseToTakeIterator++;
+        }
+
+        for(String optionalRequirement : student.getDegreeTrack().getOptionsCoreClassListRequirement())
+        {
+            if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
+            {
+                coursesToTake[courseToTakeIterator] = optionalRequirement;
+                for(Course course : student.getCoursesTaken())
+                {
+                    if(course.getCourseNumber().equals(optionalRequirement))
+                    {
+                        coursesToTake[courseToTakeIterator] = null;
+                        completedCoreAmount++;
+                        coreCourses.add(course);
+                        break;
+                    }
+                }
+                courseToTakeIterator++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
         //Check if required amount is not met
         if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
         {
             coreInformationString += "\nRequired amount of Core courses is not met. Need "
             + (Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()) - completedCoreAmount)
             + " more.";
-        }
-
-        //Check if all courses are satisfied
-        for(String courseRequirement : student.getDegreeTrack().getCoreClassListRequirement())
-        {
-            coursesToTake[courseToTakeIterator] = courseRequirement;
-            for(Course coreCourse : coreCourses)
-            {
-                if(coreCourse.getCourseNumber().equals(courseRequirement))
-                {
-                    coursesToTake[courseToTakeIterator] = null;
-                    break;
-                }
-            }
-            courseToTakeIterator++;
         }
 
         int aboveCourses = 0;
@@ -321,22 +363,22 @@ public class DegreeAudit
             {
                 coreInformationString += "\nNeed to complete course " + coursesToTake[i];
                 outstandingRequirements += "\nThe student must pass " + coursesToTake[i];
-                aboveCourses ++;
+                aboveCourses++;
                 creditsNeeded += Integer.parseInt(coursesToTake[i].substring(coursesToTake[i].length()-3, coursesToTake[i].length()-2));
             }
         }
 
-        //Check if GPA is satisfied
+        //Check if Core GPA is satisfied
         //If more classes completed, trim the top 5
-        if(completedCoreAmount >= Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
-        {
-            //Remove anything past the top 5 courses
-            for(int i = 4; i < coreCourses.size(); i++)
-            {
-                pastTop5Core.add(coreCourses.get(4));
-                coreCourses.remove(4);
-            }
-        }
+        // if(completedCoreAmount >= Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
+        // {
+        //     //Remove anything past the top 5 courses
+        //     for(int i = 4; i < coreCourses.size(); i++)
+        //     {
+        //         pastTop5Core.add(coreCourses.get(4));
+        //         coreCourses.remove(4);
+        //     }
+        // }
 
         top5Core = coreCourses;
         coreGPA = getGPA(coreCourses);
@@ -344,14 +386,17 @@ public class DegreeAudit
         if(coreCourses.size() == 0
             || getGPA(coreCourses) < Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement()))
         {
-            coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
-            if(aboveCourses > 0)
+            if(!student.getDegreeTrack().getCoreAllowSeventhElective() || ((getGPA(coreCourses) > 3.0) && !extraElectiveCheck()))
             {
-                outstandingRequirements += "\nThe student needs a core GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
-            }
-            else
-            {
-                outstandingRequirements += "\nThe student needs a core GPA >= " + student.getDegreeTrack().getCoreGPARequirement();
+                coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
+                if(aboveCourses > 0)
+                {
+                    outstandingRequirements += "\nThe student needs a core GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
+                }
+                else
+                {
+                    outstandingRequirements += "\nThe student needs a core GPA >= " + student.getDegreeTrack().getCoreGPARequirement();
+                }
             }
         }
 
@@ -455,5 +500,48 @@ public class DegreeAudit
         gpa = totalGradePointsEarned / totalCreditHoursAttempted;
         DecimalFormat df_obj = new DecimalFormat("#.###");
         return Double.parseDouble(df_obj.format(gpa));
+    }
+
+    public boolean extraElectiveCheck()
+    {
+        int completedElectiveAmount = 0;
+        List<Course> electiveCourses = new ArrayList<Course>();
+
+        //Get all elective courses from the completed courses list
+        for(Course course : duplicatesRemovedCourses)
+        {
+            if(course.getClassType() == 'E')
+            {
+                completedElectiveAmount++;
+                electiveCourses.add(course);
+            }
+            else if(course.getClassType() == 'C')
+            {
+                if(isPastTop5Core(course))
+                {
+                    completedElectiveAmount++;
+                    electiveCourses.add(course);
+                }
+            }
+        }
+
+        finalElectiveCourses = electiveCourses;
+        
+        //Check if required amount is not met
+        if(completedElectiveAmount < (Integer.parseInt(student.getDegreeTrack().getElectiveRequirementAmount()) + 1))
+        {
+            return false;
+        }
+
+        electiveGPA = getGPA(electiveCourses);
+
+        //Check if GPA is satisfied
+        if(electiveCourses.size() == 0
+        || getGPA(electiveCourses) < Double.parseDouble(student.getDegreeTrack().getElectiveGPARequirement()))
+        {
+            return false;
+        }
+
+        return true;
     }
 }
