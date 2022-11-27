@@ -33,7 +33,7 @@ public class Course implements Comparable<Course> {
         updateGradePoints();
     }
 
-    public void removeCourse(final TableView tblView, final Course course, final ComboBox dropdown, final String prereq){
+    public void removeCourse(final TableView tblView, final Course course, final ComboBox dropdown, final String prereq, final boolean overriddenCourse){
         button.setFocusTraversable(false);
         button.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -42,12 +42,18 @@ public class Course implements Comparable<Course> {
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
                 tblView.getItems().remove(course);   
                 
-                // Put item back into dropdown
-                dropdown.getItems().add(prereq);
+                // admissions table does not have dropdown
+                if(dropdown != null){
+                    // Put item back into dropdown (ONLY IF IT WAS ORIGINALLY IN DROPDOWN)
+                    if(!overriddenCourse){
+                        dropdown.getItems().add(prereq);
+                    }
+                    
+                    // sort the dropdown again after putting back an item
+                    ObservableList<String> dropdownItems = dropdown.getItems();
+                    Collections.sort(dropdownItems);
+                }
 
-                // sort the dropdown again after putting back an item
-                ObservableList<String> dropdownItems = dropdown.getItems();
-                Collections.sort(dropdownItems);
             }
         });
     }
