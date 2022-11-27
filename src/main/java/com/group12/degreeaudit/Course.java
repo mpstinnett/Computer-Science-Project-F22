@@ -10,14 +10,28 @@ public class Course implements Comparable<Course> {
     private boolean transfer;
     private char classType;
     private double gradePoints;
+    private double creditHours;
 
     public Course() {}
-    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer) {
+
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer) 
+    {
         this.courseNumber = courseNumber;
         this.semester = semester;
         this.grade = grade;
         this.courseTitle = courseTitle;
         this.transfer = transfer;
+        this.creditHours = 0;
+        updateGradePoints();
+    }
+
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer, double creditHours) {
+        this.courseNumber = courseNumber;
+        this.semester = semester;
+        this.grade = grade;
+        this.courseTitle = courseTitle;
+        this.transfer = transfer;
+        this.creditHours = creditHours;
         updateGradePoints();
     }
 
@@ -71,7 +85,8 @@ public class Course implements Comparable<Course> {
 
     private void updateGradePoints()
     {
-        int credits = getCredits();
+        double credits = getCredits();
+
         switch (getGrade()) {
             case "A+" : gradePoints = 4.00 * credits;
                         break;
@@ -104,11 +119,6 @@ public class Course implements Comparable<Course> {
         } 
     }
 
-    public int getCredits()
-    {
-        return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
-    }
-
     private int getGradeHeirarchy()
     {
         switch (getGrade()) {
@@ -128,13 +138,28 @@ public class Course implements Comparable<Course> {
             default : return 14;
         } 
     }
+    
+    public void setCreditHours(double creditHours) {
+        this.creditHours = creditHours;
+    }
+
+    public double getCredits() 
+    {
+        if(creditHours == 0)
+        {
+            return getCourseNumber().split(" ")[1].charAt(1);
+            //return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
+        }
+        return creditHours;
+    }
 
     public String toString() {
         return "\tNumber: " + courseNumber
                + "\n\tTitle: " + courseTitle
                + "\n\tGrade: " + grade
                + "\n\tSemester: " + semester
-               + "\n\tTransfer: " + transfer;
+               + "\n\tTransfer: " + transfer
+               + "\n\tCredit Hours: " + getCredits();
     }
     
 }
