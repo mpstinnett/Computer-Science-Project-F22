@@ -36,14 +36,16 @@ public class DegreeAudit
         coreComplete();
         electiveComplete();
         calculateOverallGPA();
-        String auditString = "\nAudit Report\n";
-        auditString += "Name: " + student.getName() + "\t\t\t\t\tID: " + student.getID()
-        + "\nPlan: " + student.getProgram() +"\t\t\t\t\tMajor: Computer Science"
-        + "\n\t\t\t\t\tTrack: " + student.getDegreeTrack().getDegreeName()
-        + "\n\nCore GPA: " + getCoreGPA()
-        + "\nElective GPA: " + getElectiveGPA()
-        + "\nCombined GPA: " + getCombinedGPA()
-        + "\n\nCore Courses: ";
+        String auditString = "Audit Report\n";
+        auditString += "Name: " + student.getName()
+            + "\nPlan: " + student.getProgram() 
+            + "\nID: " + student.getID()
+            + "\nMajor: Computer Science"
+            + "\nTrack: " + student.getDegreeTrack().getDegreeName()
+            + "\n\n\nCore GPA: " + getCoreGPA()
+            + "\nElective GPA: " + getElectiveGPA()
+            + "\nCombined GPA: " + getCombinedGPA()
+            + "\n\nCore Courses: ";
         for(int i = 0; i < getCoreCoursesTaken().size(); i++)
         {
             if(i !=  getCoreCoursesTaken().size()-1)

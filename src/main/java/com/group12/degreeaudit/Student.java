@@ -56,6 +56,15 @@ public class Student {
         this.degreeTrack = degreeTrack;
     }
 
+    public Course getCourseGivenCourseNumber(String courseNumber) {
+        for(Course course : coursesTaken) {
+            if(course.getCourseNumber().equals(courseNumber)) {
+                return course;
+            }
+        }
+        return null;
+    }
+
     public JSONDegree getDegreeTrack()
     {
         if(degreeTrack != null)
