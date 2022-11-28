@@ -11,6 +11,7 @@ public class Student {
     private String semesterAdmitted;
     private JSONDegree degreeTrack;
     private List<Course> coursesTaken = new ArrayList<Course>();
+    private boolean hasThesis = false;
 
     public Student(String name, String ID, String program, String semesterAdmitted, List<Course> coursesTaken) {
         this.name = name;
@@ -18,6 +19,7 @@ public class Student {
         this.program = program;
         this.semesterAdmitted = semesterAdmitted;
         this.coursesTaken = coursesTaken;
+        setHasThesis();
     }
 
     public String getName() {
@@ -54,6 +56,15 @@ public class Student {
     public void setDegreeTrack(JSONDegree degreeTrack)
     {
         this.degreeTrack = degreeTrack;
+    }
+
+    public Course getCourseGivenCourseNumber(String courseNumber) {
+        for(Course course : coursesTaken) {
+            if(course.getCourseNumber().equals(courseNumber)) {
+                return course;
+            }
+        }
+        return null;
     }
 
     public JSONDegree getDegreeTrack()
@@ -114,12 +125,25 @@ public class Student {
             }            
         }
         return matchedAddlElectiveCourses;
+	}
+	
+    public void setHasThesis() {
+        for (Course course : coursesTaken) {
+            if (course.getCourseNumber().equals("CS 6V98")) {
+                hasThesis = true;
+            } 
+        }
+    }
+
+    public boolean getHasThesis() {
+        return hasThesis;
     }
 
     public String toString() {
         return "Name: " + name
                 + "\nID: " + ID
                 + "\nProgram: " + program
-                + "\nSemester Admitted: " + semesterAdmitted;
+                + "\nSemester Admitted: " + semesterAdmitted
+                + "\nHas Thesis: " + hasThesis;
     }
 }
