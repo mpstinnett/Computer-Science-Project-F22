@@ -90,6 +90,26 @@ public class CourseWrapper
         this.course = course;
     }
 
+    public String getCourseNumber() {
+        return courseNumber;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public boolean getTransfer() {
+        return transfer;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
     public void setButton(Button button){
         this.button = button;
     }

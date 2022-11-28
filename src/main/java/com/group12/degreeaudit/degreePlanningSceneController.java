@@ -181,20 +181,6 @@ public class degreePlanningSceneController implements Initializable{
 
            
             String courseNumAndName = "";
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
-            System.out.println("111111111111111111111111111111111111111111");
 
             // Populate already taken core courses
             ObservableList<CourseWrapper> coreCourses = req_core_table.getItems();
@@ -210,140 +196,52 @@ public class degreePlanningSceneController implements Initializable{
                 
                 
                 cw.removeCourse(req_core_table, new CourseWrapper(student.matchCoreCourses(degreeTrack).get(i)), req_core_add_dropdown, courseNumAndName, false, student);
-            
-            
-            // // Grab the selected class from prerequisite dropdown
-            // String courseNum = addc_prerequisites_dropdown.getValue();
-
-            // // create an instance of JSONCourseWrapper to add to the prerequisite table
-            // JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
-
-            // // create an observable list for the prerequisite table
-            // ObservableList<JSONCourseWrapper> courseWrapper = addc_prerequisites_table.getItems();
-
-            // // populate the prerequisite table & remove the selected item from dropdown
-            // addc_prerequisites_dropdown.getItems().remove(courseNum);
-            // courseWrapper.add(course);
-            // addc_prerequisites_table.setItems(courseWrapper);
-            // course.removeTableCourse(addc_prerequisites_table, course, addc_prerequisites_dropdown,
-            //         courseNum);
-
-            // // clear selection from dropdown
-            // addc_prerequisites_dropdown.getSelectionModel().clearSelection();
-            
-            
             }
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
-            System.out.println("22222222222222222222222222222222222222222");
 
             // Populate already taken optional courses
             ObservableList<CourseWrapper> optionalCoreCourses = core_options_table.getItems();
-            // for(int i = 0; i < student.matchCoreOptionCourses(degreeTrack).size(); i++){
-            //     CourseWrapper cw = new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i));
+            for(int i = 0; i < student.matchCoreOptionCourses(degreeTrack).size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i));
 
-            //     optionalCoreCourses.add(cw);
+                optionalCoreCourses.add(cw);
 
-            //     //student.addCourse(student.matchCoreOptionCourses(degreeTrack).get(i));
+                //student.addCourse(student.matchCoreOptionCourses(degreeTrack).get(i));
 
-            //     courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-            //     core_options_add_dropdown.getItems().remove(courseNumAndName);
+                courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                core_options_add_dropdown.getItems().remove(courseNumAndName);
 
-            //     cw.removeCourse(core_options_table, new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i)), core_options_add_dropdown, courseNumAndName, false, student);
-            // }
-            
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
-            System.out.println("33333333333333333333333333333333333333333333");
+                cw.removeCourse(core_options_table, new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i)), core_options_add_dropdown, courseNumAndName, false, student);
+            }
 
             // Populate already taken elective courses
             ObservableList<CourseWrapper> electiveCourses = electives_table.getItems();
-            // for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
-            //     CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
+            for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
 
-            //     electiveCourses.add(cw);
+                electiveCourses.add(cw);
 
-            //     //student.addCourse(student.matchElectiveCourses(degreeTrack).get(i));
+                //student.addCourse(student.matchElectiveCourses(degreeTrack).get(i));
 
-            //     courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-            //     electives_add_dropdown.getItems().remove(courseNumAndName);
+                courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                electives_add_dropdown.getItems().remove(courseNumAndName);
 
-            //     cw.removeCourse(electives_table, new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i)), electives_add_dropdown, courseNumAndName, false, student);
-            // }
-
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
-            System.out.println("44444444444444444444444444444444444444");
+                cw.removeCourse(electives_table, new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i)), electives_add_dropdown, courseNumAndName, false, student);
+            }
 
 
             // Populate already taken lower level elective courses
             ObservableList<CourseWrapper> lowerElectiveCourses = addl_electives_table.getItems();
-            // for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
-            //     CourseWrapper cw = new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i));
-            //     lowerElectiveCourses.add(cw);
+            for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i));
+                lowerElectiveCourses.add(cw);
 
 
-            //     courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-            //     addl_electives_add_dropdown.getItems().remove(courseNumAndName);
+                courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                addl_electives_add_dropdown.getItems().remove(courseNumAndName);
                 
-            //     cw.removeCourse(addl_electives_table, new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i)), addl_electives_add_dropdown, courseNumAndName, false, student);
-            // }
+                cw.removeCourse(addl_electives_table, new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i)), addl_electives_add_dropdown, courseNumAndName, false, student);
+            }
 
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
-            System.out.println("5555555555555555555555555555555555555555");
         }
     }
 
