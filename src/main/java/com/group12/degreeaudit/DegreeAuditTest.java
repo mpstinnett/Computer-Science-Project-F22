@@ -40,8 +40,8 @@ public class DegreeAuditTest
         //System.out.println(degreePlanner.getDegreeTrack().getDegreeName());
 
         DegreeAudit audit = new DegreeAudit(student, courseList);
-        Report.createAuditReport(audit.doAudit(), student.getID());
-        Report.createDegreePlan(student);
+        //Report.createAuditReport(audit.doAudit(), student.getID());
+        //Report.createDegreePlan(student);
         FileActions fA = new FileActions(courseList, degreeList);
         fA.exportStudent(student);
     }
