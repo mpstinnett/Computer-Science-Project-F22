@@ -42,17 +42,16 @@ public class Course implements Comparable<Course> {
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
                 tblView.getItems().remove(course);   
                 
-                // admissions table does not have dropdown
-                if(dropdown != null){
-                    // Put item back into dropdown (ONLY IF IT WAS ORIGINALLY IN DROPDOWN)
-                    if(!overriddenCourse){
-                        dropdown.getItems().add(prereq);
-                    }
-                    
-                    // sort the dropdown again after putting back an item
-                    ObservableList<String> dropdownItems = dropdown.getItems();
-                    Collections.sort(dropdownItems);
+
+                // Put item back into dropdown (ONLY IF IT WAS ORIGINALLY IN DROPDOWN)
+                if(!overriddenCourse){
+                    dropdown.getItems().add(prereq);
                 }
+                
+                // sort the dropdown again after putting back an item
+                ObservableList<String> dropdownItems = dropdown.getItems();
+                Collections.sort(dropdownItems);
+                
 
             }
         });
