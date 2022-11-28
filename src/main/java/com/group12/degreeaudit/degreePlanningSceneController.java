@@ -12,6 +12,7 @@ import com.group12.degreeaudit.Administration.DegreeList;
 import com.group12.degreeaudit.Administration.DegreePlanner;
 import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Administration.JSONDegree;
+import com.group12.degreeaudit.Administration.FileActions;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,27 +68,27 @@ public class degreePlanningSceneController implements Initializable{
     private CheckBox fast_track_checkbox, thesis_checkbox;
 
     @FXML
-    public TableView<Course> admission_prereq_table, req_core_table, core_options_table, electives_table, addl_electives_table;
+    public TableView<CourseWrapper> admission_prereq_table, req_core_table, core_options_table, electives_table, addl_electives_table;
 
     @FXML
-    public TableColumn<Course, String> admission_prereq_course_col, admission_prereq_name_col, admission_prereq_semester_col, admission_prereq_grade_col, admission_prereq_remove_col;
-    public TableColumn<Course, Boolean> admission_prereq_waiver_col;
+    public TableColumn<CourseWrapper, String> admission_prereq_course_col, admission_prereq_name_col, admission_prereq_semester_col, admission_prereq_grade_col, admission_prereq_remove_col;
+    public TableColumn<CourseWrapper, Boolean> admission_prereq_waiver_col;
 
     @FXML
-    public TableColumn<Course, String> req_core_course_col, req_core_course_name_col, req_core_semester_col, req_core_grade_col, req_core_remove_col;
-    public TableColumn<Course, Boolean> req_core_transfer_col;
+    public TableColumn<CourseWrapper, String> req_core_course_col, req_core_course_name_col, req_core_semester_col, req_core_grade_col, req_core_remove_col;
+    public TableColumn<CourseWrapper, Boolean> req_core_transfer_col;
 
     @FXML
-    public TableColumn<Course, String> core_options_course_col, core_options_name_col, core_options_semester_col, core_options_grade_col, core_options_remove_col;
-    public TableColumn<Course, Boolean> core_options_transfer_col;
+    public TableColumn<CourseWrapper, String> core_options_course_col, core_options_name_col, core_options_semester_col, core_options_grade_col, core_options_remove_col;
+    public TableColumn<CourseWrapper, Boolean> core_options_transfer_col;
 
     @FXML
-    public TableColumn<Course, String> electives_course_col, electives_name_col, electives_semester_col,  electives_grade_col, electives_remove_col;
-    public TableColumn<Course, Boolean> electives_transfer_col;
+    public TableColumn<CourseWrapper, String> electives_course_col, electives_name_col, electives_semester_col,  electives_grade_col, electives_remove_col;
+    public TableColumn<CourseWrapper, Boolean> electives_transfer_col;
 
     @FXML
-    public TableColumn<Course, String> addl_electives_course_col, addl_electives_name_col, addl_electives_semester_col, addl_electives_grade_col, addl_electives_remove_col;
-    public TableColumn<Course, Boolean> addl_electives_transfer_col;
+    public TableColumn<CourseWrapper, String> addl_electives_course_col, addl_electives_name_col, addl_electives_semester_col, addl_electives_grade_col, addl_electives_remove_col;
+    public TableColumn<CourseWrapper, Boolean> addl_electives_transfer_col;
 
     @FXML
     private TextField admission_add_semester, req_core_add_semester, core_options_add_semester, electives_add_semester, addl_electives_add_semester;
@@ -180,42 +181,169 @@ public class degreePlanningSceneController implements Initializable{
 
            
             String courseNumAndName = "";
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+            System.out.println("111111111111111111111111111111111111111111");
+
             // Populate already taken core courses
-            ObservableList<Course> coreCourses = req_core_table.getItems();
+            ObservableList<CourseWrapper> coreCourses = req_core_table.getItems();
             for(int i = 0; i < student.matchCoreCourses(degreeTrack).size(); i++){
-                coreCourses.add(student.matchCoreCourses(degreeTrack).get(i));
+                CourseWrapper cw = new CourseWrapper(student.matchCoreCourses(degreeTrack).get(i));
+
+                coreCourses.add(cw);
+
+                //student.addCourse(student.matchCoreCourses(degreeTrack).get(i));
+
                 courseNumAndName = student.matchCoreCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 req_core_add_dropdown.getItems().remove(courseNumAndName);
-                student.matchCoreCourses(degreeTrack).get(i).removeCourse(req_core_table, student.matchCoreCourses(degreeTrack).get(i), req_core_add_dropdown, courseNumAndName, false, student);
+                
+                
+                cw.removeCourse(req_core_table, new CourseWrapper(student.matchCoreCourses(degreeTrack).get(i)), req_core_add_dropdown, courseNumAndName, false, student);
+            
+            
+            // // Grab the selected class from prerequisite dropdown
+            // String courseNum = addc_prerequisites_dropdown.getValue();
+
+            // // create an instance of JSONCourseWrapper to add to the prerequisite table
+            // JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+
+            // // create an observable list for the prerequisite table
+            // ObservableList<JSONCourseWrapper> courseWrapper = addc_prerequisites_table.getItems();
+
+            // // populate the prerequisite table & remove the selected item from dropdown
+            // addc_prerequisites_dropdown.getItems().remove(courseNum);
+            // courseWrapper.add(course);
+            // addc_prerequisites_table.setItems(courseWrapper);
+            // course.removeTableCourse(addc_prerequisites_table, course, addc_prerequisites_dropdown,
+            //         courseNum);
+
+            // // clear selection from dropdown
+            // addc_prerequisites_dropdown.getSelectionModel().clearSelection();
+            
+            
             }
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
+            System.out.println("22222222222222222222222222222222222222222");
 
             // Populate already taken optional courses
-            ObservableList<Course> optionalCoreCourses = core_options_table.getItems();
-            for(int i = 0; i < student.matchCoreOptionCourses(degreeTrack).size(); i++){
-                optionalCoreCourses.add(student.matchCoreOptionCourses(degreeTrack).get(i));
-                courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-                core_options_add_dropdown.getItems().remove(courseNumAndName);
-                student.matchCoreOptionCourses(degreeTrack).get(i).removeCourse(core_options_table, student.matchCoreOptionCourses(degreeTrack).get(i), core_options_add_dropdown, courseNumAndName, false, student);
-            }
+            ObservableList<CourseWrapper> optionalCoreCourses = core_options_table.getItems();
+            // for(int i = 0; i < student.matchCoreOptionCourses(degreeTrack).size(); i++){
+            //     CourseWrapper cw = new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i));
+
+            //     optionalCoreCourses.add(cw);
+
+            //     //student.addCourse(student.matchCoreOptionCourses(degreeTrack).get(i));
+
+            //     courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+            //     core_options_add_dropdown.getItems().remove(courseNumAndName);
+
+            //     cw.removeCourse(core_options_table, new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i)), core_options_add_dropdown, courseNumAndName, false, student);
+            // }
             
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+            System.out.println("33333333333333333333333333333333333333333333");
+
             // Populate already taken elective courses
-            ObservableList<Course> electiveCourses = electives_table.getItems();
-            for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
-                electiveCourses.add(student.matchElectiveCourses(degreeTrack).get(i));
-                courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-                electives_add_dropdown.getItems().remove(courseNumAndName);
-                student.matchElectiveCourses(degreeTrack).get(i).removeCourse(electives_table, student.matchElectiveCourses(degreeTrack).get(i), electives_add_dropdown, courseNumAndName, false, student);
-            }
+            ObservableList<CourseWrapper> electiveCourses = electives_table.getItems();
+            // for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
+            //     CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
+
+            //     electiveCourses.add(cw);
+
+            //     //student.addCourse(student.matchElectiveCourses(degreeTrack).get(i));
+
+            //     courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+            //     electives_add_dropdown.getItems().remove(courseNumAndName);
+
+            //     cw.removeCourse(electives_table, new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i)), electives_add_dropdown, courseNumAndName, false, student);
+            // }
+
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+            System.out.println("44444444444444444444444444444444444444");
+
 
             // Populate already taken lower level elective courses
-            ObservableList<Course> lowerElectiveCourses = addl_electives_table.getItems();
-            for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
-                lowerElectiveCourses.add(student.matchAddlElectiveCourses(degreeTrack).get(i));
-                courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-                addl_electives_add_dropdown.getItems().remove(courseNumAndName);
-                student.matchAddlElectiveCourses(degreeTrack).get(i).removeCourse(addl_electives_table, student.matchAddlElectiveCourses(degreeTrack).get(i), addl_electives_add_dropdown, courseNumAndName, false, student);
-            }
+            ObservableList<CourseWrapper> lowerElectiveCourses = addl_electives_table.getItems();
+            // for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
+            //     CourseWrapper cw = new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i));
+            //     lowerElectiveCourses.add(cw);
 
+
+            //     courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+            //     addl_electives_add_dropdown.getItems().remove(courseNumAndName);
+                
+            //     cw.removeCourse(addl_electives_table, new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i)), addl_electives_add_dropdown, courseNumAndName, false, student);
+            // }
+
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
+            System.out.println("5555555555555555555555555555555555555555");
         }
     }
 
@@ -243,18 +371,19 @@ public class degreePlanningSceneController implements Initializable{
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        Course course = new Course(courseNum, semester, grade, courseTitle, transfer);
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
 
         // create an observable list for the table
-        ObservableList<Course> tableList = admission_prereq_table.getItems();
+        ObservableList<CourseWrapper> tableList = admission_prereq_table.getItems();
 
         // populate the table & remove the selected item from dropdown
         admission_prereq_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
 
         // Add course to the table
         tableList.add(course);
-        student.addCourse(course);
+        student.addCourse(course.getCourse());
         admission_prereq_table.setItems(tableList);
+
         course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
@@ -288,18 +417,19 @@ public class degreePlanningSceneController implements Initializable{
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        Course course = new Course(courseNum, semester, grade, courseTitle, transfer);
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
 
         // create an observable list for the table
-        ObservableList<Course> tableList = req_core_table.getItems();
+        ObservableList<CourseWrapper> tableList = req_core_table.getItems();
 
         // populate the table & remove the selected item from dropdown
         req_core_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
 
         // Add course to the table
         tableList.add(course);
-        student.addCourse(course);
+        student.addCourse(course.getCourse());
         req_core_table.setItems(tableList);
+
         course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
@@ -334,18 +464,19 @@ public class degreePlanningSceneController implements Initializable{
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        Course course = new Course(courseNum, semester, grade, courseTitle, transfer);
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
 
         // create an observable list for the table
-        ObservableList<Course> tableList = core_options_table.getItems();
+        ObservableList<CourseWrapper> tableList = core_options_table.getItems();
 
         // populate the table & remove the selected item from dropdown
         core_options_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
 
         // Add course to the table
         tableList.add(course);
-        student.addCourse(course);
+        student.addCourse(course.getCourse());
         core_options_table.setItems(tableList);
+
         course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
@@ -378,18 +509,19 @@ public class degreePlanningSceneController implements Initializable{
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        Course course = new Course(courseNum, semester, grade, courseTitle, transfer);
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
 
         // create an observable list for the table
-        ObservableList<Course> tableList = electives_table.getItems();
+        ObservableList<CourseWrapper> tableList = electives_table.getItems();
 
         // populate the table & remove the selected item from dropdown
         electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
 
         // Add course to the table
         tableList.add(course);
-        student.addCourse(course);
+        student.addCourse(course.getCourse());
         electives_table.setItems(tableList);
+
         course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
@@ -422,18 +554,19 @@ public class degreePlanningSceneController implements Initializable{
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        Course course = new Course(courseNum, semester, grade, courseTitle, transfer);
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
 
         // create an observable list for the table
-        ObservableList<Course> tableList = addl_electives_table.getItems();
+        ObservableList<CourseWrapper> tableList = addl_electives_table.getItems();
 
         // populate the table & remove the selected item from dropdown
         addl_electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
 
         // Add course to the table
         tableList.add(course);
-        student.addCourse(course);
+        student.addCourse(course.getCourse());
         addl_electives_table.setItems(tableList);
+
         course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
@@ -770,6 +903,14 @@ public class degreePlanningSceneController implements Initializable{
         
     }
 
+    @FXML
+    private void exportStudentAndPDF(ActionEvent event){
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        FileActions export = new FileActions(courseList, degreeList);
+        export.exportStudent(student);
+    }
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -794,44 +935,44 @@ public class degreePlanningSceneController implements Initializable{
         addl_electives_add_grade.setItems(gradeList);
 
         // Set admission table
-        admission_prereq_course_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNumber"));
-        admission_prereq_name_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseTitle"));
-        admission_prereq_semester_col.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
-        admission_prereq_waiver_col.setCellValueFactory(new PropertyValueFactory<Course, Boolean>("transfer"));
-        admission_prereq_grade_col.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
-        admission_prereq_remove_col.setCellValueFactory(new PropertyValueFactory<Course, String>("button"));
+        admission_prereq_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
+        admission_prereq_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
+        admission_prereq_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
+        admission_prereq_waiver_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        admission_prereq_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
+        admission_prereq_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
         // Set core course table
-        req_core_course_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNumber"));
-        req_core_course_name_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseTitle"));
-        req_core_semester_col.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
-        req_core_transfer_col.setCellValueFactory(new PropertyValueFactory<Course, Boolean>("transfer"));
-        req_core_grade_col.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
-        req_core_remove_col.setCellValueFactory(new PropertyValueFactory<Course, String>("button"));
+        req_core_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
+        req_core_course_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
+        req_core_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
+        req_core_transfer_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        req_core_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
+        req_core_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
         // Set optional core course table
-        core_options_course_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNumber"));
-        core_options_name_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseTitle"));
-        core_options_semester_col.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
-        core_options_transfer_col.setCellValueFactory(new PropertyValueFactory<Course, Boolean>("transfer"));
-        core_options_grade_col.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
-        core_options_remove_col.setCellValueFactory(new PropertyValueFactory<Course, String>("button"));
+        core_options_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
+        core_options_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
+        core_options_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
+        core_options_transfer_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        core_options_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
+        core_options_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
         // Set elective course table
-        electives_course_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNumber"));
-        electives_name_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseTitle"));
-        electives_semester_col.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
-        electives_transfer_col.setCellValueFactory(new PropertyValueFactory<Course, Boolean>("transfer"));
-        electives_grade_col.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
-        electives_remove_col.setCellValueFactory(new PropertyValueFactory<Course, String>("button"));
+        electives_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
+        electives_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
+        electives_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
+        electives_transfer_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        electives_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
+        electives_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
         // Set lower level elective course table
-        addl_electives_course_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseNumber"));
-        addl_electives_name_col.setCellValueFactory(new PropertyValueFactory<Course, String>("courseTitle"));
-        addl_electives_semester_col.setCellValueFactory(new PropertyValueFactory<Course, String>("semester"));
-        addl_electives_transfer_col.setCellValueFactory(new PropertyValueFactory<Course, Boolean>("transfer"));
-        addl_electives_grade_col.setCellValueFactory(new PropertyValueFactory<Course, String>("grade"));
-        addl_electives_remove_col.setCellValueFactory(new PropertyValueFactory<Course, String>("button"));
+        addl_electives_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
+        addl_electives_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
+        addl_electives_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
+        addl_electives_transfer_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        addl_electives_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
+        addl_electives_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
     }
 }

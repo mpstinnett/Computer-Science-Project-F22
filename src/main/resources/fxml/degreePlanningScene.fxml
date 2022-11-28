@@ -322,7 +322,7 @@
                         <Label layoutX="309.0" layoutY="581.0" prefHeight="17.0" prefWidth="150.0" text="Get all courses available:" />
                         <Pane layoutY="997.0" prefHeight="79.0" prefWidth="567.0">
                            <children>
-                              <Button layoutX="230.0" layoutY="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="108.0" style="-fx-background-color: F68A00;" text="SUBMIT" textFill="WHITE">
+                              <Button layoutX="230.0" layoutY="15.0" mnemonicParsing="false" onAction="#exportStudentAndPDF" prefHeight="50.0" prefWidth="108.0" style="-fx-background-color: F68A00;" text="SUBMIT" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>

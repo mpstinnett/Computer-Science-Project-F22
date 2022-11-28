@@ -1,6 +1,7 @@
 com\group12\degreeaudit\degreePlanningGUI.class
 com\group12\degreeaudit\Administration\FileActions$1.class
 com\group12\degreeaudit\adminSceneController.class
+com\group12\degreeaudit\CourseWrapper$1.class
 com\group12\degreeaudit\menuGUI.class
 com\group12\degreeaudit\Course.class
 com\group12\degreeaudit\Administration\JSONCourseWrapper$1.class
@@ -8,12 +9,14 @@ com\group12\degreeaudit\Report.class
 com\group12\degreeaudit\Administration\CourseList$1.class
 com\group12\degreeaudit\Administration\DegreePlanner.class
 com\group12\degreeaudit\menuController.class
+com\group12\degreeaudit\CourseWrapper.class
 com\group12\degreeaudit\CourseSample.class
 com\group12\degreeaudit\degreePlanningSceneController.class
 com\group12\degreeaudit\adminGUI.class
 com\group12\degreeaudit\Administration\JSONDegree.class
 com\group12\degreeaudit\Administration\CourseList.class
 com\group12\degreeaudit\Administration\FileActions$2.class
+com\group12\degreeaudit\CourseWrapper$2.class
 com\group12\degreeaudit\TranscriptScanner.class
 com\group12\degreeaudit\Administration\DegreeList.class
 com\group12\degreeaudit\Administration\JSONCourseWrapper.class
@@ -24,4 +27,3 @@ com\group12\degreeaudit\DegreeAuditTest.class
 com\group12\degreeaudit\Audit\DegreeAudit.class
 com\group12\degreeaudit\CourseSample$1.class
 com\group12\degreeaudit\Administration\JSONCourse.class
-com\group12\degreeaudit\Course$1.class

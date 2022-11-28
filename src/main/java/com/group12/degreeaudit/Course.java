@@ -30,8 +30,6 @@ public class Course implements Comparable<Course> {
         this.grade = grade;
         this.courseTitle = courseTitle;
         this.transfer = transfer;
-        this.button = new Button("X");
-        button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
         this.creditHours = 0;
         updateGradePoints();
     }
@@ -43,35 +41,8 @@ public class Course implements Comparable<Course> {
         this.courseTitle = courseTitle;
         this.transfer = transfer;
         this.creditHours = creditHours;
-		this.button = new Button("X");
-        button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
         updateGradePoints();
     }
-
-    public void removeCourse(final TableView tblView, final Course course, final ComboBox dropdown, final String prereq, final boolean overriddenCourse, final Student studentRemove){
-        button.setFocusTraversable(false);
-        button.setOnAction(new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent t) {
-                //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
-                tblView.getItems().remove(course);   
-                
-
-                // Put item back into dropdown (ONLY IF IT WAS ORIGINALLY IN DROPDOWN)
-                if(!overriddenCourse){
-                    dropdown.getItems().add(prereq);
-                }
-                
-                // sort the dropdown again after putting back an item
-                ObservableList<String> dropdownItems = dropdown.getItems();
-                Collections.sort(dropdownItems);
-                studentRemove.removeCourse(course);
-
-            }
-        });
-    }
-
 
     public String getCourseNumber() {
         return courseNumber;
@@ -200,11 +171,5 @@ public class Course implements Comparable<Course> {
                + "\n\tCredit Hours: " + getCredits();
     }
     
-    public void setButton(Button button){
-        this.button = button;
-    }
 
-    public Button getButton(){
-        return button;
-    }
 }

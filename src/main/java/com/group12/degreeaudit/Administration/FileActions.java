@@ -136,13 +136,15 @@ public class FileActions
             File createFile = new File(fileChooser.getSelectedFile().toString());
             createFile.createNewFile();
 
+            System.out.println("Writing...");
             FileWriter writeFile = new FileWriter(createFile.getPath());
             writeFile.write(gson.toJson(student));
+            System.out.println("Wrote...");
             writeFile.close();
         }
         catch(Exception e)
         {
-
+            System.out.println("Fail... " + e);
         }
     }
 }
