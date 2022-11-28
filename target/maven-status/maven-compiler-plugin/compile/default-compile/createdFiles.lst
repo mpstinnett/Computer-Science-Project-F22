@@ -4,6 +4,7 @@ com\group12\degreeaudit\adminSceneController.class
 com\group12\degreeaudit\menuGUI.class
 com\group12\degreeaudit\Course.class
 com\group12\degreeaudit\Administration\JSONCourseWrapper$1.class
+com\group12\degreeaudit\Report.class
 com\group12\degreeaudit\Administration\CourseList$1.class
 com\group12\degreeaudit\Administration\DegreePlanner.class
 com\group12\degreeaudit\menuController.class

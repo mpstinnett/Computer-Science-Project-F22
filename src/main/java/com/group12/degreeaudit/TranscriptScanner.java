@@ -33,6 +33,8 @@ public class TranscriptScanner {
             String studentID = grabStudentID();
             String program = grabProgram();
             String semesterAdmitted = grabSemesterAdmitted();
+            scan.close();
+            scan = new Scanner(transcriptFile);
             List<Course> studentCourses = grabStudentCourses();
 
             return new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
@@ -128,21 +130,46 @@ public class TranscriptScanner {
                 if(line.startsWith("20")) {
                     semester = line;
                 }
-                if(line.startsWith("CS ") || line.startsWith("SE ")) {
+                if(line.startsWith("CS ") || line.startsWith("SE ")) 
+                {
                     String[] lineAsSplit = line.split(" ");
                     String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
                     String grade = "";
-                    String creditHours = lineAsSplit[lineAsSplit.length-3];
+                    String creditHours = "";
+                    if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                    {
+                        creditHours = lineAsSplit[lineAsSplit.length-3];
+                    }
+
                     if(lineAsSplit[lineAsSplit.length-2].charAt(0) != '0') {
                         grade = lineAsSplit[lineAsSplit.length-2];
-                        creditHours = lineAsSplit[lineAsSplit.length-4];
+
+                        if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                        {
+                            creditHours = lineAsSplit[lineAsSplit.length-4];
+                        }
+
                     }
+
                     String courseTitle = "";
-                    for(int i = 2; i < lineAsSplit.length-4; i++) {
+
+                    for(int i = 2; i < lineAsSplit.length-4; i++) 
+                    {
                         courseTitle += lineAsSplit[i] + " ";
                     }
+
                     courseTitle = courseTitle.trim();
-                    Course course = new Course(courseNumber, semester, grade, courseTitle, isTransfered, Double.parseDouble(creditHours));
+
+                    Course course;
+                    if(creditHours.equals(""))
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered);
+                    }
+                    else
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered, Double.parseDouble(creditHours));
+                    }
+                    
                     System.out.println(course);
                     course.setClassType(getCourseType(course));
                     studentCourses.add(course);

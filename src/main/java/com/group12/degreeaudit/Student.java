@@ -53,6 +53,10 @@ public class Student {
         coursesTaken.add(course);
     }
 
+    public void removeCourse(Course course) {
+        coursesTaken.remove(course);
+    }
+
     public void setDegreeTrack(JSONDegree degreeTrack)
     {
         this.degreeTrack = degreeTrack;
