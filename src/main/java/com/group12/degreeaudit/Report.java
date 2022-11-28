@@ -1,5 +1,6 @@
 package com.group12.degreeaudit;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,11 +25,11 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
 public class Report {
-    public static void createAuditReport(String audit, String studentID) {
+    public static void createAuditReport(String audit, String studentID, File auditFile) {
         try {
             Scanner scan = new Scanner(audit);
             //Create initial variables for document
-            String dest = "resources/" + studentID + "_Audit.pdf";
+            String dest = auditFile.getPath().toString();
             PdfWriter writer = new PdfWriter(dest);
             PdfDocument pdfDoc = new PdfDocument(writer);
             Document document = new Document(pdfDoc);
@@ -88,7 +89,7 @@ public class Report {
         }
 
     }
-    public static void createDegreePlan(Student student) {
+    public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String FILE_NAME;
         String[] studentInformationFieldKeys; 
@@ -203,7 +204,7 @@ public class Report {
                 admissionPrereqClassNumbers = new String[]{};
                 admissionPrereqFieldKeys = new String[][]{{}};
         }
-        getDegreePlan(student, FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys);
+        getDegreePlan(student, FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys, degreePlanFile);
     }
     private static void getDegreePlan(Student student, String FILE_NAME, 
             String[] studentInformationFieldKeys, 
@@ -211,9 +212,10 @@ public class Report {
             String[][] coreFieldKeys,
             String[][] electiveFieldKeys,
             String[] admissionPrereqClassNumbers,
-            String[][] admissionPrereqFieldKeys) {
+            String[][] admissionPrereqFieldKeys,
+            File degreePlanFile) {
 
-        String dest = "resources/" + student.getID() + "_Degree_Plan.pdf";
+        String dest = degreePlanFile.getPath().toString();
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
