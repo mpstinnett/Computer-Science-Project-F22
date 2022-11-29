@@ -154,8 +154,6 @@ public class degreePlanningSceneController implements Initializable{
             for (JSONCourse course : degreePlan.getPossibleCourses('A')) {
                 admissionsList.add(course.getCourseNumber() + " - " + course.getCourseName());
             }
-
-            // ADMISSION PART MISSING
             for (String course : degreeTrack.getCoreClassListRequirement()) {
                 reqCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
@@ -186,46 +184,30 @@ public class degreePlanningSceneController implements Initializable{
             ObservableList<CourseWrapper> coreCourses = req_core_table.getItems();
             for(int i = 0; i < student.matchCoreCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchCoreCourses(degreeTrack).get(i));
-
                 coreCourses.add(cw);
-
-                //student.addCourse(student.matchCoreCourses(degreeTrack).get(i));
-
                 courseNumAndName = student.matchCoreCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 req_core_add_dropdown.getItems().remove(courseNumAndName);
-                
-                
-                cw.removeCourse(req_core_table, new CourseWrapper(student.matchCoreCourses(degreeTrack).get(i)), req_core_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(req_core_table, cw, req_core_add_dropdown, courseNumAndName, false, student);
             }
 
             // Populate already taken optional courses
             ObservableList<CourseWrapper> optionalCoreCourses = core_options_table.getItems();
             for(int i = 0; i < student.matchCoreOptionCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i));
-
                 optionalCoreCourses.add(cw);
-
-                //student.addCourse(student.matchCoreOptionCourses(degreeTrack).get(i));
-
                 courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 core_options_add_dropdown.getItems().remove(courseNumAndName);
-
-                cw.removeCourse(core_options_table, new CourseWrapper(student.matchCoreOptionCourses(degreeTrack).get(i)), core_options_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(core_options_table, cw, core_options_add_dropdown, courseNumAndName, false, student);
             }
 
             // Populate already taken elective courses
             ObservableList<CourseWrapper> electiveCourses = electives_table.getItems();
             for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
-
                 electiveCourses.add(cw);
-
-                //student.addCourse(student.matchElectiveCourses(degreeTrack).get(i));
-
                 courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 electives_add_dropdown.getItems().remove(courseNumAndName);
-
-                cw.removeCourse(electives_table, new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i)), electives_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
             }
 
 
@@ -234,12 +216,9 @@ public class degreePlanningSceneController implements Initializable{
             for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i));
                 lowerElectiveCourses.add(cw);
-
-
                 courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 addl_electives_add_dropdown.getItems().remove(courseNumAndName);
-                
-                cw.removeCourse(addl_electives_table, new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i)), addl_electives_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(addl_electives_table, cw, addl_electives_add_dropdown, courseNumAndName, false, student);
             }
 
         }
@@ -267,6 +246,12 @@ public class degreePlanningSceneController implements Initializable{
         boolean transfer = admission_add_waiver.isSelected();
         String grade = admission_add_grade.getValue();
 
+        if(grade == null){
+            grade = "";
+        }
+        if(semester == null){
+            semester = "";
+        }
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
         CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
@@ -313,6 +298,12 @@ public class degreePlanningSceneController implements Initializable{
         boolean transfer = req_core_add_transfer.isSelected();
         String grade = req_core_add_grade.getValue();
 
+        if(grade == null){
+            grade = "";
+        }
+        if(semester == null){
+            semester = "";
+        }
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
         CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
@@ -360,6 +351,13 @@ public class degreePlanningSceneController implements Initializable{
         boolean transfer = core_options_add_transfer.isSelected();
         String grade = core_options_add_grade.getValue();
 
+        if(grade == null){
+            grade = "";
+        }
+        if(semester == null){
+            semester = "";
+        }
+
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
         CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
@@ -404,6 +402,13 @@ public class degreePlanningSceneController implements Initializable{
         String semester = electives_add_semester.getText().toString();
         boolean transfer = electives_add_transfer.isSelected();
         String grade = electives_add_grade.getValue();
+
+        if(grade == null){
+            grade = "";
+        }
+        if(semester == null){
+            semester = "";
+        }
 
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
@@ -450,6 +455,13 @@ public class degreePlanningSceneController implements Initializable{
         boolean transfer = addl_electives_add_transfer.isSelected();
         String grade = addl_electives_add_grade.getValue();
 
+        if(grade == null){
+            grade = "";
+        }
+        if(semester == null){
+            semester = "";
+        }
+        
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
         CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
@@ -490,13 +502,19 @@ public class degreePlanningSceneController implements Initializable{
     public void enableAddingNewAdmissionClass(ActionEvent event){
 
         boolean addNew = admission_add_new.isSelected();
+        admission_prereq_add_dropdown.getSelectionModel().clearSelection();
 
         if(addNew){
             admission_add_num.setDisable(false);
             admission_add_name.setDisable(false);
+            admission_prereq_add_dropdown.setDisable(true);
+            admission_add_all.setSelected(false);
+            admission_add_all.setDisable(true);
         } else{
             admission_add_num.setDisable(true);
             admission_add_name.setDisable(true);
+            admission_prereq_add_dropdown.setDisable(false);
+            admission_add_all.setDisable(false);
         }
 
 
@@ -507,13 +525,19 @@ public class degreePlanningSceneController implements Initializable{
     public void enableAddingNewReqClass(ActionEvent event){
 
         boolean addNew = req_core_add_new.isSelected();
+        req_core_add_dropdown.getSelectionModel().clearSelection();
 
         if(addNew){
             req_core_add_num.setDisable(false);
             req_core_add_name.setDisable(false);
+            req_core_add_dropdown.setDisable(true);
+            req_core_add_all.setSelected(false);
+            req_core_add_all.setDisable(true);
         } else{
             req_core_add_num.setDisable(true);
             req_core_add_name.setDisable(true);
+            req_core_add_dropdown.setDisable(false);
+            req_core_add_all.setDisable(false);
         }
 
 
@@ -523,13 +547,19 @@ public class degreePlanningSceneController implements Initializable{
     public void enableAddingNewOptionalClass(ActionEvent event){
 
         boolean addNew = core_options_add_new.isSelected();
+        core_options_add_dropdown.getSelectionModel().clearSelection();
 
         if(addNew){
             core_options_add_num.setDisable(false);
             core_options_add_name.setDisable(false);
+            core_options_add_dropdown.setDisable(true);
+            req_core_add_all.setSelected(false);
+            req_core_add_all.setDisable(true);
         } else{
             core_options_add_num.setDisable(true);
             core_options_add_name.setDisable(true);
+            core_options_add_dropdown.setDisable(false);
+            req_core_add_all.setDisable(false);
         }
 
 
@@ -539,13 +569,19 @@ public class degreePlanningSceneController implements Initializable{
     public void enableAddingNewElectiveClass(ActionEvent event){
 
         boolean addNew = electives_add_new.isSelected();
+        electives_add_dropdown.getSelectionModel().clearSelection();
 
         if(addNew){
             electives_add_num.setDisable(false);
             electives_add_name.setDisable(false);
+            electives_add_dropdown.setDisable(true);
+            electives_add_all.setSelected(false);
+            electives_add_all.setDisable(true);
         } else{
             electives_add_num.setDisable(true);
             electives_add_name.setDisable(true);
+            electives_add_dropdown.setDisable(false);
+            electives_add_all.setDisable(false);
         }
 
 
@@ -555,13 +591,20 @@ public class degreePlanningSceneController implements Initializable{
     public void enableAddingNewAddlElectiveClass(ActionEvent event){
 
         boolean addNew = addl_electives_add_new.isSelected();
+        addl_electives_add_dropdown.getSelectionModel().clearSelection();
 
         if(addNew){
             addl_electives_add_num.setDisable(false);
             addl_electives_add_name.setDisable(false);
+            addl_electives_add_dropdown.setDisable(true);
+            addl_electives_add_all.setSelected(false);
+            addl_electives_add_all.setDisable(true);
         } else{
             addl_electives_add_num.setDisable(true);
             addl_electives_add_name.setDisable(true);
+            addl_electives_add_dropdown.setDisable(false);
+            addl_electives_add_all.setDisable(false);
+
         }
 
 
@@ -570,6 +613,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void getAllCoursesAdmission(ActionEvent event){
+        admission_prereq_add_dropdown.getSelectionModel().clearSelection();
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);
@@ -596,6 +640,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void getAllCoursesReqCore(ActionEvent event){
+        req_core_add_dropdown.getSelectionModel().clearSelection();
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);
@@ -613,13 +658,14 @@ public class degreePlanningSceneController implements Initializable{
         }
         else{
             String degreeTrackName = degree_plan_dropdown.getValue();
+
             if (degreeTrackName != null && student != null) {
-                student.getDegreeTrack();
                 JSONDegree degreeTrack = degreeList.GetDegreeFromList(degreeTrackName);
 
-                for (String course : student.getDegreeTrack().getCoreClassListRequirement()) {
+                for (String course : degreeTrack.getCoreClassListRequirement()) {
                     reqCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
                 }
+
                 Collections.sort(reqCoreList);
                 req_core_add_dropdown.setItems(reqCoreList);
 
@@ -639,6 +685,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void getAllCoursesOptional(ActionEvent event){
+        core_options_add_dropdown.getSelectionModel().clearSelection();
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);
@@ -683,6 +730,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void getAllElectives(ActionEvent event){
+        electives_add_dropdown.getSelectionModel().clearSelection();
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);
@@ -727,6 +775,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void getAllLowerElectives(ActionEvent event){
+        addl_electives_add_dropdown.getSelectionModel().clearSelection();
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);

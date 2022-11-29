@@ -71,7 +71,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField fx:id="addc_class_number" layoutX="153.0" layoutY="13.0" prefHeight="25.0" prefWidth="355.0" />
+                                                      <TextField fx:id="addc_class_number" layoutX="153.0" layoutY="13.0" prefHeight="25.0" prefWidth="355.0" promptText="ex: CS XXXX" />
                                                       <Label layoutX="30.0" layoutY="53.0" prefHeight="26.0" prefWidth="89.0" text="Class Name:">
                                                          <font>
                                                             <Font size="14.0" />

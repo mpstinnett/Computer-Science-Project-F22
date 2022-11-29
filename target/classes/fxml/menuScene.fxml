@@ -13,9 +13,9 @@
       <Pane layoutX="13.0" layoutY="93.0" prefHeight="296.0" prefWidth="276.0" styleClass="menu-selection" stylesheets="@../styleSheets/menu.css">
          <children>
       
-            <Button fx:id="admin_btn" layoutX="77.0" layoutY="232.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Admin" />
-            <Button fx:id="audit_btn" layoutX="77.0" layoutY="172.0" mnemonicParsing="false" onAction="#importTranscript" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Audit" />
-            <Button fx:id="degree_planner_btn" layoutX="77.0" layoutY="122.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Degree Planner" textFill="WHITE" />
+            <Button fx:id="admin_btn" layoutX="77.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Admin" />
+            <Button fx:id="audit_btn" layoutX="77.0" layoutY="170.0" mnemonicParsing="false" onAction="#importTranscript" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Audit" />
+            <Button fx:id="degree_planner_btn" layoutX="77.0" layoutY="120.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="39.0" prefWidth="123.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/menu.css" text="Degree Planner" textFill="WHITE" />
             <ImageView fitHeight="95.0" fitWidth="123.0" layoutX="97.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/temoc.png" />

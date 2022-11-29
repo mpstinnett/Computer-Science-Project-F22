@@ -16,7 +16,6 @@ com\group12\degreeaudit\adminGUI.class
 com\group12\degreeaudit\Administration\JSONDegree.class
 com\group12\degreeaudit\Administration\CourseList.class
 com\group12\degreeaudit\Administration\FileActions$2.class
-com\group12\degreeaudit\CourseWrapper$2.class
 com\group12\degreeaudit\TranscriptScanner.class
 com\group12\degreeaudit\Administration\DegreeList.class
 com\group12\degreeaudit\Administration\JSONCourseWrapper.class
