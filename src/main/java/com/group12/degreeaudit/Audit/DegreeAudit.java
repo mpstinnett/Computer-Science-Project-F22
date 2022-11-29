@@ -313,40 +313,49 @@ public class DegreeAudit
         //Check if all required core courses are satisfied
         for(String courseRequirement : student.getDegreeTrack().getCoreClassListRequirement())
         {
-            coursesToTake[courseToTakeIterator] = courseRequirement;
-            for(Course course : student.getCoursesTaken())
+            if(courseToTakeIterator < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
             {
-                if(course.getCourseNumber().equals(courseRequirement))
+                if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
                 {
-                    coursesToTake[courseToTakeIterator] = null;
-                    completedCoreAmount++;
-                    coreCourses.add(course);
-                    break;
+                    coursesToTake[courseToTakeIterator] = courseRequirement;
+                    for(Course course : student.getCoursesTaken())
+                    {
+                        if(course.getCourseNumber().equals(courseRequirement))
+                        {
+                            coursesToTake[courseToTakeIterator] = null;
+                            completedCoreAmount++;
+                            coreCourses.add(course);
+                            break;
+                        }
+                    } 
                 }
+                courseToTakeIterator++;
             }
-            courseToTakeIterator++;
         }
 
         for(String optionalRequirement : student.getDegreeTrack().getOptionsCoreClassListRequirement())
         {
-            if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
+            if(courseToTakeIterator < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
             {
-                coursesToTake[courseToTakeIterator] = optionalRequirement;
-                for(Course course : student.getCoursesTaken())
+                if(completedCoreAmount < Integer.parseInt(student.getDegreeTrack().getCoreRequirementAmount()))
                 {
-                    if(course.getCourseNumber().equals(optionalRequirement))
+                    coursesToTake[courseToTakeIterator] = optionalRequirement;
+                    for(Course course : student.getCoursesTaken())
                     {
-                        coursesToTake[courseToTakeIterator] = null;
-                        completedCoreAmount++;
-                        coreCourses.add(course);
-                        break;
+                        if(course.getCourseNumber().equals(optionalRequirement))
+                        {
+                            coursesToTake[courseToTakeIterator] = null;
+                            completedCoreAmount++;
+                            coreCourses.add(course);
+                            break;
+                        }
                     }
+                    courseToTakeIterator++;
                 }
-                courseToTakeIterator++;
-            }
-            else
-            {
-                break;
+                else
+                {
+                    break;
+                }
             }
         }
 

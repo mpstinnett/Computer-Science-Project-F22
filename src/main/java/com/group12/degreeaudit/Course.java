@@ -2,6 +2,8 @@ package com.group12.degreeaudit;
 
 import com.group12.degreeaudit.Administration.CourseList;
 
+import java.util.Collections;
+
 public class Course implements Comparable<Course> {
     private String courseNumber;
     private String semester;
@@ -162,4 +164,5 @@ public class Course implements Comparable<Course> {
                + "\n\tCredit Hours: " + getCredits();
     }
     
+
 }
