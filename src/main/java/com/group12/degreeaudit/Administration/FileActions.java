@@ -1,16 +1,21 @@
 package com.group12.degreeaudit.Administration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.group12.degreeaudit.Report;
 import com.group12.degreeaudit.Student;
+import com.group12.degreeaudit.Audit.DegreeAudit;
 
 public class FileActions 
 {
@@ -75,7 +80,7 @@ public class FileActions
         }
         catch(Exception e)
         {
-
+            System.out.println("Unable to export the settings " + e);
         }
     }
 
@@ -119,7 +124,7 @@ public class FileActions
         }
         catch(Exception e)
         {
-
+            System.out.println("Unable to import the settings " + e);
         }
     }
 
@@ -127,8 +132,6 @@ public class FileActions
     {
         try
         {
-            Gson gson = new Gson();
-
             fileChooser.setSelectedFile(new File(student.getID() + ".json"));
             fileChooser.showSaveDialog(null);
             fileChooser.getSelectedFile();
@@ -136,15 +139,75 @@ public class FileActions
             File createFile = new File(fileChooser.getSelectedFile().toString());
             createFile.createNewFile();
 
-            System.out.println("Writing...");
             FileWriter writeFile = new FileWriter(createFile.getPath());
             writeFile.write(gson.toJson(student));
-            System.out.println("Wrote...");
             writeFile.close();
         }
         catch(Exception e)
         {
-            System.out.println("Fail... " + e);
+            System.out.println("Unable to export the student " + e);
+        }
+    }
+
+    public Student importStudent()
+    {
+        try
+        {
+            fileChooser.showOpenDialog(null);
+            fileChooser.getSelectedFile();
+
+            FileReader readFile = new FileReader(fileChooser.getSelectedFile().toString());
+            Student jsonStudent = gson.fromJson(readFile, new TypeToken<Student>(){}.getType());
+            readFile.close();
+
+            return jsonStudent;
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        catch(JsonSyntaxException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        catch(IOException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        return null;
+    }
+
+    public void exportDegreePlanPDF(Student student)
+    {
+        try
+        {
+            fileChooser.setSelectedFile(new File(student.getID() + "_Degree_Plan.pdf"));
+            fileChooser.showSaveDialog(null);
+            fileChooser.getSelectedFile();
+
+            File createFile = new File(fileChooser.getSelectedFile().toString());
+            Report.createDegreePlan(student, createFile);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Unable to save the degree plan " + e);
+        }
+    }
+
+    public void exportAuditPDF(Student student, DegreeAudit audit)
+    {
+        try
+        {
+            fileChooser.setSelectedFile(new File(student.getID() + "_Audit.pdf"));
+            fileChooser.showSaveDialog(null);
+            fileChooser.getSelectedFile();
+
+            File createFile = new File(fileChooser.getSelectedFile().toString());
+            Report.createAuditReport(audit.doAudit(), student.getID(), createFile);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Unable to save the audit " + e);
         }
     }
 }
