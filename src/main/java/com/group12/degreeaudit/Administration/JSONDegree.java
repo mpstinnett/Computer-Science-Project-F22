@@ -1,5 +1,7 @@
 package com.group12.degreeaudit.Administration;
 
+import java.util.ArrayList;
+
 //JSONDegree - Class to house the fields and methods associated with degree plans
 //      Used when Exporting and Importing degree plans in JSON
 public class JSONDegree 
@@ -16,7 +18,7 @@ public class JSONDegree
     private String[] electivesAcceptedLowerCourses; //List of acceptable lower level courses to fill an elective
     private String overallGPARequirement;       //Overall GPA (All 5xxx & 6xxx courses)
     private String[] coreClassListRequirement;  //List of required core classes
-    private String[] optionsCoreClassListRequirement;   //List of optional core classes (to satisfy the total required beyond the listed required)
+    private ArrayList<String> optionsCoreClassListRequirement;    //List of optional core classes (to satisfy the total required beyond the listed required)
     private String[] electiveClassListRequirement;      //Required electives to satisfy the degree track
     private boolean activeStatus;   //If the degree is able to be selected in dropdowns (Active to enroll into)
 
@@ -35,7 +37,7 @@ public class JSONDegree
         this.electivesAcceptedLowerCourses = null;
         this.overallGPARequirement = "0";
         this.coreClassListRequirement = null;
-        this.optionsCoreClassListRequirement = null;
+        this.optionsCoreClassListRequirement = new ArrayList<String>();
         this.electiveClassListRequirement = null;
         this.activeStatus = false;
     }
@@ -45,7 +47,7 @@ public class JSONDegree
             boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
             String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
             String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement, 
-            String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
+            ArrayList<String> optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
        this.degreeName = degreeName;
        this.coreRequirementAmount = coreRequirementAmount;
@@ -186,6 +188,9 @@ public class JSONDegree
     //getElectivesAcceptedLowerCourses - Returns a list of approved lower level coursees for electives.
     public String[] getElectivesAcceptedLowerCourses()
     {
+        if (electivesAcceptedLowerCourses.length == 0) {
+            return new String[0];
+        }
         return electivesAcceptedLowerCourses;
     }
     //setElectivesAcceptedLowerCourses - Sets a list of approved lower level coursees for electives.
@@ -208,6 +213,9 @@ public class JSONDegree
     //getCoreClassListRequirement - Returns the class list of required core classes.
     public String[] getCoreClassListRequirement()
     {
+        if (coreClassListRequirement.length == 0) {
+            return new String[0];
+        }
         return coreClassListRequirement;
     }
     //setCoreClassListRequirement - Sets the class list of required core classes.
@@ -218,13 +226,13 @@ public class JSONDegree
 
     //getOptionsCoreClassListRequirement - Returns the class list of core classes that can be used to satisfy the required amount
     //      past the cores required to take.
-    public String[] getOptionsCoreClassListRequirement()
+    public ArrayList<String> getOptionsCoreClassListRequirement()
     {
         return optionsCoreClassListRequirement;
     }
     //setOptionsCoreClassListRequirement - Sets the class list of core classes that can be used to satisfy the required amount
     //      past the cores required to take.
-    public void setOptionsCoreClassListRequirement(String[] optionsCoreClassListRequirement)
+    public void setOptionsCoreClassListRequirement(ArrayList<String> optionsCoreClassListRequirement)
     {
         this.optionsCoreClassListRequirement = optionsCoreClassListRequirement;
     }
@@ -232,6 +240,9 @@ public class JSONDegree
     //getElectiveClassListRequirement - Returns the class list of required elective classes.
     public String[] getElectiveClassListRequirement()
     {
+        if (electiveClassListRequirement.length == 0) {
+            return new String[0];
+        }
         return electiveClassListRequirement;
     }
     //setElectiveClassListRequirement - Sets the class list of required elective classes.
@@ -298,9 +309,9 @@ public class JSONDegree
         returnString += "\nOptional Core List: ";
         if(getOptionsCoreClassListRequirement() != null)
         {
-            for(int j = 0; j < getOptionsCoreClassListRequirement().length; j++)
+            for(int j = 0; j < getOptionsCoreClassListRequirement().size(); j++)
             {
-                returnString += "\n  " + getOptionsCoreClassListRequirement()[j];
+                returnString += "\n  " + getOptionsCoreClassListRequirement().get(j);
             }
         }
         else

@@ -22,7 +22,7 @@ import javafx.fxml.Initializable;
 public class menuController {
 
     @FXML
-    private Button admin_btn,degree_planner_btn;
+    private Button admin_btn,degree_planner_btn, audit_btn;
     private CourseList courseList;
 
 
@@ -49,34 +49,14 @@ public class menuController {
             stage.setScene(scene);
             stage.show();
         }
+        else if(event.getSource() == audit_btn){
+            stage = (Stage) audit_btn.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/fxml/auditScene.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
-    @FXML
-    private void importTranscript(ActionEvent event){
-        System.out.println("I'm so done with you");
-
-        FileChooser fc = new FileChooser();
-		// if we want to open fixed location
-		//fc.setInitialDirectory(new File("D:\\\\Books"));
-		
-
-		// Only allowing .txt files
-		fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
-		File selectedFile = fc.showOpenDialog(null);
-        
-        
-		
-		if(selectedFile != null) {
-			//listview.getItems().add(selectedFile.getAbsolutePath());
-            courseList = new CourseList("resources/CourseList.json");
-            TranscriptScanner transcriptScanner = new TranscriptScanner(selectedFile.toPath().toString(), courseList);
-            Student student = transcriptScanner.scanTranscript();
-
-            System.out.println("File is valid");
-            System.out.println(selectedFile.toPath().toString());
-		}else {
-			System.out.println("File is not valid!");
-		}
-    }
 
 }
