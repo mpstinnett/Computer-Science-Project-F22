@@ -10,6 +10,8 @@ public class Student {
     private String program;
     private String semesterAdmitted;
     private JSONDegree degreeTrack;
+    private String anticipatedGraduation;
+    private boolean fastTrack;
     private List<Course> coursesTaken = new ArrayList<Course>();
     private boolean hasThesis = false;
 
@@ -60,6 +62,16 @@ public class Student {
     public void setDegreeTrack(JSONDegree degreeTrack)
     {
         this.degreeTrack = degreeTrack;
+    }
+
+    public void setAnticipatedGraduation(String anticipatedGraduation)
+    {
+        this.anticipatedGraduation = anticipatedGraduation;
+    }
+
+    public String getAnticipatedGraduation()
+    {
+        return anticipatedGraduation;
     }
 
     public Course getCourseGivenCourseNumber(String courseNumber) {
@@ -137,6 +149,24 @@ public class Student {
                 hasThesis = true;
             } 
         }
+    }
+
+    public boolean getFastTrack()
+    {
+        return fastTrack;
+    }
+
+    public void setFastTrack(boolean fastTrack)
+    {
+        this.fastTrack = fastTrack;
+    }
+
+    public void setThesis(boolean thesis) {
+        hasThesis = thesis;
+    }
+
+    public boolean getThesis() {
+        return hasThesis;
     }
 
     public boolean getHasThesis() {

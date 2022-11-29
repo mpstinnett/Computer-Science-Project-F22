@@ -114,7 +114,21 @@ public class degreePlanningSceneController implements Initializable{
     @FXML
     private Tooltip coreCourseTooltip, electiveTooltip;
 
+    @FXML
+    public void importStudent(ActionEvent event){
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        FileActions importStudentFromFile = new FileActions(courseList, degreeList);
+        student = importStudentFromFile.importStudent();
 
+        student_name.setText(student.getName());
+        student_id.setText(student.getID());
+        semester_admitted.setText(student.getSemesterAdmitted());
+        anticipated_graduation.setText(student.getAnticipatedGraduation());
+        degree_plan_dropdown.setValue(student.getDegreeTrack().getDegreeName());
+        fast_track_checkbox.setSelected(student.getFastTrack());
+        thesis_checkbox.setSelected(student.getThesis());
+    }
 
     @FXML
     void btnOkClicked(ActionEvent event) {
@@ -132,6 +146,7 @@ public class degreePlanningSceneController implements Initializable{
             // Get Degree track name
             DegreeList degreeList = new DegreeList("resources/DegreeList.json");
             JSONDegree degreeTrack = degreeList.GetDegreeFromList(degreeTrackName);
+            student.setDegreeTrack(degreeTrack);
 
             // Based on degree track name, populate tooltip
             coreCourseTooltip.setText(degreeTrack.getCoreGPARequirement() + " Grade Point Average Required.");
@@ -851,11 +866,26 @@ public class degreePlanningSceneController implements Initializable{
     }
 
     @FXML
-    private void exportStudentAndPDF(ActionEvent event){
+    private void exportStudentAndPDF(ActionEvent event) throws IOException{
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
+        student.setName(student_name.getText());
+        student.setID(student_id.getText());
+        student.setSemesterAdmitted(semester_admitted.getText());
+        student.setAnticipatedGraduation(anticipated_graduation.getText());
+        student.setFastTrack(fast_track_checkbox.isSelected());
+        student.setThesis(thesis_checkbox.isSelected());
         FileActions export = new FileActions(courseList, degreeList);
         export.exportStudent(student);
+
+        // Go back to main menu
+        Stage stage;
+        Parent root;
+        stage = (Stage) return_to_menu_btn.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     
