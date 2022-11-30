@@ -13,6 +13,10 @@ public class DegreeAuditTest
 {
     public static void main(String args[])
     {
+        menuGUI.main(args);
+
+
+        /*
         String transcriptFilePath = "resources/TSRPT_Sample2.txt";
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
@@ -43,9 +47,9 @@ public class DegreeAuditTest
         //Report.createAuditReport(audit.doAudit(), student.getID());
         //Report.createDegreePlan(student);
         FileActions fA = new FileActions(courseList, degreeList);
-        fA.exportStudent(student);
+        fA.exportStudent(student); 
+        */
     }
-
     
 }
 
