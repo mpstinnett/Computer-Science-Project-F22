@@ -25,8 +25,8 @@
                         <Image url="@../images/CheckBox.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="import_student_btn" layoutX="436.0" layoutY="15.0" mnemonicParsing="false" onAction="#importStudent" prefHeight="25.0" prefWidth="125.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/audit.css" text="IMPORT STUDENT" />
-                  <Button fx:id="return_to_menu_btn" layoutX="436.0" layoutY="52.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="125.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/audit.css" text="RETURN TO MENU" />
+                  <Button fx:id="import_student_btn" layoutX="436.0" layoutY="46.0" mnemonicParsing="false" onAction="#importStudent" prefHeight="25.0" prefWidth="125.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/audit.css" text="IMPORT STUDENT" />
+                  <Button fx:id="return_to_menu_btn" layoutX="436.0" layoutY="15.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="125.0" styleClass="return-to-menu-btn" stylesheets="@../styleSheets/audit.css" text="RETURN TO MENU" />
                </children>
             </Pane>
             <Pane layoutX="22.0" layoutY="109.0" prefHeight="472.0" prefWidth="532.0">

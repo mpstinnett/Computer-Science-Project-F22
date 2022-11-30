@@ -23,9 +23,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="575.0" style="-fx-background-color: #FFF;" stylesheets="@../styleSheets/admin.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.adminSceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="580.0" style="-fx-background-color: #FFF;" stylesheets="@../styleSheets/admin.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.group12.degreeaudit.adminSceneController">
    <children>
-      <AnchorPane layoutX="-2.0" prefHeight="79.0" prefWidth="587.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="-2.0" prefHeight="79.0" prefWidth="575.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="80.0" prefWidth="571.0" style="-fx-background-color: F68A00;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -41,7 +41,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <TabPane fx:id="tab_pane" layoutY="91.0" prefHeight="509.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="82.0" tabMinHeight="50.0" tabMinWidth="82.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
+            <TabPane fx:id="tab_pane" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="575.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="50.0" tabMaxWidth="81.0" tabMinHeight="50.0" tabMinWidth="81.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0">
               <tabs>
                 <Tab styleClass="tab-category" text="ADD COURSE">
                   <content>
@@ -110,7 +110,6 @@
                                                             <TableColumn fx:id="addc_course_remove_col" editable="false" minWidth="0.0" prefWidth="87.5999755859375" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
                                                          </columns>
                                                       </TableView>
-                                                      <Button layoutX="25.0" layoutY="297.0" mnemonicParsing="false" onAction="#testMeBestie" text="Test" visible="false" />
                                                    </children>
                                                 </Pane>
                                              </center>
@@ -587,7 +586,7 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="updatet_overall_gpa" layoutX="222.0" layoutY="148.0" prefHeight="25.0" prefWidth="288.0" />
-                                                      <Label layoutX="29.0" layoutY="1749.0" prefHeight="26.0" prefWidth="134.0" text="Update 5XXX Course:">
+                                                      <Label layoutX="29.0" layoutY="1749.0" prefHeight="26.0" prefWidth="141.0" text="Update 5XXX Courses:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -640,13 +639,13 @@
                                                             <TableColumn fx:id="updatet_5k_remove_course_col" editable="false" minWidth="0.0" prefWidth="82.00006103515625" sortable="false" style="-fx-alignment: CENTER;" text="Remove" />
                                                          </columns>
                                                       </TableView>
-                                                      <Label layoutX="29.0" layoutY="797.0" prefHeight="26.0" prefWidth="134.0" text="Update Core Course:">
+                                                      <Label layoutX="29.0" layoutY="797.0" prefHeight="26.0" prefWidth="134.0" text="Update Core Courses:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
                                                       <Button layoutX="474.0" layoutY="798.0" mnemonicParsing="false" onAction="#updatetAddCoreCourse" styleClass="regular-button" text="ADD" />
-                                                      <Label layoutX="29.0" layoutY="1438.0" prefHeight="26.0" prefWidth="134.0" text="Update Elective:">
+                                                      <Label layoutX="29.0" layoutY="1438.0" prefHeight="26.0" prefWidth="134.0" text="Update Electives:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -673,7 +672,7 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label layoutX="29.0" layoutY="1083.0" prefHeight="67.0" prefWidth="108.0" text="Update Optional Core Course:" wrapText="true">
+                                                      <Label layoutX="29.0" layoutY="1083.0" prefHeight="67.0" prefWidth="108.0" text="Update Optional Core Courses:" wrapText="true">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -752,7 +751,7 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="return_to_menu_btn" layoutX="468.0" layoutY="6.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="6.0">
+            <Button fx:id="return_to_menu_btn" layoutX="471.6" layoutY="8.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="8.0">
                <font>
                   <Font size="10.0" />
                </font>
@@ -760,7 +759,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="export_settings_btn" layoutX="468.0" layoutY="36.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportSettings" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="EXPORT SETTINGS" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="36.0">
+            <Button fx:id="export_settings_btn" layoutX="471.6" layoutY="41.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportSettings" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="EXPORT SETTINGS" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="41.0">
                <font>
                   <Font size="10.0" />
                </font>

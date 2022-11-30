@@ -217,14 +217,21 @@ public class degreePlanningSceneController implements Initializable{
 
             // Populate already taken elective courses
             ObservableList<CourseWrapper> electiveCourses = electives_table.getItems();
+            // for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
+            //     CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
+            //     electiveCourses.add(cw);
+            //     courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+            //     electives_add_dropdown.getItems().remove(courseNumAndName);
+            //     cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
+            // }
             for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
                 electiveCourses.add(cw);
                 courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-                electives_add_dropdown.getItems().remove(courseNumAndName);
+                //electives_add_dropdown.getItems().remove(courseNumAndName);
+                // need way to remove from dropdown if they took a required elective
                 cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
             }
-
 
             // Populate already taken lower level elective courses
             ObservableList<CourseWrapper> lowerElectiveCourses = addl_electives_table.getItems();
@@ -285,7 +292,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
-        cleaur(admission_add_new, admission_add_num, admission_add_name, admission_prereq_add_dropdown, admission_add_semester, admission_add_waiver, admission_add_grade);
+        clearFields(admission_add_new, admission_add_num, admission_add_name, admission_prereq_add_dropdown, admission_add_semester, admission_add_waiver, admission_add_grade);
 
     }
 
@@ -337,7 +344,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
-        cleaur(req_core_add_new, req_core_add_num, req_core_add_name, req_core_add_dropdown, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
+        clearFields(req_core_add_new, req_core_add_num, req_core_add_name, req_core_add_dropdown, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
 
     }
 
@@ -391,7 +398,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
-        cleaur(core_options_add_new, core_options_add_num, core_options_add_name, core_options_add_dropdown, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
+        clearFields(core_options_add_new, core_options_add_num, core_options_add_name, core_options_add_dropdown, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
 
     }
 
@@ -443,7 +450,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
-        cleaur(electives_add_new, electives_add_num, electives_add_name, electives_add_dropdown, electives_add_semester, electives_add_transfer, electives_add_grade);
+        clearFields(electives_add_new, electives_add_num, electives_add_name, electives_add_dropdown, electives_add_semester, electives_add_transfer, electives_add_grade);
 
     }
 
@@ -495,12 +502,12 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
 
         // Clear all fields for this section
-        cleaur(addl_electives_add_new, addl_electives_add_num, addl_electives_add_name, addl_electives_add_dropdown, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
+        clearFields(addl_electives_add_new, addl_electives_add_num, addl_electives_add_name, addl_electives_add_dropdown, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
 
     }
 
 
-    private void cleaur(CheckBox courseNotInDropdown, TextField courseNum, TextField courseName, ComboBox<String> dropdown, TextField semester, CheckBox transfer, ComboBox<String> grade) {
+    private void clearFields(CheckBox courseNotInDropdown, TextField courseNum, TextField courseName, ComboBox<String> dropdown, TextField semester, CheckBox transfer, ComboBox<String> grade) {
         
         courseNotInDropdown.setSelected(false);
         courseNum.setDisable(true);

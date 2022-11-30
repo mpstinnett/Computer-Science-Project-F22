@@ -2,6 +2,9 @@ package com.group12.degreeaudit;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.DegreePlanner;
+import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Administration.JSONDegree;
 
 public class Student {
@@ -117,18 +120,50 @@ public class Student {
         return matchedCoreOptionCourses;
     }
 
+    // public List<Course> matchElectiveCourses(JSONDegree degreeTrack){ 
+    //     List<Course> matchedElectiveCourses = new ArrayList<Course>();
+    //     for(Course course: coursesTaken)
+    //     {
+    //         for(String JSONcourse : degreeTrack.getElectiveClassListRequirement())
+    //         {
+    //             if(course.getCourseNumber().equals(JSONcourse))
+    //                 matchedElectiveCourses.add(course);
+    //         }            
+    //     }
+    //     return matchedElectiveCourses;
+    // }
+
     public List<Course> matchElectiveCourses(JSONDegree degreeTrack){ 
         List<Course> matchedElectiveCourses = new ArrayList<Course>();
+        List<String> electiveCourses = new ArrayList<String>();
+
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        for(JSONCourse JSONcourse : courseList.GetCourseList())
+        {
+            if(JSONcourse.getClassType() == 'E' || JSONcourse.getClassType() == 'C' ){
+                electiveCourses.add(JSONcourse.getCourseNumber());
+            }
+        }
+
         for(Course course: coursesTaken)
         {
-            for(String JSONcourse : degreeTrack.getElectiveClassListRequirement())
+
+            if(electiveCourses.contains(course.getCourseNumber())){
+                matchedElectiveCourses.add(course);
+            }
+
+            for(String JSONcourse : degreeTrack.getCoreClassListRequirement())
             {
                 if(course.getCourseNumber().equals(JSONcourse))
-                    matchedElectiveCourses.add(course);
+                    matchedElectiveCourses.remove(course);
             }            
         }
+
+
         return matchedElectiveCourses;
     }
+
+
 
     public List<Course> matchAddlElectiveCourses(JSONDegree degreeTrack){ 
         List<Course> matchedAddlElectiveCourses = new ArrayList<Course>();

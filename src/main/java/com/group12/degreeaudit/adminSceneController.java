@@ -122,16 +122,10 @@ public class adminSceneController implements Initializable {
 
     }
 
-    // "TEST" button is pressed
-    @FXML
-    public void testMeBestie(ActionEvent event) {
-
-    }
-
     /*
      * SUCCESS ALERT
      */
-    public void tattooOnMyChestie() {
+    public void successAlert() {
 
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle(null);
@@ -144,7 +138,7 @@ public class adminSceneController implements Initializable {
     /*
      * ERROR ALERT
      */
-    public void cowboyFromTheWestie(String error) {
+    public void errorAlert(String error) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(null);
@@ -178,9 +172,9 @@ public class adminSceneController implements Initializable {
         if (courseList.AddCourseToList(courseNumber, courseName, courseDescription, prerequisites, classType,
                 activeStatus)) {
             // display success
-            tattooOnMyChestie();
+            successAlert();
         } else {
-            cowboyFromTheWestie("Error:  Course Number is already found in the list.");
+            errorAlert("Error:  Course Number is already found in the list.");
         }
 
         // Refresh tab
@@ -348,9 +342,9 @@ public class adminSceneController implements Initializable {
             if (!oldCourseNum.equals(newCourseNum)) {
                 courseList.UpdateCourseNumber(oldCourseNum, newCourseNum);
             }
-            tattooOnMyChestie();
+            successAlert();
         } else {
-            cowboyFromTheWestie("Error: Degree List not Updated.");
+            errorAlert("Error: Degree List not Updated.");
         }
 
         // Refresh Tab
@@ -374,7 +368,7 @@ public class adminSceneController implements Initializable {
 
         // Refresh Tab
         initialize(null, null);
-        tattooOnMyChestie();
+        successAlert();
     }
 
     /*
@@ -569,9 +563,9 @@ public class adminSceneController implements Initializable {
                 coreAllowSeventhElective, electiveRequirementAmount, electiveGPARequirement,
                 electiveReplaceHighestAttempt, electiveAllowOneLowerCourse, electivesAcceptedLowerCourses,
                 overallGPARequirement, coreClassListRequirement,optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus)) {
-            tattooOnMyChestie();
+            successAlert();
         } else {
-            cowboyFromTheWestie("Error: Degree Name is already found in the list");
+            errorAlert("Error: Degree Name is already found in the list");
         }
 
         // Refresh Tab
@@ -926,9 +920,9 @@ public class adminSceneController implements Initializable {
             if (!oldDegreeName.equals(newDegreeName)) {
                 degreeList.UpdateDegreeName(oldDegreeName, newDegreeName);
             }
-            tattooOnMyChestie();
+            successAlert();
         } else {
-            cowboyFromTheWestie("Error: Degree List not Updated.");
+            errorAlert("Error: Degree List not Updated.");
         }
 
         // Refresh Tab
@@ -952,7 +946,7 @@ public class adminSceneController implements Initializable {
 
         // Refresh Tab
         initialize(null, null);
-        tattooOnMyChestie();
+        successAlert();
     }
 
     @Override
