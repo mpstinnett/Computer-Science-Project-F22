@@ -6,14 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.JSONCourse;
+
 public class TranscriptScanner {
     private File transcriptFile;
     private Scanner scan;
+    private CourseList courseList;
 
     public TranscriptScanner() {}
 
-    public TranscriptScanner(String transcriptFilePath) {
+    public TranscriptScanner(String transcriptFilePath, CourseList courseList) {
         transcriptFile = new File(transcriptFilePath);
+        this.courseList = courseList;
     }
 
     /*
@@ -28,11 +33,13 @@ public class TranscriptScanner {
             String studentID = grabStudentID();
             String program = grabProgram();
             String semesterAdmitted = grabSemesterAdmitted();
+            scan.close();
+            scan = new Scanner(transcriptFile);
             List<Course> studentCourses = grabStudentCourses();
-            
+
             return new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
         } catch (Exception e) {
-            System.out.println("EXCEPTION ERROR!");
+            System.out.println("EXCEPTION ERROR! " + e);
         }
         return null;
     }
@@ -73,7 +80,7 @@ public class TranscriptScanner {
     private String grabProgram() throws IOException {
         while(scan.hasNext()) {
             String line = scan.nextLine();
-            if(line.startsWith("Program:"))
+            if(line.startsWith("Program: Master"))
                 return line.substring(line.indexOf(":")+2);
         }
         return "";
@@ -114,31 +121,78 @@ public class TranscriptScanner {
      */
     private List<Course> grabStudentCourses() {
         List<Course> studentCourses = new ArrayList<>();
-
-        while(scan.nextLine().equals("Beginning of Graduate Record")) {}
-
+        boolean isTransfered = true;
+        boolean locatedCourses = false;
         String semester = "";
         while(scan.hasNextLine()) {
             String line = scan.nextLine();
-            if(line.startsWith("20")) {
-                semester = line;
-            }
-            if(line.startsWith("CS ") || line.startsWith("SE ")) {
-                String[] lineAsSplit = line.split(" ");
-                String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
-                String grade = "";
-                if(lineAsSplit[lineAsSplit.length-2].charAt(0) != '0')
-                    grade = lineAsSplit[lineAsSplit.length-2];
-                String courseTitle = "";
-                for(int i = 2; i < lineAsSplit.length-4; i++) {
-                    courseTitle += lineAsSplit[i] + " ";
+            if (locatedCourses) {
+                if(line.startsWith("20")) {
+                    semester = line;
                 }
-                courseTitle = courseTitle.trim();
-                
-                Course course = new Course(courseNumber, semester, grade, courseTitle, false);
-                studentCourses.add(course);
+                if(line.startsWith("CS ") || line.startsWith("SE ")) 
+                {
+                    String[] lineAsSplit = line.split(" ");
+                    String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
+                    String grade = "";
+                    String creditHours = "";
+                    if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                    {
+                        creditHours = lineAsSplit[lineAsSplit.length-3];
+                    }
+
+                    if(lineAsSplit[lineAsSplit.length-2].charAt(0) != '0') {
+                        grade = lineAsSplit[lineAsSplit.length-2];
+
+                        if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                        {
+                            creditHours = lineAsSplit[lineAsSplit.length-4];
+                        }
+
+                    }
+
+                    String courseTitle = "";
+
+                    for(int i = 2; i < lineAsSplit.length-4; i++) 
+                    {
+                        courseTitle += lineAsSplit[i] + " ";
+                    }
+
+                    courseTitle = courseTitle.trim();
+
+                    Course course;
+                    if(creditHours.equals(""))
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered);
+                    }
+                    else
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered, Double.parseDouble(creditHours));
+                    }
+                    
+                    System.out.println(course);
+                    course.setClassType(getCourseType(course));
+                    studentCourses.add(course);
+                }
+            } else {
+                locatedCourses = line.equals("Beginning of Graduate Record") || line.equals("Applied Toward Master Program");
+            }
+            if (line.equals("Beginning of Graduate Record")) {
+                isTransfered = false;
             }
         }
         return studentCourses;
+    }
+
+    private char getCourseType(Course course)
+    {
+        for(JSONCourse courseL : courseList.GetCourseList())
+        {
+            if(courseL.getCourseNumber().equals(course.getCourseNumber()))
+            {
+                return courseL.getClassType();
+            }
+        }
+        return 'U';
     }
 }

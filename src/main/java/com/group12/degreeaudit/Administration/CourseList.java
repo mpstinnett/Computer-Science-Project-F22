@@ -39,48 +39,45 @@ public class CourseList
             courseList = new ArrayList<JSONCourse>();
         }
 
-        //Null Prereq
-        AddCourseToList("CS 6313", "A", "B", null, 'C', true);
+        // //Null Prereq
+        // AddCourseToList("CS 6313", "A", "B", null, 'C', true);
 
-        //One satisfied prereq
-        String[] temp = new String[]{"CS 6313"};
-        AddCourseToList("CS 5558", "A", "B", temp, 'C', true);
+        // //One satisfied prereq
+        // String[] temp = new String[]{"CS 6313"};
+        // AddCourseToList("CS 5558", "A", "B", temp, 'C', true);
 
-        //One unsatisfied prereq
-        temp = new String[]{"CS 6315"};
-        AddCourseToList("CS 7384", "A", "B", temp, 'C', true);
+        // //One unsatisfied prereq
+        // temp = new String[]{"CS 6315"};
+        // AddCourseToList("CS 7384", "A", "B", temp, 'C', true);
 
-        //One satisfied and one unsatisfied prereq
-        temp = new String[]{"CS 6313", "CS 6315"};
-        AddCourseToList("CS 7564", "A", "B", temp, 'C', true);
+        // //One satisfied and one unsatisfied prereq
+        // temp = new String[]{"CS 6313", "CS 6315"};
+        // AddCourseToList("CS 7564", "A", "B", temp, 'C', true);
 
-        //One satisfied but already taken prereq
-        temp = new String[]{"CS 6313"};
-        AddCourseToList("CS 6360", "A", "B", temp, 'C', true);
+        // //One satisfied but already taken prereq
+        // temp = new String[]{"CS 6313"};
+        // AddCourseToList("CS 6360", "A", "B", temp, 'C', true);
 
-        //One inactive but satisfied prereq
-        temp = new String[]{"CS 6313"};
-        AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
+        // //One inactive but satisfied prereq
+        // temp = new String[]{"CS 6313"};
+        // AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
         
-        System.out.println(PrintCourseList());
+        // System.out.println(PrintCourseList());
 
-        if(RemoveCourse("CS 5556"))
-            System.out.println("Removed");
-        System.out.println(PrintCourseList());
+        // if(RemoveCourse("CS 5556"))
+        //     System.out.println("Removed");
+        // System.out.println(PrintCourseList());
     }
 
-    public void AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
+    public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
         if(!CheckIfInCourseList(createdCourse))
         {
             AppendCourseList(createdCourse);
+            return true;
         }
-        else
-        {
-            System.out.println("Cant Append as course is already in the course list");
-        }
-        
+        return false;
     }
 
     public boolean CheckIfInCourseList(JSONCourse checkCourse)
@@ -156,8 +153,15 @@ public class CourseList
         {
             courseList.set(courseLocationInList, courseToUpdate);
             WriteCourseList(courseList);
+            return true;
         }
         return false;
+    }
+    
+    public void UpdateCourseNumber(String oldCourseNumber, String newCourseNumber) {
+        int courseLocationInList = FindCourseInList(oldCourseNumber);
+        courseList.get(courseLocationInList).setCourseNumber(newCourseNumber);
+        WriteCourseList(courseList);
     }
 
     public int FindCourseInList(JSONCourse courseToFind)
