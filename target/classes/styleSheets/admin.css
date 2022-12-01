@@ -1,0 +1,122 @@
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #154734;
+    background-color: #154734;
+}
+
+
+.tab-category{
+    -fx-background-color: #FFF;
+    background-color: #FFF;
+    -fx-border-color: #819b6f;
+    border-color: #819b6f;
+
+    -fx-border-width: 0px 0px 3px 0px;
+    border-width: 0px 0px 3px 0px;
+    -fx-font-size: 11px;
+    font-size: 11px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-category .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.tab-category:hover{
+    -fx-border-color: #154734;
+    border-color: #154734;
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+.tab-category:selected  {    
+    -fx-border-color: #154734;
+    border-color: #154734;
+    -fx-border-width: 0px 0px 3px 0px;
+    border-width: 0px 0px 3px 0px;
+    -fx-background-color: #d6ddd4;
+    background-color: #d6ddd4;
+}
+
+
+.panel-item{
+    -fx-background-radius: 0px 0px 35px 35px;
+}
+
+.regular-button{
+    -fx-background-color: #F68A00;
+    background-color: #F68A00;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.tab-header{
+    -fx-background-radius: 35px 35px 0px 0px;
+}
+
+.optional-features-grid{
+    -fx-border-color: #154734;
+    border-color: #154734;
+    -fx-border-width: 2px;
+    border-width: 2px;
+    -fx-border-radius: 5;
+    border-radius: 5;
+}
+
+.optional-features-cell{
+    -fx-border-color:  #154734;
+    border-color:  #154734;
+    -fx-border-width: 0px 0px 2px 0px;
+    border-width: 0px 0px 2px 0px;
+}
+
+
+.table-view .column-header-background, .table-view .column-header {
+    -fx-background-color: #154734;
+    background-color:  #154734;
+    border-radius: 10px;
+    -fx-text-fill: #FFF;
+}
+
+.add-and-update-course-table .column-header-background, .add-andupdate-course-table .column-header  {
+    -fx-background-color: #154734;
+    background-color: #154734;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.tab_category {
+    -fx-border-color: #819b6f;
+    border-color: #819b6f;
+    -fx-border-width: 0px 0px 3px 0px;
+    border-width: 0px 0px 3px 0px;
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+.return-to-menu-btn{
+    -fx-background-color: #FFF;
+    background-color: #FFF;
+    -fx-text-fill: #154734;
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-font-size: 10px;
+    font-size: 10px;
+}
+
+.return-to-menu-btn:hover{
+    -fx-font-size: 10px;
+    font-size: 10px;
+}
+
+.return-to-menu-btn:selected{
+    -fx-font-size: 10px;
+    font-size: 10px;
+}
