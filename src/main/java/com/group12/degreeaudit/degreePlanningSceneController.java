@@ -878,8 +878,6 @@ public class degreePlanningSceneController implements Initializable{
             semester_admitted.setText(student.getSemesterAdmitted());
   
 
-		}else {
-			System.out.println("File is not valid!");
 		}
 
         
@@ -897,6 +895,7 @@ public class degreePlanningSceneController implements Initializable{
         student.setThesis(thesis_checkbox.isSelected());
         FileActions export = new FileActions(courseList, degreeList);
         export.exportStudent(student);
+        export.exportDegreePlanPDF(student);
 
         // Go back to main menu
         Stage stage;

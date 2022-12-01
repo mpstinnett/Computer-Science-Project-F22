@@ -89,7 +89,7 @@ public class Report {
         }
 
     }
-    public static void createDegreePlan(Student student/*, File degreePlanFile*/) {
+    public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String DEGREE_PLAN_BLUEPRINT_FILE_NAME;
         String[] studentInformationFieldKeys; 
@@ -99,7 +99,7 @@ public class Report {
         String[] admissionPrereqClassNumbers;
         String[][] admissionPrereqFieldKeys;
 
-        degreeTrack = "Software Engineering";
+        //degreeTrack = "Software Engineering";
 
         switch(degreeTrack) {
             case "Traditional Computer Science":  
@@ -360,7 +360,7 @@ public class Report {
                     {"", "", ""}, 
                     {"", "", ""}};
         }
-        getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys/*, degreePlanFile*/);
+        getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys, degreePlanFile);
     }
     private static void getDegreePlan(Student student, String DEGREE_PLAN_BLUEPRINT_FILE_NAME, 
             String[] studentInformationFieldKeys, 
@@ -368,10 +368,11 @@ public class Report {
             String[][] coreFieldKeys,
             String[][] electiveFieldKeys,
             String[] admissionPrereqClassNumbers,
-            String[][] admissionPrereqFieldKeys/*,
-            File degreePlanFile*/) {
+            String[][] admissionPrereqFieldKeys,
+            File degreePlanFile) {
 
-        String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
+        //String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
+        String dest = degreePlanFile.toPath().toString();
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(

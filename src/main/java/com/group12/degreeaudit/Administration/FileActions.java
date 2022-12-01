@@ -186,7 +186,11 @@ public class FileActions
             fileChooser.getSelectedFile();
 
             File createFile = new File(fileChooser.getSelectedFile().toString());
-            //Report.createDegreePlan(student, createFile);
+            if(createFile.exists())
+            {
+                createFile.delete();
+            }
+            Report.createDegreePlan(student, createFile);
         }
         catch(Exception e)
         {
