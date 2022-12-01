@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.DegreeList;
+import com.group12.degreeaudit.Administration.FileActions;
 import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Administration.JSONCourseWrapper;
 import com.group12.degreeaudit.Administration.JSONDegree;
@@ -66,7 +67,19 @@ public class adminSceneController implements Initializable {
     // Handles export button
     @FXML
     public void exportSettings(ActionEvent event) {
-        System.out.println("Export settings");
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        FileActions fa = new FileActions(courseList, degreeList);
+        fa.exportSettings();
+    }
+
+    // Handles import button
+    @FXML
+    public void importSettings(ActionEvent event) {
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        FileActions fa = new FileActions(courseList, degreeList);
+        fa.importSettings();
     }
 
     // Tabs

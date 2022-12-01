@@ -186,7 +186,7 @@ public class FileActions
             fileChooser.getSelectedFile();
 
             File createFile = new File(fileChooser.getSelectedFile().toString());
-            Report.createDegreePlan(student, createFile);
+            //Report.createDegreePlan(student, createFile);
         }
         catch(Exception e)
         {
