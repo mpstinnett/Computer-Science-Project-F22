@@ -80,6 +80,9 @@ public class adminSceneController implements Initializable {
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         FileActions fa = new FileActions(courseList, degreeList);
         fa.importSettings();
+
+        // Refresh data
+        initialize(null, null);
     }
 
     // Tabs
@@ -392,7 +395,7 @@ public class adminSceneController implements Initializable {
             addt_num_electives, addt_overall_gpa, addt_elective_gpa_requirements;
 
     @FXML
-    private CheckBox addt_active_status, addt_core_replace_2nd, addt_core_allow_7th, addt_elective_replace_2nd,
+    private CheckBox addt_active_status, addt_core_allow_7th,
             addt_elective_allow_5k;
 
     @FXML
@@ -537,11 +540,9 @@ public class adminSceneController implements Initializable {
         String degreeName = addt_track_name.getText().toString();
         String coreRequirementAmount = addt_num_core_courses.getText().toString();
         String coreGPARequirement = addt_core_gpa_requirements.getText().toString();
-        boolean coreReplaceHighestAttempt = addt_core_replace_2nd.isSelected();
         boolean coreAllowSeventhElective = addt_core_allow_7th.isSelected();
         String electiveRequirementAmount = addt_num_electives.getText().toString();
         String electiveGPARequirement = addt_elective_gpa_requirements.getText().toString();
-        boolean electiveReplaceHighestAttempt = addt_elective_replace_2nd.isSelected();
         boolean electiveAllowOneLowerCourse = addt_elective_allow_5k.isSelected();
         String overallGPARequirement = addt_overall_gpa.getText().toString();
         boolean activeStatus = addt_active_status.isSelected();
@@ -572,9 +573,8 @@ public class adminSceneController implements Initializable {
         // Add to degree list
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
 
-        if (degreeList.AddDegreeToList(degreeName, coreRequirementAmount, coreGPARequirement, coreReplaceHighestAttempt,
-                coreAllowSeventhElective, electiveRequirementAmount, electiveGPARequirement,
-                electiveReplaceHighestAttempt, electiveAllowOneLowerCourse, electivesAcceptedLowerCourses,
+        if (degreeList.AddDegreeToList(degreeName, coreRequirementAmount, coreGPARequirement,
+                coreAllowSeventhElective, electiveRequirementAmount, electiveGPARequirement, electiveAllowOneLowerCourse, electivesAcceptedLowerCourses,
                 overallGPARequirement, coreClassListRequirement,optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus)) {
             successAlert();
         } else {
@@ -597,8 +597,7 @@ public class adminSceneController implements Initializable {
             updatet_num_electives, updatet_overall_gpa, updatet_elective_gpa_requirements;
 
     @FXML
-    private CheckBox updatet_active_status, updatet_core_replace_2nd, updatet_core_allow_7th,
-            updatet_elective_replace_2nd, updatet_elective_allow_5k;
+    private CheckBox updatet_active_status, updatet_core_allow_7th, updatet_elective_allow_5k;
 
     @FXML
     private ComboBox<String> updatet_5k_dropdown, updatet_core_dropdown, updatet_optional_core_dropdown,
@@ -647,12 +646,10 @@ public class adminSceneController implements Initializable {
             updatet_active_status.setSelected(degreeTrack.getActiveStatus());
             updatet_num_core_courses.setText(degreeTrack.getCoreRequirementAmount());
             updatet_core_gpa_requirements.setText(degreeTrack.getCoreGPARequirement());
-            updatet_core_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
             updatet_core_allow_7th.setSelected(degreeTrack.getCoreAllowSeventhElective());
             updatet_num_electives.setText(degreeTrack.getElectiveRequirementAmount());
             updatet_overall_gpa.setText(degreeTrack.getOverallGPARequirement());
             updatet_elective_gpa_requirements.setText(degreeTrack.getElectiveGPARequirement());
-            updatet_elective_replace_2nd.setSelected(degreeTrack.getElectiveReplaceHighestAttempt());
             updatet_elective_allow_5k.setSelected(degreeTrack.getElectiveAllowOneLowerCourse());
 
             // Clear the tables whenever a new track is chosen from the dropdown
@@ -890,11 +887,9 @@ public class adminSceneController implements Initializable {
         degreeTrackToUpdate.setActiveStatus(updatet_active_status.isSelected());
         degreeTrackToUpdate.setCoreRequirementAmount(updatet_num_core_courses.getText().toString());
         degreeTrackToUpdate.setCoreGPARequirement(updatet_core_gpa_requirements.getText().toString());
-        degreeTrackToUpdate.setCoreReplaceHighestAttempt(updatet_core_replace_2nd.isSelected());
         degreeTrackToUpdate.setCoreAllowSeventhElective(updatet_core_allow_7th.isSelected());
         degreeTrackToUpdate.setElectiveRequirementAmount(updatet_num_electives.getText().toString());
         degreeTrackToUpdate.setElectiveGPARequirement(updatet_elective_gpa_requirements.getText().toString());
-        degreeTrackToUpdate.setElectiveReplaceHighestAttempt(updatet_elective_replace_2nd.isSelected());
         degreeTrackToUpdate.setElectiveAllowOneLowerCourse(updatet_elective_allow_5k.isSelected());
         degreeTrackToUpdate.setOverallGPARequirement(updatet_overall_gpa.getText().toString());
 
@@ -989,12 +984,10 @@ public class adminSceneController implements Initializable {
         addt_active_status.setSelected(false);
         addt_num_core_courses.clear();
         addt_core_gpa_requirements.clear();
-        addt_core_replace_2nd.setSelected(false);
         addt_core_allow_7th.setSelected(false);
         addt_num_electives.clear();
         addt_overall_gpa.clear();
         addt_elective_gpa_requirements.clear();
-        addt_elective_replace_2nd.setSelected(false);
         addt_elective_allow_5k.setSelected(false);
         addt_5k_dropdown.getSelectionModel().clearSelection();
         addt_5k_table.getItems().clear();
@@ -1011,12 +1004,10 @@ public class adminSceneController implements Initializable {
         updatet_active_status.setSelected(false);
         updatet_num_core_courses.clear();
         updatet_core_gpa_requirements.clear();
-        updatet_core_replace_2nd.setSelected(false);
         updatet_core_allow_7th.setSelected(false);
         updatet_num_electives.clear();
         updatet_overall_gpa.clear();
         updatet_elective_gpa_requirements.clear();
-        updatet_elective_replace_2nd.setSelected(false);
         updatet_elective_allow_5k.setSelected(false);
         updatet_5k_dropdown.getSelectionModel().clearSelection();
         updatet_5k_table.getItems().clear();

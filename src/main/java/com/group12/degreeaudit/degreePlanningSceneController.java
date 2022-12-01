@@ -178,7 +178,7 @@ public class degreePlanningSceneController implements Initializable{
             for (String course : degreeTrack.getElectiveClassListRequirement()) {
                 electiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
-            for (String course : degreeTrack.getElectivesAcceptedLowerCourses()) {
+            for (String course : student.getAllElectivesNotTaken(courseList, degreeTrack)) {
                 addlElectiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
             Collections.sort(admissionsList);
@@ -194,6 +194,16 @@ public class degreePlanningSceneController implements Initializable{
 
            
             String courseNumAndName = "";
+
+            // Populate already taken core courses
+            ObservableList<CourseWrapper> admissionCourses = admission_prereq_table.getItems();
+            for(int i = 0; i < student.matchAdmissionCourses(degreeTrack).size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchAdmissionCourses(degreeTrack).get(i));
+                admissionCourses.add(cw);
+                courseNumAndName = student.matchAdmissionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAdmissionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                admission_prereq_add_dropdown.getItems().remove(courseNumAndName);
+                cw.removeCourse(admission_prereq_table, cw, admission_prereq_add_dropdown, courseNumAndName, false, student);
+            }
 
             // Populate already taken core courses
             ObservableList<CourseWrapper> coreCourses = req_core_table.getItems();
@@ -224,21 +234,24 @@ public class degreePlanningSceneController implements Initializable{
             //     electives_add_dropdown.getItems().remove(courseNumAndName);
             //     cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
             // }
-            for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
-                CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack).get(i));
+            for(int i = 0; i < student.matchElectiveCourses(degreeTrack,"top5").size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack,"top5").get(i));
                 electiveCourses.add(cw);
-                courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
-                //electives_add_dropdown.getItems().remove(courseNumAndName);
-                // need way to remove from dropdown if they took a required elective
+                courseNumAndName = student.matchElectiveCourses(degreeTrack,"top5").get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack,"top5").get(i).getCourseNumber()).getCourseName();
+
+                if(electiveList.contains(courseNumAndName)){
+                    electives_add_dropdown.getItems().remove(courseNumAndName);
+                }
+                
                 cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
             }
 
             // Populate already taken lower level elective courses
             ObservableList<CourseWrapper> lowerElectiveCourses = addl_electives_table.getItems();
-            for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
-                CourseWrapper cw = new CourseWrapper(student.matchAddlElectiveCourses(degreeTrack).get(i));
+            for(int i = 0; i < student.matchElectiveCourses(degreeTrack,"past5").size(); i++){
+                CourseWrapper cw = new CourseWrapper(student.matchElectiveCourses(degreeTrack,"past5").get(i));
                 lowerElectiveCourses.add(cw);
-                courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                courseNumAndName = student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber()).getCourseName();
                 addl_electives_add_dropdown.getItems().remove(courseNumAndName);
                 cw.removeCourse(addl_electives_table, cw, addl_electives_add_dropdown, courseNumAndName, false, student);
             }
@@ -782,8 +795,8 @@ public class degreePlanningSceneController implements Initializable{
 
 
                 String courseNumAndName = "";
-                for(int i = 0; i < student.matchElectiveCourses(degreeTrack).size(); i++){
-                    courseNumAndName = student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                for(int i = 0; i < student.matchElectiveCourses(degreeTrack,"top5").size(); i++){
+                    courseNumAndName = student.matchElectiveCourses(degreeTrack,"top5").get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack,"top5").get(i).getCourseNumber()).getCourseName();
                     electives_add_dropdown.getItems().remove(courseNumAndName);
                 }                  
 
@@ -818,15 +831,15 @@ public class degreePlanningSceneController implements Initializable{
             if (degreeTrackName != null && student != null) {
                 JSONDegree degreeTrack = degreeList.GetDegreeFromList(degreeTrackName);
 
-                for (String course : degreeTrack.getElectivesAcceptedLowerCourses()) {
+                for (String course : student.getAllElectivesNotTaken(courseList, degreeTrack)) {
                     addlList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
                 }
                 Collections.sort(addlList);
                 addl_electives_add_dropdown.setItems(addlList);
 
                 String courseNumAndName = "";
-                for(int i = 0; i < student.matchAddlElectiveCourses(degreeTrack).size(); i++){
-                    courseNumAndName = student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAddlElectiveCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
+                for(int i = 0; i < student.matchElectiveCourses(degreeTrack,"past5").size(); i++){
+                    courseNumAndName = student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber()).getCourseName();
                     addl_electives_add_dropdown.getItems().remove(courseNumAndName);
                 }     
 
