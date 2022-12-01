@@ -40,7 +40,7 @@ public class CourseWrapper
         button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
     }
 
-    public void removeCourse(final TableView tblView, final CourseWrapper course, final ComboBox dropdown, final String prereq, final boolean overriddenCourse, final Student studentRemove){
+    public void removeCourse(final TableView tblView, final CourseWrapper course, final ComboBox dropdown, final String prereq, final Student studentRemove){
         button.setFocusTraversable(false);
         button.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -49,11 +49,8 @@ public class CourseWrapper
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
                 tblView.getItems().remove(course);   
                 
-
-                // Put item back into dropdown (ONLY IF IT WAS ORIGINALLY IN DROPDOWN)
-                if(!overriddenCourse){
-                    dropdown.getItems().add(prereq);
-                }
+                // Put item back into dropdown
+                dropdown.getItems().add(prereq);
                 
                 // sort the dropdown again after putting back an item
                 ObservableList<String> dropdownItems = dropdown.getItems();

@@ -97,15 +97,6 @@ public class degreePlanningSceneController implements Initializable{
     private ComboBox<String> admission_add_grade, req_core_add_grade, core_options_add_grade, electives_add_grade, addl_electives_add_grade;
 
     @FXML
-    private TextField admission_add_num, req_core_add_num, core_options_add_num, electives_add_num, addl_electives_add_num;
-
-    @FXML
-    private TextField admission_add_name, req_core_add_name, core_options_add_name, electives_add_name, addl_electives_add_name;
-
-    @FXML
-    private CheckBox admission_add_new, req_core_add_new, core_options_add_new, electives_add_new, addl_electives_add_new;
-
-    @FXML
     private CheckBox admission_add_all, req_core_add_all, core_options_add_all, electives_add_all, addl_electives_add_all;
 
     @FXML
@@ -202,7 +193,7 @@ public class degreePlanningSceneController implements Initializable{
                 admissionCourses.add(cw);
                 courseNumAndName = student.matchAdmissionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchAdmissionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 admission_prereq_add_dropdown.getItems().remove(courseNumAndName);
-                cw.removeCourse(admission_prereq_table, cw, admission_prereq_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(admission_prereq_table, cw, admission_prereq_add_dropdown, courseNumAndName, student);
             }
 
             // Populate already taken core courses
@@ -212,7 +203,7 @@ public class degreePlanningSceneController implements Initializable{
                 coreCourses.add(cw);
                 courseNumAndName = student.matchCoreCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 req_core_add_dropdown.getItems().remove(courseNumAndName);
-                cw.removeCourse(req_core_table, cw, req_core_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(req_core_table, cw, req_core_add_dropdown, courseNumAndName, student);
             }
 
             // Populate already taken optional courses
@@ -222,7 +213,7 @@ public class degreePlanningSceneController implements Initializable{
                 optionalCoreCourses.add(cw);
                 courseNumAndName = student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchCoreOptionCourses(degreeTrack).get(i).getCourseNumber()).getCourseName();
                 core_options_add_dropdown.getItems().remove(courseNumAndName);
-                cw.removeCourse(core_options_table, cw, core_options_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(core_options_table, cw, core_options_add_dropdown, courseNumAndName, student);
             }
 
             // Populate already taken elective courses
@@ -243,7 +234,7 @@ public class degreePlanningSceneController implements Initializable{
                     electives_add_dropdown.getItems().remove(courseNumAndName);
                 }
                 
-                cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(electives_table, cw, electives_add_dropdown, courseNumAndName, student);
             }
 
             // Populate already taken lower level elective courses
@@ -253,7 +244,7 @@ public class degreePlanningSceneController implements Initializable{
                 lowerElectiveCourses.add(cw);
                 courseNumAndName = student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber() + " - " + courseList.GetCourseFromList(student.matchElectiveCourses(degreeTrack,"past5").get(i).getCourseNumber()).getCourseName();
                 addl_electives_add_dropdown.getItems().remove(courseNumAndName);
-                cw.removeCourse(addl_electives_table, cw, addl_electives_add_dropdown, courseNumAndName, false, student);
+                cw.removeCourse(addl_electives_table, cw, addl_electives_add_dropdown, courseNumAndName, student);
             }
 
         }
@@ -263,18 +254,11 @@ public class degreePlanningSceneController implements Initializable{
     @FXML
     public void addAdmission(ActionEvent event){
         CourseList courseList = new CourseList("resources/CourseList.json");
-        boolean addNew = admission_add_new.isSelected();
         String courseNum, courseTitle;
 
-        if(addNew){
-            courseNum = admission_add_num.getText().toString();
-            courseTitle = admission_add_name.getText().toString();
-        }
-        else{
-            // course drop down has course number and course name delimited by dash
-            courseNum = admission_prereq_add_dropdown.getValue().split(" - ")[0];
-            courseTitle = admission_prereq_add_dropdown.getValue().split(" - ")[1];
-        }
+        // course drop down has course number and course name delimited by dash
+        courseNum = admission_prereq_add_dropdown.getValue().split(" - ")[0];
+        courseTitle = admission_prereq_add_dropdown.getValue().split(" - ")[1];
         
         // Grab semester and transfer and grade
         String semester = admission_add_semester.getText().toString();
@@ -302,10 +286,10 @@ public class degreePlanningSceneController implements Initializable{
         student.addCourse(course.getCourse());
         admission_prereq_table.setItems(tableList);
 
-        course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
+        course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(admission_add_new, admission_add_num, admission_add_name, admission_prereq_add_dropdown, admission_add_semester, admission_add_waiver, admission_add_grade);
+        clearFields(admission_prereq_add_dropdown, admission_add_semester, admission_add_waiver, admission_add_grade);
 
     }
 
@@ -315,18 +299,11 @@ public class degreePlanningSceneController implements Initializable{
     public void addReqCore(ActionEvent event){
         // Adding course not included in dropdown, otherwise use dropdown
         CourseList courseList = new CourseList("resources/CourseList.json");
-        boolean addNew = req_core_add_new.isSelected();
         String courseNum, courseTitle;
 
-        if(addNew){
-            courseNum = req_core_add_num.getText().toString();
-            courseTitle = req_core_add_name.getText().toString();
-        }
-        else{
-            // course drop down has course number and course name delimited by dash
-            courseNum = req_core_add_dropdown.getValue().split(" - ")[0];
-            courseTitle = req_core_add_dropdown.getValue().split(" - ")[1];
-        }
+        // course drop down has course number and course name delimited by dash
+        courseNum = req_core_add_dropdown.getValue().split(" - ")[0];
+        courseTitle = req_core_add_dropdown.getValue().split(" - ")[1];
         
         // Grab semester and transfer
         String semester = req_core_add_semester.getText().toString();
@@ -354,10 +331,10 @@ public class degreePlanningSceneController implements Initializable{
         student.addCourse(course.getCourse());
         req_core_table.setItems(tableList);
 
-        course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
+        course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(req_core_add_new, req_core_add_num, req_core_add_name, req_core_add_dropdown, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
+        clearFields(req_core_add_dropdown, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
 
     }
 
@@ -368,18 +345,11 @@ public class degreePlanningSceneController implements Initializable{
     public void addOptionalCore(ActionEvent event){
         // Adding course not included in dropdown, otherwise use dropdown
         CourseList courseList = new CourseList("resources/CourseList.json");
-        boolean addNew = core_options_add_new.isSelected();
         String courseNum, courseTitle;
 
-        if(addNew){
-            courseNum = core_options_add_num.getText().toString();
-            courseTitle = core_options_add_name.getText().toString();
-        }
-        else{
-            // course drop down has course number and course name delimited by dash
-            courseNum = core_options_add_dropdown.getValue().split(" - ")[0];
-            courseTitle = core_options_add_dropdown.getValue().split(" - ")[1];
-        }
+        // course drop down has course number and course name delimited by dash
+        courseNum = core_options_add_dropdown.getValue().split(" - ")[0];
+        courseTitle = core_options_add_dropdown.getValue().split(" - ")[1];
         
         // Grab semester and transfer
         String semester = core_options_add_semester.getText().toString();
@@ -408,10 +378,10 @@ public class degreePlanningSceneController implements Initializable{
         student.addCourse(course.getCourse());
         core_options_table.setItems(tableList);
 
-        course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
+        course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(core_options_add_new, core_options_add_num, core_options_add_name, core_options_add_dropdown, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
+        clearFields(core_options_add_dropdown, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
 
     }
 
@@ -420,18 +390,12 @@ public class degreePlanningSceneController implements Initializable{
     public void addElective(ActionEvent event){
         // Adding course not included in dropdown, otherwise use dropdown
         CourseList courseList = new CourseList("resources/CourseList.json");
-        boolean addNew = electives_add_new.isSelected();
         String courseNum, courseTitle;
 
-        if(addNew){
-            courseNum = electives_add_num.getText().toString();
-            courseTitle = electives_add_name.getText().toString();
-        }
-        else{
-            // course drop down has course number and course name delimited by dash
-            courseNum = electives_add_dropdown.getValue().split(" - ")[0];
-            courseTitle = electives_add_dropdown.getValue().split(" - ")[1];
-        }
+        // course drop down has course number and course name delimited by dash
+        courseNum = electives_add_dropdown.getValue().split(" - ")[0];
+        courseTitle = electives_add_dropdown.getValue().split(" - ")[1];
+        
         
         // Grab semester and transfer
         String semester = electives_add_semester.getText().toString();
@@ -460,10 +424,10 @@ public class degreePlanningSceneController implements Initializable{
         student.addCourse(course.getCourse());
         electives_table.setItems(tableList);
 
-        course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
+        course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(electives_add_new, electives_add_num, electives_add_name, electives_add_dropdown, electives_add_semester, electives_add_transfer, electives_add_grade);
+        clearFields(electives_add_dropdown, electives_add_semester, electives_add_transfer, electives_add_grade);
 
     }
 
@@ -472,18 +436,13 @@ public class degreePlanningSceneController implements Initializable{
     public void addAddlElective(ActionEvent event){
         // Adding course not included in dropdown, otherwise use dropdown
         CourseList courseList = new CourseList("resources/CourseList.json");
-        boolean addNew = addl_electives_add_new.isSelected();
         String courseNum, courseTitle;
 
-        if(addNew){
-            courseNum = addl_electives_add_num.getText().toString();
-            courseTitle = addl_electives_add_name.getText().toString();
-        }
-        else{
-            // course drop down has course number and course name delimited by dash
-            courseNum = addl_electives_add_dropdown.getValue().split(" - ")[0];
-            courseTitle = addl_electives_add_dropdown.getValue().split(" - ")[1];
-        }
+
+        // course drop down has course number and course name delimited by dash
+        courseNum = addl_electives_add_dropdown.getValue().split(" - ")[0];
+        courseTitle = addl_electives_add_dropdown.getValue().split(" - ")[1];
+        
         
         // Grab semester and transfer
         String semester = addl_electives_add_semester.getText().toString();
@@ -512,139 +471,20 @@ public class degreePlanningSceneController implements Initializable{
         student.addCourse(course.getCourse());
         addl_electives_table.setItems(tableList);
 
-        course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, addNew, student);
+        course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(addl_electives_add_new, addl_electives_add_num, addl_electives_add_name, addl_electives_add_dropdown, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
+        clearFields(addl_electives_add_dropdown, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
 
     }
 
 
-    private void clearFields(CheckBox courseNotInDropdown, TextField courseNum, TextField courseName, ComboBox<String> dropdown, TextField semester, CheckBox transfer, ComboBox<String> grade) {
-        
-        courseNotInDropdown.setSelected(false);
-        courseNum.setDisable(true);
-        courseName.setDisable(true);
-        courseNum.clear();
-        courseName.clear();
+    private void clearFields(ComboBox<String> dropdown, TextField semester, CheckBox transfer, ComboBox<String> grade) {        
         dropdown.getSelectionModel().clearSelection();
         semester.clear();
         transfer.setSelected(false);
         grade.getSelectionModel().clearSelection();
     }
-
-    @FXML
-    public void enableAddingNewAdmissionClass(ActionEvent event){
-
-        boolean addNew = admission_add_new.isSelected();
-        admission_prereq_add_dropdown.getSelectionModel().clearSelection();
-
-        if(addNew){
-            admission_add_num.setDisable(false);
-            admission_add_name.setDisable(false);
-            admission_prereq_add_dropdown.setDisable(true);
-            admission_add_all.setSelected(false);
-            admission_add_all.setDisable(true);
-        } else{
-            admission_add_num.setDisable(true);
-            admission_add_name.setDisable(true);
-            admission_prereq_add_dropdown.setDisable(false);
-            admission_add_all.setDisable(false);
-        }
-
-
-    }
-
-
-    @FXML
-    public void enableAddingNewReqClass(ActionEvent event){
-
-        boolean addNew = req_core_add_new.isSelected();
-        req_core_add_dropdown.getSelectionModel().clearSelection();
-
-        if(addNew){
-            req_core_add_num.setDisable(false);
-            req_core_add_name.setDisable(false);
-            req_core_add_dropdown.setDisable(true);
-            req_core_add_all.setSelected(false);
-            req_core_add_all.setDisable(true);
-        } else{
-            req_core_add_num.setDisable(true);
-            req_core_add_name.setDisable(true);
-            req_core_add_dropdown.setDisable(false);
-            req_core_add_all.setDisable(false);
-        }
-
-
-    }
-
-    @FXML
-    public void enableAddingNewOptionalClass(ActionEvent event){
-
-        boolean addNew = core_options_add_new.isSelected();
-        core_options_add_dropdown.getSelectionModel().clearSelection();
-
-        if(addNew){
-            core_options_add_num.setDisable(false);
-            core_options_add_name.setDisable(false);
-            core_options_add_dropdown.setDisable(true);
-            req_core_add_all.setSelected(false);
-            req_core_add_all.setDisable(true);
-        } else{
-            core_options_add_num.setDisable(true);
-            core_options_add_name.setDisable(true);
-            core_options_add_dropdown.setDisable(false);
-            req_core_add_all.setDisable(false);
-        }
-
-
-    }
-
-    @FXML
-    public void enableAddingNewElectiveClass(ActionEvent event){
-
-        boolean addNew = electives_add_new.isSelected();
-        electives_add_dropdown.getSelectionModel().clearSelection();
-
-        if(addNew){
-            electives_add_num.setDisable(false);
-            electives_add_name.setDisable(false);
-            electives_add_dropdown.setDisable(true);
-            electives_add_all.setSelected(false);
-            electives_add_all.setDisable(true);
-        } else{
-            electives_add_num.setDisable(true);
-            electives_add_name.setDisable(true);
-            electives_add_dropdown.setDisable(false);
-            electives_add_all.setDisable(false);
-        }
-
-
-    }
-
-    @FXML
-    public void enableAddingNewAddlElectiveClass(ActionEvent event){
-
-        boolean addNew = addl_electives_add_new.isSelected();
-        addl_electives_add_dropdown.getSelectionModel().clearSelection();
-
-        if(addNew){
-            addl_electives_add_num.setDisable(false);
-            addl_electives_add_name.setDisable(false);
-            addl_electives_add_dropdown.setDisable(true);
-            addl_electives_add_all.setSelected(false);
-            addl_electives_add_all.setDisable(true);
-        } else{
-            addl_electives_add_num.setDisable(true);
-            addl_electives_add_name.setDisable(true);
-            addl_electives_add_dropdown.setDisable(false);
-            addl_electives_add_all.setDisable(false);
-
-        }
-
-
-    }
-
 
     @FXML
     public void getAllCoursesAdmission(ActionEvent event){

@@ -39,7 +39,7 @@
                         <Image url="@../images/Gear.png" />
                      </image>
                   </ImageView>
-                  <Button layoutX="473.0" layoutY="40.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#importSettings" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="IMPORT SETTINGS">
+                  <Button layoutX="460.0" layoutY="40.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#importSettings" prefHeight="25.0" prefWidth="115.0" styleClass="return-to-menu-btn" text="IMPORT SETTINGS">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="export_settings_btn" layoutX="473.0" layoutY="72.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportSettings" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="EXPORT SETTINGS">
+                  <Button fx:id="export_settings_btn" layoutX="460.0" layoutY="72.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#exportSettings" prefHeight="25.0" prefWidth="115.0" styleClass="return-to-menu-btn" text="EXPORT SETTINGS">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -662,7 +662,7 @@
                                                          </columns>
                                                       </TableView>
                                                       <ComboBox fx:id="updatet_dropdown" layoutX="166.0" layoutY="15.0" onAction="#updatetGetClassInfo" prefHeight="25.0" prefWidth="344.0" style="-fx-background-color: #fff;" />
-                                                      <Label layoutX="29.0" layoutY="14.0" prefHeight="26.0" prefWidth="134.0" text="Class to Update:">
+                                                      <Label layoutX="29.0" layoutY="15.0" prefHeight="26.0" prefWidth="134.0" text="Degree Track:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
@@ -729,7 +729,7 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button fx:id="return_to_menu_btn" layoutX="473.0" layoutY="8.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="102.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="8.0">
+            <Button fx:id="return_to_menu_btn" layoutX="473.0" layoutY="8.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="26.0" prefWidth="115.0" styleClass="return-to-menu-btn" text="RETURN TO MENU" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="8.0">
                <font>
                   <Font size="10.0" />
                </font>
