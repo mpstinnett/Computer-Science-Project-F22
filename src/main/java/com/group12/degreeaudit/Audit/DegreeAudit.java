@@ -24,6 +24,7 @@ public class DegreeAudit
     private double coreGPA = 0.0;
     private double combinedGPA = 0.0;
     private String outstandingRequirements = "\nOutstanding Requirements:\n";
+    final DecimalFormat decfor = new DecimalFormat("0.00"); 
     
     public DegreeAudit(Student student, CourseList courseList)
     {
@@ -240,7 +241,7 @@ public class DegreeAudit
             electiveInformationString += "\nElective GPA of " + student.getDegreeTrack().getElectiveGPARequirement() + " is not met";
             if(aboveCourses > 0)
             {
-                outstandingRequirements += "\nThe student needs a Elective GPA >= " + getNeededGPA(electiveCourses, creditsNeeded, 'E') + " in the above " + aboveCourses + " courses.";
+                outstandingRequirements += "\nThe student needs a Elective GPA >= " + decfor.format(getNeededGPA(electiveCourses, creditsNeeded, 'E')) + " in the above " + aboveCourses + " courses.";
             }
             else
             {
@@ -415,7 +416,7 @@ public class DegreeAudit
                 coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
                 if(aboveCourses > 0)
                 {
-                    outstandingRequirements += "\nThe student needs a core GPA >= " + getNeededGPA(coreCourses, creditsNeeded, 'C') + " in the above " + aboveCourses + " courses.";
+                    outstandingRequirements += "\nThe student needs a core GPA >= " + decfor.format(getNeededGPA(coreCourses, creditsNeeded, 'C')) + " in the above " + aboveCourses + " courses.";
                 }
                 else
                 {
@@ -523,12 +524,15 @@ public class DegreeAudit
         }
         gpa = totalGradePointsEarned / totalCreditHoursAttempted;
         DecimalFormat df_obj = new DecimalFormat("#.###");
+        if(df_obj.format(gpa).toString().equals("NaN"))
+        {
+            return 0.0;
+        }
         return Double.parseDouble(df_obj.format(gpa));
     }
 
     public boolean extraElectiveCheck()
     {
-        System.out.println("T: 3");
         int completedElectiveAmount = 0;
         List<Course> electiveCourses = new ArrayList<Course>();
 
@@ -549,13 +553,11 @@ public class DegreeAudit
                 }
             }
         }
-        System.out.println("T: 4");
         finalElectiveCourses = electiveCourses;
         
         //Check if required amount is not met
         if(completedElectiveAmount < (Integer.parseInt(student.getDegreeTrack().getElectiveRequirementAmount()) + 1))
         {
-            System.out.println("T: 5");
             return false;
         }
 
