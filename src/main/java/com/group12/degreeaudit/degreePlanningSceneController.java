@@ -719,7 +719,8 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     private void importTranscript(ActionEvent event){
-        
+        clearAllFields();
+        degree_plan_dropdown.setValue(null);
 
         FileChooser fc = new FileChooser();
 		// if we want to open fixed location
