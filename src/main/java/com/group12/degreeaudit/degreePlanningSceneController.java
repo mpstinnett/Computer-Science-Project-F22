@@ -108,6 +108,7 @@ public class degreePlanningSceneController implements Initializable{
 
     @FXML
     public void importStudent(ActionEvent event){
+        clearAllFields();
         CourseList courseList = new CourseList("resources/CourseList.json");
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         FileActions importStudentFromFile = new FileActions(courseList, degreeList);
@@ -120,6 +121,7 @@ public class degreePlanningSceneController implements Initializable{
         degree_plan_dropdown.setValue(student.getDegreeTrack().getDegreeName());
         fast_track_checkbox.setSelected(student.getFastTrack());
         thesis_checkbox.setSelected(student.getThesis());
+        getDegreePlanInfo(event);
     }
 
     @FXML
