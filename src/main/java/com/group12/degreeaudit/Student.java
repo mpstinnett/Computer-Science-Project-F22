@@ -286,7 +286,6 @@ public class Student {
 
         for(Course course : coursesTaken)
         {
-            System.out.println("T: " + course.getCourseNumber() + " : " + course.getClassType());
             if(course.getClassType() == 'A')
                 matchAdmissionCourses.add(course);
         }
