@@ -760,17 +760,24 @@ public class degreePlanningSceneController implements Initializable{
         student.setFastTrack(fast_track_checkbox.isSelected());
         student.setThesis(thesis_checkbox.isSelected());
         FileActions export = new FileActions(courseList, degreeList);
-        export.exportStudent(student);
-        export.exportDegreePlanPDF(student);
 
-        // Go back to main menu
-        Stage stage;
-        Parent root;
-        stage = (Stage) return_to_menu_btn.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        try{
+            export.exportStudent(student);
+            export.exportDegreePlanPDF(student);
+
+            // Go back to main menu
+            Stage stage;
+            Parent root;
+            stage = (Stage) return_to_menu_btn.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(Exception e) {
+
+        }
+
     }
 
     
