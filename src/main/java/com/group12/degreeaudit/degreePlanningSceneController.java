@@ -132,7 +132,7 @@ public class degreePlanningSceneController implements Initializable{
     @FXML
     void getDegreePlanInfo(ActionEvent event) 
     {
-
+        clearAllFields();
         String degreeTrackName = degree_plan_dropdown.getValue();
         if(student == null)
         {
@@ -167,6 +167,7 @@ public class degreePlanningSceneController implements Initializable{
             electiveList.clear();
             addlElectiveList.clear();
             
+
             for (JSONCourse course : degreePlan.getPossibleCourses('A')) {
                 if(course != null)
                     admissionsList.add(course.getCourseNumber() + " - " + course.getCourseName());
@@ -201,7 +202,7 @@ public class degreePlanningSceneController implements Initializable{
            
             String courseNumAndName = "";
 
-            // Populate already taken core courses
+            // Populate already taken admission courses
             ObservableList<CourseWrapper> admissionCourses = admission_prereq_table.getItems();
             for(int i = 0; i < student.matchAdmissionCourses(degreeTrack).size(); i++){
                 CourseWrapper cw = new CourseWrapper(student.matchAdmissionCourses(degreeTrack).get(i));
@@ -499,6 +500,15 @@ public class degreePlanningSceneController implements Initializable{
         semester.clear();
         transfer.setSelected(false);
         grade.getSelectionModel().clearSelection();
+    }
+
+    public void clearAllFields()
+    {
+        admission_prereq_table.getItems().clear();
+        req_core_table.getItems().clear();
+        core_options_table.getItems().clear();
+        electives_table.getItems().clear();
+        addl_electives_table.getItems().clear();
     }
 
     @FXML
