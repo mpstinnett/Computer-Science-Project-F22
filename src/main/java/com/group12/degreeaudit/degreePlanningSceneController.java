@@ -289,7 +289,7 @@ public class degreePlanningSceneController implements Initializable{
         }
         // create an instance of Course to add to the table
         // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
+        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer, 0, 'A'));
 
         // create an observable list for the table
         ObservableList<CourseWrapper> tableList = admission_prereq_table.getItems();

@@ -37,6 +37,17 @@ public class Course implements Comparable<Course> {
         updateGradePoints();
     }
 
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer, double creditHours, char classType) {
+        this.courseNumber = courseNumber;
+        this.semester = semester;
+        this.grade = grade;
+        this.courseTitle = courseTitle;
+        this.transfer = transfer;
+        this.creditHours = creditHours;
+        this.classType = classType;
+        updateGradePoints();
+    }
+
     public String getCourseNumber() {
         return courseNumber;
     }

@@ -18,6 +18,7 @@ public class CourseWrapper
     public String courseNumber = "";
     public String courseTitle = "";
     public String semester = "";
+    public char classType;
     public boolean transfer = false;
     public String grade = "";
 
@@ -34,6 +35,7 @@ public class CourseWrapper
         this.courseTitle = course.getCourseTitle();
         this.semester = course.getSemester();
         this.transfer = course.getTransfer();
+        this.classType = course.getClassType();
         this.grade = course.getGrade();
         // create a remove button for the instance
         this.button = new Button("X");
@@ -94,5 +96,13 @@ public class CourseWrapper
 
     public Button getButton(){
         return button;
+    }
+
+    public void setClassType(char classType){
+        this.classType = classType;
+    }
+
+    public char getClassType(){
+        return classType;
     }
 }
