@@ -130,9 +130,14 @@ public class degreePlanningSceneController implements Initializable{
 
 
     @FXML
-    void getDegreePlanInfo(ActionEvent event) {
+    void getDegreePlanInfo(ActionEvent event) 
+    {
 
         String degreeTrackName = degree_plan_dropdown.getValue();
+        if(student == null)
+        {
+            student = new Student();
+        }
         if (degreeTrackName != null && student != null) {
             // Get Degree track name
             DegreeList degreeList = new DegreeList("resources/DegreeList.json");
@@ -156,21 +161,31 @@ public class degreePlanningSceneController implements Initializable{
 
 
             DegreePlanner degreePlan = new DegreePlanner(student, courseList, degreeList);
-
+            admissionsList.clear();
+            reqCoreList.clear();
+            optionalCoreList.clear();
+            electiveList.clear();
+            addlElectiveList.clear();
+            
             for (JSONCourse course : degreePlan.getPossibleCourses('A')) {
-                admissionsList.add(course.getCourseNumber() + " - " + course.getCourseName());
+                if(course != null)
+                    admissionsList.add(course.getCourseNumber() + " - " + course.getCourseName());
             }
             for (String course : degreeTrack.getCoreClassListRequirement()) {
-                reqCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
+                if(course != null && courseList.GetCourseFromList(course) != null)
+                    reqCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
             for (String course : degreeTrack.getOptionsCoreClassListRequirement()) {
-                optionalCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
+                if(course != null && courseList.GetCourseFromList(course) != null)
+                    optionalCoreList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
             for (String course : degreeTrack.getElectiveClassListRequirement()) {
-                electiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
+                if(course != null && courseList.GetCourseFromList(course) != null)
+                    electiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
             for (String course : student.getAllElectivesNotTaken(courseList, degreeTrack)) {
-                addlElectiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
+                if(course != null && courseList.GetCourseFromList(course) != null)
+                    addlElectiveList.add(course + " - " + courseList.GetCourseFromList(course).getCourseName());
             }
             Collections.sort(admissionsList);
             Collections.sort(reqCoreList);

@@ -18,6 +18,14 @@ public class Student {
     private List<Course> coursesTaken = new ArrayList<Course>();
     private boolean hasThesis = false;
 
+    public Student()
+    {
+        name = "";
+        ID = "";
+        program = "";
+        semesterAdmitted = "";
+    }
+
     public Student(String name, String ID, String program, String semesterAdmitted, List<Course> coursesTaken) {
         this.name = name;
         this.ID = ID;
