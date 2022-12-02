@@ -170,6 +170,11 @@ public class adminSceneController implements Initializable {
     // "ADD" button is pressed for adding a course
     @FXML
     public void addCourseToCourseList(ActionEvent event) {
+        if (addc_class_number.getText().toString().isEmpty()) 
+        {
+            errorAlert("Error: No Course Number Entered");
+            return;
+        }
         // Get filled in fields
         String courseNumber = addc_class_number.getText().toString();
         String courseName = addc_class_name.getText().toString();
@@ -179,9 +184,11 @@ public class adminSceneController implements Initializable {
 
         // Getting prereqs from table
         String prerequisites[] = new String[addc_prerequisites_table.getItems().size()];
-        for (int i = 0; i < prerequisites.length; i++) {
+        for (int i = 0; i < prerequisites.length; i++) 
+        {
             prerequisites[i] = addc_prerequisites_table.getItems().get(i).getJsonCourse().getCourseNumber();
         }
+    
 
         // Adding course to course list
         CourseList courseList = new CourseList("resources/CourseList.json");
@@ -225,7 +232,6 @@ public class adminSceneController implements Initializable {
     // Prefill the tab when a class is chosen from the dropdown
     @FXML
     void updatecGetClassInfo(ActionEvent event) {
-
         // Chosen class from dropdown
         String courseNumber = updatec_class_dropdown.getValue();
 
@@ -301,6 +307,7 @@ public class adminSceneController implements Initializable {
     // "ADD" button is pressed for prerequisite table
     @FXML
     void updatecPrerequisites(ActionEvent event) {
+
         // Grab the selected class from prerequisite dropdown
         String courseNum = updatec_prerequisites_dropdown.getValue();
 
@@ -329,6 +336,11 @@ public class adminSceneController implements Initializable {
     // "UPDATE" button is pressed for updating a course
     @FXML
     public void updateCourseInCourseList(ActionEvent event) {
+        if (updatec_class_dropdown.getValue() == null) 
+        {
+            errorAlert("Error: No Course Selected");
+            return;
+        }
         // Get filled in fields
         CourseList courseList = new CourseList("resources/CourseList.json");
 
@@ -380,6 +392,13 @@ public class adminSceneController implements Initializable {
     @FXML
     public void removeCourseInCourseList(ActionEvent event) {
         CourseList courseList = new CourseList("resources/CourseList.json");
+
+        if (removec_dropdown.getValue() == null) 
+        {
+            errorAlert("Error: No Course Selected");
+            return;
+        }
+
         courseList.RemoveCourse(removec_dropdown.getValue());
 
         // Refresh Tab
@@ -535,7 +554,11 @@ public class adminSceneController implements Initializable {
     // "SUBMIT" button is pressed for adding a degree track
     @FXML
     void addtSubmit(ActionEvent event) {
-
+        if (addt_track_name.getText().toString().isEmpty()) 
+        {
+            errorAlert("Error: No Degree Name Entered");
+            return;
+        }
         // Grab filled in fields
         String degreeName = addt_track_name.getText().toString();
         String coreRequirementAmount = addt_num_core_courses.getText().toString();
@@ -930,7 +953,7 @@ public class adminSceneController implements Initializable {
             }
             successAlert();
         } else {
-            errorAlert("Error: Degree List not Updated.");
+            errorAlert("Error: Degree List not Updated");
         }
 
         // Refresh Tab
@@ -950,6 +973,13 @@ public class adminSceneController implements Initializable {
     @FXML
     public void removeDegreeTrack(ActionEvent event) {
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+
+        if (removet_dropdown.getValue() == null) 
+        {
+            errorAlert("Error: Degree Track not chosen");
+            return;
+        }
+
         degreeList.RemoveDegree(removet_dropdown.getValue());
 
         // Refresh Tab
