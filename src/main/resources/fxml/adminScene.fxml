@@ -106,7 +106,10 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button fx:id="addc_add_btn" layoutX="30.0" layoutY="467.0" mnemonicParsing="false" onAction="#addCourseToCourseList" styleClass="regular-button" text="ADD" />
+                                                      <Button fx:id="addc_add_btn" layoutX="30.0" layoutY="467.0" mnemonicParsing="false" onAction="#addCourseToCourseList" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor></Button>
                                                       <Label layoutX="30.0" layoutY="220.0" prefHeight="26.0" prefWidth="112.0" text="Class Type:">
                                                          <font>
                                                             <Font size="14.0" />
@@ -118,7 +121,10 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="465.0" layoutY="262.0" mnemonicParsing="false" onAction="#addcPrerequisites" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="465.0" layoutY="262.0" mnemonicParsing="false" onAction="#addcPrerequisites" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor></Button>
                                                       <ComboBox fx:id="addc_prerequisites_dropdown" layoutX="154.0" layoutY="262.0" prefHeight="25.0" prefWidth="303.0" style="-fx-background-color: #fff;" />
                                                       <TableView fx:id="addc_prerequisites_table" layoutX="155.0" layoutY="297.0" maxWidth="-Infinity" prefHeight="158.0" prefWidth="302.0" styleClass="add-and-update-course-table">
                                                          <columns>
@@ -192,7 +198,10 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button fx:id="updatec_update_btn" layoutX="28.0" layoutY="490.0" mnemonicParsing="false" onAction="#updateCourseInCourseList" styleClass="regular-button" text="UPDATE" />
+                                                      <Button fx:id="updatec_update_btn" layoutX="28.0" layoutY="490.0" mnemonicParsing="false" onAction="#updateCourseInCourseList" styleClass="regular-button" text="UPDATE">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor></Button>
                                                       <Label layoutX="30.0" layoutY="245.0" prefHeight="26.0" prefWidth="112.0" text="Class Type:">
                                                          <font>
                                                             <Font size="14.0" />
@@ -210,7 +219,10 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="465.0" layoutY="285.0" mnemonicParsing="false" onAction="#updatecPrerequisites" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="465.0" layoutY="285.0" mnemonicParsing="false" onAction="#updatecPrerequisites" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor></Button>
                                                       <ComboBox fx:id="updatec_prerequisites_dropdown" layoutX="155.0" layoutY="285.0" prefHeight="25.0" prefWidth="303.0" style="-fx-background-color: #fff;" />
                                                       <ComboBox fx:id="updatec_class_dropdown" layoutX="154.0" layoutY="22.0" onAction="#updatecGetClassInfo" prefHeight="25.0" prefWidth="354.0" style="-fx-background-color: #fff;" />
                                                       <Label layoutX="28.0" layoutY="20.0" prefHeight="26.0" prefWidth="102.0" text="Choose Class:">
@@ -245,7 +257,10 @@
                                  <bottom>
                                     <Pane maxWidth="1.7976931348623157E308" prefHeight="110.0" prefWidth="538.0" style="-fx-background-color: EBEBEB;" styleClass="panel-item" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="removec_remove_btn" layoutX="28.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeCourseInCourseList" styleClass="regular-button" text="REMOVE" />
+                                          <Button fx:id="removec_remove_btn" layoutX="28.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeCourseInCourseList" styleClass="regular-button" text="REMOVE">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                           <ComboBox fx:id="removec_dropdown" layoutX="160.0" layoutY="29.0" prefHeight="25.0" prefWidth="354.0" style="-fx-background-color: #fff;" />
                                           <Label layoutX="28.0" layoutY="29.0" prefHeight="26.0" prefWidth="117.0" text="Choose Course:">
                                              <font>
@@ -279,6 +294,15 @@
                      </graphic>
                   </Tab>
                   <Tab styleClass="tab-category" text="ADD DEGREE TRACK">
+                     <graphic>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="77.0" prefWidth="71.0" text="ADD DEGREE TRACK" textAlignment="CENTER" textFill="#154734" wrapText="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Label>
+                     </graphic>
+                     <content />
+                     <content />
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
                            <children>
@@ -313,7 +337,11 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="addt_track_name" layoutX="166.0" layoutY="15.0" prefHeight="25.0" prefWidth="343.0" />
-                                                      <Button layoutX="474.0" layoutY="1588.0" mnemonicParsing="false" onAction="#addtAdd5kCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="1588.0" mnemonicParsing="false" onAction="#addtAdd5kCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1235.0" prefWidth="538.0" stylesheets="@../styleSheets/admin.css" visible="false" />
                                                       <Label layoutX="29.0" layoutY="163.0" prefHeight="26.0" prefWidth="167.0" text="Number of Core Courses:">
                                                          <font>
@@ -416,14 +444,26 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="635.0" mnemonicParsing="false" onAction="#addtAddCoreCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="635.0" mnemonicParsing="false" onAction="#addtAddCoreCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <Label layoutX="29.0" layoutY="1275.0" prefHeight="26.0" prefWidth="134.0" text="Add Elective Course:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="1276.0" mnemonicParsing="false" onAction="#addtAddElectiveCourse" styleClass="regular-button" text="ADD" />
-                                                      <Button layoutX="209.0" layoutY="1902.0" mnemonicParsing="false" onAction="#addtSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="SUBMIT" />
+                                                      <Button layoutX="474.0" layoutY="1276.0" mnemonicParsing="false" onAction="#addtAddElectiveCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
+                                                      <Button layoutX="209.0" layoutY="1902.0" mnemonicParsing="false" onAction="#addtSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="SUBMIT">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <ComboBox fx:id="addt_5k_dropdown" layoutX="173.0" layoutY="1587.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <ComboBox fx:id="addt_core_dropdown" layoutX="168.0" layoutY="635.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <TableView fx:id="addt_core_table" layoutX="168.0" layoutY="678.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
@@ -449,7 +489,11 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="948.0" mnemonicParsing="false" onAction="#addtAddOptionalCoreCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="948.0" mnemonicParsing="false" onAction="#addtAddOptionalCoreCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <ComboBox fx:id="addt_optional_core_dropdown" layoutX="168.0" layoutY="948.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <TableView fx:id="addt_optional_core_table" layoutX="168.0" layoutY="991.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
                                                          <columns>
@@ -471,13 +515,6 @@
                            </children>
                         </AnchorPane>
                      </content>
-                     <graphic>
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="77.0" prefWidth="71.0" text="ADD DEGREE TRACK" textAlignment="CENTER" textFill="#154734" wrapText="true">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Label>
-                     </graphic>
                   </Tab>
                   <Tab styleClass="tab-category" text="UPDATE DEGREE TRACK">
                      <content>
@@ -517,7 +554,11 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="updatet_track_name" layoutX="166.0" layoutY="60.0" prefHeight="25.0" prefWidth="343.0" />
-                                                      <Button layoutX="474.0" layoutY="1609.0" mnemonicParsing="false" onAction="#updatetAdd5kCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="1609.0" mnemonicParsing="false" onAction="#updatetAdd5kCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1235.0" prefWidth="538.0" stylesheets="@../styleSheets/admin.css" visible="false" />
                                                       <Label layoutX="29.0" layoutY="198.0" prefHeight="26.0" prefWidth="167.0" text="Number of Core Courses:">
                                                          <font>
@@ -620,14 +661,26 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="656.0" mnemonicParsing="false" onAction="#updatetAddCoreCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="656.0" mnemonicParsing="false" onAction="#updatetAddCoreCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <Label layoutX="29.0" layoutY="1296.0" prefHeight="26.0" prefWidth="134.0" text="Update Electives:">
                                                          <font>
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="1297.0" mnemonicParsing="false" onAction="#updatetAddElectiveCourse" styleClass="regular-button" text="ADD" />
-                                                      <Button layoutX="209.0" layoutY="1923.0" mnemonicParsing="false" onAction="#updatetSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="SUBMIT" />
+                                                      <Button layoutX="474.0" layoutY="1297.0" mnemonicParsing="false" onAction="#updatetAddElectiveCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
+                                                      <Button layoutX="209.0" layoutY="1923.0" mnemonicParsing="false" onAction="#updatetSubmit" prefHeight="30.0" prefWidth="215.0" styleClass="regular-button" text="SUBMIT">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <ComboBox fx:id="updatet_5k_dropdown" layoutX="173.0" layoutY="1608.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <ComboBox fx:id="updatet_core_dropdown" layoutX="168.0" layoutY="656.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <TableView fx:id="updatet_core_table" layoutX="168.0" layoutY="699.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
@@ -653,7 +706,11 @@
                                                             <Font size="14.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="474.0" layoutY="969.0" mnemonicParsing="false" onAction="#updatetAddOptionalCoreCourse" styleClass="regular-button" text="ADD" />
+                                                      <Button layoutX="474.0" layoutY="969.0" mnemonicParsing="false" onAction="#updatetAddOptionalCoreCourse" styleClass="regular-button" text="ADD">
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                      </Button>
                                                       <ComboBox fx:id="updatet_optional_core_dropdown" layoutX="168.0" layoutY="969.0" prefHeight="25.0" prefWidth="292.0" style="-fx-background-color: #fff;" />
                                                       <TableView fx:id="updatet_optional_core_table" layoutX="168.0" layoutY="1012.0" maxWidth="-Infinity" prefHeight="218.0" prefWidth="296.0">
                                                          <columns>
@@ -694,7 +751,10 @@
                                  <bottom>
                                     <Pane maxWidth="1.7976931348623157E308" prefHeight="110.0" prefWidth="538.0" style="-fx-background-color: EBEBEB;" styleClass="panel-item" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="removet_remove_btn" layoutX="28.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeDegreeTrack" styleClass="regular-button" text="REMOVE" />
+                                          <Button fx:id="removet_remove_btn" layoutX="28.0" layoutY="68.0" mnemonicParsing="false" onAction="#removeDegreeTrack" styleClass="regular-button" text="REMOVE">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                           <ComboBox fx:id="removet_dropdown" layoutX="160.0" layoutY="29.0" prefHeight="25.0" prefWidth="354.0" style="-fx-background-color: #fff;" />
                                           <Label layoutX="28.0" layoutY="29.0" prefHeight="26.0" prefWidth="117.0" text="Choose Course:">
                                              <font>
