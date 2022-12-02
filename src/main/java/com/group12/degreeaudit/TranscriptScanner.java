@@ -243,8 +243,6 @@ public class TranscriptScanner {
                     {
                         course = new Course(courseNumber, semester, grade, courseTitle, isTransfered, Double.parseDouble(creditHours));
                     }
-                    
-                    System.out.println(course);
                     course.setClassType(getCourseType(course));
                     studentCourses.add(course);
                 }

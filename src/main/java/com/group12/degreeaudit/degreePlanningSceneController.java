@@ -741,7 +741,8 @@ public class degreePlanningSceneController implements Initializable{
             student_name.setText(student.getName());
             student_id.setText(student.getID());
             semester_admitted.setText(student.getSemesterAdmitted());
-  
+            fast_track_checkbox.setSelected(student.getFastTrack());
+            thesis_checkbox.setSelected(student.getThesis());
 
 		}
 
