@@ -149,7 +149,7 @@ public class Course implements Comparable<Course> {
     {
         if(creditHours == 0)
         {
-            return getCourseNumber().split(" ")[1].charAt(1);
+            return Double.parseDouble(Character.toString(getCourseNumber().split(" ")[1].charAt(1)));
             //return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
         }
         return creditHours;

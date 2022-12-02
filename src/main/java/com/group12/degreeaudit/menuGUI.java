@@ -17,7 +17,7 @@ public class menuGUI extends Application {
         primaryStage.setTitle("Degree Planning & Audit Tool");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image("/images/favicon.jpg"));
+        primaryStage.getIcons().add(new Image("/images/favicon.png"));
 
         primaryStage.show();
     }

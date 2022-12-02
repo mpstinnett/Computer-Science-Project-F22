@@ -130,7 +130,81 @@ public class TranscriptScanner {
                 if(line.startsWith("20")) {
                     semester = line;
                 }
-                if(line.startsWith("CS ") || line.startsWith("SE ")) 
+                if(line.startsWith("CS ") || 
+                    line.startsWith("SE ") ||
+                    line.startsWith("ACCT ") ||
+                    line.startsWith("ACN ") ||
+                    line.startsWith("ACTS ") ||
+                    line.startsWith("AHST ") ||
+                    line.startsWith("ARHM ") ||
+                    line.startsWith("ATCM ") ||
+                    line.startsWith("AUD ") ||
+                    line.startsWith("BIOL ") ||
+                    line.startsWith("BMEN ") ||
+                    line.startsWith("BPS ") ||
+                    line.startsWith("BUAN ") ||
+                    line.startsWith("CE ") ||
+                    line.startsWith("CHEM ") ||
+                    line.startsWith("COMD ") ||
+                    line.startsWith("CRIM ") ||
+                    line.startsWith("ECON ") ||
+                    line.startsWith("ECSC ") ||
+                    line.startsWith("ED ") ||
+                    line.startsWith("EEBM ") ||
+                    line.startsWith("EECS ") ||
+                    line.startsWith("EECT ") ||
+                    line.startsWith("EEDG ") ||
+                    line.startsWith("EEGR ") ||
+                    line.startsWith("EEMF ") ||
+                    line.startsWith("EEOP ") ||
+                    line.startsWith("EEPE ") ||
+                    line.startsWith("EERF ") ||
+                    line.startsWith("EESC ") ||
+                    line.startsWith("ENGY ") ||
+                    line.startsWith("ENTP ") ||
+                    line.startsWith("EPPS ") ||
+                    line.startsWith("FIN ") ||
+                    line.startsWith("FTEC ") ||
+                    line.startsWith("GEOS ") ||
+                    line.startsWith("GISC ") ||
+                    line.startsWith("HCS ") ||
+                    line.startsWith("HDCD ") ||
+                    line.startsWith("HIST ") ||
+                    line.startsWith("HMGT ") ||
+                    line.startsWith("HUAS ") ||
+                    line.startsWith("HUHI ") ||
+                    line.startsWith("HUMA ") ||
+                    line.startsWith("IDEA ") ||
+                    line.startsWith("IMS ") ||
+                    line.startsWith("IPEC ") ||
+                    line.startsWith("LATS ") ||
+                    line.startsWith("LIT ") ||
+                    line.startsWith("MAIS ") ||
+                    line.startsWith("MAS ") ||
+                    line.startsWith("MATH ") ||
+                    line.startsWith("MECH ") ||
+                    line.startsWith("MECO ") ||
+                    line.startsWith("MIS ") ||
+                    line.startsWith("MKT ") ||
+                    line.startsWith("MSEN ") ||
+                    line.startsWith("MTHE ") ||
+                    line.startsWith("OB ") ||
+                    line.startsWith("OPRE ") ||
+                    line.startsWith("PA ") ||
+                    line.startsWith("PHIL ") ||
+                    line.startsWith("PHYS ") ||
+                    line.startsWith("PPPE ") ||
+                    line.startsWith("PSCI ") ||
+                    line.startsWith("PSYC ") ||
+                    line.startsWith("SCI ") ||
+                    line.startsWith("SE ") ||
+                    line.startsWith("SMED ") ||
+                    line.startsWith("SOC ") ||
+                    line.startsWith("STAT ") ||
+                    line.startsWith("SYSE ") ||
+                    line.startsWith("SYSM ") ||
+                    line.startsWith("TE ") ||
+                    line.startsWith("VPAS ")) 
                 {
                     String[] lineAsSplit = line.split(" ");
                     String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];

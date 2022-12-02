@@ -1,14 +1,14 @@
 .tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #F68A00;
-    background-color: #F68A00;
+    -fx-background-color: #154734;
+    background-color: #154734;
 }
 
 
 .tab-category{
-    -fx-background-color: #FCEBD6;
-    background-color: #FCEBD6;
-    -fx-border-color: #EACBA3;
-    border-color: #EACBA3;
+    -fx-background-color: #FFF;
+    background-color: #FFF;
+    -fx-border-color: #819b6f;
+    border-color: #819b6f;
 
     -fx-border-width: 0px 0px 3px 0px;
     border-width: 0px 0px 3px 0px;
@@ -25,19 +25,19 @@
 }
 
 .tab-category:hover{
-    -fx-border-color: #F68A00;
-    border-color: #F68A00;
+    -fx-border-color: #154734;
+    border-color: #154734;
     -fx-font-size: 11px;
     font-size: 11px;
 }
 
 .tab-category:selected  {    
-    -fx-border-color: #F68A00;
-    border-color: #F68A00;
+    -fx-border-color: #154734;
+    border-color: #154734;
     -fx-border-width: 0px 0px 3px 0px;
     border-width: 0px 0px 3px 0px;
-    -fx-background-color: #FFDFB7;
-    background-color: #FFDFB7;
+    -fx-background-color: #d6ddd4;
+    background-color: #d6ddd4;
 }
 
 
@@ -59,8 +59,8 @@
 }
 
 .optional-features-grid{
-    -fx-border-color: #2e8b57;
-    border-color: #2e8b57;
+    -fx-border-color: #154734;
+    border-color: #154734;
     -fx-border-width: 2px;
     border-width: 2px;
     -fx-border-radius: 5;
@@ -68,23 +68,23 @@
 }
 
 .optional-features-cell{
-    -fx-border-color: #2e8b57;
-    border-color: #2e8b57;
+    -fx-border-color:  #154734;
+    border-color:  #154734;
     -fx-border-width: 0px 0px 2px 0px;
     border-width: 0px 0px 2px 0px;
 }
 
 
 .table-view .column-header-background, .table-view .column-header {
-    -fx-background-color: #83C03D;
-    background-color: #83C03D;
+    -fx-background-color: #154734;
+    background-color:  #154734;
     border-radius: 10px;
     -fx-text-fill: #FFF;
 }
 
-.add-and-update-course-table .column-header-background, .add-and-update-course-table .column-header  {
-    -fx-background-color:#1C5EAB;
-    background-color:#1C5EAB;
+.add-and-update-course-table .column-header-background, .add-andupdate-course-table .column-header  {
+    -fx-background-color: #154734;
+    background-color: #154734;
 }
 
 .table-view .column-header .label {
@@ -92,8 +92,8 @@
 }
 
 .tab_category {
-    -fx-border-color: #EACBA3;
-    border-color: #EACBA3;
+    -fx-border-color: #819b6f;
+    border-color: #819b6f;
     -fx-border-width: 0px 0px 3px 0px;
     border-width: 0px 0px 3px 0px;
     -fx-font-size: 11px;
@@ -103,13 +103,20 @@
 .return-to-menu-btn{
     -fx-background-color: #FFF;
     background-color: #FFF;
-    -fx-text-fill: #F68A00;
+    -fx-text-fill: #154734;
     -fx-background-radius: 5;
     -fx-font-weight: bold;
     font-weight: bold;
+    -fx-font-size: 10px;
+    font-size: 10px;
 }
 
 .return-to-menu-btn:hover{
+    -fx-font-size: 10px;
+    font-size: 10px;
+}
+
+.return-to-menu-btn:selected{
     -fx-font-size: 10px;
     font-size: 10px;
 }

@@ -180,6 +180,17 @@ public class DegreeAudit
                     electiveCourses.add(course);
                 }
             }
+            else if(student.getDegreeTrack().getElectiveAllowOneLowerCourse())
+            {
+                for(String courseApprove5X : student.getDegreeTrack().getElectivesAcceptedLowerCourses())
+                {
+                    if(courseApprove5X.equals(course.getCourseNumber()))
+                    {
+                        electiveCourses.add(course);
+                        completedElectiveAmount++;
+                    }
+                }
+            }
         }
 
         finalElectiveCourses = electiveCourses;
@@ -398,7 +409,8 @@ public class DegreeAudit
         if(coreCourses.size() == 0
             || getGPA(coreCourses) < Double.parseDouble(student.getDegreeTrack().getCoreGPARequirement()))
         {
-            if(!student.getDegreeTrack().getCoreAllowSeventhElective() || ((getGPA(coreCourses) > 3.0) && !extraElectiveCheck()))
+            if(!student.getDegreeTrack().getCoreAllowSeventhElective() || ((getGPA(coreCourses) > 3.0) && !extraElectiveCheck())
+                || (getGPA(coreCourses) < 3.0))
             {
                 coreInformationString += "\nCore GPA of " + student.getDegreeTrack().getCoreGPARequirement() + " is not met";
                 if(aboveCourses > 0)
@@ -516,6 +528,7 @@ public class DegreeAudit
 
     public boolean extraElectiveCheck()
     {
+        System.out.println("T: 3");
         int completedElectiveAmount = 0;
         List<Course> electiveCourses = new ArrayList<Course>();
 
@@ -536,12 +549,13 @@ public class DegreeAudit
                 }
             }
         }
-
+        System.out.println("T: 4");
         finalElectiveCourses = electiveCourses;
         
         //Check if required amount is not met
         if(completedElectiveAmount < (Integer.parseInt(student.getDegreeTrack().getElectiveRequirementAmount()) + 1))
         {
+            System.out.println("T: 5");
             return false;
         }
 
