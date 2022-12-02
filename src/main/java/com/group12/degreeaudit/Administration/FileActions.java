@@ -136,7 +136,7 @@ public class FileActions
         }
     }
 
-    public void exportStudent(Student student)
+    public void exportStudent(Student student) throws Exception
     {
         try
         {
@@ -157,6 +157,7 @@ public class FileActions
         catch(Exception e)
         {
             System.out.println("Unable to export the student " + e);
+            throw e;
         }
     }
 
@@ -191,7 +192,7 @@ public class FileActions
         return null;
     }
 
-    public void exportDegreePlanPDF(Student student)
+    public void exportDegreePlanPDF(Student student) throws Exception
     {
         try
         {
@@ -212,6 +213,7 @@ public class FileActions
         catch(Exception e)
         {
             System.out.println("Unable to save the degree plan " + e);
+            throw e;
         }
     }
 
