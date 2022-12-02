@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -89,7 +90,7 @@ public class Report {
         }
 
     }
-    public static void createDegreePlan(Student student/*, File degreePlanFile*/) {
+    public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String DEGREE_PLAN_BLUEPRINT_FILE_NAME;
         String[] studentInformationFieldKeys; 
@@ -98,8 +99,6 @@ public class Report {
         String[][] electiveFieldKeys;
         String[] admissionPrereqClassNumbers;
         String[][] admissionPrereqFieldKeys;
-
-        degreeTrack = "Software Engineering";
 
         switch(degreeTrack) {
             case "Traditional Computer Science":  
@@ -360,7 +359,7 @@ public class Report {
                     {"", "", ""}, 
                     {"", "", ""}};
         }
-        getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys/*, degreePlanFile*/);
+        getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys, degreePlanFile);
     }
     private static void getDegreePlan(Student student, String DEGREE_PLAN_BLUEPRINT_FILE_NAME, 
             String[] studentInformationFieldKeys, 
@@ -368,8 +367,8 @@ public class Report {
             String[][] coreFieldKeys,
             String[][] electiveFieldKeys,
             String[] admissionPrereqClassNumbers,
-            String[][] admissionPrereqFieldKeys/*,
-            File degreePlanFile*/) {
+            String[][] admissionPrereqFieldKeys,
+            File degreePlanFile) {
 
         String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
         try {
@@ -383,7 +382,7 @@ public class Report {
             //Tests all fields if they exist
             for(String key : fields.keySet()) {
                 if(fields.get(key) == null)
-                    System.out.println("ERROR");
+                    System.out.println("Field " + key + " does not exist.");
             }
 
             //Courses taken by student
@@ -406,11 +405,12 @@ public class Report {
                     fields.get(coreFieldKeys[i][2]).setValue(student.getCourseGivenCourseNumber(coreClassNumbers[i]).getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
                 }
             }
-
             //Approved 6000 Level Electives
             int electiveCount = 0;
             for(Course course : coursesTaken) {
-                if(course.getCourseNumber().charAt(3) == '6' && course.getClassType() == 'E') {
+                if(electiveCount >= electiveFieldKeys.length)
+                    break;
+                if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
                     fields.get(electiveFieldKeys[electiveCount][0]).setValue(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
                     fields.get(electiveFieldKeys[electiveCount][1]).setValue(course.getCourseNumber());
                     fields.get(electiveFieldKeys[electiveCount][2]).setValue(course.getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
