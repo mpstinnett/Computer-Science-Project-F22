@@ -370,7 +370,7 @@ public class Report {
             String[][] admissionPrereqFieldKeys,
             File degreePlanFile) {
 
-        String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
+        String dest = degreePlanFile.getPath();
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
