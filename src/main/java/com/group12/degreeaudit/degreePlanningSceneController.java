@@ -22,6 +22,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -753,30 +754,48 @@ public class degreePlanningSceneController implements Initializable{
     private void exportStudentAndPDF(ActionEvent event) throws IOException{
         DegreeList degreeList = new DegreeList("resources/DegreeList.json");
         CourseList courseList = new CourseList("resources/CourseList.json");
-        student.setName(student_name.getText());
-        student.setID(student_id.getText());
-        student.setSemesterAdmitted(semester_admitted.getText());
-        student.setAnticipatedGraduation(anticipated_graduation.getText());
-        student.setFastTrack(fast_track_checkbox.isSelected());
-        student.setThesis(thesis_checkbox.isSelected());
-        FileActions export = new FileActions(courseList, degreeList);
-
-        try{
-            export.exportStudent(student);
-            export.exportDegreePlanPDF(student);
-
-            // Go back to main menu
-            Stage stage;
-            Parent root;
-            stage = (Stage) return_to_menu_btn.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        if (student == null)
+        {
+            errorAlert("Error: Submitted without input ");
         }
-        catch(Exception e) {
+        else
+        {
+            student.setName(student_name.getText());
+            student.setID(student_id.getText());
+            student.setSemesterAdmitted(semester_admitted.getText());
+            student.setAnticipatedGraduation(anticipated_graduation.getText());
+            student.setFastTrack(fast_track_checkbox.isSelected());
+            student.setThesis(thesis_checkbox.isSelected());
+            FileActions export = new FileActions(courseList, degreeList);
 
+            try{
+                export.exportStudent(student);
+                export.exportDegreePlanPDF(student);
+
+                // Go back to main menu
+                Stage stage;
+                Parent root;
+                stage = (Stage) return_to_menu_btn.getScene().getWindow();
+                root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+            catch(Exception e) {
+                errorAlert("Error: Canceled while saving... Try Again");
+            }
         }
+    }
+
+    /*
+     * ERROR ALERT
+     */
+    public void errorAlert(String error) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(null);
+        alert.setContentText(error);
+        alert.showAndWait();
 
     }
 
