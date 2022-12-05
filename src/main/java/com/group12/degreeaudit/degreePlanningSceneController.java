@@ -815,12 +815,14 @@ public class degreePlanningSceneController implements Initializable{
 
         // Populate degree tracks
         for (JSONDegree degreeTrack : allDegreeTracks) {
-            degreeTrackList.add(degreeTrack.getDegreeName());
+            if(degreeTrack.getActiveStatus()){
+                degreeTrackList.add(degreeTrack.getDegreeName());
+            }
         }
         degree_plan_dropdown.setItems(degreeTrackList);
 
         // Grades dropdown
-        ObservableList<String> gradeList = FXCollections.observableArrayList("", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F", "P");
+        ObservableList<String> gradeList = FXCollections.observableArrayList("A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "F", "P");
         admission_add_grade.setItems(gradeList);
         req_core_add_grade.setItems(gradeList);
         core_options_add_grade.setItems(gradeList);

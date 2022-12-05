@@ -120,21 +120,27 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from prerequisite dropdown
         String courseNum = addc_prerequisites_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the prerequisite table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the prerequisite table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the prerequisite table
-        ObservableList<JSONCourseWrapper> courseWrapper = addc_prerequisites_table.getItems();
+            // create an observable list for the prerequisite table
+            ObservableList<JSONCourseWrapper> courseWrapper = addc_prerequisites_table.getItems();
 
-        // populate the prerequisite table & remove the selected item from dropdown
-        addc_prerequisites_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        addc_prerequisites_table.setItems(courseWrapper);
-        course.removeTableCourse(addc_prerequisites_table, course, addc_prerequisites_dropdown,
-                courseNum);
+            // populate the prerequisite table & remove the selected item from dropdown
+            addc_prerequisites_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            addc_prerequisites_table.setItems(courseWrapper);
+            course.removeTableCourse(addc_prerequisites_table, course, addc_prerequisites_dropdown,
+                    courseNum);
 
-        // clear selection from dropdown
-        addc_prerequisites_dropdown.getSelectionModel().clearSelection();
+            // clear selection from dropdown
+            addc_prerequisites_dropdown.getSelectionModel().clearSelection();
+        }
+
 
     }
 
@@ -311,23 +317,28 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from prerequisite dropdown
         String courseNum = updatec_prerequisites_dropdown.getValue();
 
-        // Create an instance of JSONCourseWrapper to add to the prerequisite table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // Create an instance of JSONCourseWrapper to add to the prerequisite table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // Remove the selected class from the dropdown
-        updatec_prerequisites_dropdown.getItems().remove(courseNum);
+            // Remove the selected class from the dropdown
+            updatec_prerequisites_dropdown.getItems().remove(courseNum);
 
-        // Create an observable list for the prerequisite table
-        ObservableList<JSONCourseWrapper> courseWrapper = updatec_prerequisites_table.getItems();
+            // Create an observable list for the prerequisite table
+            ObservableList<JSONCourseWrapper> courseWrapper = updatec_prerequisites_table.getItems();
 
-        // Populate the prerequisite table & remove the selected item from dropdown
-        courseWrapper.add(course);
-        updatec_prerequisites_table.setItems(courseWrapper);
-        course.removeTableCourse(updatec_prerequisites_table, course,
-                updatec_prerequisites_dropdown, courseNum);
+            // Populate the prerequisite table & remove the selected item from dropdown
+            courseWrapper.add(course);
+            updatec_prerequisites_table.setItems(courseWrapper);
+            course.removeTableCourse(updatec_prerequisites_table, course,
+                    updatec_prerequisites_dropdown, courseNum);
 
-        // Clear selection from dropdown
-        updatec_prerequisites_dropdown.getSelectionModel().clearSelection();
+            // Clear selection from dropdown
+            updatec_prerequisites_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     @FXML
@@ -435,21 +446,26 @@ public class adminSceneController implements Initializable {
     void addtAddCoreCourse(ActionEvent event) {
         // Grab the selected class from core course dropdown
         String courseNum = addt_core_dropdown.getValue();
+        
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the core course table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an instance of JSONCourseWrapper to add to the core course table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+            // create an observable list for the core course table
+            ObservableList<JSONCourseWrapper> courseWrapper = addt_core_table.getItems();
 
-        // create an observable list for the core course table
-        ObservableList<JSONCourseWrapper> courseWrapper = addt_core_table.getItems();
+            // populate the core course table & remove the selected item from dropdown
+            addt_core_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            addt_core_table.setItems(courseWrapper);
+            course.removeTableCourse(addt_core_table, course, addt_core_dropdown, courseNum);
 
-        // populate the core course table & remove the selected item from dropdown
-        addt_core_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        addt_core_table.setItems(courseWrapper);
-        course.removeTableCourse(addt_core_table, course, addt_core_dropdown, courseNum);
-
-        // clear selection from dropdown
-        addt_core_dropdown.getSelectionModel().clearSelection();
+            // clear selection from dropdown
+            addt_core_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to Optional Core Courses Table
@@ -468,20 +484,25 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from optional core dropdown
         String courseNum = addt_optional_core_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the optional core table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the optional core table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the optional core table
-        ObservableList<JSONCourseWrapper> courseWrapper = addt_optional_core_table.getItems();
+            // create an observable list for the optional core table
+            ObservableList<JSONCourseWrapper> courseWrapper = addt_optional_core_table.getItems();
 
-        // populate the optional core table & remove the selected item from dropdown
-        addt_optional_core_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        addt_optional_core_table.setItems(courseWrapper);
-        course.removeTableCourse(addt_optional_core_table, course, addt_optional_core_dropdown, courseNum);
+            // populate the optional core table & remove the selected item from dropdown
+            addt_optional_core_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            addt_optional_core_table.setItems(courseWrapper);
+            course.removeTableCourse(addt_optional_core_table, course, addt_optional_core_dropdown, courseNum);
 
-        // clear selection from dropdown
-        addt_optional_core_dropdown.getSelectionModel().clearSelection();
+            // clear selection from dropdown
+            addt_optional_core_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to Elective Courses Table
@@ -500,22 +521,26 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from elective dropdown
         String courseNum = addt_elective_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the elective table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the elective table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the elective table
-        ObservableList<JSONCourseWrapper> courseWrapper = addt_elective_table.getItems();
+            // create an observable list for the elective table
+            ObservableList<JSONCourseWrapper> courseWrapper = addt_elective_table.getItems();
 
-        // populate the prerequisite table & remove the selected item from dropdown
-        addt_elective_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        addt_elective_table.setItems(courseWrapper);
-        course.removeTableCourse(addt_elective_table, course, addt_elective_dropdown,
-                courseNum);
+            // populate the prerequisite table & remove the selected item from dropdown
+            addt_elective_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            addt_elective_table.setItems(courseWrapper);
+            course.removeTableCourse(addt_elective_table, course, addt_elective_dropdown,
+                    courseNum);
 
-        // clear selection from dropdown
-        addt_elective_dropdown.getSelectionModel().clearSelection();
-
+            // clear selection from dropdown
+            addt_elective_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to 5XXX Courses Table
@@ -535,20 +560,25 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from 5XXX dropdown
         String courseNum = addt_5k_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the 5XXX table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the 5XXX table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the 5XXX table
-        ObservableList<JSONCourseWrapper> courseWrapper = addt_5k_table.getItems();
+            // create an observable list for the 5XXX table
+            ObservableList<JSONCourseWrapper> courseWrapper = addt_5k_table.getItems();
 
-        // populate the 5XXX table
-        addt_5k_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        addt_5k_table.setItems(courseWrapper);
-        course.removeTableCourse(addt_5k_table, course, addt_5k_dropdown, courseNum);
+            // populate the 5XXX table
+            addt_5k_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            addt_5k_table.setItems(courseWrapper);
+            course.removeTableCourse(addt_5k_table, course, addt_5k_dropdown, courseNum);
 
-        // clear selection
-        addt_5k_dropdown.getSelectionModel().clearSelection();
+            // clear selection
+            addt_5k_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // "SUBMIT" button is pressed for adding a degree track
@@ -778,21 +808,26 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from core course dropdown
         String courseNum = updatet_core_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the core course table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the core course table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the core course table
-        ObservableList<JSONCourseWrapper> courseWrapper = updatet_core_table.getItems();
+            // create an observable list for the core course table
+            ObservableList<JSONCourseWrapper> courseWrapper = updatet_core_table.getItems();
 
-        // populate the core course table & remove the selected item from dropdown
-        updatet_core_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        updatet_core_table.setItems(courseWrapper);
-        course.removeTableCourse(updatet_core_table, course, updatet_core_dropdown,
-                courseNum);
+            // populate the core course table & remove the selected item from dropdown
+            updatet_core_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            updatet_core_table.setItems(courseWrapper);
+            course.removeTableCourse(updatet_core_table, course, updatet_core_dropdown,
+                    courseNum);
 
-        // clear selection
-        updatet_core_dropdown.getSelectionModel().clearSelection();
+            // clear selection
+            updatet_core_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to Optional Core Courses Table
@@ -811,21 +846,26 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from optional core dropdown
         String courseNum = updatet_optional_core_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the optional core table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the optional core table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the optional core table
-        ObservableList<JSONCourseWrapper> courseWrapper = updatet_optional_core_table.getItems();
+            // create an observable list for the optional core table
+            ObservableList<JSONCourseWrapper> courseWrapper = updatet_optional_core_table.getItems();
 
-        // populate the optional core table & remove the selected item from dropdown
-        updatet_optional_core_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        updatet_optional_core_table.setItems(courseWrapper);
-        course.removeTableCourse(updatet_optional_core_table, course, updatet_optional_core_dropdown,
-                courseNum);
+            // populate the optional core table & remove the selected item from dropdown
+            updatet_optional_core_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            updatet_optional_core_table.setItems(courseWrapper);
+            course.removeTableCourse(updatet_optional_core_table, course, updatet_optional_core_dropdown,
+                    courseNum);
 
-        // clear selection
-        updatet_optional_core_dropdown.getSelectionModel().clearSelection();
+            // clear selection
+            updatet_optional_core_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to Elective Courses Table
@@ -844,21 +884,26 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from elective dropdown
         String courseNum = updatet_elective_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the elective table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the elective table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the elective table
-        ObservableList<JSONCourseWrapper> courseWrapper = updatet_elective_table.getItems();
+            // create an observable list for the elective table
+            ObservableList<JSONCourseWrapper> courseWrapper = updatet_elective_table.getItems();
 
-        // populate the elective table & remove the selected item from dropdown
-        updatet_elective_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        updatet_elective_table.setItems(courseWrapper);
-        course.removeTableCourse(updatet_elective_table, course,
-                updatet_elective_dropdown, courseNum);
+            // populate the elective table & remove the selected item from dropdown
+            updatet_elective_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            updatet_elective_table.setItems(courseWrapper);
+            course.removeTableCourse(updatet_elective_table, course,
+                    updatet_elective_dropdown, courseNum);
 
-        // clear selection
-        updatet_elective_dropdown.getSelectionModel().clearSelection();
+            // clear selection
+            updatet_elective_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // Add to 5XXX Courses Table
@@ -877,21 +922,26 @@ public class adminSceneController implements Initializable {
         // Grab the selected class from 5XXX dropdown
         String courseNum = updatet_5k_dropdown.getValue();
 
-        // create an instance of JSONCourseWrapper to add to the 5XXX table
-        JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
+        if(courseNum == null){
+            errorAlert("Please choose a course from the dropdown.");
+        }
+        else{
+            // create an instance of JSONCourseWrapper to add to the 5XXX table
+            JSONCourseWrapper course = new JSONCourseWrapper(courseNum);
 
-        // create an observable list for the 5XXX table
-        ObservableList<JSONCourseWrapper> courseWrapper = updatet_5k_table.getItems();
+            // create an observable list for the 5XXX table
+            ObservableList<JSONCourseWrapper> courseWrapper = updatet_5k_table.getItems();
 
-        // populate the 5XXX table & remove the selected item from dropdown
-        updatet_5k_dropdown.getItems().remove(courseNum);
-        courseWrapper.add(course);
-        updatet_5k_table.setItems(courseWrapper);
-        course.removeTableCourse(updatet_5k_table, course, updatet_5k_dropdown,
-                courseNum);
+            // populate the 5XXX table & remove the selected item from dropdown
+            updatet_5k_dropdown.getItems().remove(courseNum);
+            courseWrapper.add(course);
+            updatet_5k_table.setItems(courseWrapper);
+            course.removeTableCourse(updatet_5k_table, course, updatet_5k_dropdown,
+                    courseNum);
 
-        // clear selection
-        updatet_5k_dropdown.getSelectionModel().clearSelection();
+            // clear selection
+            updatet_5k_dropdown.getSelectionModel().clearSelection();
+        }
     }
 
     // "SUBMIT" button is pressed for updating a degree track
