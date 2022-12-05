@@ -1,21 +1,28 @@
 package com.group12.degreeaudit.Administration;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
+//import javax.swing.JFileChooser;
+//import javax.swing.filechooser.FileFilter;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import com.group12.degreeaudit.Report;
 import com.group12.degreeaudit.Student;
+import com.group12.degreeaudit.Audit.DegreeAudit;
 
 public class FileActions 
 {
     File dir = new File("./Resources");
-    final JFileChooser fileChooser = new JFileChooser();
+    final FileChooser fileChooser = new FileChooser();
     CourseList courseList;
     DegreeList degreeList;
     Gson gson = new Gson();
@@ -29,25 +36,29 @@ public class FileActions
             dir.mkdir();
         }
 
-        fileChooser.setFileFilter(new FileFilter() {
-            public String getDescription(){
-                return "JSON File (*.json)";
-            }
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("JSON Files", "*.json"));
+        // fileChooser.setFileFilter(new FileFilter() {
+        //     public String getDescription(){
+        //         return "JSON File (*.json)";
+        //     }
 
-            public boolean accept (File f)
-            {
-                if(f.isDirectory())
-                {
-                    return true;
-                }
-                else
-                {
-                    return f.getName().toLowerCase().endsWith(".json");
-                }
-            }
-        });
-        fileChooser.setCurrentDirectory(dir);
-        fileChooser.setSelectedFile(new File("settings.json"));
+        //     public boolean accept (File f)
+        //     {
+        //         if(f.isDirectory())
+        //         {
+        //             return true;
+        //         }
+        //         else
+        //         {
+        //             return f.getName().toLowerCase().endsWith(".json");
+        //         }
+        //     }
+        // });
+        fileChooser.setInitialDirectory(dir);
+        //fileChooser.setCurrentDirectory(dir);
+
+        //File selectedFile = fileChooser.showOpenDialog(null);
+        //fileChooser.setSelectedFile(new File("settings.json"));
     }
     
 
@@ -55,7 +66,6 @@ public class FileActions
     {
         try
         {
-            Gson gson = new Gson();
             List<JSONCourse> courseListExport = courseList.GetCourseListFromFile();
             List<JSONDegree> degreeListExport = degreeList.GetDegreeListFromFile();
             List<Object> objectExport = new ArrayList<Object>();
@@ -63,10 +73,12 @@ public class FileActions
             objectExport.add(courseListExport);
             objectExport.add(degreeListExport);
 
-            fileChooser.showSaveDialog(null);
-            fileChooser.getSelectedFile();
+            fileChooser.setInitialFileName("settings.json");
+            File selectedFile = fileChooser.showSaveDialog(null);
+            //fileChooser.showSaveDialog(null);
+            //fileChooser.getSelectedFile();
 
-            File createFile = new File(fileChooser.getSelectedFile().toString());
+            File createFile = new File(selectedFile.toString());
             createFile.createNewFile();
 
             FileWriter writeFile = new FileWriter(createFile.getPath());
@@ -75,7 +87,7 @@ public class FileActions
         }
         catch(Exception e)
         {
-
+            System.out.println("Unable to export the settings " + e);
         }
     }
 
@@ -84,11 +96,12 @@ public class FileActions
         try
         {
             List<Object> objectImport;
+            fileChooser.setInitialFileName("");
+            File selectedFile = fileChooser.showOpenDialog(null);
+            //fileChooser.showOpenDialog(null);
+            //fileChooser.getSelectedFile();
 
-            fileChooser.showOpenDialog(null);
-            fileChooser.getSelectedFile();
-
-            FileReader readFile = new FileReader(fileChooser.getSelectedFile().toString());
+            FileReader readFile = new FileReader(selectedFile.toString());
         
             objectImport = gson.fromJson(readFile, new TypeToken<List<Object>>(){}.getType());
             readFile.close();
@@ -119,21 +132,22 @@ public class FileActions
         }
         catch(Exception e)
         {
-
+            System.out.println("Unable to import the settings " + e);
         }
     }
 
-    public void exportStudent(Student student)
+    public void exportStudent(Student student) throws Exception
     {
         try
         {
-            Gson gson = new Gson();
+            fileChooser.setInitialFileName(student.getID() + ".json");
+            File selectedFile = fileChooser.showSaveDialog(null);
 
-            fileChooser.setSelectedFile(new File(student.getID() + ".json"));
-            fileChooser.showSaveDialog(null);
-            fileChooser.getSelectedFile();
+            //fileChooser.setSelectedFile(new File(student.getID() + ".json"));
+            //fileChooser.showSaveDialog(null);
+            //fileChooser.getSelectedFile();
 
-            File createFile = new File(fileChooser.getSelectedFile().toString());
+            File createFile = new File(selectedFile.toString());
             createFile.createNewFile();
 
             FileWriter writeFile = new FileWriter(createFile.getPath());
@@ -142,7 +156,84 @@ public class FileActions
         }
         catch(Exception e)
         {
+            System.out.println("Unable to export the student " + e);
+            throw e;
+        }
+    }
 
+    public Student importStudent()
+    {
+        try
+        {
+            fileChooser.setInitialFileName("");
+            File selectedFile = fileChooser.showOpenDialog(null);
+
+            //fileChooser.showOpenDialog(null);
+            //fileChooser.getSelectedFile();
+
+            FileReader readFile = new FileReader(selectedFile.toString());
+            Student jsonStudent = gson.fromJson(readFile, new TypeToken<Student>(){}.getType());
+            readFile.close();
+
+            return jsonStudent;
+        }
+        catch(FileNotFoundException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        catch(JsonSyntaxException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        catch(IOException e)
+        {
+            System.out.println("Unable to import the student " + e);
+        }
+        return null;
+    }
+
+    public void exportDegreePlanPDF(Student student) throws Exception
+    {
+        try
+        {
+            fileChooser.setInitialFileName(student.getID() + "_Degree_Plan.pdf");
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            //fileChooser.setSelectedFile(new File(student.getID() + "_Degree_Plan.pdf"));
+            //fileChooser.showSaveDialog(null);
+            //fileChooser.getSelectedFile();
+
+            File createFile = new File(selectedFile.toString());
+            if(createFile.exists())
+            {
+                createFile.delete();
+            }
+            Report.createDegreePlan(student, createFile);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Unable to save the degree plan " + e);
+            throw e;
+        }
+    }
+
+    public void exportAuditPDF(Student student, DegreeAudit audit)
+    {
+        try
+        {
+            fileChooser.setInitialFileName(student.getID() + "_Audit.pdf");
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            //fileChooser.setSelectedFile(new File(student.getID() + "_Audit.pdf"));
+            //fileChooser.showSaveDialog(null);
+            //fileChooser.getSelectedFile();
+
+            File createFile = new File(selectedFile.toString());
+            Report.createAuditReport(audit.doAudit(), student.getID(), createFile);
+        }
+        catch(Exception e)
+        {
+            System.out.println("Unable to save the audit " + e);
         }
     }
 }

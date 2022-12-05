@@ -1,24 +1,19 @@
 package com.group12.degreeaudit;
 
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class menuGUI extends Application {
+public class auditGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));
-        primaryStage.setTitle("Degree Planning & Audit Tool");
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/auditSceneController.fxml"));
+        primaryStage.setTitle("Degree Audit");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image("/images/favicon.png"));
-
         primaryStage.show();
     }
 

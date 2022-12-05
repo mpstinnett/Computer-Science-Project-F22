@@ -80,16 +80,15 @@ public class DegreeList
     //AddDegreeToList - Takes all values to create a JSONDegree and adds it to the degree list both locally and in the file
     //Returns True - Degree Track successfully added
     //Returns False - Degree Track already in the list, try updating instead
-    public boolean AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
-    boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
-    String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
+    public boolean AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, boolean coreAllowSeventhElective, String electiveRequirementAmount,
+    String electiveGPARequirement, boolean electiveAllowOneLowerCourse,
     String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
-    String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
+    ArrayList<String> optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
         //First, create the JSONDegree to add with the parameter values
         JSONDegree createdDegree = new JSONDegree(degreeName, coreRequirementAmount, coreGPARequirement, 
-        coreReplaceHighestAttempt, coreAllowSeventhElective, electiveRequirementAmount,
-        electiveGPARequirement, electiveReplaceHighestAttempt, electiveAllowOneLowerCourse,
+         coreAllowSeventhElective, electiveRequirementAmount,
+        electiveGPARequirement, electiveAllowOneLowerCourse,
         electivesAcceptedLowerCourses, overallGPARequirement, coreClassListRequirement,
         optionsCoreClassListRequirement, electiveClassListRequirement, activeStatus);
 

@@ -1,5 +1,7 @@
 package com.group12.degreeaudit.Administration;
 
+import java.util.ArrayList;
+
 //JSONDegree - Class to house the fields and methods associated with degree plans
 //      Used when Exporting and Importing degree plans in JSON
 public class JSONDegree 
@@ -7,16 +9,14 @@ public class JSONDegree
     private String degreeName;              //Degree Name Ex: Systems
     private String coreRequirementAmount;   //Required amount of core classes
     private String coreGPARequirement;      //Required GPA core requirement
-    private boolean coreReplaceHighestAttempt;  //Replace core with highest attempt toggle
     private boolean coreAllowSeventhElective;   //Allow a 7th elective to bypass the core GPA (>3.0 but < requirement)
     private String electiveRequirementAmount;   //Required amount of elective classes
     private String electiveGPARequirement;      //Required GPA of electives
-    private boolean electiveReplaceHighestAttempt;  //Replace elective with highest attempt toggle
     private boolean electiveAllowOneLowerCourse;    //Allow a lower level course as an elective (Only if listed)
     private String[] electivesAcceptedLowerCourses; //List of acceptable lower level courses to fill an elective
     private String overallGPARequirement;       //Overall GPA (All 5xxx & 6xxx courses)
     private String[] coreClassListRequirement;  //List of required core classes
-    private String[] optionsCoreClassListRequirement;   //List of optional core classes (to satisfy the total required beyond the listed required)
+    private ArrayList<String> optionsCoreClassListRequirement;    //List of optional core classes (to satisfy the total required beyond the listed required)
     private String[] electiveClassListRequirement;      //Required electives to satisfy the degree track
     private boolean activeStatus;   //If the degree is able to be selected in dropdowns (Active to enroll into)
 
@@ -26,35 +26,31 @@ public class JSONDegree
         this.degreeName = "No Degree Track Chosen";
         this.coreRequirementAmount = "0";
         this.coreGPARequirement = "0";
-        this.coreReplaceHighestAttempt = false;
         this.coreAllowSeventhElective = false;
         this.electiveRequirementAmount = "0";
         this.electiveGPARequirement = "0";
-        this.electiveReplaceHighestAttempt = false;
         this.electiveAllowOneLowerCourse = false;
         this.electivesAcceptedLowerCourses = null;
         this.overallGPARequirement = "0";
         this.coreClassListRequirement = null;
-        this.optionsCoreClassListRequirement = null;
+        this.optionsCoreClassListRequirement = new ArrayList<String>();
         this.electiveClassListRequirement = null;
         this.activeStatus = false;
     }
 
     //Constructor with all values to input.
     public JSONDegree(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
-            boolean coreReplaceHighestAttempt, boolean coreAllowSeventhElective, String electiveRequirementAmount,
-            String electiveGPARequirement, boolean electiveReplaceHighestAttempt, boolean electiveAllowOneLowerCourse,
+             boolean coreAllowSeventhElective, String electiveRequirementAmount,
+            String electiveGPARequirement, boolean electiveAllowOneLowerCourse,
             String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement, 
-            String[] optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
+            ArrayList<String> optionsCoreClassListRequirement, String[] electiveClassListRequirement, boolean activeStatus)
     {
        this.degreeName = degreeName;
        this.coreRequirementAmount = coreRequirementAmount;
        this.coreGPARequirement = coreGPARequirement;
-       this.coreReplaceHighestAttempt = coreReplaceHighestAttempt;
        this.coreAllowSeventhElective = coreAllowSeventhElective;
        this.electiveRequirementAmount = electiveRequirementAmount;
        this.electiveGPARequirement = electiveGPARequirement;
-       this.electiveReplaceHighestAttempt = electiveReplaceHighestAttempt;
        this.electiveAllowOneLowerCourse = electiveAllowOneLowerCourse;
        this.electivesAcceptedLowerCourses = electivesAcceptedLowerCourses;
        this.overallGPARequirement = overallGPARequirement;
@@ -70,11 +66,9 @@ public class JSONDegree
         this.degreeName = copyDegree.getDegreeName();
         this.coreRequirementAmount = copyDegree.getCoreRequirementAmount();
         this.coreGPARequirement = copyDegree.getCoreGPARequirement();
-        this.coreReplaceHighestAttempt = copyDegree.getCoreReplaceHighestAttempt();
         this.coreAllowSeventhElective = copyDegree.getCoreAllowSeventhElective();
         this.electiveRequirementAmount = copyDegree.getElectiveRequirementAmount();
         this.electiveGPARequirement = copyDegree.getElectiveGPARequirement();
-        this.electiveReplaceHighestAttempt = copyDegree.getElectiveReplaceHighestAttempt();
         this.electiveAllowOneLowerCourse = copyDegree.getElectiveAllowOneLowerCourse();
         this.electivesAcceptedLowerCourses = copyDegree.getElectivesAcceptedLowerCourses();
         this.overallGPARequirement = copyDegree.getOverallGPARequirement();
@@ -117,17 +111,6 @@ public class JSONDegree
         this.coreGPARequirement = coreGPARequirement;
     }
 
-    //getCoreReplaceHighestAttempt - Returns if the core classes can be replaced with higher attempts.
-    public boolean getCoreReplaceHighestAttempt()
-    {
-        return coreReplaceHighestAttempt;
-    }
-    //setCoreReplaceHighestAttempt - Sets if the core classes can be replaced with higher attempts.
-    public void setCoreReplaceHighestAttempt(boolean coreReplaceHighestAttempt)
-    {
-        this.coreReplaceHighestAttempt = coreReplaceHighestAttempt;
-    }
-
     //getCoreAllowSeventhElective - Returns if the core gpa requirement can be bypassed with a 7th elective.
     public boolean getCoreAllowSeventhElective()
     {
@@ -161,17 +144,6 @@ public class JSONDegree
         this.electiveGPARequirement = electiveGPARequirement;
     }
     
-    //getElectiveReplaceHighestAttempt - Returns if the elective classes can be replaced with higher attempts.
-    public boolean getElectiveReplaceHighestAttempt()
-    {
-        return electiveReplaceHighestAttempt;
-    }
-    //setElectiveReplaceHighestAttempt - Sets if the elective classes can be replaced with higher attempts.
-    public void setElectiveReplaceHighestAttempt(boolean electiveReplaceHighestAttempt)
-    {
-        this.electiveReplaceHighestAttempt = electiveReplaceHighestAttempt;
-    }
-    
     //getElectiveAllowOneLowerCourse - Returns if it is allowed to have a lower level elective count towards a completed course and gpa.
     public boolean getElectiveAllowOneLowerCourse()
     {
@@ -186,6 +158,9 @@ public class JSONDegree
     //getElectivesAcceptedLowerCourses - Returns a list of approved lower level coursees for electives.
     public String[] getElectivesAcceptedLowerCourses()
     {
+        if (electivesAcceptedLowerCourses.length == 0) {
+            return new String[0];
+        }
         return electivesAcceptedLowerCourses;
     }
     //setElectivesAcceptedLowerCourses - Sets a list of approved lower level coursees for electives.
@@ -208,6 +183,9 @@ public class JSONDegree
     //getCoreClassListRequirement - Returns the class list of required core classes.
     public String[] getCoreClassListRequirement()
     {
+        if (coreClassListRequirement.length == 0) {
+            return new String[0];
+        }
         return coreClassListRequirement;
     }
     //setCoreClassListRequirement - Sets the class list of required core classes.
@@ -218,13 +196,13 @@ public class JSONDegree
 
     //getOptionsCoreClassListRequirement - Returns the class list of core classes that can be used to satisfy the required amount
     //      past the cores required to take.
-    public String[] getOptionsCoreClassListRequirement()
+    public ArrayList<String> getOptionsCoreClassListRequirement()
     {
         return optionsCoreClassListRequirement;
     }
     //setOptionsCoreClassListRequirement - Sets the class list of core classes that can be used to satisfy the required amount
     //      past the cores required to take.
-    public void setOptionsCoreClassListRequirement(String[] optionsCoreClassListRequirement)
+    public void setOptionsCoreClassListRequirement(ArrayList<String> optionsCoreClassListRequirement)
     {
         this.optionsCoreClassListRequirement = optionsCoreClassListRequirement;
     }
@@ -232,6 +210,9 @@ public class JSONDegree
     //getElectiveClassListRequirement - Returns the class list of required elective classes.
     public String[] getElectiveClassListRequirement()
     {
+        if (electiveClassListRequirement.length == 0) {
+            return new String[0];
+        }
         return electiveClassListRequirement;
     }
     //setElectiveClassListRequirement - Sets the class list of required elective classes.
@@ -261,11 +242,9 @@ public class JSONDegree
         returnString += "\nDegree Track: " + getDegreeName()
             + "\nRequired Core Classes: " + getCoreRequirementAmount()
             + "\nRequired Core GPA: " + getCoreGPARequirement()
-            + "\nHighest Core Retake Replaced: " + getCoreReplaceHighestAttempt()
             + "\nAllow 7th Elective if Core GPA >=3.0 but <3.19: " + getCoreAllowSeventhElective()
             + "\nRequired Elective Classes: " + getElectiveRequirementAmount()
             + "\nRequired Elective GPA:  " + getElectiveGPARequirement()
-            + "\nHighest Elective Retake Replaced:  " + getElectiveReplaceHighestAttempt()
             + "\nAllow One 5xxx Elective Course: " + getElectiveAllowOneLowerCourse()
             + "\nApproved Lower Level Courses: ";
 
@@ -298,9 +277,9 @@ public class JSONDegree
         returnString += "\nOptional Core List: ";
         if(getOptionsCoreClassListRequirement() != null)
         {
-            for(int j = 0; j < getOptionsCoreClassListRequirement().length; j++)
+            for(int j = 0; j < getOptionsCoreClassListRequirement().size(); j++)
             {
-                returnString += "\n  " + getOptionsCoreClassListRequirement()[j];
+                returnString += "\n  " + getOptionsCoreClassListRequirement().get(j);
             }
         }
         else

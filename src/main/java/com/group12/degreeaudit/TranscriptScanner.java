@@ -33,8 +33,11 @@ public class TranscriptScanner {
             String studentID = grabStudentID();
             String program = grabProgram();
             String semesterAdmitted = grabSemesterAdmitted();
+            //Resetting the scanner here to account for transfer students
+            scan.close();
+            scan = new Scanner(transcriptFile);
             List<Course> studentCourses = grabStudentCourses();
-            
+
             return new Student(studentName, studentID, program, semesterAdmitted, studentCourses);
         } catch (Exception e) {
             System.out.println("EXCEPTION ERROR! " + e);
@@ -78,7 +81,7 @@ public class TranscriptScanner {
     private String grabProgram() throws IOException {
         while(scan.hasNext()) {
             String line = scan.nextLine();
-            if(line.startsWith("Program:"))
+            if(line.startsWith("Program: Master"))
                 return line.substring(line.indexOf(":")+2);
         }
         return "";
@@ -119,28 +122,136 @@ public class TranscriptScanner {
      */
     private List<Course> grabStudentCourses() {
         List<Course> studentCourses = new ArrayList<>();
-
-        while(scan.nextLine().equals("Beginning of Graduate Record")) {}
+        boolean isTransfered = true;
+        boolean locatedCourses = false;
         String semester = "";
         while(scan.hasNextLine()) {
             String line = scan.nextLine();
-            if(line.startsWith("20")) {
-                semester = line;
-            }
-            if(line.startsWith("CS ") || line.startsWith("SE ")) {
-                String[] lineAsSplit = line.split(" ");
-                String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
-                String grade = "";
-                if(lineAsSplit[lineAsSplit.length-2].charAt(0) != '0')
-                    grade = lineAsSplit[lineAsSplit.length-2];
-                String courseTitle = "";
-                for(int i = 2; i < lineAsSplit.length-4; i++) {
-                    courseTitle += lineAsSplit[i] + " ";
+            if (locatedCourses) {
+                if(line.startsWith("20")) {
+                    semester = line;
                 }
-                courseTitle = courseTitle.trim();
-                Course course = new Course(courseNumber, semester, grade, courseTitle, false);
-                course.setClassType(getCourseType(course));
-                studentCourses.add(course);
+                if(line.startsWith("CS ") || 
+                    line.startsWith("SE ") ||
+                    line.startsWith("ACCT ") ||
+                    line.startsWith("ACN ") ||
+                    line.startsWith("ACTS ") ||
+                    line.startsWith("AHST ") ||
+                    line.startsWith("ARHM ") ||
+                    line.startsWith("ATCM ") ||
+                    line.startsWith("AUD ") ||
+                    line.startsWith("BIOL ") ||
+                    line.startsWith("BMEN ") ||
+                    line.startsWith("BPS ") ||
+                    line.startsWith("BUAN ") ||
+                    line.startsWith("CE ") ||
+                    line.startsWith("CHEM ") ||
+                    line.startsWith("COMD ") ||
+                    line.startsWith("CRIM ") ||
+                    line.startsWith("ECON ") ||
+                    line.startsWith("ECSC ") ||
+                    line.startsWith("ED ") ||
+                    line.startsWith("EEBM ") ||
+                    line.startsWith("EECS ") ||
+                    line.startsWith("EECT ") ||
+                    line.startsWith("EEDG ") ||
+                    line.startsWith("EEGR ") ||
+                    line.startsWith("EEMF ") ||
+                    line.startsWith("EEOP ") ||
+                    line.startsWith("EEPE ") ||
+                    line.startsWith("EERF ") ||
+                    line.startsWith("EESC ") ||
+                    line.startsWith("ENGY ") ||
+                    line.startsWith("ENTP ") ||
+                    line.startsWith("EPPS ") ||
+                    line.startsWith("FIN ") ||
+                    line.startsWith("FTEC ") ||
+                    line.startsWith("GEOS ") ||
+                    line.startsWith("GISC ") ||
+                    line.startsWith("HCS ") ||
+                    line.startsWith("HDCD ") ||
+                    line.startsWith("HIST ") ||
+                    line.startsWith("HMGT ") ||
+                    line.startsWith("HUAS ") ||
+                    line.startsWith("HUHI ") ||
+                    line.startsWith("HUMA ") ||
+                    line.startsWith("IDEA ") ||
+                    line.startsWith("IMS ") ||
+                    line.startsWith("IPEC ") ||
+                    line.startsWith("LATS ") ||
+                    line.startsWith("LIT ") ||
+                    line.startsWith("MAIS ") ||
+                    line.startsWith("MAS ") ||
+                    line.startsWith("MATH ") ||
+                    line.startsWith("MECH ") ||
+                    line.startsWith("MECO ") ||
+                    line.startsWith("MIS ") ||
+                    line.startsWith("MKT ") ||
+                    line.startsWith("MSEN ") ||
+                    line.startsWith("MTHE ") ||
+                    line.startsWith("OB ") ||
+                    line.startsWith("OPRE ") ||
+                    line.startsWith("PA ") ||
+                    line.startsWith("PHIL ") ||
+                    line.startsWith("PHYS ") ||
+                    line.startsWith("PPPE ") ||
+                    line.startsWith("PSCI ") ||
+                    line.startsWith("PSYC ") ||
+                    line.startsWith("SCI ") ||
+                    line.startsWith("SE ") ||
+                    line.startsWith("SMED ") ||
+                    line.startsWith("SOC ") ||
+                    line.startsWith("STAT ") ||
+                    line.startsWith("SYSE ") ||
+                    line.startsWith("SYSM ") ||
+                    line.startsWith("TE ") ||
+                    line.startsWith("VPAS ")) 
+                {
+                    String[] lineAsSplit = line.split(" ");
+                    String courseNumber = lineAsSplit[0] + " " + lineAsSplit[1];
+                    String grade = "";
+                    String creditHours = "";
+                    if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                    {
+                        creditHours = lineAsSplit[lineAsSplit.length-3];
+                    }
+
+                    if(lineAsSplit[lineAsSplit.length-2].charAt(0) != '0') {
+                        grade = lineAsSplit[lineAsSplit.length-2];
+
+                        if(lineAsSplit[1].charAt(1) == 'V' || lineAsSplit[1].charAt(1) == 'v')
+                        {
+                            creditHours = lineAsSplit[lineAsSplit.length-4];
+                        }
+
+                    }
+
+                    String courseTitle = "";
+
+                    for(int i = 2; i < lineAsSplit.length-4; i++) 
+                    {
+                        courseTitle += lineAsSplit[i] + " ";
+                    }
+
+                    courseTitle = courseTitle.trim();
+
+                    Course course;
+                    if(creditHours.equals(""))
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered);
+                    }
+                    else
+                    {
+                        course = new Course(courseNumber, semester, grade, courseTitle, isTransfered, Double.parseDouble(creditHours));
+                    }
+                    course.setClassType(getCourseType(course));
+                    studentCourses.add(course);
+                }
+            } else {
+                locatedCourses = line.equals("Beginning of Graduate Record") || line.equals("Applied Toward Master Program");
+            }
+            if (line.equals("Beginning of Graduate Record")) {
+                isTransfered = false;
             }
         }
         return studentCourses;
