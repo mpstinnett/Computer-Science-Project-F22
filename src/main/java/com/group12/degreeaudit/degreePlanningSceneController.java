@@ -308,7 +308,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(admission_prereq_add_dropdown, admission_add_semester, admission_add_waiver, admission_add_grade);
+        clearFields(admission_prereq_add_dropdown, admission_add_all, admission_add_semester, admission_add_waiver, admission_add_grade);
 
     }
 
@@ -353,7 +353,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(req_core_add_dropdown, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
+        clearFields(req_core_add_dropdown, req_core_add_all, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
 
     }
 
@@ -400,7 +400,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(core_options_add_dropdown, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
+        clearFields(core_options_add_dropdown, core_options_add_all, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
 
     }
 
@@ -446,7 +446,7 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(electives_add_dropdown, electives_add_semester, electives_add_transfer, electives_add_grade);
+        clearFields(electives_add_dropdown, electives_add_all, electives_add_semester, electives_add_transfer, electives_add_grade);
 
     }
 
@@ -493,13 +493,15 @@ public class degreePlanningSceneController implements Initializable{
         course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, student);
 
         // Clear all fields for this section
-        clearFields(addl_electives_add_dropdown, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
+        clearFields(addl_electives_add_dropdown, addl_electives_add_all, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
 
     }
 
 
-    private void clearFields(ComboBox<String> dropdown, TextField semester, CheckBox transfer, ComboBox<String> grade) {        
+    private void clearFields(ComboBox<String> dropdown, CheckBox getAllCourses, TextField semester, CheckBox transfer, ComboBox<String> grade) {        
         dropdown.getSelectionModel().clearSelection();
+        getAllCourses.setSelected(false);
+        getAllCourses.fireEvent(new ActionEvent());
         semester.clear();
         transfer.setSelected(false);
         grade.getSelectionModel().clearSelection();
