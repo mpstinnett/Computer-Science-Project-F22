@@ -17,12 +17,18 @@ import com.itextpdf.forms.fields.PdfFormField;
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.AreaBreak;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.TextAlignment;
 
 public class Report {
@@ -407,16 +413,56 @@ public class Report {
             }
             //Approved 6000 Level Electives
             int electiveCount = 0;
-            for(Course course : coursesTaken) {
-                if(electiveCount >= electiveFieldKeys.length)
-                    break;
-                if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
-                    fields.get(electiveFieldKeys[electiveCount][0]).setValue(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
-                    fields.get(electiveFieldKeys[electiveCount][1]).setValue(course.getCourseNumber());
-                    fields.get(electiveFieldKeys[electiveCount][2]).setValue(course.getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
-                    fields.get(electiveFieldKeys[electiveCount][3]).setValue(course.getTransfer()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
-                    fields.get(electiveFieldKeys[electiveCount][4]).setValue(course.getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
-                    electiveCount++;
+            boolean needSecondPage = true;
+            Table table = null;
+            for(int i = 0; i < coursesTaken.size(); i++) {
+                Course course = coursesTaken.get(i);
+                if(electiveCount < electiveFieldKeys.length) {
+                    //First Page of Degree Plan for Electives
+                    if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
+                        fields.get(electiveFieldKeys[electiveCount][0]).setValue(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
+                        fields.get(electiveFieldKeys[electiveCount][1]).setValue(course.getCourseNumber());
+                        fields.get(electiveFieldKeys[electiveCount][2]).setValue(course.getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
+                        fields.get(electiveFieldKeys[electiveCount][3]).setValue(course.getTransfer()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
+                        fields.get(electiveFieldKeys[electiveCount][4]).setValue(course.getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
+                        electiveCount++;
+                    }
+                } else {
+                    //Adding a second page for extra electives
+                    if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
+                        if(needSecondPage) {
+                            PageSize ps = new PageSize(pdfDoc.getFirstPage().getPageSize());
+                            pdfDoc.addNewPage(ps);
+                            float[] columnWidths = {50F, 300F, 125F, 125F, 125F, 125F};
+                            table = new Table(columnWidths);
+                            needSecondPage = false;
+                        }
+                        Cell courseCountCell = new Cell();
+                        courseCountCell.add("" + (electiveCount+1));
+                        table.addCell(courseCountCell);
+
+                        Cell courseNameCell = new Cell();
+                        courseNameCell.add(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
+                        table.addCell(courseNameCell);
+
+                        Cell courseNumberCell = new Cell();
+                        courseNumberCell.add(course.getCourseNumber());
+                        table.addCell(courseNumberCell);
+
+                        Cell courseSemesterCell = new Cell();
+                        courseSemesterCell.add(course.getSemester());
+                        table.addCell(courseSemesterCell);
+
+                        Cell courseTransferCell = new Cell();
+                        courseTransferCell.add(course.getTransfer()? "T":"");
+                        table.addCell(courseTransferCell);
+
+                        Cell courseGradeCell = new Cell();
+                        courseGradeCell.add(course.getGrade());
+                        table.addCell(courseGradeCell);
+
+                        electiveCount++;
+                    }
                 }
             }
             
@@ -428,6 +474,12 @@ public class Report {
                 }
             }
             Document document = new Document(pdfDoc);
+            if(!needSecondPage) {
+                document.add(new AreaBreak());
+                Paragraph para = new Paragraph("Additional Electives (3 Credit Hours Minimum)").setTextAlignment(TextAlignment.CENTER);
+                document.add(para);
+                document.add(table);
+            }
             document.close();
             pdfReader.close();
         } catch (IOException e) {
