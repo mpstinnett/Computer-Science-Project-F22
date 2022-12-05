@@ -35,15 +35,39 @@ public class Student {
         setHasThesis();
     }
 
+    /**
+    * Description: Gets the name of the Student
+    * @param None
+    * @return String - name
+    * @throws None
+    */
     public String getName() {
         return name;
     }
+    /**
+    * Description: Sets the name of the Student
+    * @param String - name
+    * @return None
+    * @throws None
+    */
     public void setName(String name) {
         this.name = name;
     }
+    /**
+    * Description: Gets the id of the Student
+    * @param None
+    * @return String - ID
+    * @throws None
+    */
     public String getID() {
         return ID;
     }
+    /**
+    * Description: Sets the id of the Student
+    * @param None
+    * @return String - ID
+    * @throws None
+    */
     public void setID(String ID) {
         this.ID = ID;
     }
