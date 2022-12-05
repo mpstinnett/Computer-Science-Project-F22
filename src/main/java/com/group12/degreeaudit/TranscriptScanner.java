@@ -33,6 +33,7 @@ public class TranscriptScanner {
             String studentID = grabStudentID();
             String program = grabProgram();
             String semesterAdmitted = grabSemesterAdmitted();
+            //Resetting the scanner here to account for transfer students
             scan.close();
             scan = new Scanner(transcriptFile);
             List<Course> studentCourses = grabStudentCourses();
