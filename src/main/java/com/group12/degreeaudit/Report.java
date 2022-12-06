@@ -19,7 +19,6 @@ import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -28,21 +27,16 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
-import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.TextAlignment;
 
 /**
- * Class to generate reports (audit report and degree plan)
- * 
+ * Description: Class to generate reports (audit report and degree plan)
  * @author Anhy Luu
  */
 public class Report {
     /**
-     * Generates an audit report pdf given some student information.
-     * 
+     * Description: Generates an audit report pdf given some student information.
      * @param audit as String - contains student information such as name, ID, GPA, etc., studentID as String - the student's ID number, auditFile as File - the file to write to
-     * @return None
-     * @throws FileNotFoundException - if file path does not exist, IOException - if accessing information does not work
      */
     public static void createAuditReport(String audit, String studentID, File auditFile) {
         try {
@@ -111,10 +105,7 @@ public class Report {
 
     /**
      * Generates a pdf of a given degree plan with the corresponding key values filled in for each field.
-     * 
      * @param degreeName as string - name of the degree track, degreePlanFilePath as string - file path to the degree plan
-     * @return None
-     * @throws FileNotFoundException - if file path does not exist, IOException - if accessing information does not work
      */
     public static void getKeysPDF(String degreeName, String degreePlanFilePath) {
         String outputFilePath = "resources\\degreePlanBlueprints\\" + degreeName + "_Keys.pdf";
@@ -140,11 +131,8 @@ public class Report {
     }
 
     /**
-     * Creates the degree plan pdf given a student. Has a lot of cases for each degree plan.
-     * 
+     * Description: Creates the degree plan pdf given a student. Has a lot of cases for each degree plan.
      * @param student as String - the student, degreePlanFile as File - the file to write to.
-     * @return None
-     * @throws None
      */
     public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
@@ -419,8 +407,7 @@ public class Report {
     }
 
     /**
-     * Generates the degree plan pdf after getting values from Report.createDegreePlan
-     * 
+     * Description: Generates the degree plan pdf after getting values from Report.createDegreePlan
      * @param student as student - the student
      * @param DEGREE_PLAN_BLUEPRINT_FILE_NAME as String - the file path to the degree plan
      * @param studentInformationFieldKeys as String array - the field keys for student information
@@ -430,8 +417,6 @@ public class Report {
      * @param admissionPrereqClassNumbers as String array - the admission prerequisite class numbers in the degree plan
      * @param admissionPrereqFieldKeys as String 2D array - the field keys for admission prerequisite courses
      * @param degreePlanFile as File - the file to write to
-     * @return None
-     * @throws IOException - if accessing information does not work
      */
     private static void getDegreePlan(Student student, String DEGREE_PLAN_BLUEPRINT_FILE_NAME, 
             String[] studentInformationFieldKeys, 
@@ -442,7 +427,8 @@ public class Report {
             String[][] admissionPrereqFieldKeys,
             File degreePlanFile) {
 
-        String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
+        String dest = degreePlanFile.getPath();
+        
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
