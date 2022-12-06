@@ -1,9 +1,5 @@
 package com.group12.degreeaudit;
 
-import com.group12.degreeaudit.Administration.CourseList;
-
-import java.util.Collections;
-
 public class Course implements Comparable<Course> {
     private String courseNumber;
     private String semester;
@@ -34,6 +30,17 @@ public class Course implements Comparable<Course> {
         this.courseTitle = courseTitle;
         this.transfer = transfer;
         this.creditHours = creditHours;
+        updateGradePoints();
+    }
+
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer, double creditHours, char classType) {
+        this.courseNumber = courseNumber;
+        this.semester = semester;
+        this.grade = grade;
+        this.courseTitle = courseTitle;
+        this.transfer = transfer;
+        this.creditHours = creditHours;
+        this.classType = classType;
         updateGradePoints();
     }
 
@@ -149,7 +156,7 @@ public class Course implements Comparable<Course> {
     {
         if(creditHours == 0)
         {
-            return getCourseNumber().split(" ")[1].charAt(1);
+            return Double.parseDouble(Character.toString(getCourseNumber().split(" ")[1].charAt(1)));
             //return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
         }
         return creditHours;

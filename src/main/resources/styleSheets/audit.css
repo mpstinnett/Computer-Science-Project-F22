@@ -1,7 +1,7 @@
 .return-to-menu-btn{
     -fx-background-color: #FFF;
     background-color: #FFF;
-    -fx-text-fill: #F68A00;
+    -fx-text-fill: #154734;
     -fx-background-radius: 5;
     -fx-font-weight: bold;
     font-weight: bold;
@@ -9,6 +9,11 @@
     font-size: 11px;
 }
 .return-to-menu-btn:hover{
+    -fx-font-size: 11px;
+    font-size: 11px;
+}
+
+.return-to-menu-btn:selected{
     -fx-font-size: 11px;
     font-size: 11px;
 }

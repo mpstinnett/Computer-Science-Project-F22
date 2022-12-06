@@ -8,6 +8,11 @@ import javafx.stage.Stage;
 
 public class degreePlanningGUI extends Application {
 
+    /**
+    * Description: start - Main entry point for degree planning GUI
+    * @param primaryStage Which JavaFX Scene we want to run
+    * @exception Exception if the degree planning scene cannot be loaded
+    */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/degreePlanningScene.fxml"));

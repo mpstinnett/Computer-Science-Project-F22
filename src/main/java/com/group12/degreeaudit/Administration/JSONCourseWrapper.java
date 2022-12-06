@@ -2,8 +2,6 @@ package com.group12.degreeaudit.Administration;
 
 import java.util.Collections;
 
-import com.group12.degreeaudit.CourseSample;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,16 +14,32 @@ public class JSONCourseWrapper
     private JSONCourse jsonCourse;
     private Button button;
 
+    /**
+    * Description: JSONCourseWrapper Constructor
+    */
     public JSONCourseWrapper() 
     {
         jsonCourse = new JSONCourse();
     }
 
+    /**
+    * Description: JSONCourseWrapper Constructor
+    * @param courseNumber as String
+    * @param courseName as String
+    * @param courseDescription as String
+    * @param prereqs as String array of course numbers
+    * @param classType as char 'A' for admissions, 'E' for elective, or 'C' for core
+    * @param activeStatus as boolean
+    */
     public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         jsonCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
     }
 
+    /**
+    * Description: JSONCourseWrapper Constructor - Created when adding a course to a table in administration GUI
+    * @param courseNumber as String
+    */
     public JSONCourseWrapper(String courseNumber)
     {
         jsonCourse = new JSONCourse(courseNumber);
@@ -36,6 +50,13 @@ public class JSONCourseWrapper
         
     }
 
+    /**
+    * Description: removeTableCourse - called whenever the "X" button on a course in a table is pressed
+    * @param tblView current table the course is in
+    * @param course course to be removed
+    * @param dropdown dropdown that the course will be added to after removal from table
+    * @param prereq String for the class number (used for dropdown)
+    */
     public void removeTableCourse(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
 
@@ -55,17 +76,32 @@ public class JSONCourseWrapper
         });
     }
 
+    /**
+    * Description: getJsonCourse - getter for a course
+    */
     public JSONCourse getJsonCourse() {
         return jsonCourse;
     }
+
+    /**
+    * Description: setJsonCourse - setter for course
+    * @param jsonCourse course that is being wrapped
+    */
     public void setJsonCourse(JSONCourse jsonCourse) {
         this.jsonCourse = jsonCourse;
     }
 
+    /**
+    * Description: setButton - setter for "X" button
+    * @param button for "X"
+    */
     public void setButton(Button button){
         this.button = button;
     }
 
+    /**
+    * Description: getButton - getter for "X" button
+    */
     public Button getButton(){
         return button;
     }
