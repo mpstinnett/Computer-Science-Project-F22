@@ -16,7 +16,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <javafx.version>19</javafx.version>
     <javafx.plugin.version>0.0.8</javafx.plugin.version>
-    <main.class>com.group12.degreeaudit.DegreeAuditTest</main.class>
+    <main.class>com.group12.degreeaudit.DegreeAuditMain</main.class>
   </properties>
 
   <dependencies>

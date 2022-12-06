@@ -19,7 +19,6 @@ public class JSONCourseWrapper
     /**
     * Description: JSONCourseWrapper Constructor
     * @return None
-    * @throws Nothing is implemented
     */
     public JSONCourseWrapper() 
     {
