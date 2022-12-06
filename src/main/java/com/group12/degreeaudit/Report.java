@@ -19,6 +19,7 @@ import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -27,9 +28,22 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.property.AreaBreakType;
 import com.itextpdf.layout.property.TextAlignment;
 
+/**
+ * Class to generate reports (audit report and degree plan)
+ * 
+ * @author Anhy Luu
+ */
 public class Report {
+    /**
+     * Generates an audit report pdf given some student information.
+     * 
+     * @param audit as String - contains student information such as name, ID, GPA, etc., studentID as String - the student's ID number, auditFile as File - the file to write to
+     * @return None
+     * @throws FileNotFoundException - if file path does not exist, IOException - if accessing information does not work
+     */
     public static void createAuditReport(String audit, String studentID, File auditFile) {
         try {
             Scanner scan = new Scanner(audit);
@@ -95,6 +109,13 @@ public class Report {
 
     }
 
+    /**
+     * Generates a pdf of a given degree plan with the corresponding key values filled in for each field.
+     * 
+     * @param degreeName as string - name of the degree track, degreePlanFilePath as string - file path to the degree plan
+     * @return None
+     * @throws FileNotFoundException - if file path does not exist, IOException - if accessing information does not work
+     */
     public static void getKeysPDF(String degreeName, String degreePlanFilePath) {
         String outputFilePath = "resources\\degreePlanBlueprints\\" + degreeName + "_Keys.pdf";
         try {
@@ -118,6 +139,13 @@ public class Report {
         }
     }
 
+    /**
+     * Creates the degree plan pdf given a student. Has a lot of cases for each degree plan.
+     * 
+     * @param student as String - the student, degreePlanFile as File - the file to write to.
+     * @return None
+     * @throws None
+     */
     public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String DEGREE_PLAN_BLUEPRINT_FILE_NAME;
@@ -389,6 +417,22 @@ public class Report {
         }
         getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys, degreePlanFile);
     }
+
+    /**
+     * Generates the degree plan pdf after getting values from Report.createDegreePlan
+     * 
+     * @param student as student - the student
+     * @param DEGREE_PLAN_BLUEPRINT_FILE_NAME as String - the file path to the degree plan
+     * @param studentInformationFieldKeys as String array - the field keys for student information
+     * @param coreClassNumbers as String array - the core class numbers in the degree plan
+     * @param coreFieldKeys as String 2D array - the field keys for core classes
+     * @param electiveFieldKeys as String 2D array - the field keys for elective courses
+     * @param admissionPrereqClassNumbers as String array - the admission prerequisite class numbers in the degree plan
+     * @param admissionPrereqFieldKeys as String 2D array - the field keys for admission prerequisite courses
+     * @param degreePlanFile as File - the file to write to
+     * @return None
+     * @throws IOException - if accessing information does not work
+     */
     private static void getDegreePlan(Student student, String DEGREE_PLAN_BLUEPRINT_FILE_NAME, 
             String[] studentInformationFieldKeys, 
             String[] coreClassNumbers, 
@@ -398,7 +442,7 @@ public class Report {
             String[][] admissionPrereqFieldKeys,
             File degreePlanFile) {
 
-        String dest = degreePlanFile.getPath();
+        String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
@@ -459,6 +503,7 @@ public class Report {
                             table = new Table(columnWidths);
                             needSecondPage = false;
                         }
+                        //Cells for the table
                         Cell courseCountCell = new Cell();
                         courseCountCell.add("" + (electiveCount+1));
                         table.addCell(courseCountCell);
