@@ -96,6 +96,30 @@ public class Report {
         }
 
     }
+
+    public static void getKeysPDF(String degreeName, String degreePlanFilePath) {
+        String outputFilePath = "resources\\degreePlanBlueprints\\" + degreeName + "_Keys.pdf";
+        try {
+            PdfReader pdfReader = new PdfReader(new FileInputStream(degreePlanFilePath));
+            PdfDocument pdfDoc = new PdfDocument(
+                pdfReader, new PdfWriter(new FileOutputStream(outputFilePath)));
+
+            PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
+            Map<String, PdfFormField> fields = form.getFormFields();
+            for(String key : fields.keySet()) {
+                fields.get(key).setValue(key);
+            }
+            Document document = new Document(pdfDoc);
+            document.close();
+            pdfDoc.close();
+            pdfReader.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("File not found.");
+        } catch(IOException e) {
+            System.out.println("IOException found.");
+        }
+    }
+
     public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String DEGREE_PLAN_BLUEPRINT_FILE_NAME;
