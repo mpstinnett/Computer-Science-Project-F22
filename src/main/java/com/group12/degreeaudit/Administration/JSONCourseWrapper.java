@@ -18,7 +18,6 @@ public class JSONCourseWrapper
 
     /**
     * Description: JSONCourseWrapper Constructor
-    * @return None
     */
     public JSONCourseWrapper() 
     {
@@ -33,8 +32,6 @@ public class JSONCourseWrapper
     * @param prereqs as String array of course numbers
     * @param classType as char 'A' for admissions, 'E' for elective, or 'C' for core
     * @param activeStatus as boolean
-    * @return None
-    * @throws Nothing is implemented
     */
     public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
@@ -44,8 +41,6 @@ public class JSONCourseWrapper
     /**
     * Description: JSONCourseWrapper Constructor - Created when adding a course to a table in administration GUI
     * @param courseNumber as String
-    * @return None
-    * @throws Nothing is implemented
     */
     public JSONCourseWrapper(String courseNumber)
     {
@@ -63,8 +58,6 @@ public class JSONCourseWrapper
     * @param course course to be removed
     * @param dropdown dropdown that the course will be added to after removal from table
     * @param prereq String for the class number (used for dropdown)
-    * @return None
-    * @throws Nothing is implemented
     */
     public void removeTableCourse(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
@@ -87,8 +80,6 @@ public class JSONCourseWrapper
 
     /**
     * Description: getJsonCourse - getter for a course
-    * @return None
-    * @throws Nothing is implemented
     */
     public JSONCourse getJsonCourse() {
         return jsonCourse;
@@ -97,8 +88,6 @@ public class JSONCourseWrapper
     /**
     * Description: setJsonCourse - setter for course
     * @params jsonCourse course that is being wrapped
-    * @return None
-    * @throws Nothing is implemented
     */
     public void setJsonCourse(JSONCourse jsonCourse) {
         this.jsonCourse = jsonCourse;
@@ -107,8 +96,6 @@ public class JSONCourseWrapper
     /**
     * Description: setButton - setter for "X" button
     * @params button for "X"
-    * @return None
-    * @throws Nothing is implemented
     */
     public void setButton(Button button){
         this.button = button;
@@ -116,8 +103,6 @@ public class JSONCourseWrapper
 
     /**
     * Description: getButton - getter for "X" button
-    * @return None
-    * @throws Nothing is implemented
     */
     public Button getButton(){
         return button;
