@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -75,11 +76,31 @@ public void importStudent(ActionEvent event) {
 */
 @FXML
 public void exportPDF(ActionEvent event) {
-    CourseList courseList = new CourseList("resources/CourseList.json");
-    DegreeList degreeList = new DegreeList("resources/DegreeList.json");
-    FileActions exportAudit = new FileActions(courseList, degreeList);
-    DegreeAudit audit = new DegreeAudit(student, courseList);
-    exportAudit.exportAuditPDF(student, audit);
+    if(student == null){
+        errorAlert("Please import student before exporting pdf.");
+    }
+    else{
+        CourseList courseList = new CourseList("resources/CourseList.json");
+        DegreeList degreeList = new DegreeList("resources/DegreeList.json");
+        FileActions exportAudit = new FileActions(courseList, degreeList);
+        DegreeAudit audit = new DegreeAudit(student, courseList);
+        exportAudit.exportAuditPDF(student, audit);
+    }
+}
+
+/**
+* Description: errorAlert - Displays error popup
+* @param error The specific error that occured as a String
+* @return None
+* @throws Nothing
+*/
+public void errorAlert(String error) {
+
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(null);
+    alert.setContentText(error);
+    alert.showAndWait();
+
 }
 
 @Override 
