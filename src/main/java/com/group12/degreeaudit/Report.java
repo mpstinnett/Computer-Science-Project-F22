@@ -442,7 +442,7 @@ public class Report {
             String[][] admissionPrereqFieldKeys,
             File degreePlanFile) {
 
-        String dest = "resources\\" + student.getID() + "_Degree_Plan.pdf";
+        String dest = degreePlanFile.getPath();
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
@@ -458,7 +458,7 @@ public class Report {
             }
 
             //Courses taken by student
-            List<Course> coursesTaken = student.getCoursesTaken();
+            List<Course> coursesTaken = student.getUniqueCoursesTaken(student.getCoursesTaken());
             List<String> coursesTakenAsCourseNumber = new ArrayList<>();
             for(Course course : coursesTaken) {
                 coursesTakenAsCourseNumber.add(course.getCourseNumber());
