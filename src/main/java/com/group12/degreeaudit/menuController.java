@@ -1,6 +1,4 @@
 package com.group12.degreeaudit;
-
-import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,28 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.group12.degreeaudit.Administration.CourseList;
-
-import javafx.fxml.Initializable;
 
 public class menuController {
 
     @FXML
     private Button admin_btn,degree_planner_btn, audit_btn;
-    private CourseList courseList;
 
-
-    public void initialize() {
-        // TODO
-    }
-
+    /**
+    * Description: handleButtonAction - Directs user to desired window (administration, degree planner, or audit)
+    * @param event User click
+    * @return None
+    * @throws IOException if the window cannot be loaded
+    */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {
         Stage stage;

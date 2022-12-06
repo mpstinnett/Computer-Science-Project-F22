@@ -30,6 +30,12 @@ private Button import_student_btn, export_pdf_btn, return_to_menu_btn;
 @FXML
 private TextArea audit_textarea;
 
+/**
+* Description: returnToMenu - Brings user to main menu GUI when "return to main menu" button is clicked
+* @param event User click
+* @return None
+* @throws IOException if the menu scene cannot be loaded
+*/
 @FXML
 public void returnToMenu(ActionEvent event) throws IOException 
 {
@@ -42,6 +48,12 @@ public void returnToMenu(ActionEvent event) throws IOException
     stage.show();
 }
 
+/**
+* Description: importStudent - Lets the user open up their file directory when "import student" button is clicked
+* @param event User click
+* @return None
+* @throws Nothing
+*/
 @FXML
 public void importStudent(ActionEvent event) {
     // grab student file
@@ -55,6 +67,12 @@ public void importStudent(ActionEvent event) {
     audit_textarea.setText(audit.doAudit());
 }
 
+/**
+* Description: exportPDF - Lets the user open up their file directory when "export PDF" button is clicked
+* @param event User click
+* @return None
+* @throws Nothing
+*/
 @FXML
 public void exportPDF(ActionEvent event) {
     CourseList courseList = new CourseList("resources/CourseList.json");

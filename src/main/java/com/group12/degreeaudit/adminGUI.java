@@ -7,6 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 public class adminGUI extends Application {
 
+    /**
+    * Description: start - Main entry point for Administration GUI
+    * @param primaryStage Which JavaFX Scene we want to run
+    * @return None
+    * @throws Exception if the administration scene cannot be loaded
+    */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/adminScene.fxml"));
