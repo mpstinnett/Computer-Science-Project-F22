@@ -12,12 +12,21 @@ import java.util.List;
 
 import java.io.FileWriter;
 
+/*
+ * Description: CourseList - holds all methods relating to obtaining, creating, adding, removing, updating, etc of 
+ * courses in a list. These courses are different from JSON course as they are designed for courses that have grades
+ * and semesters.
+*/
 public class CourseList
 {
     List<JSONCourse> courseList = new ArrayList<JSONCourse>();
     Gson gson = new Gson();
     File courseListFile;
 
+    /* Description: CourseList - Constructor that takes a filename for the location of the courselist json file.
+     * Sets all needed values and makes sure the file exists or creates a new one.
+     * @param fileName String for the name of the file
+    */
     public CourseList(String fileName)
     {
         courseListFile = new File(fileName);
@@ -38,35 +47,6 @@ public class CourseList
         {
             courseList = new ArrayList<JSONCourse>();
         }
-
-        // //Null Prereq
-        // AddCourseToList("CS 6313", "A", "B", null, 'C', true);
-
-        // //One satisfied prereq
-        // String[] temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 5558", "A", "B", temp, 'C', true);
-
-        // //One unsatisfied prereq
-        // temp = new String[]{"CS 6315"};
-        // AddCourseToList("CS 7384", "A", "B", temp, 'C', true);
-
-        // //One satisfied and one unsatisfied prereq
-        // temp = new String[]{"CS 6313", "CS 6315"};
-        // AddCourseToList("CS 7564", "A", "B", temp, 'C', true);
-
-        // //One satisfied but already taken prereq
-        // temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 6360", "A", "B", temp, 'C', true);
-
-        // //One inactive but satisfied prereq
-        // temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
-        
-        // System.out.println(PrintCourseList());
-
-        // if(RemoveCourse("CS 5556"))
-        //     System.out.println("Removed");
-        // System.out.println(PrintCourseList());
     }
 
     public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)

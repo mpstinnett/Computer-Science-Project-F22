@@ -2,8 +2,6 @@ package com.group12.degreeaudit.Administration;
 
 import java.util.Collections;
 
-import com.group12.degreeaudit.CourseSample;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -87,7 +85,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: setJsonCourse - setter for course
-    * @params jsonCourse course that is being wrapped
+    * @param jsonCourse course that is being wrapped
     */
     public void setJsonCourse(JSONCourse jsonCourse) {
         this.jsonCourse = jsonCourse;
@@ -95,7 +93,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: setButton - setter for "X" button
-    * @params button for "X"
+    * @param button for "X"
     */
     public void setButton(Button button){
         this.button = button;

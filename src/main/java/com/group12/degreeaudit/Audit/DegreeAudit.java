@@ -483,7 +483,6 @@ public class DegreeAudit
     * Description: Takes as input a list of course objects and calculates the gpa of that list. 
     * @param List of course objects - courses
     * @return double GPA
-    * @throws None
     */
     private double calculateGPA(List<Course> courses) {
         double gpa = 0.0;

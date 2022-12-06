@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import javax.swing.JFileChooser;
-//import javax.swing.filechooser.FileFilter;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import com.google.gson.Gson;
@@ -37,28 +35,7 @@ public class FileActions
         }
 
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("JSON Files", "*.json"));
-        // fileChooser.setFileFilter(new FileFilter() {
-        //     public String getDescription(){
-        //         return "JSON File (*.json)";
-        //     }
-
-        //     public boolean accept (File f)
-        //     {
-        //         if(f.isDirectory())
-        //         {
-        //             return true;
-        //         }
-        //         else
-        //         {
-        //             return f.getName().toLowerCase().endsWith(".json");
-        //         }
-        //     }
-        // });
         fileChooser.setInitialDirectory(dir);
-        //fileChooser.setCurrentDirectory(dir);
-
-        //File selectedFile = fileChooser.showOpenDialog(null);
-        //fileChooser.setSelectedFile(new File("settings.json"));
     }
     
 
@@ -75,8 +52,6 @@ public class FileActions
 
             fileChooser.setInitialFileName("settings.json");
             File selectedFile = fileChooser.showSaveDialog(null);
-            //fileChooser.showSaveDialog(null);
-            //fileChooser.getSelectedFile();
 
             File createFile = new File(selectedFile.toString());
             createFile.createNewFile();
@@ -98,8 +73,6 @@ public class FileActions
             List<Object> objectImport;
             fileChooser.setInitialFileName("");
             File selectedFile = fileChooser.showOpenDialog(null);
-            //fileChooser.showOpenDialog(null);
-            //fileChooser.getSelectedFile();
 
             FileReader readFile = new FileReader(selectedFile.toString());
         
@@ -143,10 +116,6 @@ public class FileActions
             fileChooser.setInitialFileName(student.getID() + ".json");
             File selectedFile = fileChooser.showSaveDialog(null);
 
-            //fileChooser.setSelectedFile(new File(student.getID() + ".json"));
-            //fileChooser.showSaveDialog(null);
-            //fileChooser.getSelectedFile();
-
             File createFile = new File(selectedFile.toString());
             createFile.createNewFile();
 
@@ -167,9 +136,6 @@ public class FileActions
         {
             fileChooser.setInitialFileName("");
             File selectedFile = fileChooser.showOpenDialog(null);
-
-            //fileChooser.showOpenDialog(null);
-            //fileChooser.getSelectedFile();
 
             FileReader readFile = new FileReader(selectedFile.toString());
             Student jsonStudent = gson.fromJson(readFile, new TypeToken<Student>(){}.getType());
@@ -199,10 +165,6 @@ public class FileActions
             fileChooser.setInitialFileName(student.getID() + "_Degree_Plan.pdf");
             File selectedFile = fileChooser.showSaveDialog(null);
 
-            //fileChooser.setSelectedFile(new File(student.getID() + "_Degree_Plan.pdf"));
-            //fileChooser.showSaveDialog(null);
-            //fileChooser.getSelectedFile();
-
             File createFile = new File(selectedFile.toString());
             if(createFile.exists())
             {
@@ -223,10 +185,6 @@ public class FileActions
         {
             fileChooser.setInitialFileName(student.getID() + "_Audit.pdf");
             File selectedFile = fileChooser.showSaveDialog(null);
-
-            //fileChooser.setSelectedFile(new File(student.getID() + "_Audit.pdf"));
-            //fileChooser.showSaveDialog(null);
-            //fileChooser.getSelectedFile();
 
             File createFile = new File(selectedFile.toString());
             Report.createAuditReport(audit.doAudit(), student.getID(), createFile);

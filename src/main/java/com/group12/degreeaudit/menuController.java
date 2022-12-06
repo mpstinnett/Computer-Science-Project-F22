@@ -17,8 +17,7 @@ public class menuController {
     /**
     * Description: handleButtonAction - Directs user to desired window (administration, degree planner, or audit)
     * @param event User click
-    * @return None
-    * @throws IOException if the window cannot be loaded
+    * @exception IOException if the window cannot be loaded
     */
     @FXML
     private void handleButtonAction(ActionEvent event) throws IOException {

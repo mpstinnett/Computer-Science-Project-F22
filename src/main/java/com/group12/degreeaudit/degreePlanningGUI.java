@@ -11,8 +11,7 @@ public class degreePlanningGUI extends Application {
     /**
     * Description: start - Main entry point for degree planning GUI
     * @param primaryStage Which JavaFX Scene we want to run
-    * @return None
-    * @throws Exception if the degree planning scene cannot be loaded
+    * @exception Exception if the degree planning scene cannot be loaded
     */
     @Override
     public void start(Stage primaryStage) throws Exception{

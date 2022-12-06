@@ -11,8 +11,7 @@ public class auditGUI extends Application {
     /**
     * Description: start - Main entry point for audit GUI
     * @param primaryStage Which JavaFX Scene we want to run
-    * @return None
-    * @throws Exception if the audit scene cannot be loaded
+    * @exception Exception if the audit scene cannot be loaded
     */
     @Override
     public void start(Stage primaryStage) throws Exception{

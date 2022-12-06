@@ -4,10 +4,8 @@ package com.group12.degreeaudit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.group12.degreeaudit.Administration.CourseList;
@@ -27,11 +25,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,7 +34,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class adminSceneController implements Initializable {
@@ -49,11 +43,10 @@ public class adminSceneController implements Initializable {
     private Button return_to_menu_btn;
 
     /**
-    * Description: returnToMenu - Brings user to main menu GUI when "return to main menu" button is clicked
-    * @param event User click
-    * @return None
-    * @throws IOException if the menu scene cannot be loaded
-    */
+      * Description: returnToMenu - Brings user to main menu GUI when "return to main menu" button is clicked
+      * @param event User click
+      * @exception IOException if the menu scene cannot be loaded
+      */
     @FXML
     public void returnToMenu(ActionEvent event) throws IOException {
         Stage stage;
@@ -72,8 +65,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: exportSettings - Lets the user open up their file directory when "export settings" button is clicked
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void exportSettings(ActionEvent event) {
@@ -86,8 +77,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: importSettings - Lets the user open up their file directory when "import settings" button is clicked
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void importSettings(ActionEvent event) {
@@ -129,8 +118,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addcPrerequisites - Adds a prerequisite course to the prerequisite table when "ADD" button is pressed in "add course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addcPrerequisites(ActionEvent event) {
@@ -164,9 +151,6 @@ public class adminSceneController implements Initializable {
 
     /**
     * Description: successAlert - Displays "Successfully Submitted!" popup when submitting 
-    * @param None
-    * @return None
-    * @throws Nothing
     */
     public void successAlert() {
 
@@ -181,8 +165,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: errorAlert - Displays error popup
     * @param error The specific error that occured as a String
-    * @return None
-    * @throws Nothing
     */
     public void errorAlert(String error) {
 
@@ -200,8 +182,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addCourseToCourseList - adds a course to course list when "ADD" button is pressed in "add course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addCourseToCourseList(ActionEvent event) {
@@ -265,8 +245,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatecGetClassInfo - Autopopulates fields in tab when a course is chosen from the dropdown in "update course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatecGetClassInfo(ActionEvent event) {
@@ -345,8 +323,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatecPrerequisites - Adds a prerequisite course to the prerequisite table when "ADD" button is pressed in "update course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatecPrerequisites(ActionEvent event) {
@@ -384,8 +360,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updateCourseInCourseList - Updates a course to course list when "UPDATE" button is pressed in "update course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void updateCourseInCourseList(ActionEvent event) {
@@ -442,8 +416,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: removeCourseInCourseList - Removes a course to course list when "REMOVE" button is pressed in "remove course" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void removeCourseInCourseList(ActionEvent event) {
@@ -487,8 +459,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addtAddCoreCourse - Adds a course to core course table when "ADD" button is pressed in "add degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addtAddCoreCourse(ActionEvent event) {
@@ -529,8 +499,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addtAddOptionalCoreCourse - Adds an optional course to optional core course table when "ADD" button is pressed in "add degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addtAddOptionalCoreCourse(ActionEvent event) {
@@ -571,8 +539,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addtAddElectiveCourse - Adds an elective to the electives table when "ADD" button is pressed in "add degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addtAddElectiveCourse(ActionEvent event) {
@@ -614,8 +580,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addtAdd5kCourse - Adds an elective to the 5XXX electives table when "ADD" button is pressed in "add degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addtAdd5kCourse(ActionEvent event) {
@@ -647,8 +611,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: addtSubmit - Adds a degree track to the degree track list when "ADD" button is pressed in bottom of "add degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void addtSubmit(ActionEvent event) {
@@ -725,8 +687,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetGetClassInfo - Autopopulates fields in tab when a course is degree track from the dropdown in "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetGetClassInfo(ActionEvent event) {
@@ -876,8 +836,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetAddCoreCourse - Adds a core course to core course table when "ADD" button is pressed in "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetAddCoreCourse(ActionEvent event) {
@@ -919,8 +877,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetAddOptionalCoreCourse - Adds an optional core course to the optional core course table when "ADD" button is pressed in "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetAddOptionalCoreCourse(ActionEvent event) {
@@ -962,8 +918,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetAddElectiveCourse - Adds an elective course to the electives table when "ADD" button is pressed in "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetAddElectiveCourse(ActionEvent event) {
@@ -1005,8 +959,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetAdd5kCourse - Adds a 5XXX elective course to the 5XXX electives table when "ADD" button is pressed in "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetAdd5kCourse(ActionEvent event) {
@@ -1038,8 +990,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: updatetSubmit - Updates a degree track in the degree track list when "UPDATE" button is pressed in bottom of "update degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void updatetSubmit(ActionEvent event) {
@@ -1116,8 +1066,6 @@ public class adminSceneController implements Initializable {
     /**
     * Description: removeDegreeTrack - Removes a degree track from the degree track list when "REMOVE" button is pressed in "remove degree track" tab
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void removeDegreeTrack(ActionEvent event) {
@@ -1140,8 +1088,6 @@ public class adminSceneController implements Initializable {
     * Description: initialize - Prepopulates dropdowns, prepopulates tables, and clears all fields when a page is submitted
     * @param url no location specified
     * @param rb no resource bundle specified
-    * @return None
-    * @throws Nothing
     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

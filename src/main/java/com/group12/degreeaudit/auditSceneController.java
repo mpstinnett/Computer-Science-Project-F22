@@ -34,8 +34,7 @@ private TextArea audit_textarea;
 /**
 * Description: returnToMenu - Brings user to main menu GUI when "return to main menu" button is clicked
 * @param event User click
-* @return None
-* @throws IOException if the menu scene cannot be loaded
+* @exception IOException if the menu scene cannot be loaded
 */
 @FXML
 public void returnToMenu(ActionEvent event) throws IOException 
@@ -52,8 +51,6 @@ public void returnToMenu(ActionEvent event) throws IOException
 /**
 * Description: importStudent - Lets the user open up their file directory when "import student" button is clicked
 * @param event User click
-* @return None
-* @throws Nothing
 */
 @FXML
 public void importStudent(ActionEvent event) {
@@ -71,8 +68,6 @@ public void importStudent(ActionEvent event) {
 /**
 * Description: exportPDF - Lets the user open up their file directory when "export PDF" button is clicked
 * @param event User click
-* @return None
-* @throws Nothing
 */
 @FXML
 public void exportPDF(ActionEvent event) {
@@ -91,8 +86,6 @@ public void exportPDF(ActionEvent event) {
 /**
 * Description: errorAlert - Displays error popup
 * @param error The specific error that occured as a String
-* @return None
-* @throws Nothing
 */
 public void errorAlert(String error) {
 

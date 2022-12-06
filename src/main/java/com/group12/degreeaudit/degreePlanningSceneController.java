@@ -44,8 +44,7 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: returnToMenu - Brings user to main menu GUI when "return to main menu" button is clicked
     * @param event User click
-    * @return None
-    * @throws IOException if the menu scene cannot be loaded
+    * @exception IOException if the menu scene cannot be loaded
     */
     @FXML
     public void returnToMenu(ActionEvent event) throws IOException 
@@ -110,8 +109,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: importStudent - Lets the user open up their file directory when "import student" button is clicked
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void importStudent(ActionEvent event){
@@ -134,8 +131,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getDegreePlanInfo - Autopopulates fields in page when a degree track is chosen from the "degree plan" dropdown
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     void getDegreePlanInfo(ActionEvent event) 
@@ -277,8 +272,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: addAdmission - Adds an admission course to the admissions prerequisites table when "ADD" button is pressed
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addAdmission(ActionEvent event){
@@ -326,8 +319,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: addReqCore - Adds a required core course to the required core course table when "ADD" button is pressed
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addReqCore(ActionEvent event){
@@ -377,8 +368,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: addOptionalCore - Adds an optional core course to the optional core course table when "ADD" button is pressed
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addOptionalCore(ActionEvent event){
@@ -427,8 +416,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: addElective - Adds an elective to the electives table when "ADD" button is pressed
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addElective(ActionEvent event){
@@ -478,8 +465,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: addAddlElective - Adds a 5XXX elective to the electives table when "ADD" button is pressed
     * @param event User click
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void addAddlElective(ActionEvent event){
@@ -534,8 +519,6 @@ public class degreePlanningSceneController implements Initializable{
     * @param semester textfield for semester
     * @param transfer selected checkbox for transfer
     * @param grade selected dropdown for grade
-    * @return None
-    * @throws Nothing
     */
     private void clearFields(ComboBox<String> dropdown, CheckBox getAllCourses, TextField semester, CheckBox transfer, ComboBox<String> grade) {        
         dropdown.getSelectionModel().clearSelection();
@@ -548,8 +531,6 @@ public class degreePlanningSceneController implements Initializable{
 
     /**
     * Description: clearAllFields - clears all fields when saving
-    * @return None
-    * @throws Nothing
     */
     public void clearAllFields()
     {
@@ -563,8 +544,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getAllCoursesAdmission - puts all courses available in the admission prerequisites dropdown
     * @param event User click on checkbox
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void getAllCoursesAdmission(ActionEvent event){
@@ -596,8 +575,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getAllCoursesReqCore - puts all courses available in the core requirements dropdown
     * @param event User click on checkbox
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void getAllCoursesReqCore(ActionEvent event){
@@ -647,8 +624,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getAllCoursesOptional - puts all courses available in the optional core courses dropdown
     * @param event User click on checkbox
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void getAllCoursesOptional(ActionEvent event){
@@ -698,8 +673,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getAllElectives - puts all courses available in the electives dropdown
     * @param event User click on checkbox
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void getAllElectives(ActionEvent event){
@@ -749,8 +722,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: getAllLowerElectives - puts all courses available in the 5XXX electives dropdown
     * @param event User click on checkbox
-    * @return None
-    * @throws Nothing
     */
     @FXML
     public void getAllLowerElectives(ActionEvent event){
@@ -797,8 +768,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: importTranscript - Lets the user open up their file directory when "import transcript" button is clicked
     * @param event User click
-    * @return None
-    * @throws Nothing
     */   
     @FXML
     private void importTranscript(ActionEvent event){
@@ -838,8 +807,7 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: exportStudentAndPDF - Lets the user open up their file directory when "save & export" button is clicked
     * @param event User click
-    * @return None
-    * @throws IOException when there is an error going back to the menu window
+    * @exception IOException when there is an error going back to the menu window
     */  
     @FXML
     private void exportStudentAndPDF(ActionEvent event) throws IOException{
@@ -881,8 +849,6 @@ public class degreePlanningSceneController implements Initializable{
     /**
     * Description: errorAlert - Displays error popup
     * @param error The specific error that occured as a String
-    * @return None
-    * @throws Nothing
     */
     public void errorAlert(String error) {
 
@@ -894,11 +860,9 @@ public class degreePlanningSceneController implements Initializable{
     }
 
     /**
-    * Description: initialize - Prepopulates dropdowns & prepopulates tables
+    * Description: initialize - Prepopulates dropdowns and prepopulates tables
     * @param url no location specified
     * @param rb no resource bundle specified
-    * @return None
-    * @throws Nothing
     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -2,8 +2,6 @@ package com.group12.degreeaudit;
 
 import java.util.Collections;
 
-import com.group12.degreeaudit.CourseSample;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,8 +22,6 @@ public class CourseWrapper
 
     /**
     * Description: CourseWrapper Constructor
-    * @return None
-    * @throws Nothing is implemented
     */
     public CourseWrapper() 
     {
@@ -34,9 +30,7 @@ public class CourseWrapper
 
     /**
     * Description: CourseWrapper Constructor
-    * @param course as Course
-    * @return None
-    * @throws Nothing is implemented
+    * @param course as Course that we are wrapping
     */
     public CourseWrapper(Course course)
     {
@@ -58,8 +52,6 @@ public class CourseWrapper
     * @param course course to be removed
     * @param dropdown dropdown that the course will be added to after removal from table
     * @param studentRemove student who needs a course to be removed from
-    * @return None
-    * @throws Nothing is implemented
     */
     public void removeCourse(final TableView tblView, final CourseWrapper course, final ComboBox dropdown, final String prereq, final Student studentRemove){
         button.setFocusTraversable(false);
@@ -84,8 +76,6 @@ public class CourseWrapper
 
     /**
     * Description: getCourse - getter for a course
-    * @return None
-    * @throws Nothing is implemented
     */
     public Course getCourse() {
         return course;
@@ -93,8 +83,6 @@ public class CourseWrapper
     
     /**
     * Description: setCourse - setter for a course
-    * @return None
-    * @throws Nothing is implemented
     */
     public void setCourse(Course course) {
         this.course = course;
@@ -102,8 +90,6 @@ public class CourseWrapper
 
     /**
     * Description: getCourseNumber - getter for a course number
-    * @return None
-    * @throws Nothing is implemented
     */
     public String getCourseNumber() {
         return courseNumber;
@@ -111,8 +97,6 @@ public class CourseWrapper
 
     /**
     * Description: getCourseTitle - getter for a course title
-    * @return None
-    * @throws Nothing is implemented
     */
     public String getCourseTitle() {
         return courseTitle;
@@ -120,8 +104,6 @@ public class CourseWrapper
 
     /**
     * Description: getSemester - getter for the semester a course was taken in
-    * @return None
-    * @throws Nothing is implemented
     */
     public String getSemester() {
         return semester;
@@ -129,8 +111,6 @@ public class CourseWrapper
 
     /**
     * Description: getTransfer - getter for a course's transfer info
-    * @return None
-    * @throws Nothing is implemented
     */
     public boolean getTransfer() {
         return transfer;
@@ -138,8 +118,6 @@ public class CourseWrapper
 
     /**
     * Description: getGrade - getter for a grade in course
-    * @return None
-    * @throws Nothing is implemented
     */
     public String getGrade() {
         return grade;
@@ -147,9 +125,7 @@ public class CourseWrapper
 
     /**
     * Description: setButton - setter for "X" button
-    * @params button for "X"
-    * @return None
-    * @throws Nothing is implemented
+    * @param button for "X"
     */
     public void setButton(Button button){
         this.button = button;
@@ -157,8 +133,6 @@ public class CourseWrapper
 
     /**
     * Description: getButton - getter for "X" button
-    * @return None
-    * @throws Nothing is implemented
     */
     public Button getButton(){
         return button;
@@ -166,9 +140,7 @@ public class CourseWrapper
 
     /**
     * Description: setClassType - setter for class type 
-    * @params classType can be 'A' for admissions, 'C' for core, or 'E' for electives
-    * @return None
-    * @throws Nothing is implemented 
+    * @param classType can be 'A' for admissions, 'C' for core, or 'E' for electives
     */
     public void setClassType(char classType){
         this.classType = classType;
@@ -176,8 +148,6 @@ public class CourseWrapper
 
     /**
     * Description: getClassType - getter for class type 
-    * @return None
-    * @throws Nothing is implemented
     */
     public char getClassType(){
         return classType;

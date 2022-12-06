@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.group12.degreeaudit.Administration.CourseList;
-import com.group12.degreeaudit.Administration.DegreePlanner;
 import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Administration.JSONDegree;
 
@@ -37,40 +36,36 @@ public class Student {
 
     /**
     * Description: Gets the name of the Student
-    * @param None
-    * @return String - name
-    * @throws None
+    * @return name - String containing the name of the student
     */
     public String getName() {
         return name;
     }
     /**
     * Description: Sets the name of the Student
-    * @param String - name
-    * @return None
-    * @throws None
+    * @param name - String for the name of the student to set
     */
     public void setName(String name) {
         this.name = name;
     }
     /**
     * Description: Gets the id of the Student
-    * @param None
-    * @return String - ID
-    * @throws None
+    * @return ID - String containing the ID of the student
     */
     public String getID() {
         return ID;
     }
     /**
     * Description: Sets the id of the Student
-    * @param None
-    * @return String - ID
-    * @throws None
+    * @param ID - Id of the student to set
     */
     public void setID(String ID) {
         this.ID = ID;
     }
+    /**
+     * Description: gets the program of the student
+     * @return program - String containing the program of the student
+     */
     public String getProgram() {
         return program;
     }
