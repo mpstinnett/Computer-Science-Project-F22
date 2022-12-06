@@ -168,7 +168,7 @@ public class CourseWrapper
     * Description: setClassType - setter for class type 
     * @params classType can be 'A' for admissions, 'C' for core, or 'E' for electives
     * @return None
-    * @throws Nothing is implemented
+    * @throws Nothing is implemented 
     */
     public void setClassType(char classType){
         this.classType = classType;
