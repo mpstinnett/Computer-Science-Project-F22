@@ -76,6 +76,7 @@ public class CourseWrapper
 
     /**
     * Description: getCourse - getter for a course
+    * @return    Course for the course that is being wrapped
     */
     public Course getCourse() {
         return course;
@@ -91,6 +92,7 @@ public class CourseWrapper
 
     /**
     * Description: getCourseNumber - getter for a course number
+    * @return    String for the course number of a course
     */
     public String getCourseNumber() {
         return courseNumber;
@@ -98,6 +100,7 @@ public class CourseWrapper
 
     /**
     * Description: getCourseTitle - getter for a course title
+    * @return    String for the course title of a course
     */
     public String getCourseTitle() {
         return courseTitle;
@@ -105,6 +108,7 @@ public class CourseWrapper
 
     /**
     * Description: getSemester - getter for the semester a course was taken in
+    * @return    String for a the semester a course was taken in
     */
     public String getSemester() {
         return semester;
@@ -112,6 +116,7 @@ public class CourseWrapper
 
     /**
     * Description: getTransfer - getter for a course's transfer info
+    * @return    boolean for a course's transfer info
     */
     public boolean getTransfer() {
         return transfer;
@@ -119,6 +124,7 @@ public class CourseWrapper
 
     /**
     * Description: getGrade - getter for a grade in course
+    * @return    String for a grade in a course
     */
     public String getGrade() {
         return grade;
@@ -134,6 +140,7 @@ public class CourseWrapper
 
     /**
     * Description: getButton - getter for "X" button
+    * @return    JavaFX button for "X" in table
     */
     public Button getButton(){
         return button;
@@ -149,6 +156,7 @@ public class CourseWrapper
 
     /**
     * Description: getClassType - getter for class type 
+    * @return    char for the class type of the current course which can be 'A' for admissions, 'C' for core, or 'E' for electives
     */
     public char getClassType(){
         return classType;
