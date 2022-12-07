@@ -24,12 +24,12 @@ public class JSONCourseWrapper
 
     /**
     * Description: JSONCourseWrapper Constructor
-    * @param courseNumber as String
-    * @param courseName as String
-    * @param courseDescription as String
-    * @param prereqs as String array of course numbers
-    * @param classType as char 'A' for admissions, 'E' for elective, or 'C' for core
-    * @param activeStatus as boolean
+    * @param courseNumber    String for the course number
+    * @param courseName    String for course name
+    * @param courseDescription    String for course description
+    * @param prereqs    Array of strings for prerequisite classes
+    * @param classType    char 'A' for admissions, 'E' for elective, or 'C' for core
+    * @param activeStatus    Boolean for the active status (if the course can be taken)
     */
     public JSONCourseWrapper(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
@@ -38,7 +38,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: JSONCourseWrapper Constructor - Created when adding a course to a table in administration GUI
-    * @param courseNumber as String
+    * @param courseNumber    String for the course number
     */
     public JSONCourseWrapper(String courseNumber)
     {
@@ -52,10 +52,10 @@ public class JSONCourseWrapper
 
     /**
     * Description: removeTableCourse - called whenever the "X" button on a course in a table is pressed
-    * @param tblView current table the course is in
-    * @param course course to be removed
-    * @param dropdown dropdown that the course will be added to after removal from table
-    * @param prereq String for the class number (used for dropdown)
+    * @param tblView    JavaFX TableView for the current table the course is in
+    * @param course    JavaFX JSONCourseWrapper for the course to be removed
+    * @param dropdown    JavaFX ComboBox for the course will be added to after removal from table
+    * @param prereq    String for the class number (used for dropdown)
     */
     public void removeTableCourse(final TableView tblView, final JSONCourseWrapper course, final ComboBox dropdown, final String prereq){
         button.setOnAction(new EventHandler<ActionEvent>(){
@@ -85,7 +85,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: setJsonCourse - setter for course
-    * @param jsonCourse course that is being wrapped
+    * @param jsonCourse    course that is being wrapped
     */
     public void setJsonCourse(JSONCourse jsonCourse) {
         this.jsonCourse = jsonCourse;
@@ -93,7 +93,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: setButton - setter for "X" button
-    * @param button for "X"
+    * @param button    JavaFX button for "X" in table
     */
     public void setButton(Button button){
         this.button = button;

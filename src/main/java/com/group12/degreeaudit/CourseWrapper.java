@@ -30,7 +30,7 @@ public class CourseWrapper
 
     /**
     * Description: CourseWrapper Constructor
-    * @param course as Course that we are wrapping
+    * @param course    Course that we are wrapping
     */
     public CourseWrapper(Course course)
     {
@@ -48,10 +48,10 @@ public class CourseWrapper
 
     /**
     * Description: removeCourse - called whenever the "X" button on a course in a table is pressed
-    * @param tblView current table the course is in
-    * @param course course to be removed
-    * @param dropdown dropdown that the course will be added to after removal from table
-    * @param studentRemove student who needs a course to be removed from
+    * @param tblView    JavaFX TableView of current table the course is in
+    * @param course    CourseWrapper for course to be removed
+    * @param dropdown    JavaFX ComboBox dropdown that the course will be added to after removal from table
+    * @param studentRemove    Student who needs a course to be removed from
     */
     public void removeCourse(final TableView tblView, final CourseWrapper course, final ComboBox dropdown, final String prereq, final Student studentRemove){
         button.setFocusTraversable(false);
@@ -83,6 +83,7 @@ public class CourseWrapper
     
     /**
     * Description: setCourse - setter for a course
+    * @param course    New Course to be set
     */
     public void setCourse(Course course) {
         this.course = course;
@@ -125,7 +126,7 @@ public class CourseWrapper
 
     /**
     * Description: setButton - setter for "X" button
-    * @param button for "X"
+    * @param button    JavaFX button for "X" in tables
     */
     public void setButton(Button button){
         this.button = button;
@@ -140,7 +141,7 @@ public class CourseWrapper
 
     /**
     * Description: setClassType - setter for class type 
-    * @param classType can be 'A' for admissions, 'C' for core, or 'E' for electives
+    * @param classType    Char for class type which can be 'A' for admissions, 'C' for core, or 'E' for electives
     */
     public void setClassType(char classType){
         this.classType = classType;
