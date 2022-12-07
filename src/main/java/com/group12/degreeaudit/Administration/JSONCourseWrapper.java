@@ -78,6 +78,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: getJsonCourse - getter for a course
+    * @return    JSONCourse course that is being wrapped 
     */
     public JSONCourse getJsonCourse() {
         return jsonCourse;
@@ -101,6 +102,7 @@ public class JSONCourseWrapper
 
     /**
     * Description: getButton - getter for "X" button
+    * @return    JavaFX button for "X" in table
     */
     public Button getButton(){
         return button;

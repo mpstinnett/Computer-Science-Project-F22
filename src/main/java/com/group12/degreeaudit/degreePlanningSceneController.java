@@ -275,44 +275,48 @@ public class degreePlanningSceneController implements Initializable{
     */
     @FXML
     public void addAdmission(ActionEvent event){
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        String courseNum, courseTitle;
+        if(admission_prereq_add_dropdown.getValue() == null){
+            errorAlert("Please choose a course from the dropdown.");
+        } 
+        else{
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            String courseNum, courseTitle;
 
-        // course drop down has course number and course name delimited by dash
-        courseNum = admission_prereq_add_dropdown.getValue().split(" - ")[0];
-        courseTitle = admission_prereq_add_dropdown.getValue().split(" - ")[1];
-        
-        // Grab semester and transfer and grade
-        String semester = admission_add_semester.getText().toString();
-        boolean transfer = admission_add_waiver.isSelected();
-        String grade = admission_add_grade.getValue();
+            // course drop down has course number and course name delimited by dash
+            courseNum = admission_prereq_add_dropdown.getValue().split(" - ")[0];
+            courseTitle = admission_prereq_add_dropdown.getValue().split(" - ")[1];
+            
+            // Grab semester and transfer and grade
+            String semester = admission_add_semester.getText().toString();
+            boolean transfer = admission_add_waiver.isSelected();
+            String grade = admission_add_grade.getValue();
 
-        if(grade == null){
-            grade = "";
+            if(grade == null){
+                grade = "";
+            }
+            if(semester == null){
+                semester = "";
+            }
+            // create an instance of Course to add to the table
+            // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer, 0, 'A'));
+
+            // create an observable list for the table
+            ObservableList<CourseWrapper> tableList = admission_prereq_table.getItems();
+
+            // populate the table & remove the selected item from dropdown
+            admission_prereq_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
+
+            // Add course to the table
+            tableList.add(course);
+            student.addCourse(course.getCourse());
+            admission_prereq_table.setItems(tableList);
+
+            course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, student);
+
+            // Clear all fields for this section
+            clearFields(admission_prereq_add_dropdown, admission_add_all, admission_add_semester, admission_add_waiver, admission_add_grade);
         }
-        if(semester == null){
-            semester = "";
-        }
-        // create an instance of Course to add to the table
-        // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer, 0, 'A'));
-
-        // create an observable list for the table
-        ObservableList<CourseWrapper> tableList = admission_prereq_table.getItems();
-
-        // populate the table & remove the selected item from dropdown
-        admission_prereq_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
-
-        // Add course to the table
-        tableList.add(course);
-        student.addCourse(course.getCourse());
-        admission_prereq_table.setItems(tableList);
-
-        course.removeCourse(admission_prereq_table, course, admission_prereq_add_dropdown, courseNum + " - " + courseTitle, student);
-
-        // Clear all fields for this section
-        clearFields(admission_prereq_add_dropdown, admission_add_all, admission_add_semester, admission_add_waiver, admission_add_grade);
-
     }
 
 
@@ -322,45 +326,49 @@ public class degreePlanningSceneController implements Initializable{
     */
     @FXML
     public void addReqCore(ActionEvent event){
-        // Adding course not included in dropdown, otherwise use dropdown
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        String courseNum, courseTitle;
+        if(req_core_add_dropdown.getValue() == null){
+            errorAlert("Please choose a course from the dropdown.");
+        } 
+        else{
+            // Adding course not included in dropdown, otherwise use dropdown
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            String courseNum, courseTitle;
 
-        // course drop down has course number and course name delimited by dash
-        courseNum = req_core_add_dropdown.getValue().split(" - ")[0];
-        courseTitle = req_core_add_dropdown.getValue().split(" - ")[1];
-        
-        // Grab semester and transfer
-        String semester = req_core_add_semester.getText().toString();
-        boolean transfer = req_core_add_transfer.isSelected();
-        String grade = req_core_add_grade.getValue();
+            // course drop down has course number and course name delimited by dash
+            courseNum = req_core_add_dropdown.getValue().split(" - ")[0];
+            courseTitle = req_core_add_dropdown.getValue().split(" - ")[1];
+            
+            // Grab semester and transfer
+            String semester = req_core_add_semester.getText().toString();
+            boolean transfer = req_core_add_transfer.isSelected();
+            String grade = req_core_add_grade.getValue();
 
-        if(grade == null){
-            grade = "";
+            if(grade == null){
+                grade = "";
+            }
+            if(semester == null){
+                semester = "";
+            }
+            // create an instance of Course to add to the table
+            // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
+
+            // create an observable list for the table
+            ObservableList<CourseWrapper> tableList = req_core_table.getItems();
+
+            // populate the table & remove the selected item from dropdown
+            req_core_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
+
+            // Add course to the table
+            tableList.add(course);
+            student.addCourse(course.getCourse());
+            req_core_table.setItems(tableList);
+
+            course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, student);
+
+            // Clear all fields for this section
+            clearFields(req_core_add_dropdown, req_core_add_all, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
         }
-        if(semester == null){
-            semester = "";
-        }
-        // create an instance of Course to add to the table
-        // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
-
-        // create an observable list for the table
-        ObservableList<CourseWrapper> tableList = req_core_table.getItems();
-
-        // populate the table & remove the selected item from dropdown
-        req_core_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
-
-        // Add course to the table
-        tableList.add(course);
-        student.addCourse(course.getCourse());
-        req_core_table.setItems(tableList);
-
-        course.removeCourse(req_core_table, course, req_core_add_dropdown, courseNum + " - " + courseTitle, student);
-
-        // Clear all fields for this section
-        clearFields(req_core_add_dropdown, req_core_add_all, req_core_add_semester, req_core_add_transfer, req_core_add_grade);
-
     }
 
 
@@ -371,46 +379,50 @@ public class degreePlanningSceneController implements Initializable{
     */
     @FXML
     public void addOptionalCore(ActionEvent event){
-        // Adding course not included in dropdown, otherwise use dropdown
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        String courseNum, courseTitle;
+        if(core_options_add_dropdown.getValue() == null){
+            errorAlert("Please choose a course from the dropdown.");
+        } 
+        else{
+            // Adding course not included in dropdown, otherwise use dropdown
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            String courseNum, courseTitle;
 
-        // course drop down has course number and course name delimited by dash
-        courseNum = core_options_add_dropdown.getValue().split(" - ")[0];
-        courseTitle = core_options_add_dropdown.getValue().split(" - ")[1];
-        
-        // Grab semester and transfer
-        String semester = core_options_add_semester.getText().toString();
-        boolean transfer = core_options_add_transfer.isSelected();
-        String grade = core_options_add_grade.getValue();
+            // course drop down has course number and course name delimited by dash
+            courseNum = core_options_add_dropdown.getValue().split(" - ")[0];
+            courseTitle = core_options_add_dropdown.getValue().split(" - ")[1];
+            
+            // Grab semester and transfer
+            String semester = core_options_add_semester.getText().toString();
+            boolean transfer = core_options_add_transfer.isSelected();
+            String grade = core_options_add_grade.getValue();
 
-        if(grade == null){
-            grade = "";
+            if(grade == null){
+                grade = "";
+            }
+            if(semester == null){
+                semester = "";
+            }
+
+            // create an instance of Course to add to the table
+            // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
+
+            // create an observable list for the table
+            ObservableList<CourseWrapper> tableList = core_options_table.getItems();
+
+            // populate the table & remove the selected item from dropdown
+            core_options_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
+
+            // Add course to the table
+            tableList.add(course);
+            student.addCourse(course.getCourse());
+            core_options_table.setItems(tableList);
+
+            course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, student);
+
+            // Clear all fields for this section
+            clearFields(core_options_add_dropdown, core_options_add_all, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
         }
-        if(semester == null){
-            semester = "";
-        }
-
-        // create an instance of Course to add to the table
-        // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
-
-        // create an observable list for the table
-        ObservableList<CourseWrapper> tableList = core_options_table.getItems();
-
-        // populate the table & remove the selected item from dropdown
-        core_options_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
-
-        // Add course to the table
-        tableList.add(course);
-        student.addCourse(course.getCourse());
-        core_options_table.setItems(tableList);
-
-        course.removeCourse(core_options_table, course, core_options_add_dropdown, courseNum + " - " + courseTitle, student);
-
-        // Clear all fields for this section
-        clearFields(core_options_add_dropdown, core_options_add_all, core_options_add_semester, core_options_add_transfer, core_options_add_grade);
-
     }
 
     /**
@@ -419,47 +431,51 @@ public class degreePlanningSceneController implements Initializable{
     */
     @FXML
     public void addElective(ActionEvent event){
-        // Adding course not included in dropdown, otherwise use dropdown
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        String courseNum, courseTitle;
+        if(electives_add_dropdown.getValue() == null){
+            errorAlert("Please choose a course from the dropdown.");
+        } 
+        else{
+            // Adding course not included in dropdown, otherwise use dropdown
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            String courseNum, courseTitle;
 
-        // course drop down has course number and course name delimited by dash
-        courseNum = electives_add_dropdown.getValue().split(" - ")[0];
-        courseTitle = electives_add_dropdown.getValue().split(" - ")[1];
-        
-        
-        // Grab semester and transfer
-        String semester = electives_add_semester.getText().toString();
-        boolean transfer = electives_add_transfer.isSelected();
-        String grade = electives_add_grade.getValue();
+            // course drop down has course number and course name delimited by dash
+            courseNum = electives_add_dropdown.getValue().split(" - ")[0];
+            courseTitle = electives_add_dropdown.getValue().split(" - ")[1];
+            
+            
+            // Grab semester and transfer
+            String semester = electives_add_semester.getText().toString();
+            boolean transfer = electives_add_transfer.isSelected();
+            String grade = electives_add_grade.getValue();
 
-        if(grade == null){
-            grade = "";
+            if(grade == null){
+                grade = "";
+            }
+            if(semester == null){
+                semester = "";
+            }
+
+            // create an instance of Course to add to the table
+            // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
+
+            // create an observable list for the table
+            ObservableList<CourseWrapper> tableList = electives_table.getItems();
+
+            // populate the table & remove the selected item from dropdown
+            electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
+
+            // Add course to the table
+            tableList.add(course);
+            student.addCourse(course.getCourse());
+            electives_table.setItems(tableList);
+
+            course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, student);
+
+            // Clear all fields for this section
+            clearFields(electives_add_dropdown, electives_add_all, electives_add_semester, electives_add_transfer, electives_add_grade);
         }
-        if(semester == null){
-            semester = "";
-        }
-
-        // create an instance of Course to add to the table
-        // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
-
-        // create an observable list for the table
-        ObservableList<CourseWrapper> tableList = electives_table.getItems();
-
-        // populate the table & remove the selected item from dropdown
-        electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
-
-        // Add course to the table
-        tableList.add(course);
-        student.addCourse(course.getCourse());
-        electives_table.setItems(tableList);
-
-        course.removeCourse(electives_table, course, electives_add_dropdown, courseNum + " - " + courseTitle, student);
-
-        // Clear all fields for this section
-        clearFields(electives_add_dropdown, electives_add_all, electives_add_semester, electives_add_transfer, electives_add_grade);
-
     }
 
     /**
@@ -468,48 +484,52 @@ public class degreePlanningSceneController implements Initializable{
     */
     @FXML
     public void addAddlElective(ActionEvent event){
-        // Adding course not included in dropdown, otherwise use dropdown
-        CourseList courseList = new CourseList("resources/CourseList.json");
-        String courseNum, courseTitle;
+        if(addl_electives_add_dropdown.getValue() == null){
+            errorAlert("Please choose a course from the dropdown.");
+        } 
+        else{
+            // Adding course not included in dropdown, otherwise use dropdown
+            CourseList courseList = new CourseList("resources/CourseList.json");
+            String courseNum, courseTitle;
 
 
-        // course drop down has course number and course name delimited by dash
-        courseNum = addl_electives_add_dropdown.getValue().split(" - ")[0];
-        courseTitle = addl_electives_add_dropdown.getValue().split(" - ")[1];
-        
-        
-        // Grab semester and transfer
-        String semester = addl_electives_add_semester.getText().toString();
-        boolean transfer = addl_electives_add_transfer.isSelected();
-        String grade = addl_electives_add_grade.getValue();
+            // course drop down has course number and course name delimited by dash
+            courseNum = addl_electives_add_dropdown.getValue().split(" - ")[0];
+            courseTitle = addl_electives_add_dropdown.getValue().split(" - ")[1];
+            
+            
+            // Grab semester and transfer
+            String semester = addl_electives_add_semester.getText().toString();
+            boolean transfer = addl_electives_add_transfer.isSelected();
+            String grade = addl_electives_add_grade.getValue();
 
-        if(grade == null){
-            grade = "";
+            if(grade == null){
+                grade = "";
+            }
+            if(semester == null){
+                semester = "";
+            }
+            
+            // create an instance of Course to add to the table
+            // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
+
+            // create an observable list for the table
+            ObservableList<CourseWrapper> tableList = addl_electives_table.getItems();
+
+            // populate the table & remove the selected item from dropdown
+            addl_electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
+
+            // Add course to the table
+            tableList.add(course);
+            student.addCourse(course.getCourse());
+            addl_electives_table.setItems(tableList);
+
+            course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, student);
+
+            // Clear all fields for this section
+            clearFields(addl_electives_add_dropdown, addl_electives_add_all, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
         }
-        if(semester == null){
-            semester = "";
-        }
-        
-        // create an instance of Course to add to the table
-        // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-        CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer));
-
-        // create an observable list for the table
-        ObservableList<CourseWrapper> tableList = addl_electives_table.getItems();
-
-        // populate the table & remove the selected item from dropdown
-        addl_electives_add_dropdown.getItems().remove(courseNum + " - " + courseTitle);
-
-        // Add course to the table
-        tableList.add(course);
-        student.addCourse(course.getCourse());
-        addl_electives_table.setItems(tableList);
-
-        course.removeCourse(addl_electives_table, course, addl_electives_add_dropdown, courseNum + " - " + courseTitle, student);
-
-        // Clear all fields for this section
-        clearFields(addl_electives_add_dropdown, addl_electives_add_all, addl_electives_add_semester, addl_electives_add_transfer, addl_electives_add_grade);
-
     }
 
     /**
