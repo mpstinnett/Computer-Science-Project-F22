@@ -169,12 +169,40 @@ public class Student {
      * @return  A course object if the student has taken the course being searched for or null if they have not
      */
     public Course getCourseGivenCourseNumber(String courseNumber) {
-        for(Course course : coursesTaken) {
+        for(Course course : getUniqueCoursesTaken(coursesTaken)) {
             if(course.getCourseNumber().equals(courseNumber)) {
                 return course;
             }
         }
         return null;
+    }
+
+    /**
+     * Description: Given all the courses taken by the student, this method only returns back the unique courses taken so that only the best course grade per course is kept.
+     * 
+     * @param coursesTaken as a List of Courses - The courses taken by the student
+     * @return List of Courses - returns the list of unique courses the student has taken
+     */
+    public List<Course> getUniqueCoursesTaken(List<Course> coursesTaken) {
+        List<Course> uniqueCoursesTaken = new ArrayList<>();
+        List<String> uniqueCoursesTakenAsString = new ArrayList<>();
+        for(Course course : coursesTaken) {
+            if(uniqueCoursesTakenAsString.contains(course.getCourseNumber())) {
+                Course prevCourse = null;
+                for(Course course2 : uniqueCoursesTaken) {
+                    if(course2.getCourseNumber().equals(course.getCourseNumber()))
+                        prevCourse = course2;
+                }
+                if(prevCourse.getGradePoints() <= course.getGradePoints()) {
+                    uniqueCoursesTaken.remove(prevCourse);
+                    uniqueCoursesTaken.add(course);
+                }
+            } else {
+                uniqueCoursesTaken.add(course);
+                uniqueCoursesTakenAsString.add(course.getCourseNumber());
+            }
+        }
+        return uniqueCoursesTaken;
     }
      
     /**
