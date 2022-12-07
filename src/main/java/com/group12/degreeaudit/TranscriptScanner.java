@@ -9,20 +9,23 @@ import java.util.Scanner;
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.JSONCourse;
 
+/**
+ * @author Anhy Luu
+ */
 public class TranscriptScanner {
     private File transcriptFile;
     private Scanner scan;
     private CourseList courseList;
-
-    public TranscriptScanner() {}
 
     public TranscriptScanner(String transcriptFilePath, CourseList courseList) {
         transcriptFile = new File(transcriptFilePath);
         this.courseList = courseList;
     }
 
-    /*
+    /**
      * Goes through whole transcript and assigns relevant data to Student and Course objects.
+     * 
+     * @return Student - returns student with all the information from the transcript
      */
     public Student scanTranscript() {
         try {
@@ -33,6 +36,7 @@ public class TranscriptScanner {
             String studentID = grabStudentID();
             String program = grabProgram();
             String semesterAdmitted = grabSemesterAdmitted();
+            //Resetting the scanner here to account for transfer students
             scan.close();
             scan = new Scanner(transcriptFile);
             List<Course> studentCourses = grabStudentCourses();
@@ -44,10 +48,13 @@ public class TranscriptScanner {
         return null;
     }
 
-    /*
+    /**
      * Grabs student name.
      * 
      * Assume file has only one line with "Name: " followed by the student name.
+     * 
+     * @return String - returns student name
+     * @throws IOException - if scanner reads null
      */
     private String grabStudentName() throws IOException {
         while(scan.hasNext()) {
@@ -58,10 +65,13 @@ public class TranscriptScanner {
         return "";
     }
 
-    /*
+    /**
      * Grabs student ID number.
      * 
      * Assume file has only one line with "Student ID: " followed by the student ID number.
+     * 
+     * @return String - returns student ID number
+     * @throws IOException - if scanner reads null
      */
     private String grabStudentID() throws IOException {
         while(scan.hasNext()) {
@@ -72,10 +82,13 @@ public class TranscriptScanner {
         return "";
     }
 
-    /*
+    /**
      * Grabs the program the student is enrolled in.
      * 
      * Assume file has only one line with "Program: " followed by the program.
+     * 
+     * @return String - returns student program
+     * @throws IOException - if scanner reads null
      */
     private String grabProgram() throws IOException {
         while(scan.hasNext()) {
@@ -86,13 +99,16 @@ public class TranscriptScanner {
         return "";
     }
 
-    /*
+    /**
      * Grabs the semester when the student was admitted.
      * 
      * The method will grab the data when the student was admitted and figure out the year and semester after.
      * 
      * Assume the method is ran right after TranscriptScanner.grabProgram
      * Assume the line after running TranscriptScanner.grabProgram starts with the admission date
+     * 
+     * @return String - returns student's semester admitted into program
+     * @throws IOException - if scanner reads null
      */
     private String grabSemesterAdmitted() throws IOException {
         String line = scan.nextLine();
@@ -107,7 +123,7 @@ public class TranscriptScanner {
         return "";
     }
 
-    /*
+    /**
      * Grabs the list of courses the studend has taken or is currently taking.
      * 
      * The method will run through the rest of the transcript and grab all the courses in the transcript, 
@@ -118,6 +134,8 @@ public class TranscriptScanner {
      * Assume all courses will be in a line that starts with "CS"
      * Assume any line after "Beginning of Graduate Record" that starts with "20" indicates a new semester.
      * Assume all new semesters will be in a line that starts with "20"
+     * 
+     * @return List of Courses - returns the list of courses that the student has taken from the transcript
      */
     private List<Course> grabStudentCourses() {
         List<Course> studentCourses = new ArrayList<>();
@@ -256,6 +274,15 @@ public class TranscriptScanner {
         return studentCourses;
     }
 
+    /**
+     * Given a course, return the course type as a letter.
+     * 
+     * 'C' means core course. 'E' means elective course. 'A' means admission prerequisite course.
+     * If the course meets no type, return 'U'.
+     * 
+     * @param course as course - a course
+     * @return char - returns the course type as a letter
+     */
     private char getCourseType(Course course)
     {
         for(JSONCourse courseL : courseList.GetCourseList())

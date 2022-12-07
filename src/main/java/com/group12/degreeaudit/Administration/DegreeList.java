@@ -16,15 +16,20 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-//DegreeList Class - Houses the active lists of degrees read in from the DegreeList.json
-//      Uses JSONDegree class to house the individual degree tracks
+/**
+ * Description: DegreeList - Houses the active lists of degrees read in from the DegreeList.json
+ * Uses JSONDegree class to house the individual degree tracks
+ */
 public class DegreeList 
 {
     private List<JSONDegree> degreeList = new ArrayList<JSONDegree>();  //Degree List - Holds all the degree tracks
     private Gson gson = new Gson();     //Google JSON - Used for Importing/Exporting JSON files
     private File degreeListFile;        //Path to the degree list (normally resources/DegreeList.json)
 
-    //DegreeList constructor - Takes in a file path to open and read the degree list
+    /** Description: DegreeList constructor - Takes in a file path to open and read the degree list
+     * Sets all needed values and makes sure the file exists or creates a new one.
+     * @param   fileName    String for the name of the file
+    */
     public DegreeList(String fileName)
     {
         degreeListFile = new File(fileName);    //Sets the file path for future use
@@ -46,40 +51,25 @@ public class DegreeList
         {
             degreeList = new ArrayList<JSONDegree>();   //Create an empty list since the read file was empty
         }
-
-        // Commented out code for creating a degree and adding it to the list - Will delete by submission
-        // String[] temp = new String[]{"CS 555755", "CS 5556"};
-        // AddDegreeToList("Systems", "5", "3.2", 
-        // true, true, "6",
-        // "3.0", true, true,
-        // temp, "3.2", temp,
-        // temp, true);
-        // AddDegreeToList("Data Science", "5", "3.2", 
-        // true, true, "6",
-        // "3.0", true, true,
-        // temp, "3.2", temp,
-        // temp, true);
-
-        // AddDegreeToList("Systems", "5", "3.2", 
-        // true, true, "6",
-        // "3.0", true, true,
-        // temp, "3.2", temp,
-        // temp, true);
-        // AddDegreeToList("Interactive Computing", "5", "3.2", 
-        // true, true, "6",
-        // "3.0", true, true,
-        // temp, "3.2", temp,
-        // temp, true);
-        // System.out.println(PrintDegreeList());
-
-        // if(RemoveDegree("Interactive Computing"))
-        //     System.out.println("Removed");
-        // System.out.println(PrintDegreeList());
     }
     
-    //AddDegreeToList - Takes all values to create a JSONDegree and adds it to the degree list both locally and in the file
-    //Returns True - Degree Track successfully added
-    //Returns False - Degree Track already in the list, try updating instead
+    /** Description: AddDegreeToList - Takes all values to create a JSONDegree and adds it to the degree list both locally and in the file
+     * course locally
+     * @param   degreeName    String for the degree name
+     * @param   coreRequirementAmount  String for core requirement amount
+     * @param   coreGPARequirement   String core gpa requirement
+     * @param   coreAllowSeventhElective Boolean for the allowing of a 7th elective
+     * @param   electiveRequirementAmount   String for core requirement amount
+     * @param   electiveGPARequirement    String for the elective gpa requirement
+     * @param   electiveAllowOneLowerCourse Boolean for the allowing of lower level courses for the electives
+     * @param   electivesAcceptedLowerCourses   String array for accepted lower level courses
+     * @param   overallGPARequirement   String for the overall gpa requirement
+     * @param   coreClassListRequirement    String array for the required core classes
+     * @param   optionsCoreClassListRequirement ArrayList of Strings for the optional core classes
+     * @param   electiveClassListRequirement    String array for the required elective classes
+     * @param   activeStatus    Boolean for the active status of the degree track
+     * @return True - Degree Track successfully added. False - Degree Track already in the list, try updating instead.
+     */
     public boolean AddDegreeToList(String degreeName, String coreRequirementAmount, String coreGPARequirement, boolean coreAllowSeventhElective, String electiveRequirementAmount,
     String electiveGPARequirement, boolean electiveAllowOneLowerCourse,
     String[] electivesAcceptedLowerCourses, String overallGPARequirement, String[] coreClassListRequirement,
@@ -101,9 +91,10 @@ public class DegreeList
         return false;   //Return false - Already in the list
     }
 
-    //CheckIfInDegreeList - Checks if the Degree Track is already in the degree list
-    //Returns True - Degree Track already exists in the degree list
-    //Returns False - Degree Track does not exist in the degree list
+    /** Description: CheckIfInDegreeList - Checks if the Degree Track is already in the degree list
+     * @param   checkDegree    JSONDegree to check if it is in the degree list
+     * @return  True - Degree Track already exists in the degree list. False - Degree Track does not exist in the degree list.
+    */
     public boolean CheckIfInDegreeList(JSONDegree checkDegree)
     {
         if(degreeList != null)  //First check if the list is null, if it is null then the degree track is not in the list
@@ -120,16 +111,19 @@ public class DegreeList
         return false;   //Return False - If the degree track name does not match any in the list
     }
 
-    //AppendDegreeList - Appends the degree track locally and in the file
+    /** Description: AppendDegreeList - Appends the degree track locally and in the file
+     * @param   degree    JSONDegree to append to the list
+     */
     private void AppendDegreeList(JSONDegree degree)
     {
         degreeList.add(degree);         //Appends the list locally
         WriteDegreeList(degreeList);    //Appends the file
     }
 
-    //WriteDegreeList - Writes the degree list into the file
-    //Returns True - 
-    //Returns False - Failed to write
+    /** Description: WriteDegreeList - Writes the degree list into the file
+     * @param   degreeList    List of JSONDegrees to write to the degree list (DegreeList to overwrite the file with)
+     * @return  Returns True - Wrote Successfully. Returns False - Failed to write (IOException)
+     */
     private boolean WriteDegreeList(List<JSONDegree> degreeList)
     {
         //Try to append - Catches an IOException
@@ -148,9 +142,10 @@ public class DegreeList
         return true;    //Returns True - Wrote Successfully
     }
 
-    //RemoveDegree - Removes a specified degree track from the list and file
-    //Returns True - Successfully Removed
-    //Returns False - Degree is not in the list
+    /** Description: RemoveDegree - Removes a specified degree track from the list and file
+     * @param   degreeName    String of the degree name to remove
+     * @return  Returns True - Successfully Removed. Returns False - Degree is not in the list.
+     */
     public boolean RemoveDegree(String degreeName)
     {
         for(int i = 0; i < degreeList.size(); i++)  //Loop all the degree tracks in the list
@@ -165,15 +160,18 @@ public class DegreeList
         return false; //Return False - Degree is not in the list
     }
 
-    //GetDegreeList - Returns the entire degree list
+    /** Description: GetDegreeList - Returns the entire degree list
+     * @return  List of JSONDegrees (The Degree List from the variable)
+     */
     public List<JSONDegree> GetDegreeList()
     {
         return degreeList;
     }
 
-    //GetDegreeList - Returns a degree track from the list if it exists
-    //Parameter - String degreeName - Name of degree to search for
-    //Returns null - If the degree track is not in the list
+    /** Description: GetDegreeFromList - Gets a degree from the degree list based on the name of a degree
+     * @param   degreeName    String for the degree name to get from the list
+     * @return  JSONDegree from the degree list. Null - If the degree track is not in the list.
+     */
     public JSONDegree GetDegreeFromList(String degreeName)
     {
         int degreeLocationInList = FindDegreeInList(degreeName);    //Search for the degree track in the list
@@ -186,10 +184,10 @@ public class DegreeList
         return null;    //Returns null - If the degree track is not in the list
     }
 
-    //GetDegreeList - Returns a degree track from the list if it exists
-    //Parameter - String degreeName - Name of degree to search for
-    //Returns True - If the degree track was successfully updated
-    //Returns False - If the degree track is not in the list
+    /** Description: UpdateDegreeInList - Updates a degree in the list based on a JSONDegree (Uses the name from the degree object)
+     * @param   degreeToUpdate    JSONDegree for the degree to update (will use name from this object)
+     * @return  True - If the degree track was successfully updated. False - If the degree track is not in the list.
+     */
     public boolean UpdateDegreeInList(JSONDegree degreeToUpdate)
     {
         int degreeLocationInList = FindDegreeInList(degreeToUpdate);    //Search for the degree track in the list
@@ -203,9 +201,12 @@ public class DegreeList
 
         return false;   //Return False - The degree track is not in the list
     }
-
-    //UpdateDegreeName - Updating a degree requires the name to stay the same as its the key we use to search
-    //      So this method is called after an update to set the name to the correct one
+   
+    /** Description: UpdateDegreeName - Updating a degree requires the name to stay the same as its the key we use to search
+     * So this method is called after an update to set the name to the correct one
+     * @param   oldDegreeName    String for the old degree name to find and update
+     * @param   newDegreeName    String for the new degree name to update to
+     */
     public void UpdateDegreeName(String oldDegreeName, String newDegreeName) 
     {
         int degreeLocationInList = FindDegreeInList(oldDegreeName);    //Search for the degree track in the list
@@ -217,17 +218,19 @@ public class DegreeList
         }
     }
 
-    //FindDegreeInList(JSONDegree) - Finds a degree in the degree list based on the entire degree track object
-    //Returns an integer location in the list for the degree track if found
-    //Returns -1 if the degree does not exist in the list
+    /** Description: FindDegreeInList(JSONDegree) - Finds a degree in the degree list based on a JSONDegree (Uses name of this object)
+     * @param   degreeToFind    JSONDegree degree to find in the list
+     * @return Integer of the location of the degree in the list. -1 if degree is not found in the list.
+     */
     public int FindDegreeInList(JSONDegree degreeToFind)
     {
         return FindDegreeInList(degreeToFind.getDegreeName()); //Pulls the name from the JSONDegree and searches by the name
     }
 
-    //FindDegreeInList(String) - Finds a degree in the degree list based on the name of the degree track
-    //Returns an integer location in the list for the degree track if found
-    //Returns -1 if the degree does not exist in the list
+    /** Description: FindDegreeInList(String) - Finds a degree in the degree list based on the name of the degree track
+     * @param   degreeNameToFind    String of degree name to find in the list
+     * @return Integer of the location of the degree in the list. -1 if degree is not found in the list.
+     */
     public int FindDegreeInList(String degreeNameToFind)
     {
         for(int i = 0; i < degreeList.size(); i++)  //Loop all degree tracks in the list
@@ -240,9 +243,9 @@ public class DegreeList
         return -1;  //Return -1 - The degree does not exist in the list
     }
 
-    //GetDegreeListFromFile - Reads the degree list from the specified file path (variable)
-    //Returns List of JSONDegrees from the file read
-    //Returns null - Unable to read the file
+    /** Description: GetDegreeListFromFile - Gets the degree list from the specified file path (variable based not parameter)
+     * @return List of JSONDegrees from the file read. null - Unable to read the file (FileNotFoundException, JsonSyntaxException, or IOException).
+     */
     public List<JSONDegree> GetDegreeListFromFile()
     {
         try
@@ -267,7 +270,9 @@ public class DegreeList
         return null;    //Return null - Unable to read the file
     }
 
-    //PrintDegreeList - Returns a string with all degree tracks in the list
+    /** Description: PrintDegreeList - Returns a string with all degree tracks in the list
+     * @return String with all degree tracks
+     */
     public String PrintDegreeList()
     {
         String degreeL = new String();  //Create an empty string

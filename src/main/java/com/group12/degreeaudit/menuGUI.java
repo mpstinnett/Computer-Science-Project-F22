@@ -11,6 +11,11 @@ import javafx.stage.Stage;
 
 public class menuGUI extends Application {
 
+    /**
+    * Description: start - Main entry point for Menu GUI
+    * @param primaryStage    Which JavaFX Scene we want to run
+    * @exception Exception    if the administration scene cannot be loaded
+    */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/menuScene.fxml"));

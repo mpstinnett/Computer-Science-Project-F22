@@ -12,12 +12,21 @@ import java.util.List;
 
 import java.io.FileWriter;
 
+/**
+ * Description: CourseList - holds all methods relating to obtaining, creating, adding, removing, updating, etc of 
+ * courses in a list. These courses are different from JSON course as they are designed for courses that have grades
+ * and semesters.
+ */
 public class CourseList
 {
     List<JSONCourse> courseList = new ArrayList<JSONCourse>();
     Gson gson = new Gson();
     File courseListFile;
 
+    /** Description: CourseList - Constructor that takes a filename for the location of the courselist json file.
+     * Sets all needed values and makes sure the file exists or creates a new one.
+     * @param   fileName    String for the name of the file
+    */
     public CourseList(String fileName)
     {
         courseListFile = new File(fileName);
@@ -38,37 +47,18 @@ public class CourseList
         {
             courseList = new ArrayList<JSONCourse>();
         }
-
-        // //Null Prereq
-        // AddCourseToList("CS 6313", "A", "B", null, 'C', true);
-
-        // //One satisfied prereq
-        // String[] temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 5558", "A", "B", temp, 'C', true);
-
-        // //One unsatisfied prereq
-        // temp = new String[]{"CS 6315"};
-        // AddCourseToList("CS 7384", "A", "B", temp, 'C', true);
-
-        // //One satisfied and one unsatisfied prereq
-        // temp = new String[]{"CS 6313", "CS 6315"};
-        // AddCourseToList("CS 7564", "A", "B", temp, 'C', true);
-
-        // //One satisfied but already taken prereq
-        // temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 6360", "A", "B", temp, 'C', true);
-
-        // //One inactive but satisfied prereq
-        // temp = new String[]{"CS 6313"};
-        // AddCourseToList("CS 6575", "A", "B", temp, 'C', false);
-        
-        // System.out.println(PrintCourseList());
-
-        // if(RemoveCourse("CS 5556"))
-        //     System.out.println("Removed");
-        // System.out.println(PrintCourseList());
     }
 
+    /** Description: AddCourseToList - Adds a course to the courselist, takes a course by the course values and creates the
+     * course locally
+     * @param   courseNumber    String for the course number
+     * @param   courseName  String for the course name
+     * @param   courseDescription   String for the course description
+     * @param   prereqs String array for the course prerequisites
+     * @param   classType   Character for the class type (A, C, E)
+     * @param   activeStatus    Boolean for the active status (if the course can be taken)
+     * @return True - If the course successfully added to the list. False - If the course is already in the list
+     */
     public boolean AddCourseToList(String courseNumber, String courseName, String courseDescription, String[] prereqs, char classType, boolean activeStatus)
     {
         JSONCourse createdCourse = new JSONCourse(courseNumber, courseName, courseDescription, prereqs, classType, activeStatus);
@@ -80,6 +70,11 @@ public class CourseList
         return false;
     }
 
+    /** Description: CheckIfInCourseList - Checks if a JSONCourse is in the courselist
+     * Sets all needed values and makes sure the file exists or creates a new one.
+     * @param   checkCourse    JSONCourse to check if in the course list
+     * @return True - Course is in the courselist. False - Course is not in the courselist.
+    */
     public boolean CheckIfInCourseList(JSONCourse checkCourse)
     {
         if(courseList != null)
@@ -95,12 +90,20 @@ public class CourseList
         return false;
     }
 
+    /** Description: AppendCourseList - Appends a course to the end of the courselist and writes it to the
+     * courselist file
+     * @param   course    JSONCourse for the course to append to the courselist
+    */
     private void AppendCourseList(JSONCourse course)
     {
         courseList.add(course);
         WriteCourseList(courseList);
     }
 
+    /** Description: WriteCourseList - Writes the courselist to the courselist file
+     * @param   courseList    List of JSONCourses to write to the file
+     * @return  True - Courselist wrote successfully. False - IOException occured
+    */
     private boolean WriteCourseList(List<JSONCourse> courseList)
     {
         try
@@ -117,6 +120,10 @@ public class CourseList
         return true;
     }
 
+    /** Description: RemoveCourse - Removes a course from the list (locally and in file)
+     * @param   courseNumber    String containing the course number
+     * @return  True - Course Removed. False - Course not found in the list
+    */
     public boolean RemoveCourse(String courseNumber)
     {
         for(int i = 0; i < courseList.size(); i++)
@@ -131,11 +138,18 @@ public class CourseList
         return false;
     }
 
+    /** Description: GetCourseList - Gets the entire course list
+     * @return   List of JSONCourses holding all courses in the course list
+    */
     public List<JSONCourse> GetCourseList()
     {
         return courseList;
     }
 
+    /** Description: GetCourseFromList - Returns a course from the courselist (JSONCourse)
+     * @param   courseNumber    String of the coursenumber to find
+     * @return  JSONCourse of the course from the course list
+    */
     public JSONCourse GetCourseFromList(String courseNumber)
     {
         int courseLocationInList = FindCourseInList(courseNumber);
@@ -146,6 +160,10 @@ public class CourseList
         return null;
     }
 
+    /** Description: UpdateCourseInList - Updates a course in the list using a JSONCourse (Later only uses the number from this param)
+     * @param   courseToUpdate    JSONCourse to use - Uses name from this later
+     * @return  True - Update successfully. False - Course not found in the list
+    */
     public boolean UpdateCourseInList(JSONCourse courseToUpdate)
     {
         int courseLocationInList = FindCourseInList(courseToUpdate);
@@ -158,12 +176,20 @@ public class CourseList
         return false;
     }
     
+    /** Description: UpdateCourseNumber - Updates a course in the list with a new course number (Used after UpdateCourseInList)
+     * @param   oldCourseNumber    String for the old course number
+     * @param   newCourseNumber    String for the new course number
+    */
     public void UpdateCourseNumber(String oldCourseNumber, String newCourseNumber) {
         int courseLocationInList = FindCourseInList(oldCourseNumber);
         courseList.get(courseLocationInList).setCourseNumber(newCourseNumber);
         WriteCourseList(courseList);
     }
 
+    /** Description: FindCourseInList - Finds a course location in a list based on the JSONCourse (Uses course number of JSONCourse)
+     * @param   courseToFind    JSONCourse to find
+     * @return   Integer location of the course in the list. -1 if not found.
+    */
     public int FindCourseInList(JSONCourse courseToFind)
     {
         for(int i = 0; i < courseList.size(); i++)
@@ -176,6 +202,10 @@ public class CourseList
         return -1;
     }
 
+    /** Description: FindCourseInList - Finds a course location in a list based on the course number
+     * @param   courseNumberToFind    String of the course number to look for in the list
+     * @return   Integer location of the course in the list. -1 if not found.
+    */
     public int FindCourseInList(String courseNumberToFind)
     {
         for(int i = 0; i < courseList.size(); i++)
@@ -188,6 +218,9 @@ public class CourseList
         return -1;
     }
 
+    /** Description: GetCourseListFromFile - Returns the course list from the file, not from local variable
+     * @return   List of JSONCourses of all the courses in the list
+    */
     public List<JSONCourse> GetCourseListFromFile()
     {
         try
@@ -212,6 +245,9 @@ public class CourseList
         return null;
     }
 
+    /** Description: PrintCourseList - Printable string all the courses in the list
+     * @return   String containing all courses in the list
+    */
     public String PrintCourseList()
     {
         String courseL = new String();

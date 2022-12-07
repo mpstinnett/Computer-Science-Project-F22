@@ -17,15 +17,27 @@ import com.itextpdf.forms.fields.PdfFormField;
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.AreaBreak;
+import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
+/**
+ * Description: Class to generate reports (audit report and degree plan)
+ * @author Anhy Luu
+ */
 public class Report {
+    /**
+     * Description: Generates an audit report pdf given some student information.
+     * @param audit as String - contains student information such as name, ID, GPA, etc., studentID as String - the student's ID number, auditFile as File - the file to write to
+     */
     public static void createAuditReport(String audit, String studentID, File auditFile) {
         try {
             Scanner scan = new Scanner(audit);
@@ -90,6 +102,38 @@ public class Report {
         }
 
     }
+
+    /**
+     * Generates a pdf of a given degree plan with the corresponding key values filled in for each field.
+     * @param degreeName as string - name of the degree track, degreePlanFilePath as string - file path to the degree plan
+     */
+    public static void getKeysPDF(String degreeName, String degreePlanFilePath) {
+        String outputFilePath = "resources\\degreePlanBlueprints\\" + degreeName + "_Keys.pdf";
+        try {
+            PdfReader pdfReader = new PdfReader(new FileInputStream(degreePlanFilePath));
+            PdfDocument pdfDoc = new PdfDocument(
+                pdfReader, new PdfWriter(new FileOutputStream(outputFilePath)));
+
+            PdfAcroForm form = PdfAcroForm.getAcroForm(pdfDoc, true);
+            Map<String, PdfFormField> fields = form.getFormFields();
+            for(String key : fields.keySet()) {
+                fields.get(key).setValue(key);
+            }
+            Document document = new Document(pdfDoc);
+            document.close();
+            pdfDoc.close();
+            pdfReader.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("File not found.");
+        } catch(IOException e) {
+            System.out.println("IOException found.");
+        }
+    }
+
+    /**
+     * Description: Creates the degree plan pdf given a student. Has a lot of cases for each degree plan.
+     * @param student as String - the student, degreePlanFile as File - the file to write to.
+     */
     public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();
         final String DEGREE_PLAN_BLUEPRINT_FILE_NAME;
@@ -361,6 +405,19 @@ public class Report {
         }
         getDegreePlan(student, DEGREE_PLAN_BLUEPRINT_FILE_NAME, studentInformationFieldKeys, coreClassNumbers, coreFieldKeys, electiveFieldKeys, admissionPrereqClassNumbers, admissionPrereqFieldKeys, degreePlanFile);
     }
+
+    /**
+     * Description: Generates the degree plan pdf after getting values from Report.createDegreePlan
+     * @param student as student - the student
+     * @param DEGREE_PLAN_BLUEPRINT_FILE_NAME as String - the file path to the degree plan
+     * @param studentInformationFieldKeys as String array - the field keys for student information
+     * @param coreClassNumbers as String array - the core class numbers in the degree plan
+     * @param coreFieldKeys as String 2D array - the field keys for core classes
+     * @param electiveFieldKeys as String 2D array - the field keys for elective courses
+     * @param admissionPrereqClassNumbers as String array - the admission prerequisite class numbers in the degree plan
+     * @param admissionPrereqFieldKeys as String 2D array - the field keys for admission prerequisite courses
+     * @param degreePlanFile as File - the file to write to
+     */
     private static void getDegreePlan(Student student, String DEGREE_PLAN_BLUEPRINT_FILE_NAME, 
             String[] studentInformationFieldKeys, 
             String[] coreClassNumbers, 
@@ -371,6 +428,7 @@ public class Report {
             File degreePlanFile) {
 
         String dest = degreePlanFile.getPath();
+        
         try {
             PdfReader pdfReader = new PdfReader(new FileInputStream(DEGREE_PLAN_BLUEPRINT_FILE_NAME));
             PdfDocument pdfDoc = new PdfDocument(
@@ -407,16 +465,57 @@ public class Report {
             }
             //Approved 6000 Level Electives
             int electiveCount = 0;
-            for(Course course : coursesTaken) {
-                if(electiveCount >= electiveFieldKeys.length)
-                    break;
-                if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
-                    fields.get(electiveFieldKeys[electiveCount][0]).setValue(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
-                    fields.get(electiveFieldKeys[electiveCount][1]).setValue(course.getCourseNumber());
-                    fields.get(electiveFieldKeys[electiveCount][2]).setValue(course.getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
-                    fields.get(electiveFieldKeys[electiveCount][3]).setValue(course.getTransfer()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
-                    fields.get(electiveFieldKeys[electiveCount][4]).setValue(course.getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
-                    electiveCount++;
+            boolean needSecondPage = true;
+            Table table = null;
+            for(int i = 0; i < coursesTaken.size(); i++) {
+                Course course = coursesTaken.get(i);
+                if(electiveCount < electiveFieldKeys.length) {
+                    //First Page of Degree Plan for Electives
+                    if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
+                        fields.get(electiveFieldKeys[electiveCount][0]).setValue(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
+                        fields.get(electiveFieldKeys[electiveCount][1]).setValue(course.getCourseNumber());
+                        fields.get(electiveFieldKeys[electiveCount][2]).setValue(course.getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
+                        fields.get(electiveFieldKeys[electiveCount][3]).setValue(course.getTransfer()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
+                        fields.get(electiveFieldKeys[electiveCount][4]).setValue(course.getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
+                        electiveCount++;
+                    }
+                } else {
+                    //Adding a second page for extra electives
+                    if(course.getCourseNumber().charAt(3) == '6' && (course.getClassType() == 'E' || (course.getClassType() == 'C' && !Arrays.asList(coreClassNumbers).contains(course.getCourseNumber())))) {
+                        if(needSecondPage) {
+                            PageSize ps = new PageSize(pdfDoc.getFirstPage().getPageSize());
+                            pdfDoc.addNewPage(ps);
+                            float[] columnWidths = {50F, 300F, 125F, 125F, 125F, 125F};
+                            table = new Table(columnWidths);
+                            needSecondPage = false;
+                        }
+                        //Cells for the table
+                        Cell courseCountCell = new Cell();
+                        courseCountCell.add("" + (electiveCount+1));
+                        table.addCell(courseCountCell);
+
+                        Cell courseNameCell = new Cell();
+                        courseNameCell.add(new CourseList("resources/CourseList.json").GetCourseFromList(course.getCourseNumber()).getCourseName());
+                        table.addCell(courseNameCell);
+
+                        Cell courseNumberCell = new Cell();
+                        courseNumberCell.add(course.getCourseNumber());
+                        table.addCell(courseNumberCell);
+
+                        Cell courseSemesterCell = new Cell();
+                        courseSemesterCell.add(course.getSemester());
+                        table.addCell(courseSemesterCell);
+
+                        Cell courseTransferCell = new Cell();
+                        courseTransferCell.add(course.getTransfer()? "T":"");
+                        table.addCell(courseTransferCell);
+
+                        Cell courseGradeCell = new Cell();
+                        courseGradeCell.add(course.getGrade());
+                        table.addCell(courseGradeCell);
+
+                        electiveCount++;
+                    }
                 }
             }
             
@@ -428,6 +527,12 @@ public class Report {
                 }
             }
             Document document = new Document(pdfDoc);
+            if(!needSecondPage) {
+                document.add(new AreaBreak());
+                Paragraph para = new Paragraph("Additional Electives (3 Credit Hours Minimum)").setTextAlignment(TextAlignment.CENTER);
+                document.add(para);
+                document.add(table);
+            }
             document.close();
             pdfReader.close();
         } catch (IOException e) {
