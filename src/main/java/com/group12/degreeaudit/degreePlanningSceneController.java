@@ -72,27 +72,27 @@ public class degreePlanningSceneController implements Initializable{
     private CheckBox fast_track_checkbox, thesis_checkbox;
 
     @FXML
-    public TableView<CourseWrapper> admission_prereq_table, req_core_table, core_options_table, electives_table, addl_electives_table;
+    private TableView<CourseWrapper> admission_prereq_table, req_core_table, core_options_table, electives_table, addl_electives_table;
 
     @FXML
-    public TableColumn<CourseWrapper, String> admission_prereq_course_col, admission_prereq_name_col, admission_prereq_semester_col, admission_prereq_grade_col, admission_prereq_remove_col;
-    public TableColumn<CourseWrapper, Boolean> admission_prereq_waiver_col;
+    private TableColumn<CourseWrapper, String> admission_prereq_course_col, admission_prereq_name_col, admission_prereq_semester_col, admission_prereq_grade_col, admission_prereq_remove_col;
+    private TableColumn<CourseWrapper, Boolean> admission_prereq_waiver_col;
 
     @FXML
-    public TableColumn<CourseWrapper, String> req_core_course_col, req_core_course_name_col, req_core_semester_col, req_core_grade_col, req_core_remove_col;
-    public TableColumn<CourseWrapper, Boolean> req_core_transfer_col;
+    private TableColumn<CourseWrapper, String> req_core_course_col, req_core_course_name_col, req_core_semester_col, req_core_grade_col, req_core_remove_col;
+    private TableColumn<CourseWrapper, Boolean> req_core_transfer_col;
 
     @FXML
-    public TableColumn<CourseWrapper, String> core_options_course_col, core_options_name_col, core_options_semester_col, core_options_grade_col, core_options_remove_col;
-    public TableColumn<CourseWrapper, Boolean> core_options_transfer_col;
+    private TableColumn<CourseWrapper, String> core_options_course_col, core_options_name_col, core_options_semester_col, core_options_grade_col, core_options_remove_col;
+    private TableColumn<CourseWrapper, Boolean> core_options_transfer_col;
 
     @FXML
-    public TableColumn<CourseWrapper, String> electives_course_col, electives_name_col, electives_semester_col,  electives_grade_col, electives_remove_col;
-    public TableColumn<CourseWrapper, Boolean> electives_transfer_col;
+    private TableColumn<CourseWrapper, String> electives_course_col, electives_name_col, electives_semester_col,  electives_grade_col, electives_remove_col;
+    private TableColumn<CourseWrapper, Boolean> electives_transfer_col;
 
     @FXML
-    public TableColumn<CourseWrapper, String> addl_electives_course_col, addl_electives_name_col, addl_electives_semester_col, addl_electives_grade_col, addl_electives_remove_col;
-    public TableColumn<CourseWrapper, Boolean> addl_electives_transfer_col;
+    private TableColumn<CourseWrapper, String> addl_electives_course_col, addl_electives_name_col, addl_electives_semester_col, addl_electives_grade_col, addl_electives_remove_col;
+    private TableColumn<CourseWrapper, Boolean> addl_electives_transfer_col;
 
     @FXML
     private TextField admission_add_semester, req_core_add_semester, core_options_add_semester, electives_add_semester, addl_electives_add_semester;

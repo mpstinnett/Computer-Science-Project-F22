@@ -110,13 +110,13 @@ public class adminSceneController implements Initializable {
     private ComboBox<String> addc_type_dropdown, addc_prerequisites_dropdown;
 
     @FXML
-    public TableView<JSONCourseWrapper> addc_prerequisites_table;
+    private TableView<JSONCourseWrapper> addc_prerequisites_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addc_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> addc_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addc_course_remove_col;
+    private TableColumn<JSONCourseWrapper, String> addc_course_remove_col;
 
     /**
     * Description: addcPrerequisites - Adds a prerequisite course to the prerequisite table when "ADD" button is pressed in "add course" tab
@@ -439,7 +439,7 @@ public class adminSceneController implements Initializable {
 
     // ADD DEGREE TRACK TAB
     @FXML
-    public TextField addt_track_name, addt_num_core_courses, addt_core_gpa_requirements,
+    private TextField addt_track_name, addt_num_core_courses, addt_core_gpa_requirements,
             addt_num_electives, addt_overall_gpa, addt_elective_gpa_requirements;
 
     @FXML
@@ -491,13 +491,13 @@ public class adminSceneController implements Initializable {
 
     // Add to Optional Core Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> addt_optional_core_table;
+    private TableView<JSONCourseWrapper> addt_optional_core_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_optional_core_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> addt_optional_core_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_optional_core_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> addt_optional_core_remove_course_col;
 
     /**
     * Description: addtAddOptionalCoreCourse - Adds an optional course to optional core course table when "ADD" button is pressed in "add degree track" tab
@@ -572,13 +572,13 @@ public class adminSceneController implements Initializable {
 
     // Add to 5XXX Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> addt_5k_table;
+    private TableView<JSONCourseWrapper> addt_5k_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_5k_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> addt_5k_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_5k_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> addt_5k_remove_course_col;
 
     /**
     * Description: addtAdd5kCourse - Adds an elective to the 5XXX electives table when "ADD" button is pressed in "add degree track" tab

@@ -16,7 +16,12 @@ public class TranscriptScanner {
     private File transcriptFile;
     private Scanner scan;
     private CourseList courseList;
-
+    
+    /**
+    * Description: TranscriptScanner - Constructor that takes in the file path for the transcript and a CourseList object
+    * @param transcriptFilePath String file path for the transcript to be scanned
+    * @param courseList CourseList object that enables access to information for all courses in the CourseList.json
+    */
     public TranscriptScanner(String transcriptFilePath, CourseList courseList) {
         transcriptFile = new File(transcriptFilePath);
         this.courseList = courseList;
@@ -126,7 +131,7 @@ public class TranscriptScanner {
     /**
      * Grabs the list of courses the studend has taken or is currently taking.
      * 
-     * The method will run through the rest of the transcript and grab all the courses in the transcript, 
+     * The method will run through all of the transcript and grab all the courses in the transcript, 
      *      creating a Course object for each one and adding it to the list.
      * 
      * Assume all course information will start after lie "Beginning of Graduate Record"

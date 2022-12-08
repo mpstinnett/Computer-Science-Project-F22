@@ -621,6 +621,10 @@ public class DegreeAudit
         return Double.parseDouble(df_obj.format(gpa));
     }
 
+    /**
+    * Description: extraElectiveCheck - If 7th elective is allowed, it will check if the elective GPA is satisfied
+    * @return boolean    true if a 7th elective is allowed and that elective can bypass the elective GPA
+    */
     public boolean extraElectiveCheck()
     {
         int completedElectiveAmount = 0;
