@@ -237,13 +237,13 @@ public class adminSceneController implements Initializable {
     private CheckBox updatec_active_status;
 
     @FXML
-    public TableView<JSONCourseWrapper> updatec_prerequisites_table;
+    private TableView<JSONCourseWrapper> updatec_prerequisites_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatec_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> updatec_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatec_course_remove_col;
+    private TableColumn<JSONCourseWrapper, String> updatec_course_remove_col;
 
     /**
     * Description: updatecGetClassInfo - Autopopulates fields in tab when a course is chosen from the dropdown in "update course" tab
@@ -451,13 +451,13 @@ public class adminSceneController implements Initializable {
 
     // Add to Core Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> addt_core_table;
+    private TableView<JSONCourseWrapper> addt_core_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_core_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> addt_core_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_core_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> addt_core_remove_course_col;
 
     /**
     * Description: addtAddCoreCourse - Adds a course to core course table when "ADD" button is pressed in "add degree track" tab
@@ -531,13 +531,13 @@ public class adminSceneController implements Initializable {
 
     // Add to Elective Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> addt_elective_table;
+    private TableView<JSONCourseWrapper> addt_elective_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_elective_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> addt_elective_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> addt_elective_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> addt_elective_remove_course_col;
 
     /**
     * Description: addtAddElectiveCourse - Adds an elective to the electives table when "ADD" button is pressed in "add degree track" tab
@@ -676,7 +676,7 @@ public class adminSceneController implements Initializable {
     private ComboBox<String> updatet_dropdown;
 
     @FXML
-    public TextField updatet_track_name, updatet_num_core_courses,
+    private TextField updatet_track_name, updatet_num_core_courses,
             updatet_core_gpa_requirements,
             updatet_num_electives, updatet_overall_gpa, updatet_elective_gpa_requirements;
 
@@ -828,13 +828,13 @@ public class adminSceneController implements Initializable {
 
     // Add to Core Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> updatet_core_table;
+    private TableView<JSONCourseWrapper> updatet_core_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_core_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_core_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_core_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_core_remove_course_col;
 
     /**
     * Description: updatetAddCoreCourse - Adds a core course to core course table when "ADD" button is pressed in "update degree track" tab
@@ -910,13 +910,13 @@ public class adminSceneController implements Initializable {
 
     // Add to Elective Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> updatet_elective_table;
+    private TableView<JSONCourseWrapper> updatet_elective_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_elective_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_elective_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_elective_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_elective_remove_course_col;
 
     /**
     * Description: updatetAddElectiveCourse - Adds an elective course to the electives table when "ADD" button is pressed in "update degree track" tab
@@ -951,13 +951,13 @@ public class adminSceneController implements Initializable {
 
     // Add to 5XXX Courses Table
     @FXML
-    public TableView<JSONCourseWrapper> updatet_5k_table;
+    private TableView<JSONCourseWrapper> updatet_5k_table;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_5k_course_num_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_5k_course_num_col;
 
     @FXML
-    public TableColumn<JSONCourseWrapper, String> updatet_5k_remove_course_col;
+    private TableColumn<JSONCourseWrapper, String> updatet_5k_remove_course_col;
 
     /**
     * Description: updatetAdd5kCourse - Adds a 5XXX elective course to the 5XXX electives table when "ADD" button is pressed in "update degree track" tab

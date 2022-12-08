@@ -14,14 +14,14 @@ import javafx.scene.control.TableView;
  */
 public class CourseWrapper
 {
-    public Course course;
-    public Button button;
-    public String courseNumber = "";
-    public String courseTitle = "";
-    public String semester = "";
-    public char classType;
-    public boolean transfer = false;
-    public String grade = "";
+    private Course course;
+    private Button button;
+    private String courseNumber = "";
+    private String courseTitle = "";
+    private String semester = "";
+    private char classType;
+    private boolean transfer = false;
+    private String grade = "";
 
     /**
     * Description: CourseWrapper Constructor
