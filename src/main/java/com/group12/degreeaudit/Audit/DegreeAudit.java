@@ -9,6 +9,9 @@ import com.group12.degreeaudit.Course;
 import com.group12.degreeaudit.Student;
 import com.group12.degreeaudit.Administration.CourseList;
 
+/**
+ * Description: DegreeAudit - Houses degree audit operations for running audits on students
+ */
 public class DegreeAudit 
 {
     private Student student;
@@ -26,12 +29,21 @@ public class DegreeAudit
     private String outstandingRequirements = "\nOutstanding Requirements:\n";
     final DecimalFormat decfor = new DecimalFormat("0.00"); 
     
+    /**
+    * Description: Degree Audit Constructor
+    * @param student    Student object who will have their audit performed on
+    * @param courseList    list of all courses that a student can take
+    */
     public DegreeAudit(Student student, CourseList courseList)
     {
         this.student = student;
         this.courseList = courseList;
     }
 
+    /**
+    * Description: performs degree audit on the student
+    * @return String    formatted String containing the student's completed degree audit
+    */
     public String doAudit()
     {
         coreComplete();
@@ -84,26 +96,45 @@ public class DegreeAudit
         return auditString;
     }
 
+    /**
+    * Description: getter for elective GPA of the student
+    * @return double    elective GPA of the student  
+    */
     public double getElectiveGPA()
     {
         return electiveGPA;
     }
 
+    /**
+    * Description: getter for core GPA of the student
+    * @return double    core GPA of the student  
+    */
     public double getCoreGPA()
     {
         return coreGPA;
     }
 
+    /**
+    * Description: getter for combined GPA (overall GPA of the student)
+    * @return double    overall GPA of the student
+    */
     public double getCombinedGPA()
     {
         return combinedGPA;
     }
 
+    /**
+    * Description: getter for outstanding requirements a student has
+    * @return String    list of the requirements that will be displayed when the student is not meeting the core, elective, or overall GPA
+    */
     public String getOutstandingRequirements()
     {
         return outstandingRequirements;
     }
 
+    /**
+    * Description: Retrieves all the leveling courses and pre-requisites from Admission Letter that are found in the course list
+    */
     public void findLevelingCourses()
     {
         List<Course> levelingCoursesFound = new ArrayList<Course>();
@@ -118,21 +149,36 @@ public class DegreeAudit
         levelingCourses = levelingCoursesFound;
     }
 
+    /**
+    * Description: getter for leveling courses a student has taken
+    * @return List of Course    list of leveling and prerequisite courses a student has taken
+    */
     public List<Course> getLevelingCoursesTaken()
     {
         return levelingCourses;
     }
 
+    /**
+    * Description: getter for elective courses a student has taken
+    * @return List of Course    list of elective courses a student has taken
+    */
     public List<Course> getElectiveCoursesTaken()
     {
         return finalElectiveCourses;
     }
 
+    /**
+    * Description: getter for the 5 highest-grade core courses a student has taken 
+    * @return List of Course    list of the 5 highest-grade core courses a student has taken
+    */
     public List<Course> getCoreCoursesTaken()
     {
         return top5Core;
     }
 
+    /**
+    * Description: calculates the outstanding requirements for a student's combined GPA if it is lower than the overall GPA requirement
+    */
     public void calculateOverallGPA()
     {
         //List<Course> nonACourses = new ArrayList<Course>();
@@ -153,6 +199,10 @@ public class DegreeAudit
         }
     }
 
+    /**
+    * Description: Retrieves all the electives a student has completed, specifies if the elective requirement amount is not met, and adds to list of outstanding requirements if elective GPA requirements are not met
+    * @return String    String that lists out all the electives a student has taken
+    */
     public String electiveComplete()
     {
         String electiveInformationString = "";
@@ -252,6 +302,11 @@ public class DegreeAudit
         return electiveInformationString;
     }
 
+    /**
+    * Description - given a core course, determine if the course can be one of the top five highest-grade core courses
+    * @param course    course to compare with all the current top five courses
+    * @return boolean    if the course can be a top five course, return true; otherwise, false
+    */
     public boolean isPastTop5Core(Course course)
     {
         if(top5Core != null)
@@ -267,6 +322,9 @@ public class DegreeAudit
         return true;
     }
 
+    /**
+    * Description - remove duplicate courses from the list of all the courses the student has taken
+    */
     public void removeDuplicates()
     {
         for(int i = 0; i < sortedCourseListByGrade.size(); i++)
@@ -295,6 +353,10 @@ public class DegreeAudit
         }
     }
 
+    /**
+    * Description: Retrieves all the core courses a student has completed, specifies if the core requirement amount is not met, and adds to list of outstanding requirements if core GPA requirements are not met
+    * @return String    String that lists out all the core courses a student has taken (the top 5 highest-grade core courses)
+    */
     public String coreComplete()
     {
         //Check required + optional - Optional only up to the required amount
@@ -428,6 +490,13 @@ public class DegreeAudit
         return coreInformationString;
     }
 
+    /**
+    * Description - calculates the needed GPA of a student when they have outstanding requirements
+    * @param courses    The list of all the courses that are being checked (can be core courses or electives)
+    * @param creditsLeft    The amount of remaining credits that a student needs to take for the course category (ex: amount of core courses not taken yet)
+    * @param gpaType    Core course 'C' or elective course 'E'
+    * @return double    The GPA that a student needs to have in order to fulfill the GPA requirement for a particular course category
+    */
     private double getNeededGPA(List<Course> courses, int creditsLeft, char gpaType)
     {
         int currentCredits = 0;
@@ -456,16 +525,31 @@ public class DegreeAudit
         }
     }
     
+    /**
+    * Description: sortByGrade - sorts the student's list of courses by grade
+    * @param sortList    List of all the courses a student has taken
+    */
     private void sortByGrade(List<Course> sortList)
     {
         Collections.sort(sortList);
     }
 
+    /**
+    * Description: getGPA - calls the calculateGPA method on a given list of courses
+    * @param courses    List of courses to check the gpa from
+    * @return Double for the GPA calculated
+    */
     public double getGPA(List<Course> courses)
     {
         return calculateGPA(courses);
     }
 
+    /**
+      * Description: getGPA - Gets the gpa based on class type and courses
+      * @param classType    Character for the class type (A, C, E) - Used to trim
+      * @param courses  List of courses to check the gpa from
+      * @return Double for the GPA calculated
+    */
     public double getGPA(char classType, List<Course> courses) {
         List<Course> GPAlist = new ArrayList<Course>();
         

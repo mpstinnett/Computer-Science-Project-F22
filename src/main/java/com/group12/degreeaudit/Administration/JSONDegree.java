@@ -2,8 +2,10 @@ package com.group12.degreeaudit.Administration;
 
 import java.util.ArrayList;
 
-//JSONDegree - Class to house the fields and methods associated with degree plans
-//      Used when Exporting and Importing degree plans in JSON
+/**
+ * Description: JSONDegree - Class to house the fields and methods associated with degree plans
+ * Used when Exporting and Importing degree plans in JSON
+ */
 public class JSONDegree 
 {
     private String degreeName;              //Degree Name Ex: Systems
@@ -14,13 +16,14 @@ public class JSONDegree
     private String electiveGPARequirement;      //Required GPA of electives
     private boolean electiveAllowOneLowerCourse;    //Allow a lower level course as an elective (Only if listed)
     private String[] electivesAcceptedLowerCourses; //List of acceptable lower level courses to fill an elective
-    private String overallGPARequirement;       //Overall GPA (All 5xxx & 6xxx courses)
+    private String overallGPARequirement;       //Overall GPA (All 5xxx and 6xxx courses)
     private String[] coreClassListRequirement;  //List of required core classes
     private ArrayList<String> optionsCoreClassListRequirement;    //List of optional core classes (to satisfy the total required beyond the listed required)
     private String[] electiveClassListRequirement;      //Required electives to satisfy the degree track
     private boolean activeStatus;   //If the degree is able to be selected in dropdowns (Active to enroll into)
 
-    //Empty constructor, sets all values to nulls or empty values
+    /** Description: JSONDegree default constructor - Sets all values to nulls or empty values
+    */
     public JSONDegree()
     {
         this.degreeName = "No Degree Track Chosen";
@@ -38,7 +41,21 @@ public class JSONDegree
         this.activeStatus = false;
     }
 
-    //Constructor with all values to input.
+    /** Description: JSONDegree constructor - Sets all values to parameter values, creating the degree
+      * @param  degreeName  String for the name of the degree
+      * @param  coreRequirementAmount   String for the required amount of core courses
+      * @param  coreGPARequirement  String for the core gpa requirement
+      * @param  coreAllowSeventhElective    Boolean for if there can be a 7th elective to bypass a core gpa greater than 3.0 but less than 3.19
+      * @param  electiveRequirementAmount   String for the total number of electives required
+      * @param  electiveGPARequirement  String for the elective gpa requirement
+      * @param  electiveAllowOneLowerCourse Boolean for if lower courses can be used as electives
+      * @param  electivesAcceptedLowerCourses   String array for the accepted 5XXX courses to count as electives
+      * @param  overallGPARequirement   String for the overall gpa requirement
+      * @param  coreClassListRequirement    String array for the core class requirements
+      * @param  optionsCoreClassListRequirement Arraylist of Strings for the optional core classes
+      * @param  electiveClassListRequirement    String array for the required electives
+      * @param  activeStatus    Boolean for if the degree can be taken or not (dropdowns)
+    */
     public JSONDegree(String degreeName, String coreRequirementAmount, String coreGPARequirement, 
              boolean coreAllowSeventhElective, String electiveRequirementAmount,
             String electiveGPARequirement, boolean electiveAllowOneLowerCourse,
@@ -60,7 +77,9 @@ public class JSONDegree
        this.activeStatus = activeStatus;
     }
 
-    //Copy Constructor, copies all values of a degree track.
+    /** Description: JSONDegree copy constructor - Copies all values from a JSONDegree
+      * @param copyDegree JSONDegree to copy
+    */
     public JSONDegree(JSONDegree copyDegree)
     {
         this.degreeName = copyDegree.getDegreeName();
@@ -78,84 +97,121 @@ public class JSONDegree
         this.activeStatus = copyDegree.getActiveStatus();
     }
 
-    //getDegreeName - Returns the degree name.
+    /** Description: getDegreeName - Returns the degree name
+      * @return String with the degree name
+    */
     public String getDegreeName()
     {
         return degreeName;
     }
-    //setDegreeName - Sets the degree name.
+
+    /** Description: setDegreeName - Sets the degree name.
+      * @param degreeName Sets the degree name
+    */
     public void setDegreeName(String degreeName)
     {
         this.degreeName = degreeName;
     }
 
-    //getCoreRequirementAmount - Returns the required amount of core classes to take.
+    /** Description: getCoreRequirementAmount - Returns the required amount of core classes to take.
+      * @return String with the required core amount of core classes
+    */
     public String getCoreRequirementAmount()
     {
         return coreRequirementAmount;
     }
-    //setCoreRequirementAmount - Sets the required amount of core classes to take.
+
+    /** Description: setCoreRequirementAmount - Sets the required amount of core classes to take.
+      * @param coreRequirementAmount Sets the degree core requirement amount
+    */
     public void setCoreRequirementAmount(String coreRequirementAmount)
     {
         this.coreRequirementAmount = coreRequirementAmount;
     }
 
-    //getCoreGPARequirement - Returns the required gpa requirement of core classes.
+    /** Description: getCoreGPARequirement - Returns the required gpa requirement of core classes.
+      * @return String with the required core GPA
+    */
     public String getCoreGPARequirement()
     {
         return coreGPARequirement;
     }
-    //setCoreGPARequirement - Sets the required gpa requirement of core classes.
+    
+    /** Description: setCoreGPARequirement - Sets the required gpa requirement of core classes.
+      * @param coreGPARequirement Sets the degree core gpa requirement
+    */
     public void setCoreGPARequirement(String coreGPARequirement)
     {
         this.coreGPARequirement = coreGPARequirement;
     }
 
-    //getCoreAllowSeventhElective - Returns if the core gpa requirement can be bypassed with a 7th elective.
+    /** Description: getCoreAllowSeventhElective - Returns if the core gpa requirement can be bypassed with a 7th elective.
+      * @return Boolean with the allowance of a 7th elective to bypass core gpa requirements
+    */
     public boolean getCoreAllowSeventhElective()
     {
         return coreAllowSeventhElective;
     }
-    //setCoreAllowSeventhElective - Sets if the core gpa requirement can be bypassed with a 7th elective.
+    
+    /** Description: setCoreAllowSeventhElective - Sets if the core gpa requirement can be bypassed with a 7th elective.
+      * @param coreAllowSeventhElective Sets the degree allowing of a 7th elective to bypass core gpa requirements
+    */
     public void setCoreAllowSeventhElective(boolean coreAllowSeventhElective)
     {
         this.coreAllowSeventhElective = coreAllowSeventhElective;
     }
     
-    //getElectiveRequirementAmount - Returns the required amount of electives classes to take.
+    /** Description: getElectiveRequirementAmount - Returns the required amount of electives classes to take.
+      * @return String with the required amount of elective courses
+    */
     public String getElectiveRequirementAmount()
     {
         return electiveRequirementAmount;
     }
-    //setElectiveRequirementAmount - Sets the required amount of electives classes to take.
+    
+    /** Description: setElectiveRequirementAmount - Sets the required amount of electives classes to take.
+      * @param electiveRequirementAmount Sets the requirement amount of elective courses
+    */
     public void setElectiveRequirementAmount(String electiveRequirementAmount)
     {
         this.electiveRequirementAmount = electiveRequirementAmount;
     }
 
-    //getElectiveGPARequirement - Returns the required gpa requirement of elective classes.
+    /** Description: getElectiveGPARequirement - Returns the required gpa requirement of elective classes.
+      * @return String with the required elective GPA
+    */
     public String getElectiveGPARequirement()
     {
         return electiveGPARequirement;
     }
-    //setElectiveGPARequirement - Sets the required gpa requirement of elective classes.
+    
+    /** Description: setElectiveGPARequirement - Sets the required gpa requirement of elective classes.
+      * @param electiveGPARequirement Sets the required elective gpa
+    */
     public void setElectiveGPARequirement(String electiveGPARequirement)
     {
         this.electiveGPARequirement = electiveGPARequirement;
     }
     
-    //getElectiveAllowOneLowerCourse - Returns if it is allowed to have a lower level elective count towards a completed course and gpa.
+    /** Description: getElectiveAllowOneLowerCourse - Returns if it is allowed to have a lower level elective count towards a completed course and gpa.
+      * @return Boolean with if there can be a single lower level (5XXX) course in the electives
+    */
     public boolean getElectiveAllowOneLowerCourse()
     {
         return electiveAllowOneLowerCourse;
     }
-    //setElectiveAllowOneLowerCourse - Sets if it is allowed to have a lower level elective count towards a completed course and gpa.
+
+    /** Description: setElectiveAllowOneLowerCourse - Sets if it is allowed to have a lower level elective count towards a completed course and gpa.
+      * @param electiveAllowOneLowerCourse Sets the allowance of a 5XXX course to be counted as an elective
+    */
     public void setElectiveAllowOneLowerCourse(boolean electiveAllowOneLowerCourse)
     {
         this.electiveAllowOneLowerCourse = electiveAllowOneLowerCourse;
     }
     
-    //getElectivesAcceptedLowerCourses - Returns a list of approved lower level coursees for electives.
+    /** Description: getElectivesAcceptedLowerCourses - Returns a list of approved lower level coursees for electives.
+      * @return String array with the approved lower level (5XXX) courses that can be an elective
+    */
     public String[] getElectivesAcceptedLowerCourses()
     {
         if (electivesAcceptedLowerCourses.length == 0) {
@@ -163,24 +219,34 @@ public class JSONDegree
         }
         return electivesAcceptedLowerCourses;
     }
-    //setElectivesAcceptedLowerCourses - Sets a list of approved lower level coursees for electives.
+    
+    /** Description: setElectivesAcceptedLowerCourses - Sets a list of approved lower level coursees for electives.
+      * @param electivesAcceptedLowerCourses Sets the accepted 5XXX courses to be counted as an elective
+    */
     public void setElectivesAcceptedLowerCourses(String[] electivesAcceptedLowerCourses)
     {
         this.electivesAcceptedLowerCourses = electivesAcceptedLowerCourses;
     }
     
-    //getOverallGPARequirement - Returns the overall gpa (all 5xxx & 6xxx) requirement.
+    /** Description: getOverallGPARequirement - Returns the overall gpa (all 5xxx and 6xxx) requirement.
+      * @return String with the overall GPA requirement
+    */
     public String getOverallGPARequirement()
     {
         return overallGPARequirement;
     }
-    //setOverallGPARequirement - Sets the overall gpa (all 5xxx & 6xxx) requirement.
+    
+    /** Description: setOverallGPARequirement - Sets the overall gpa (all 5xxx and 6xxx) requirement.
+      * @param overallGPARequirement Sets the overall GPA requirement
+    */
     public void setOverallGPARequirement(String overallGPARequirement)
     {
         this.overallGPARequirement = overallGPARequirement;
     }
     
-    //getCoreClassListRequirement - Returns the class list of required core classes.
+    /** Description: getCoreClassListRequirement - Returns the class list of required core classes.
+      * @return String array with the required core classes
+    */
     public String[] getCoreClassListRequirement()
     {
         if (coreClassListRequirement.length == 0) {
@@ -188,26 +254,36 @@ public class JSONDegree
         }
         return coreClassListRequirement;
     }
-    //setCoreClassListRequirement - Sets the class list of required core classes.
+    
+    /** Description: setCoreClassListRequirement - Sets the class list of required core classes.
+      * @param coreClassListRequirement Sets the list of required core classes
+    */
     public void setCoreClassListRequirement(String[] coreClassListRequirement)
     {
         this.coreClassListRequirement = coreClassListRequirement;
     }
 
-    //getOptionsCoreClassListRequirement - Returns the class list of core classes that can be used to satisfy the required amount
-    //      past the cores required to take.
+    /** Description: getOptionsCoreClassListRequirement - Returns the class list of core classes that can be used to satisfy the required amount
+      * past the cores required to take.
+      * @return Arraylist of Strings with the optional core classes
+    */
     public ArrayList<String> getOptionsCoreClassListRequirement()
     {
         return optionsCoreClassListRequirement;
     }
-    //setOptionsCoreClassListRequirement - Sets the class list of core classes that can be used to satisfy the required amount
-    //      past the cores required to take.
+     
+    /** Description: setOptionsCoreClassListRequirement - Sets the class list of core classes that can be used to satisfy the required amount
+      * past the cores required to take.
+      * @param optionsCoreClassListRequirement Sets the optional core class list
+    */
     public void setOptionsCoreClassListRequirement(ArrayList<String> optionsCoreClassListRequirement)
     {
         this.optionsCoreClassListRequirement = optionsCoreClassListRequirement;
     }
     
-    //getElectiveClassListRequirement - Returns the class list of required elective classes.
+    /** Description: getElectiveClassListRequirement - Returns the class list of required elective classes.
+      * @return String array with the required electives
+    */
     public String[] getElectiveClassListRequirement()
     {
         if (electiveClassListRequirement.length == 0) {
@@ -215,24 +291,34 @@ public class JSONDegree
         }
         return electiveClassListRequirement;
     }
-    //setElectiveClassListRequirement - Sets the class list of required elective classes.
+    
+    /** Description: setElectiveClassListRequirement - Sets the class list of required elective classes.
+      * @param electiveClassListRequirement Sets the elective required courses
+    */
     public void setElectiveClassListRequirement(String[] electiveClassListRequirement)
     {
         this.electiveClassListRequirement = electiveClassListRequirement;
     }
     
-    //getActiveStatus - Returns if the degree track is active - Meaning a student may enroll into it
+    /** Description: getActiveStatus - Returns if the degree track is active - Meaning a student may enroll into it
+      * @return Boolean with the active status of the degree
+    */
     public boolean getActiveStatus()
     {
         return activeStatus;
     }
-    //setActiveStatus - Sets if the degree track is active - Meaning a student may enroll into it
+    
+    /** Description: setActiveStatus - Sets if the degree track is active - Meaning a student may enroll into it
+      * @param activeStatus Sets the active status of the degree track
+    */
     public void setActiveStatus(boolean activeStatus)
     {
         this.activeStatus = activeStatus;
     }
     
-    //toString method - Prints the information of the degree and all its fields.
+    /** Description: toString Override - Returns a string with the degree information
+     * @return String with the degree information
+    */
     @Override
     public String toString()
     {

@@ -9,6 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Description: menuGUI -  Front end for Main Menu
+ */
 public class menuGUI extends Application {
 
     /**
@@ -27,7 +30,10 @@ public class menuGUI extends Application {
         primaryStage.show();
     }
 
-
+    /**
+    * Description: main - loads and initializes application window
+    * @param args    command line arguments (null)
+    */
     public static void main(String[] args) {
         launch(args);
     }

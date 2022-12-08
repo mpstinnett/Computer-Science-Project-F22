@@ -1,5 +1,8 @@
 package com.group12.degreeaudit;
 
+/**
+ * Description: Course - Houses all methods for course operations for student courses taken or taking
+ */
 public class Course implements Comparable<Course> {
     private String courseNumber;
     private String semester;
@@ -10,7 +13,10 @@ public class Course implements Comparable<Course> {
     private double gradePoints;
     private double creditHours;
 
+    /** Description: Course default constructor - Does nothing
+    */
     public Course() {}
+
     /**
      * Description: Course Constructor - generates a new course a student takes
      * @param   courseNumber    String for the course number

@@ -17,6 +17,9 @@ import com.group12.degreeaudit.Report;
 import com.group12.degreeaudit.Student;
 import com.group12.degreeaudit.Audit.DegreeAudit;
 
+/**
+ * Description: FileActions - Houses importing and exporting methods for PDFs, students, and settings
+ */
 public class FileActions 
 {
     File dir = new File("./Resources");
@@ -25,6 +28,10 @@ public class FileActions
     DegreeList degreeList;
     Gson gson = new Gson();
 
+    /** Description: FileActions constructor - Creates the file settings before use
+     * @param   courseList  Course list to use with file actions
+     * @param   degreeList  Degree list to use with file actions
+    */
     public FileActions(CourseList courseList, DegreeList degreeList)
     {
         this.courseList = courseList;
@@ -38,7 +45,8 @@ public class FileActions
         fileChooser.setInitialDirectory(dir);
     }
     
-
+    /** Description: exportSettings - Exports the courselist and degree list to a settings file
+    */
     public void exportSettings()
     {
         try
@@ -66,6 +74,8 @@ public class FileActions
         }
     }
 
+    /** Description: importSettings - Imports the course list and degree list from a settings file
+    */
     public void importSettings()
     {
         try
@@ -109,6 +119,10 @@ public class FileActions
         }
     }
 
+    /** Description: exportStudent - Exports the student object into a json file
+      * @param student Student object to export
+      * @exception Exception throws if there is a problem exporting
+    */
     public void exportStudent(Student student) throws Exception
     {
         try
@@ -130,6 +144,9 @@ public class FileActions
         }
     }
 
+    /** Description: importStudent - Imports the student from a student file
+      * @return Student object that was imported from the file
+    */
     public Student importStudent()
     {
         try
@@ -158,6 +175,10 @@ public class FileActions
         return null;
     }
 
+    /** Description: exportDegreePlanPDF - Exports the degree plan in PDF form based on a student
+      * @param student Student object to export into a PDF for a degree plan
+      * @exception Exception Thrown when unable to save a degree plan
+    */
     public void exportDegreePlanPDF(Student student) throws Exception
     {
         try
@@ -179,6 +200,10 @@ public class FileActions
         }
     }
 
+    /** Description: exportAuditPDF - Exports the audit in PDF form based on a student
+      * @param student Student object to export into a PDF for an audit
+      * @param audit DegreeAudit from the audit report
+    */
     public void exportAuditPDF(Student student, DegreeAudit audit)
     {
         try

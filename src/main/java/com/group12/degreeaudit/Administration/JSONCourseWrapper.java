@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 
+/**
+ * Description: JSONCourseWrapper - Wraps around JSONCourse to allow for button usage in tables
+ */
 public class JSONCourseWrapper 
 {
     private JSONCourse jsonCourse;

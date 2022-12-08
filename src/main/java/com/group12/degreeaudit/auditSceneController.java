@@ -21,6 +21,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+/**
+ * Description: auditSceneController - Controller for the front end for audits
+ */
 public class auditSceneController implements Initializable {
 
 private Student student = null;

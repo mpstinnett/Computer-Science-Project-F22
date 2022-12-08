@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 
+/**
+ * Description: CourseWrapper - Wraps around Course to allow for button usage in tables
+ */
 public class CourseWrapper
 {
     public Course course;
@@ -49,9 +52,10 @@ public class CourseWrapper
     /**
     * Description: removeCourse - called whenever the "X" button on a course in a table is pressed
     * @param tblView    JavaFX TableView of current table the course is in
-    * @param course    CourseWrapper for course to be removed
-    * @param dropdown    JavaFX ComboBox dropdown that the course will be added to after removal from table
-    * @param studentRemove    Student who needs a course to be removed from
+    * @param course CourseWrapper for course to be removed
+    * @param dropdown   JavaFX ComboBox dropdown that the course will be added to after removal from table
+    * @param prereq Name of the course to be re-added into the dropdown
+    * @param studentRemove  Student who needs a course to be removed from
     */
     public void removeCourse(final TableView tblView, final CourseWrapper course, final ComboBox dropdown, final String prereq, final Student studentRemove){
         button.setFocusTraversable(false);

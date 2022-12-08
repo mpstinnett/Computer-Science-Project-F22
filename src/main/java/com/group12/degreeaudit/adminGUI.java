@@ -5,6 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+/**
+ * Description: adminGUI - Front end for administration
+ */
 public class adminGUI extends Application {
 
     /**
@@ -21,6 +25,10 @@ public class adminGUI extends Application {
         primaryStage.show();
     }
 
+    /**
+    * Description: main - loads and initializes application window
+    * @param args    command line arguments (null)
+    */
     public static void main(String[] args) {
         launch(args);
     }

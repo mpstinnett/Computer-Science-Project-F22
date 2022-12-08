@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Description: degreePlanningGUI -  Front end for degree planning
+ */
 public class degreePlanningGUI extends Application {
 
     /**
@@ -22,7 +25,10 @@ public class degreePlanningGUI extends Application {
         primaryStage.show();
     }
 
-
+    /**
+    * Description: main - loads and initializes application window
+    * @param args    command line arguments (null)
+    */
     public static void main(String[] args) {
         launch(args);
     }

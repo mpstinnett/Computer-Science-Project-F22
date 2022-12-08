@@ -33,11 +33,11 @@ public class Student {
 
     /**
     * Description: Student - Constructor that takes in basic student information like a students name, id, program, their semester admitted, and their courses taken  
-    * @param name 
-    * @param ID
-    * @param program
-    * @param semesterAdmitted
-    * @param coursesTaken
+    * @param name   String for the name of the student
+    * @param ID String for the ID of the student
+    * @param program    String for the program the student is taking
+    * @param semesterAdmitted   String for the semester admitted to the program
+    * @param coursesTaken   List of courses for the courses the student has taken
     */
     public Student(String name, String ID, String program, String semesterAdmitted, List<Course> coursesTaken) {
         this.name = name;
@@ -338,7 +338,7 @@ public class Student {
     /**
      * Description: compares the list of elective courses a student has taken to a degree track and looks for overlapping courses
      * @param degreeTrack A JSON degree track to be compared to the courseList
-     * @param type 
+     * @param type Elective type top 5 and past 5
      * @return  A List of Course Objects containing the elective courses that are both in courseList and degreeTrack
      */
     public List<Course> matchElectiveCourses(JSONDegree degreeTrack, String type)

@@ -35,6 +35,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 
+/**
+ * Description: degreePlanningSceneController - Controller for the front end for degree planning
+ */
 public class degreePlanningSceneController implements Initializable{
     private Student student = null;
     

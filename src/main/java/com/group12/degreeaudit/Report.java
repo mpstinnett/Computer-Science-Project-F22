@@ -30,13 +30,14 @@ import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
 /**
- * Description: Class to generate reports (audit report and degree plan)
- * @author Anhy Luu
+ * Description: Report - Class to generate reports (audit report and degree plan)
  */
 public class Report {
     /**
      * Description: Generates an audit report pdf given some student information.
-     * @param audit as String - contains student information such as name, ID, GPA, etc., studentID as String - the student's ID number, auditFile as File - the file to write to
+     * @param   audit as String - contains student information such as name, ID, GPA, etc., studentID as String - the student's ID number, auditFile as File - the file to write to
+     * @param   studentID   String containing the students id number
+     * @param   auditFile   File containing the location to export to
      */
     public static void createAuditReport(String audit, String studentID, File auditFile) {
         try {
@@ -106,6 +107,7 @@ public class Report {
     /**
      * Generates a pdf of a given degree plan with the corresponding key values filled in for each field.
      * @param degreeName as string - name of the degree track, degreePlanFilePath as string - file path to the degree plan
+     * @param degreePlanFilePath as string - path containing the location to export to
      */
     public static void getKeysPDF(String degreeName, String degreePlanFilePath) {
         String outputFilePath = "resources\\degreePlanBlueprints\\" + degreeName + "_Keys.pdf";
@@ -133,6 +135,7 @@ public class Report {
     /**
      * Description: Creates the degree plan pdf given a student. Has a lot of cases for each degree plan.
      * @param student as String - the student, degreePlanFile as File - the file to write to.
+     * @param   degreePlanFile   File containing the location to export to
      */
     public static void createDegreePlan(Student student, File degreePlanFile) {
         String degreeTrack = student.getDegreeTrack().getDegreeName();

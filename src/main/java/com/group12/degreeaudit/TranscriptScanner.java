@@ -10,7 +10,7 @@ import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.JSONCourse;
 
 /**
- * @author Anhy Luu
+ * Description: TranscriptScanner - Scans a student transcript and produces a student object
  */
 public class TranscriptScanner {
     private File transcriptFile;

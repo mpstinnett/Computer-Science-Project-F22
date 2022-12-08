@@ -36,6 +36,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * Description: adminSceneController - Controller for the front end for administration
+ */
 public class adminSceneController implements Initializable {
 
     // Return to main menu button
