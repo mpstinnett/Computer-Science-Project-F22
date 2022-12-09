@@ -353,12 +353,7 @@ public class Student {
 
         if(matchedRequiredElectiveCourses.size() >= Integer.parseInt(degreeTrack.getElectiveRequirementAmount()))
         {
-            int topXInt = 5;
-            if(degreeTrack.getCoreRequirementAmount().equals("4"))
-            {
-                topXInt = 4;
-            }
-            for(int i = matchedRequiredElectiveCourses.size() - 1; i >= topXInt; i--)
+            for(int i = matchedRequiredElectiveCourses.size() - 1; i >= 5; i--)
             {
                 matchedElectiveCourses.add(matchedRequiredElectiveCourses.get(i));
                 matchedRequiredElectiveCourses.remove(i);

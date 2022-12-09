@@ -480,8 +480,8 @@ public class Report {
             {
                 if(top5.size() == 5 && top5.get(4) != null)
                 {
-                    past5.add(top5.get(3));
-                    System.out.println("GET: " + top5.get(3));
+                    past5.add(top5.get(4));
+                    System.out.println("GET: " + top5.get(4));
                     top5.remove(4);
                 }
             }
