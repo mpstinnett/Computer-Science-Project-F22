@@ -1,9 +1,9 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.Audit;
 
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.DegreeList;
-import com.group12.degreeaudit.Administration.FileActions;
-import com.group12.degreeaudit.Audit.DegreeAudit;
+import com.group12.degreeaudit.FileActions.FileActions;
+import com.group12.degreeaudit.Planner.Student;
 
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;

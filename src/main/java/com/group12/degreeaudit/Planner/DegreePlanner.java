@@ -1,10 +1,12 @@
-package com.group12.degreeaudit.Administration;
+package com.group12.degreeaudit.Planner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.group12.degreeaudit.Course;
-import com.group12.degreeaudit.Student;
+import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.DegreeList;
+import com.group12.degreeaudit.Administration.JSONCourse;
+import com.group12.degreeaudit.Administration.JSONDegree;
 
 /**
  * Description: DegreePlanner - Houses degree planner methods

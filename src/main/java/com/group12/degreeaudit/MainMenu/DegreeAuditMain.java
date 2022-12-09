@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.MainMenu;
 
 /**
  * Description: DegreeAuditMain - Main Class, runs when launched

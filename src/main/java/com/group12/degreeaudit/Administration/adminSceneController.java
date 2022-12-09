@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.Administration;
 
 // Imports
 import java.io.IOException;
@@ -8,12 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.group12.degreeaudit.Administration.CourseList;
-import com.group12.degreeaudit.Administration.DegreeList;
-import com.group12.degreeaudit.Administration.FileActions;
-import com.group12.degreeaudit.Administration.JSONCourse;
-import com.group12.degreeaudit.Administration.JSONCourseWrapper;
-import com.group12.degreeaudit.Administration.JSONDegree;
+import com.group12.degreeaudit.FileActions.FileActions;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

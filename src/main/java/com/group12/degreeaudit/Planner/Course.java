@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.Planner;
 
 /**
  * Description: Course - Houses all methods for course operations for student courses taken or taking

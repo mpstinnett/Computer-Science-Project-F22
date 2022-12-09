@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.group12.degreeaudit.Course;
-import com.group12.degreeaudit.Student;
 import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Planner.Course;
+import com.group12.degreeaudit.Planner.Student;
 
 /**
  * Description: DegreeAudit - Houses degree audit operations for running audits on students

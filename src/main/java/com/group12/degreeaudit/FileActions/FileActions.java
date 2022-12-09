@@ -1,4 +1,4 @@
-package com.group12.degreeaudit.Administration;
+package com.group12.degreeaudit.FileActions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,9 +13,12 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.group12.degreeaudit.Report;
-import com.group12.degreeaudit.Student;
+import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Administration.DegreeList;
+import com.group12.degreeaudit.Administration.JSONCourse;
+import com.group12.degreeaudit.Administration.JSONDegree;
 import com.group12.degreeaudit.Audit.DegreeAudit;
+import com.group12.degreeaudit.Planner.Student;
 
 /**
  * Description: FileActions - Houses importing and exporting methods for PDFs, students, and settings

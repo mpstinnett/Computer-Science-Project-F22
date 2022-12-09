@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.Planner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

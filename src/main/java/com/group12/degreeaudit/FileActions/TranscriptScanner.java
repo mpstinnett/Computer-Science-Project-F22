@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.FileActions;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.JSONCourse;
+import com.group12.degreeaudit.Planner.Course;
+import com.group12.degreeaudit.Planner.Student;
 
 /**
  * Description: TranscriptScanner - Scans a student transcript and produces a student object

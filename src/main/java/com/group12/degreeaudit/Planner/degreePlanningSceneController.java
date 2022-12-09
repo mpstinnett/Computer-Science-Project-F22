@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.Planner;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.util.ResourceBundle;
 
 import com.group12.degreeaudit.Administration.CourseList;
 import com.group12.degreeaudit.Administration.DegreeList;
-import com.group12.degreeaudit.Administration.DegreePlanner;
 import com.group12.degreeaudit.Administration.JSONCourse;
 import com.group12.degreeaudit.Administration.JSONDegree;
-import com.group12.degreeaudit.Administration.FileActions;
+import com.group12.degreeaudit.FileActions.FileActions;
+import com.group12.degreeaudit.FileActions.TranscriptScanner;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

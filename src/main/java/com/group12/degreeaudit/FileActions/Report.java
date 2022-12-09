@@ -1,4 +1,4 @@
-package com.group12.degreeaudit;
+package com.group12.degreeaudit.FileActions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.group12.degreeaudit.Administration.CourseList;
+import com.group12.degreeaudit.Planner.Course;
+import com.group12.degreeaudit.Planner.Student;
 import com.itextpdf.forms.PdfAcroForm;
 import com.itextpdf.forms.fields.PdfFormField;
 import com.itextpdf.io.font.FontConstants;
