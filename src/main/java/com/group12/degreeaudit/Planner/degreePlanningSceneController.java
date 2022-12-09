@@ -911,6 +911,7 @@ public class degreePlanningSceneController implements Initializable{
 
 		// Only allowing .txt files
 		fc.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"));
+        fc.setInitialDirectory(new File("./Resources"));
 		File selectedFile = fc.showOpenDialog(null);
         
 
