@@ -868,14 +868,18 @@ public class adminSceneController implements Initializable {
     }
 
     // Add to Optional Core Courses Table
-    @FXML
-    private TableView<JSONCourseWrapper> updatet_optional_core_table;
 
+    /**Descripton: Table Variable for the Update Optional Courses Table */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> updatet_optional_core_course_num_col;
+    public TableView<JSONCourseWrapper> updatet_optional_core_table;
 
+    /**Descripton: Optional Core Course Column Variable for the Update Optional Courses Table */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> updatet_optional_core_remove_course_col;
+    public TableColumn<JSONCourseWrapper, String> updatet_optional_core_course_num_col;
+
+    /**Descripton: Remove Course Column Variable for the Update Optional Courses Table */
+    @FXML
+    public TableColumn<JSONCourseWrapper, String> updatet_optional_core_remove_course_col;
 
     /**
     * Description: updatetAddOptionalCoreCourse - Adds an optional core course to the optional core course table when "ADD" button is pressed in "update degree track" tab
