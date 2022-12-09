@@ -67,7 +67,6 @@ public class JSONCourseWrapper
             public void handle(ActionEvent t) {
                 //tblView.getItems().remove(tblView.getSelectionModel().getSelectedItem());
                 tblView.getItems().remove(course);   
-                System.out.println("after removed: " + tblView.getItems());
                 
                 // Put item back into dropdown
                 dropdown.getItems().add(prereq);
