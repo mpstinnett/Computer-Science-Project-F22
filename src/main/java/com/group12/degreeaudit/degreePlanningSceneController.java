@@ -398,7 +398,7 @@ public class degreePlanningSceneController implements Initializable{
             
             // Grab semester and transfer and grade
             String semester = admission_add_semester.getText().toString();
-            boolean transfer = admission_add_waiver.isSelected();
+            boolean waiver = admission_add_waiver.isSelected();
             String grade = admission_add_grade.getValue();
 
             if(grade == null){
@@ -409,7 +409,7 @@ public class degreePlanningSceneController implements Initializable{
             }
             // create an instance of Course to add to the table
             // Constructor: Course(String courseNum, String semester, String grade, String courseTitle, boolean transfer) 
-            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, transfer, 0, 'A'));
+            CourseWrapper course = new CourseWrapper(new Course(courseNum, semester, grade, courseTitle, false, 0, waiver));
 
             // create an observable list for the table
             ObservableList<CourseWrapper> tableList = admission_prereq_table.getItems();
@@ -1022,7 +1022,7 @@ public class degreePlanningSceneController implements Initializable{
         admission_prereq_course_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseNumber"));
         admission_prereq_name_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("courseTitle"));
         admission_prereq_semester_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("semester"));
-        admission_prereq_waiver_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("transfer"));
+        admission_prereq_waiver_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, Boolean>("waiver"));
         admission_prereq_grade_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("grade"));
         admission_prereq_remove_col.setCellValueFactory(new PropertyValueFactory<CourseWrapper, String>("button"));
 
