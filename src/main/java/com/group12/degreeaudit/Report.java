@@ -543,6 +543,7 @@ public class Report {
             for(int i = 0; i < admissionPrereqClassNumbers.length; i++) {
                 if(coursesTakenAsCourseNumber.contains(admissionPrereqClassNumbers[i])) {
                     fields.get(admissionPrereqFieldKeys[i][0]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
+                    fields.get(admissionPrereqFieldKeys[i][2]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getWaiver()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
                     fields.get(admissionPrereqFieldKeys[i][2]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
                 }
             }
