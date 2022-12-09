@@ -473,6 +473,15 @@ public class Report {
             Table table = null;
             List<Course> top5 = student.matchElectiveCourses(student.getDegreeTrack(), "top5");
             List<Course> past5 = student.matchElectiveCourses(student.getDegreeTrack(), "past5");
+            
+            if(electiveFieldKeys.length == 4)
+            {
+                if(top5.size() == 5 && top5.get(4) != null)
+                {
+                    past5.add(top5.get(4));
+                    top5.remove(4);
+                }
+            }
 
             for(int i = 0; i < top5.size(); i++) 
             {
@@ -509,7 +518,12 @@ public class Report {
                     needSecondPage = false;
                 }
 
-                for(int i = electiveCount - 5; i < past5.size(); i++)
+                int removeFromElective = 5;
+                if(electiveFieldKeys.length == 4)
+                {
+                    removeFromElective = 4;
+                }
+                for(int i = electiveCount - removeFromElective; i < past5.size(); i++)
                 {
                     //Cells for the table
                     Cell courseCountCell = new Cell();
