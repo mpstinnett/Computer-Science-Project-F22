@@ -12,6 +12,7 @@ public class Course implements Comparable<Course> {
     private char classType;
     private double gradePoints;
     private double creditHours;
+    private boolean waiver = false;
 
     /** Description: Course default constructor - Does nothing
     */
@@ -52,6 +53,27 @@ public class Course implements Comparable<Course> {
         this.courseTitle = courseTitle;
         this.transfer = transfer;
         this.creditHours = creditHours;
+        updateGradePoints();
+    }
+
+    /**
+     * Description: Course Constructor - generates a new course a student takes with information about credit hours for transfer credit
+     * @param   courseNumber    String for the course number
+     * @param   semester    String for the semester
+     * @param   grade    String for the grade
+     * @param   courseTitle    String array for the course prerequisites
+     * @param   transfer    Boolean for if the course was a transfer course
+     * @param   creditHours    Double for credit hours for a course
+     * @param   waiver  If the coruse is waived (Admissions)
+    */
+    public Course(String courseNumber, String semester, String grade, String courseTitle, boolean transfer, double creditHours, boolean waiver) {
+        this.courseNumber = courseNumber;
+        this.semester = semester;
+        this.grade = grade;
+        this.courseTitle = courseTitle;
+        this.transfer = transfer;
+        this.creditHours = creditHours;
+        this.waiver = waiver;
         updateGradePoints();
     }
 
@@ -275,6 +297,22 @@ public class Course implements Comparable<Course> {
             //return Integer.parseInt(courseNumber.substring(courseNumber.length()-3, courseNumber.length()-2));
         }
         return creditHours;
+    }
+
+    /**
+    * Description: setWaiver - setter for waiver type 
+    * @param waiver    boolean for if the class is waived
+    */
+    public void setWaiver(boolean waiver){
+        this.waiver = waiver;
+    }
+
+    /**
+    * Description: getWaiver - getter for waiver type
+    * @return    boolean for if the class is waived
+    */
+    public boolean getWaiver(){
+        return waiver;
     }
 
     /**

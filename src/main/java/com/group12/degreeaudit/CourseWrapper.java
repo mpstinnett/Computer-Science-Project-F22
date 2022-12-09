@@ -22,6 +22,7 @@ public class CourseWrapper
     private char classType;
     private boolean transfer = false;
     private String grade = "";
+    private boolean waiver = false;
 
     /**
     * Description: CourseWrapper Constructor
@@ -44,6 +45,7 @@ public class CourseWrapper
         this.transfer = course.getTransfer();
         this.classType = course.getClassType();
         this.grade = course.getGrade();
+        this.waiver = course.getWaiver();
         // create a remove button for the instance
         this.button = new Button("X");
         button.setStyle("-fx-text-fill: #C00000; -fx-background-color: transparent; -fx-font-weight: bold;");
@@ -164,5 +166,21 @@ public class CourseWrapper
     */
     public char getClassType(){
         return classType;
+    }
+
+    /**
+    * Description: setWaiver - setter for waiver type 
+    * @param waiver    boolean for if the class is waived
+    */
+    public void setWaiver(boolean waiver){
+        this.waiver = waiver;
+    }
+
+    /**
+    * Description: getWaiver - getter for waiver type
+    * @return    boolean for if the class is waived
+    */
+    public boolean getWaiver(){
+        return waiver;
     }
 }
