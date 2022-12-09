@@ -92,7 +92,6 @@ public class adminSceneController implements Initializable {
         initialize(null, null);
     }
 
-    // Tabs
     @FXML
     private TabPane tab_pane;
 
@@ -109,14 +108,17 @@ public class adminSceneController implements Initializable {
     @FXML
     private ComboBox<String> addc_type_dropdown, addc_prerequisites_dropdown;
 
+    /**Description: Table Variable for the prerequisites table in the add courses tab */
     @FXML
-    private TableView<JSONCourseWrapper> addc_prerequisites_table;
+    public TableView<JSONCourseWrapper> addc_prerequisites_table;
 
+    /**Description: Course number Column variable for the prerequisites table in the add courses tab */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addc_course_num_col;
+    public TableColumn<JSONCourseWrapper, String> addc_course_num_col;
 
+    /**Description: Remove course column variable for the prerequisites table in the add courses tab */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addc_course_remove_col;
+    public TableColumn<JSONCourseWrapper, String> addc_course_remove_col;
 
     /**
     * Description: addcPrerequisites - Adds a prerequisite course to the prerequisite table when "ADD" button is pressed in "add course" tab
@@ -227,8 +229,20 @@ public class adminSceneController implements Initializable {
     @FXML
     private ComboBox<String> updatec_class_dropdown, updatec_type_dropdown, updatec_prerequisites_dropdown;
 
+    
+    /**
+    * Description: updatec_class_number - input text field for the update tab to update the course number
+    * 
+    */
     @FXML
-    private TextField updatec_class_number, updatec_class_name;
+    public TextField updatec_class_number;
+    
+    /**
+    * Description: updatec_class_name - input text field for the update tab to update the the course name
+    * 
+    */
+    @FXML
+    public TextField updatec_class_name;
 
     @FXML
     private TextArea updatec_class_description;
@@ -490,14 +504,17 @@ public class adminSceneController implements Initializable {
     }
 
     // Add to Optional Core Courses Table
+    /**Description:  addt_optional_core_table - Table variable for the optional core table in the add degree track tab*/
     @FXML
-    private TableView<JSONCourseWrapper> addt_optional_core_table;
+    public TableView<JSONCourseWrapper> addt_optional_core_table;
 
+    /**Description:  addt_optional_core_course_num_col - Course number column variable for the optional core table in the add degree track tab*/
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addt_optional_core_course_num_col;
+    public TableColumn<JSONCourseWrapper, String> addt_optional_core_course_num_col;
 
+    /**Description: addt_optional_core_remove_course_col - Remove course column variable for the optional core table in the add degree track tab*/
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addt_optional_core_remove_course_col;
+    public TableColumn<JSONCourseWrapper, String> addt_optional_core_remove_course_col;
 
     /**
     * Description: addtAddOptionalCoreCourse - Adds an optional course to optional core course table when "ADD" button is pressed in "add degree track" tab
@@ -571,14 +588,17 @@ public class adminSceneController implements Initializable {
     }
 
     // Add to 5XXX Courses Table
+    /** Description: addt_5k_table - table for all 5XXX courses */
     @FXML
-    private TableView<JSONCourseWrapper> addt_5k_table;
+    public TableView<JSONCourseWrapper> addt_5k_table;
 
+    /** Description: addt_5k_course_num_col - column for course number in 5XXX course table */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addt_5k_course_num_col;
+    public TableColumn<JSONCourseWrapper, String> addt_5k_course_num_col;
 
+    /** Description: addt_5k_remove_course_col - column for remove button in 5XXX course table */
     @FXML
-    private TableColumn<JSONCourseWrapper, String> addt_5k_remove_course_col;
+    public TableColumn<JSONCourseWrapper, String> addt_5k_remove_course_col;
 
     /**
     * Description: addtAdd5kCourse - Adds an elective to the 5XXX electives table when "ADD" button is pressed in "add degree track" tab
