@@ -72,28 +72,135 @@ public class degreePlanningSceneController implements Initializable{
     private CheckBox fast_track_checkbox, thesis_checkbox;
 
     @FXML
-    private TableView<CourseWrapper> admission_prereq_table, req_core_table, core_options_table, electives_table, addl_electives_table;
+    private TableView<CourseWrapper> admission_prereq_table;
 
+    /**
+    * Description: req_core_table - table that houses the required core classes the student has taken or will take for the selected degree track
+    */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_course_col, admission_prereq_name_col, admission_prereq_semester_col, admission_prereq_grade_col, admission_prereq_remove_col;
-    private TableColumn<CourseWrapper, Boolean> admission_prereq_waiver_col;
+    public TableView<CourseWrapper> req_core_table;
+    
+    /**
+    * Description: core_options_table - table that houses the optional core classes for degree plans that have several options for core classes the student has taken or will take for the selected degree track
+    */
+    @FXML
+    public TableView<CourseWrapper> core_options_table;
 
+    /**
+    * Description: electives_table - table that houses the electives the student has taken, only up to the total required amount for the degree track
+    */
     @FXML
-    private TableColumn<CourseWrapper, String> req_core_course_col, req_core_course_name_col, req_core_semester_col, req_core_grade_col, req_core_remove_col;
-    private TableColumn<CourseWrapper, Boolean> req_core_transfer_col;
+    public TableView<CourseWrapper> electives_table;
 
+    /**
+    * Description: addl_electives_table - table that houses the any additional elective the student has taken past the required amount
+    */
     @FXML
-    private TableColumn<CourseWrapper, String> core_options_course_col, core_options_name_col, core_options_semester_col, core_options_grade_col, core_options_remove_col;
-    private TableColumn<CourseWrapper, Boolean> core_options_transfer_col;
+    public TableView<CourseWrapper> addl_electives_table;
 
+    /** Description: admission_prereq_course_col - Admission prerequisite course number column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> electives_course_col, electives_name_col, electives_semester_col,  electives_grade_col, electives_remove_col;
-    private TableColumn<CourseWrapper, Boolean> electives_transfer_col;
+    private TableColumn<CourseWrapper, String> admission_prereq_course_col;
+    
+    /** Description: admission_prereq_name_col - Admission prerequisite name column for the admission prerequisites table in degree planning */
+    @FXML
+    private TableColumn<CourseWrapper, String> admission_prereq_name_col; 
+    
+    /** Description: admission_prereq_semester_col - Admission prerequisite semester taken column for the admission prerequisites table in degree planning */
+    @FXML
+    private TableColumn<CourseWrapper, String> admission_prereq_semester_col;
+    
+    /** Description: admission_prereq_grade_col - Admission prerequisite grade column for the admission prerequisites table in degree planning */
+    @FXML
+    private TableColumn<CourseWrapper, String> admission_prereq_grade_col;
+    
+    /** Description: admission_prereq_remove_col - Admission prerequisite remove column for the admission prerequisites table in degree planning */
+    @FXML
+    private TableColumn<CourseWrapper, String> admission_prereq_remove_col;
+    
+    /** Description: admission_prereq_waiver_col - column for waiver status in admission prerequisite table*/
+    @FXML
+    public TableColumn<CourseWrapper, Boolean> admission_prereq_waiver_col;
+
+    /** Description: req_core_course_col - column for core course number in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, String> req_core_course_col;
+    
+    /** Description: req_core_course_name_col - column for core course name in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, String> req_core_course_name_col;
+    
+    /** Description: req_core_semester_col - column for core course semester in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, String> req_core_semester_col;
+    
+    /** Description: req_core_grade_col - column for core course grade in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, String> req_core_grade_col;
+    
+    /** Description: req_core_remove_col - column for remove button in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, String> req_core_remove_col;
+    
+    /** Description: req_core_transfer_col - column for transfer status in core course table */
+    @FXML
+    public TableColumn<CourseWrapper, Boolean> req_core_transfer_col;
+
+    /** Description: core_options_course_col - column for the course number in the core options table */
+    @FXML
+    public TableColumn<CourseWrapper, String> core_options_course_col;
+
+    /** Description: core_options_name_col - column for the course name in the core options table */
+    @FXML
+    public TableColumn<CourseWrapper, String> core_options_name_col;
+    
+    /** Description: core_options_semester_col - column for the semester taken in the core options table */
+    @FXML
+    public TableColumn<CourseWrapper, String> core_options_semester_col;
+
+    /** Description: core_options_grade_col - column for the grade received in the core options table */
+    @FXML
+    public TableColumn<CourseWrapper, String> core_options_grade_col;
+
+    /** Description: core_options_remove_col - column for the remove button in the core options table */
+    @FXML
+    public TableColumn<CourseWrapper, String> core_options_remove_col;
+    
+    /** Description: core_options_transfer_col - column for transfer status in optional core courses table  */
+    @FXML
+    public TableColumn<CourseWrapper, Boolean> core_options_transfer_col;
+
+    /** Description: electives_course_col - column for elective course nember status in optional core courses table  */
+    @FXML
+    public TableColumn<CourseWrapper, String> electives_course_col;
+
+    /** Description: electives_name_col - column for elective name in electives table */
+    @FXML
+    public TableColumn<CourseWrapper, String> electives_name_col;
+
+    /** Description: electives_semester_col - column for semester in electives table */
+    @FXML 
+    public TableColumn<CourseWrapper, String> electives_semester_col;
+
+    /** Description: electives_grade_col - column for grade in electives table */
+    @FXML   
+    public TableColumn<CourseWrapper, String> electives_grade_col;
+
+    /** Description: electives_remove_col - column for remove button in electives table */
+    @FXML
+    public TableColumn<CourseWrapper, String> electives_remove_col;
+    
+    /** Description: electives_transfer_col - column for transfer status in electives table */
+    @FXML
+    public TableColumn<CourseWrapper, Boolean> electives_transfer_col;
 
     @FXML
     private TableColumn<CourseWrapper, String> addl_electives_course_col, addl_electives_name_col, addl_electives_semester_col, addl_electives_grade_col, addl_electives_remove_col;
-    private TableColumn<CourseWrapper, Boolean> addl_electives_transfer_col;
-
+    
+    /** Description: addl_electives_transfer_col - column for transfer status in the electives table */
+    @FXML
+    public TableColumn<CourseWrapper, Boolean> addl_electives_transfer_col;
+    
     @FXML
     private TextField admission_add_semester, req_core_add_semester, core_options_add_semester, electives_add_semester, addl_electives_add_semester;
     
