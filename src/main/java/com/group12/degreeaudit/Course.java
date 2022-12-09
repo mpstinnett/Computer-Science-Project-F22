@@ -74,6 +74,7 @@ public class Course implements Comparable<Course> {
         this.transfer = transfer;
         this.creditHours = creditHours;
         this.classType = classType;
+        this.waiver = waiver;
         updateGradePoints();
     }
 
