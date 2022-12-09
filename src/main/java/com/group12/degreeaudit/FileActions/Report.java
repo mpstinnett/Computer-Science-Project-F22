@@ -478,8 +478,6 @@ public class Report {
             
             if(electiveFieldKeys.length == 4)
             {
-                System.out.println("Top5 Size: " + top5.size());
-                System.out.println("Top5 Get: " + top5.get(3));
                 if(top5.size() == 5 && top5.get(4) != null)
                 {
                     past5.add(top5.get(3));
@@ -530,9 +528,6 @@ public class Report {
                 }
                 for(int i = electiveCount - removeFromElective; i < past5.size(); i++)
                 {
-                    System.out.println("I: " + i);
-                    System.out.println("EC: " + electiveCount);
-                    System.out.println("Adding: " + past5.get(i));
                     //Cells for the table
                     Cell courseCountCell = new Cell();
                     courseCountCell.add("" + (electiveCount+1));
