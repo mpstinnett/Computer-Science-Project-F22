@@ -100,23 +100,23 @@ public class degreePlanningSceneController implements Initializable{
 
     /** Description: admission_prereq_course_col - Admission prerequisite course number column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_course_col;
+    public TableColumn<CourseWrapper, String> admission_prereq_course_col;
     
     /** Description: admission_prereq_name_col - Admission prerequisite name column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_name_col; 
+    public TableColumn<CourseWrapper, String> admission_prereq_name_col; 
     
     /** Description: admission_prereq_semester_col - Admission prerequisite semester taken column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_semester_col;
+    public TableColumn<CourseWrapper, String> admission_prereq_semester_col;
     
     /** Description: admission_prereq_grade_col - Admission prerequisite grade column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_grade_col;
+    public TableColumn<CourseWrapper, String> admission_prereq_grade_col;
     
     /** Description: admission_prereq_remove_col - Admission prerequisite remove column for the admission prerequisites table in degree planning */
     @FXML
-    private TableColumn<CourseWrapper, String> admission_prereq_remove_col;
+    public TableColumn<CourseWrapper, String> admission_prereq_remove_col;
     
     /** Description: admission_prereq_waiver_col - column for waiver status in admission prerequisite table*/
     @FXML
