@@ -150,7 +150,7 @@ public class Report {
         switch(degreeTrack) {
             case "Traditional Computer Science":  
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Traditional_Computer_Science.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6363", "CS 6378", "CS 6390", "CS 6353", "CS 6360", "CS 6371"};
                 coreFieldKeys = new String[][]{
                     {"Text118.0.0.0", "Text118.0.1.0", "Text118.0.2.0"},
@@ -178,9 +178,9 @@ public class Report {
                     {"Text118.0.0.6", "Text118.0.1.6", "Text118.0.2.6"},
                     {"Text118.1.0.6", "Text118.1.1.6", "Text118.1.2.6"}};
                 break;
-            case "Networks and Telecommunications":
+            case "Networks Telecommunication":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Networks_Telecommunication.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6352", "CS 6363", "CS 6378", "CS 6385", "CS 6390"};
                 coreFieldKeys = new String[][]{
                     {"Text141.0.0", "Text141.0.1", "Text141.0.2"},
@@ -209,7 +209,7 @@ public class Report {
                 break;
             case "Intelligent Systems":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Intelligent_Systems.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6320", "CS 6363", "CS 6364", "CS 6375", "CS 6360", "CS 6378"};
                 coreFieldKeys = new String[][]{
                     {"Text182.0.0", "Text182.0.1", "Text182.0.2"},
@@ -237,7 +237,7 @@ public class Report {
                 break;
             case "Cyber Security":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Cyber_Security.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program", "Text199"};
                 coreClassNumbers = new String[]{"CS 6324", "CS 6363", "CS 6378", "CS 6332", "CS 6348", "CS 6349", "CS 6377"};
                 coreFieldKeys = new String[][]{
                     {"Text200.0.0", "Text200.0.1", "Text200.0.2"}, 
@@ -263,7 +263,7 @@ public class Report {
                 break;
             case "Interactive Computing":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Interactive_Computing.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6326", "CS 6363", "CS 6323", "CS 6328", "CS 6331", "CS 6334", "CS 6366"};
                 coreFieldKeys = new String[][]{
                     {"Text1.0.0", "Text1.0.1", "Text1.0.2"}, 
@@ -292,7 +292,7 @@ public class Report {
                 break;
             case "Systems":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Systems.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6304", "CS 6363", "CS 6378", "CS 6396", "CS 6349", "CS 6376", "CS 6380", "CS 6397", "CS 6399"};
                 coreFieldKeys = new String[][]{
                     {"Text132.0.0.0", "Text132.0.1.0", "Text132.0.2.0"},
@@ -324,7 +324,7 @@ public class Report {
                 break;
             case "Data Science":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Data_Science.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program", "Graduation"};
                 coreClassNumbers = new String[]{"CS 6313", "CS 6350", "CS 6363", "CS 6375", "CS 6301", "CS 6320", "CS 6327", "CS 6347", "CS 6360"};
                 coreFieldKeys = new String[][]{
                     {"CS 6313.0", "CS 6313.1", "CS 6313.2"}, 
@@ -356,7 +356,7 @@ public class Report {
                 break;
             case "Software Engineering":
                 DEGREE_PLAN_BLUEPRINT_FILE_NAME = "resources\\degreePlanBlueprints\\Software_Engineering.pdf";
-                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1"};
+                studentInformationFieldKeys = new String[]{"Name of Student", "Student ID Number", "Semester Admitted to Program 1", "Graduation"};
                 coreClassNumbers = new String[]{"SE 6329", "SE 6361", "SE 6362", "SE 6367", "SE 6387"};
                 coreFieldKeys = new String[][]{
                     {"Text65.0", "Text65.1", "Text65.2"}, 
@@ -457,6 +457,7 @@ public class Report {
             fields.get(studentInformationFieldKeys[0]).setValue(student.getName());
             fields.get(studentInformationFieldKeys[1]).setValue(student.getID());
             fields.get(studentInformationFieldKeys[2]).setValue(student.getSemesterAdmitted());
+            fields.get(studentInformationFieldKeys[3]).setValue(student.getAnticipatedGraduation());
 
             //Core Courses
             for(int i = 0; i < coreClassNumbers.length; i++) {
@@ -543,7 +544,7 @@ public class Report {
             for(int i = 0; i < admissionPrereqClassNumbers.length; i++) {
                 if(coursesTakenAsCourseNumber.contains(admissionPrereqClassNumbers[i])) {
                     fields.get(admissionPrereqFieldKeys[i][0]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getSemester()).setJustification(PdfFormField.ALIGN_CENTER);
-                    fields.get(admissionPrereqFieldKeys[i][2]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getWaiver()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
+                    fields.get(admissionPrereqFieldKeys[i][1]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getWaiver()? "T":"").setJustification(PdfFormField.ALIGN_CENTER);
                     fields.get(admissionPrereqFieldKeys[i][2]).setValue(student.getCourseGivenCourseNumber(admissionPrereqClassNumbers[i]).getGrade()).setJustification(PdfFormField.ALIGN_CENTER);
                 }
             }
