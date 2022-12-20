@@ -289,7 +289,14 @@ public class DegreeAudit
             electiveInformationString += "\nElective GPA of " + student.getDegreeTrack().getElectiveGPARequirement() + " is not met";
             if(aboveCourses > 0)
             {
-                outstandingRequirements += "\nThe student needs a Elective GPA >= " + decfor.format(getNeededGPA(electiveCourses, creditsNeeded, 'E')) + " in the above " + aboveCourses + " courses.";
+                if(getNeededGPA(electiveCourses, creditsNeeded, 'E') <= 1.7)
+                {
+                    outstandingRequirements += "\nThe student needs to pass the remaining " + aboveCourses + " elective courses.";
+                }
+                else
+                {
+                    outstandingRequirements += "\nThe student needs a Elective GPA >= " + decfor.format(getNeededGPA(electiveCourses, creditsNeeded, 'E')) + " in the above " + aboveCourses + " elective courses.";
+                }
             }
             else
             {
@@ -321,7 +328,14 @@ public class DegreeAudit
 
         if(remainingCourses.size() != 0)
         {
-            outstandingRequirements += "\nThe student needs an elective GPA >= " + decfor.format(getNeededGPA(removedRemainingElectiveCourses, remainingCredits, 'E')) + " in the remaining " + remainingCourses.size() + " elective course(s).";
+            if(getNeededGPA(removedRemainingElectiveCourses, remainingCredits, 'E') <= 1.7)
+            {
+                outstandingRequirements += "\nThe student needs to pass the remaining " + remainingCourses.size() + " elective courses.";
+            }
+            else
+            {
+                outstandingRequirements += "\nThe student needs an elective GPA >= " + decfor.format(getNeededGPA(removedRemainingElectiveCourses, remainingCredits, 'E')) + " in the remaining " + remainingCourses.size() + " elective course(s).";
+            }
         }
 
         return electiveInformationString;
@@ -526,7 +540,14 @@ public class DegreeAudit
                     }
                     else
                     {
-                        outstandingRequirements += "\nThe student needs a core GPA >= " + decfor.format(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C')) + " in the remaining " + remainingCourses.size() + " core course(s).";
+                        if(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C') <= 1.7)
+                        {
+                            outstandingRequirements += "\nThe student needs to pass the remaining " + remainingCourses.size() + " core course(s).";
+                        }
+                        else
+                        {
+                            outstandingRequirements += "\nThe student needs a core GPA >= " + decfor.format(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C')) + " in the remaining " + remainingCourses.size() + " core course(s).";
+                        }
                     }
                     return coreInformationString;
                 }
@@ -557,7 +578,14 @@ public class DegreeAudit
 
         if(remainingCourses.size() != 0)
         {
-            outstandingRequirements += "\nThe student needs a core GPA >= " + decfor.format(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C')) + " in the remaining " + remainingCourses.size() + " core course(s).";
+            if(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C') <= 1.7)
+            {
+                outstandingRequirements += "\nThe student needs to pass the remaining " + remainingCourses.size() + " core course(s).";
+            }
+            else
+            {
+                outstandingRequirements += "\nThe student needs a core GPA >= " + decfor.format(getNeededGPA(removedRemainingCoreCourses, remainingCredits, 'C')) + " in the remaining " + remainingCourses.size() + " core course(s).";
+            }
         }
 
         return coreInformationString;
